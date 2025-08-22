@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.pharmacy.mapper.DrugPrescMasterMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.pharmacy.domain.DrugPrescMaster">
+    <result column="PRESC_DATE" jdbcType="TIMESTAMP" property="prescDate" />
+    <result column="PRESC_NO" jdbcType="NUMERIC" property="prescNo" />
+    <result column="DISPENSARY" jdbcType="VARCHAR" property="dispensary" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="NAME_PHONETIC" jdbcType="VARCHAR" property="namePhonetic" />
+    <result column="IDENTITY" jdbcType="VARCHAR" property="identity" />
+    <result column="CHARGE_TYPE" jdbcType="VARCHAR" property="chargeType" />
+    <result column="UNIT_IN_CONTRACT" jdbcType="VARCHAR" property="unitInContract" />
+    <result column="PRESC_TYPE" jdbcType="NUMERIC" property="prescType" />
+    <result column="PRESC_ATTR" jdbcType="VARCHAR" property="prescAttr" />
+    <result column="PRESC_SOURCE" jdbcType="NUMERIC" property="prescSource" />
+    <result column="REPETITION" jdbcType="NUMERIC" property="repetition" />
+    <result column="COSTS" jdbcType="NUMERIC" property="costs" />
+    <result column="PAYMENTS" jdbcType="NUMERIC" property="payments" />
+    <result column="ORDERED_BY" jdbcType="VARCHAR" property="orderedBy" />
+    <result column="PRESCRIBED_BY" jdbcType="VARCHAR" property="prescribedBy" />
+    <result column="ENTERED_BY" jdbcType="VARCHAR" property="enteredBy" />
+    <result column="DISPENSING_PROVIDER" jdbcType="VARCHAR" property="dispensingProvider" />
+    <result column="COUNT_PER_REPETITION" jdbcType="NUMERIC" property="countPerRepetition" />
+    <result column="ENTERED_DATETIME" jdbcType="TIMESTAMP" property="enteredDatetime" />
+    <result column="DISPENSING_DATETIME" jdbcType="TIMESTAMP" property="dispensingDatetime" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="SUB_STORAGE" jdbcType="VARCHAR" property="subStorage" />
+    <result column="FLAG" jdbcType="NUMERIC" property="flag" />
+    <result column="DOCTOR_USER" jdbcType="VARCHAR" property="doctorUser" />
+    <result column="VERIFY_BY" jdbcType="VARCHAR" property="verifyBy" />
+    <result column="DISCHARGE_TAKING_INDICATOR" jdbcType="NUMERIC" property="dischargeTakingIndicator" />
+    <result column="CLINIC_NO" jdbcType="VARCHAR" property="clinicNo" />
+    <result column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="DECOCTION" jdbcType="NUMERIC" property="decoction" />
+    <result column="VERIFIED_DATETIME" jdbcType="TIMESTAMP" property="verifiedDatetime" />
+    <result column="RCPT_NO" jdbcType="VARCHAR" property="rcptNo" />
+    <result column="ORIGINAL_PRESC_DATE" jdbcType="TIMESTAMP" property="originalPrescDate" />
+    <result column="ORIGINAL_PRESC_NO" jdbcType="NUMERIC" property="originalPrescNo" />
+    <result column="RETURN_VISIT_NO" jdbcType="NUMERIC" property="returnVisitNo" />
+    <result column="RETURN_VISIT_DATE" jdbcType="TIMESTAMP" property="returnVisitDate" />
+    <result column="BATCH_PROVIDE_NO" jdbcType="VARCHAR" property="batchProvideNo" />
+    <result column="DISPENSE_DATE_TIME" jdbcType="TIMESTAMP" property="dispenseDateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+      PRESC_DATE, PRESC_NO, DISPENSARY,
+      PATIENT_ID, NAME, NAME_PHONETIC,
+      IDENTITY, CHARGE_TYPE, UNIT_IN_CONTRACT,
+      PRESC_TYPE, PRESC_ATTR, PRESC_SOURCE,
+      REPETITION, COSTS, PAYMENTS,
+      ORDERED_BY, PRESCRIBED_BY, ENTERED_BY,
+      DISPENSING_PROVIDER, COUNT_PER_REPETITION,
+      ENTERED_DATETIME, DISPENSING_DATETIME,
+      MEMO, SUB_STORAGE, FLAG,
+      DOCTOR_USER, VERIFY_BY, DISCHARGE_TAKING_INDICATOR,
+      CLINIC_NO, VISIT_ID, DECOCTION,
+      VERIFIED_DATETIME, RCPT_NO, ORIGINAL_PRESC_DATE,
+      ORIGINAL_PRESC_NO, RETURN_VISIT_NO, RETURN_VISIT_DATE,
+      BATCH_PROVIDE_NO, DISPENSE_DATE_TIME
+  </sql>
+  <insert id="insert" parameterType="cn.xa.eyre.pharmacy.domain.DrugPrescMaster">
+    insert into DRUG_PRESC_MASTER (PRESC_DATE, PRESC_NO, DISPENSARY, 
+      PATIENT_ID, NAME, NAME_PHONETIC, 
+      IDENTITY, CHARGE_TYPE, UNIT_IN_CONTRACT, 
+      PRESC_TYPE, PRESC_ATTR, PRESC_SOURCE, 
+      REPETITION, COSTS, PAYMENTS, 
+      ORDERED_BY, PRESCRIBED_BY, ENTERED_BY, 
+      DISPENSING_PROVIDER, COUNT_PER_REPETITION, 
+      ENTERED_DATETIME, DISPENSING_DATETIME, 
+      MEMO, SUB_STORAGE, FLAG, 
+      DOCTOR_USER, VERIFY_BY, DISCHARGE_TAKING_INDICATOR, 
+      CLINIC_NO, VISIT_ID, DECOCTION, 
+      VERIFIED_DATETIME, RCPT_NO, ORIGINAL_PRESC_DATE, 
+      ORIGINAL_PRESC_NO, RETURN_VISIT_NO, RETURN_VISIT_DATE, 
+      BATCH_PROVIDE_NO, DISPENSE_DATE_TIME)
+    values (#{prescDate,jdbcType=TIMESTAMP}, #{prescNo,jdbcType=NUMERIC}, #{dispensary,jdbcType=VARCHAR}, 
+      #{patientId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{namePhonetic,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, #{unitInContract,jdbcType=VARCHAR}, 
+      #{prescType,jdbcType=NUMERIC}, #{prescAttr,jdbcType=VARCHAR}, #{prescSource,jdbcType=NUMERIC}, 
+      #{repetition,jdbcType=NUMERIC}, #{costs,jdbcType=NUMERIC}, #{payments,jdbcType=NUMERIC}, 
+      #{orderedBy,jdbcType=VARCHAR}, #{prescribedBy,jdbcType=VARCHAR}, #{enteredBy,jdbcType=VARCHAR}, 
+      #{dispensingProvider,jdbcType=VARCHAR}, #{countPerRepetition,jdbcType=NUMERIC}, 
+      #{enteredDatetime,jdbcType=TIMESTAMP}, #{dispensingDatetime,jdbcType=TIMESTAMP}, 
+      #{memo,jdbcType=VARCHAR}, #{subStorage,jdbcType=VARCHAR}, #{flag,jdbcType=NUMERIC}, 
+      #{doctorUser,jdbcType=VARCHAR}, #{verifyBy,jdbcType=VARCHAR}, #{dischargeTakingIndicator,jdbcType=NUMERIC}, 
+      #{clinicNo,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{decoction,jdbcType=NUMERIC}, 
+      #{verifiedDatetime,jdbcType=TIMESTAMP}, #{rcptNo,jdbcType=VARCHAR}, #{originalPrescDate,jdbcType=TIMESTAMP}, 
+      #{originalPrescNo,jdbcType=NUMERIC}, #{returnVisitNo,jdbcType=NUMERIC}, #{returnVisitDate,jdbcType=TIMESTAMP}, 
+      #{batchProvideNo,jdbcType=VARCHAR}, #{dispenseDateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.pharmacy.domain.DrugPrescMaster">
+    insert into DRUG_PRESC_MASTER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prescDate != null">
+        PRESC_DATE,
+      </if>
+      <if test="prescNo != null">
+        PRESC_NO,
+      </if>
+      <if test="dispensary != null">
+        DISPENSARY,
+      </if>
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="namePhonetic != null">
+        NAME_PHONETIC,
+      </if>
+      <if test="identity != null">
+        IDENTITY,
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE,
+      </if>
+      <if test="unitInContract != null">
+        UNIT_IN_CONTRACT,
+      </if>
+      <if test="prescType != null">
+        PRESC_TYPE,
+      </if>
+      <if test="prescAttr != null">
+        PRESC_ATTR,
+      </if>
+      <if test="prescSource != null">
+        PRESC_SOURCE,
+      </if>
+      <if test="repetition != null">
+        REPETITION,
+      </if>
+      <if test="costs != null">
+        COSTS,
+      </if>
+      <if test="payments != null">
+        PAYMENTS,
+      </if>
+      <if test="orderedBy != null">
+        ORDERED_BY,
+      </if>
+      <if test="prescribedBy != null">
+        PRESCRIBED_BY,
+      </if>
+      <if test="enteredBy != null">
+        ENTERED_BY,
+      </if>
+      <if test="dispensingProvider != null">
+        DISPENSING_PROVIDER,
+      </if>
+      <if test="countPerRepetition != null">
+        COUNT_PER_REPETITION,
+      </if>
+      <if test="enteredDatetime != null">
+        ENTERED_DATETIME,
+      </if>
+      <if test="dispensingDatetime != null">
+        DISPENSING_DATETIME,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="subStorage != null">
+        SUB_STORAGE,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="doctorUser != null">
+        DOCTOR_USER,
+      </if>
+      <if test="verifyBy != null">
+        VERIFY_BY,
+      </if>
+      <if test="dischargeTakingIndicator != null">
+        DISCHARGE_TAKING_INDICATOR,
+      </if>
+      <if test="clinicNo != null">
+        CLINIC_NO,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="decoction != null">
+        DECOCTION,
+      </if>
+      <if test="verifiedDatetime != null">
+        VERIFIED_DATETIME,
+      </if>
+      <if test="rcptNo != null">
+        RCPT_NO,
+      </if>
+      <if test="originalPrescDate != null">
+        ORIGINAL_PRESC_DATE,
+      </if>
+      <if test="originalPrescNo != null">
+        ORIGINAL_PRESC_NO,
+      </if>
+      <if test="returnVisitNo != null">
+        RETURN_VISIT_NO,
+      </if>
+      <if test="returnVisitDate != null">
+        RETURN_VISIT_DATE,
+      </if>
+      <if test="batchProvideNo != null">
+        BATCH_PROVIDE_NO,
+      </if>
+      <if test="dispenseDateTime != null">
+        DISPENSE_DATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prescDate != null">
+        #{prescDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prescNo != null">
+        #{prescNo,jdbcType=NUMERIC},
+      </if>
+      <if test="dispensary != null">
+        #{dispensary,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namePhonetic != null">
+        #{namePhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="unitInContract != null">
+        #{unitInContract,jdbcType=VARCHAR},
+      </if>
+      <if test="prescType != null">
+        #{prescType,jdbcType=NUMERIC},
+      </if>
+      <if test="prescAttr != null">
+        #{prescAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="prescSource != null">
+        #{prescSource,jdbcType=NUMERIC},
+      </if>
+      <if test="repetition != null">
+        #{repetition,jdbcType=NUMERIC},
+      </if>
+      <if test="costs != null">
+        #{costs,jdbcType=NUMERIC},
+      </if>
+      <if test="payments != null">
+        #{payments,jdbcType=NUMERIC},
+      </if>
+      <if test="orderedBy != null">
+        #{orderedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="prescribedBy != null">
+        #{prescribedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="enteredBy != null">
+        #{enteredBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dispensingProvider != null">
+        #{dispensingProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="countPerRepetition != null">
+        #{countPerRepetition,jdbcType=NUMERIC},
+      </if>
+      <if test="enteredDatetime != null">
+        #{enteredDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dispensingDatetime != null">
+        #{dispensingDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="subStorage != null">
+        #{subStorage,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=NUMERIC},
+      </if>
+      <if test="doctorUser != null">
+        #{doctorUser,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyBy != null">
+        #{verifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeTakingIndicator != null">
+        #{dischargeTakingIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="clinicNo != null">
+        #{clinicNo,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="decoction != null">
+        #{decoction,jdbcType=NUMERIC},
+      </if>
+      <if test="verifiedDatetime != null">
+        #{verifiedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rcptNo != null">
+        #{rcptNo,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrescDate != null">
+        #{originalPrescDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originalPrescNo != null">
+        #{originalPrescNo,jdbcType=NUMERIC},
+      </if>
+      <if test="returnVisitNo != null">
+        #{returnVisitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="returnVisitDate != null">
+        #{returnVisitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchProvideNo != null">
+        #{batchProvideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dispenseDateTime != null">
+        #{dispenseDateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectDrugByPrescNoAndPrescDate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from DRUG_PRESC_MASTER
+    where PRESC_NO = #{prescNo}
+    AND PRESC_DATE = TO_DATE(#{prescDateStr,jdbcType=VARCHAR}, 'YYYY/MM/DD')
+  </select>
+  <select id="selectDrugByPrescNoAndPatientId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from (
+      select
+      <include refid="Base_Column_List" />
+      from DRUG_PRESC_MASTER
+      where PRESC_NO = #{prescNo} and patient_Id = #{patientId}
+      and  PRESC_DATE <![CDATA[>=]]> TRUNC(SYSDATE)  AND PRESC_DATE <![CDATA[<]]>TRUNC(SYSDATE) +1
+      order by PRESC_DATE desc
+    )
+    WHERE ROWNUM = 1;
+  </select>
+</mapper>

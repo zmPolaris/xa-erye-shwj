@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.medrec.mapper.OutpMrYbMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.medrec.domain.OutpMrYb">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <id column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
+    <result column="DIAG_DESC" jdbcType="VARCHAR" property="diagDesc" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+    <result column="ICD_CODE01" jdbcType="VARCHAR" property="icdCode01" />
+    <result column="ICD_NAME01" jdbcType="VARCHAR" property="icdName01" />
+    <result column="ICD_CODE02" jdbcType="VARCHAR" property="icdCode02" />
+    <result column="ICD_NAME02" jdbcType="VARCHAR" property="icdName02" />
+    <result column="ICD_CODE03" jdbcType="VARCHAR" property="icdCode03" />
+    <result column="ICD_NAME03" jdbcType="VARCHAR" property="icdName03" />
+    <result column="ICD_CODE04" jdbcType="VARCHAR" property="icdCode04" />
+    <result column="ICD_NAME04" jdbcType="VARCHAR" property="icdName04" />
+    <result column="ICD_CODE05" jdbcType="VARCHAR" property="icdCode05" />
+    <result column="ICD_NAME05" jdbcType="VARCHAR" property="icdName05" />
+    <result column="ICD_CODE06" jdbcType="VARCHAR" property="icdCode06" />
+    <result column="ICD_NAME06" jdbcType="VARCHAR" property="icdName06" />
+    <result column="ICD_CODE07" jdbcType="VARCHAR" property="icdCode07" />
+    <result column="ICD_NAME07" jdbcType="VARCHAR" property="icdName07" />
+    <result column="ICD_CODE08" jdbcType="VARCHAR" property="icdCode08" />
+    <result column="ICD_NAME08" jdbcType="VARCHAR" property="icdName08" />
+    <result column="ICD_TYPE01" jdbcType="VARCHAR" property="icdType01" />
+    <result column="ICD_TYPE02" jdbcType="VARCHAR" property="icdType02" />
+    <result column="ICD_TYPE03" jdbcType="VARCHAR" property="icdType03" />
+    <result column="ICD_TYPE04" jdbcType="VARCHAR" property="icdType04" />
+    <result column="ICD_TYPE05" jdbcType="VARCHAR" property="icdType05" />
+    <result column="ICD_TYPE06" jdbcType="VARCHAR" property="icdType06" />
+    <result column="ICD_TYPE07" jdbcType="VARCHAR" property="icdType07" />
+    <result column="ICD_TYPE08" jdbcType="VARCHAR" property="icdType08" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_DATE, VISIT_NO, DIAG_DESC, DOCTOR, ICD_CODE01, ICD_NAME01, ICD_CODE02, 
+    ICD_NAME02, ICD_CODE03, ICD_NAME03, ICD_CODE04, ICD_NAME04, ICD_CODE05, ICD_NAME05, 
+    ICD_CODE06, ICD_NAME06, ICD_CODE07, ICD_NAME07, ICD_CODE08, ICD_NAME08, ICD_TYPE01, 
+    ICD_TYPE02, ICD_TYPE03, ICD_TYPE04, ICD_TYPE05, ICD_TYPE06, ICD_TYPE07, ICD_TYPE08
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.OutpMrYbKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from OUTP_MR_YB
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </select>
+  <select id="selectOutpMrYb" parameterType="cn.xa.eyre.medrec.domain.OutpMrYb" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from OUTP_MR_YB
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+    and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'YYYY/MM/DD')
+    and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.OutpMrYbKey">
+    delete from OUTP_MR_YB
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.OutpMrYb">
+    insert into OUTP_MR_YB (PATIENT_ID, VISIT_DATE, VISIT_NO, 
+      DIAG_DESC, DOCTOR, ICD_CODE01, 
+      ICD_NAME01, ICD_CODE02, ICD_NAME02, 
+      ICD_CODE03, ICD_NAME03, ICD_CODE04, 
+      ICD_NAME04, ICD_CODE05, ICD_NAME05, 
+      ICD_CODE06, ICD_NAME06, ICD_CODE07, 
+      ICD_NAME07, ICD_CODE08, ICD_NAME08, 
+      ICD_TYPE01, ICD_TYPE02, ICD_TYPE03, 
+      ICD_TYPE04, ICD_TYPE05, ICD_TYPE06, 
+      ICD_TYPE07, ICD_TYPE08)
+    values (#{patientId,jdbcType=VARCHAR}, #{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC}, 
+      #{diagDesc,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, #{icdCode01,jdbcType=VARCHAR}, 
+      #{icdName01,jdbcType=VARCHAR}, #{icdCode02,jdbcType=VARCHAR}, #{icdName02,jdbcType=VARCHAR}, 
+      #{icdCode03,jdbcType=VARCHAR}, #{icdName03,jdbcType=VARCHAR}, #{icdCode04,jdbcType=VARCHAR}, 
+      #{icdName04,jdbcType=VARCHAR}, #{icdCode05,jdbcType=VARCHAR}, #{icdName05,jdbcType=VARCHAR}, 
+      #{icdCode06,jdbcType=VARCHAR}, #{icdName06,jdbcType=VARCHAR}, #{icdCode07,jdbcType=VARCHAR}, 
+      #{icdName07,jdbcType=VARCHAR}, #{icdCode08,jdbcType=VARCHAR}, #{icdName08,jdbcType=VARCHAR}, 
+      #{icdType01,jdbcType=VARCHAR}, #{icdType02,jdbcType=VARCHAR}, #{icdType03,jdbcType=VARCHAR}, 
+      #{icdType04,jdbcType=VARCHAR}, #{icdType05,jdbcType=VARCHAR}, #{icdType06,jdbcType=VARCHAR}, 
+      #{icdType07,jdbcType=VARCHAR}, #{icdType08,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.OutpMrYb">
+    insert into OUTP_MR_YB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitDate != null">
+        VISIT_DATE,
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO,
+      </if>
+      <if test="diagDesc != null">
+        DIAG_DESC,
+      </if>
+      <if test="doctor != null">
+        DOCTOR,
+      </if>
+      <if test="icdCode01 != null">
+        ICD_CODE01,
+      </if>
+      <if test="icdName01 != null">
+        ICD_NAME01,
+      </if>
+      <if test="icdCode02 != null">
+        ICD_CODE02,
+      </if>
+      <if test="icdName02 != null">
+        ICD_NAME02,
+      </if>
+      <if test="icdCode03 != null">
+        ICD_CODE03,
+      </if>
+      <if test="icdName03 != null">
+        ICD_NAME03,
+      </if>
+      <if test="icdCode04 != null">
+        ICD_CODE04,
+      </if>
+      <if test="icdName04 != null">
+        ICD_NAME04,
+      </if>
+      <if test="icdCode05 != null">
+        ICD_CODE05,
+      </if>
+      <if test="icdName05 != null">
+        ICD_NAME05,
+      </if>
+      <if test="icdCode06 != null">
+        ICD_CODE06,
+      </if>
+      <if test="icdName06 != null">
+        ICD_NAME06,
+      </if>
+      <if test="icdCode07 != null">
+        ICD_CODE07,
+      </if>
+      <if test="icdName07 != null">
+        ICD_NAME07,
+      </if>
+      <if test="icdCode08 != null">
+        ICD_CODE08,
+      </if>
+      <if test="icdName08 != null">
+        ICD_NAME08,
+      </if>
+      <if test="icdType01 != null">
+        ICD_TYPE01,
+      </if>
+      <if test="icdType02 != null">
+        ICD_TYPE02,
+      </if>
+      <if test="icdType03 != null">
+        ICD_TYPE03,
+      </if>
+      <if test="icdType04 != null">
+        ICD_TYPE04,
+      </if>
+      <if test="icdType05 != null">
+        ICD_TYPE05,
+      </if>
+      <if test="icdType06 != null">
+        ICD_TYPE06,
+      </if>
+      <if test="icdType07 != null">
+        ICD_TYPE07,
+      </if>
+      <if test="icdType08 != null">
+        ICD_TYPE08,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitDate != null">
+        #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="diagDesc != null">
+        #{diagDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode01 != null">
+        #{icdCode01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName01 != null">
+        #{icdName01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode02 != null">
+        #{icdCode02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName02 != null">
+        #{icdName02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode03 != null">
+        #{icdCode03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName03 != null">
+        #{icdName03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode04 != null">
+        #{icdCode04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName04 != null">
+        #{icdName04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode05 != null">
+        #{icdCode05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName05 != null">
+        #{icdName05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode06 != null">
+        #{icdCode06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName06 != null">
+        #{icdName06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode07 != null">
+        #{icdCode07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName07 != null">
+        #{icdName07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode08 != null">
+        #{icdCode08,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName08 != null">
+        #{icdName08,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType01 != null">
+        #{icdType01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType02 != null">
+        #{icdType02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType03 != null">
+        #{icdType03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType04 != null">
+        #{icdType04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType05 != null">
+        #{icdType05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType06 != null">
+        #{icdType06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType07 != null">
+        #{icdType07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType08 != null">
+        #{icdType08,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.OutpMrYb">
+    update OUTP_MR_YB
+    <set>
+      <if test="diagDesc != null">
+        DIAG_DESC = #{diagDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        DOCTOR = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode01 != null">
+        ICD_CODE01 = #{icdCode01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName01 != null">
+        ICD_NAME01 = #{icdName01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode02 != null">
+        ICD_CODE02 = #{icdCode02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName02 != null">
+        ICD_NAME02 = #{icdName02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode03 != null">
+        ICD_CODE03 = #{icdCode03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName03 != null">
+        ICD_NAME03 = #{icdName03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode04 != null">
+        ICD_CODE04 = #{icdCode04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName04 != null">
+        ICD_NAME04 = #{icdName04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode05 != null">
+        ICD_CODE05 = #{icdCode05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName05 != null">
+        ICD_NAME05 = #{icdName05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode06 != null">
+        ICD_CODE06 = #{icdCode06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName06 != null">
+        ICD_NAME06 = #{icdName06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode07 != null">
+        ICD_CODE07 = #{icdCode07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName07 != null">
+        ICD_NAME07 = #{icdName07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode08 != null">
+        ICD_CODE08 = #{icdCode08,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName08 != null">
+        ICD_NAME08 = #{icdName08,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType01 != null">
+        ICD_TYPE01 = #{icdType01,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType02 != null">
+        ICD_TYPE02 = #{icdType02,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType03 != null">
+        ICD_TYPE03 = #{icdType03,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType04 != null">
+        ICD_TYPE04 = #{icdType04,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType05 != null">
+        ICD_TYPE05 = #{icdType05,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType06 != null">
+        ICD_TYPE06 = #{icdType06,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType07 != null">
+        ICD_TYPE07 = #{icdType07,jdbcType=VARCHAR},
+      </if>
+      <if test="icdType08 != null">
+        ICD_TYPE08 = #{icdType08,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.OutpMrYb">
+    update OUTP_MR_YB
+    set DIAG_DESC = #{diagDesc,jdbcType=VARCHAR},
+      DOCTOR = #{doctor,jdbcType=VARCHAR},
+      ICD_CODE01 = #{icdCode01,jdbcType=VARCHAR},
+      ICD_NAME01 = #{icdName01,jdbcType=VARCHAR},
+      ICD_CODE02 = #{icdCode02,jdbcType=VARCHAR},
+      ICD_NAME02 = #{icdName02,jdbcType=VARCHAR},
+      ICD_CODE03 = #{icdCode03,jdbcType=VARCHAR},
+      ICD_NAME03 = #{icdName03,jdbcType=VARCHAR},
+      ICD_CODE04 = #{icdCode04,jdbcType=VARCHAR},
+      ICD_NAME04 = #{icdName04,jdbcType=VARCHAR},
+      ICD_CODE05 = #{icdCode05,jdbcType=VARCHAR},
+      ICD_NAME05 = #{icdName05,jdbcType=VARCHAR},
+      ICD_CODE06 = #{icdCode06,jdbcType=VARCHAR},
+      ICD_NAME06 = #{icdName06,jdbcType=VARCHAR},
+      ICD_CODE07 = #{icdCode07,jdbcType=VARCHAR},
+      ICD_NAME07 = #{icdName07,jdbcType=VARCHAR},
+      ICD_CODE08 = #{icdCode08,jdbcType=VARCHAR},
+      ICD_NAME08 = #{icdName08,jdbcType=VARCHAR},
+      ICD_TYPE01 = #{icdType01,jdbcType=VARCHAR},
+      ICD_TYPE02 = #{icdType02,jdbcType=VARCHAR},
+      ICD_TYPE03 = #{icdType03,jdbcType=VARCHAR},
+      ICD_TYPE04 = #{icdType04,jdbcType=VARCHAR},
+      ICD_TYPE05 = #{icdType05,jdbcType=VARCHAR},
+      ICD_TYPE06 = #{icdType06,jdbcType=VARCHAR},
+      ICD_TYPE07 = #{icdType07,jdbcType=VARCHAR},
+      ICD_TYPE08 = #{icdType08,jdbcType=VARCHAR}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </update>
+</mapper>

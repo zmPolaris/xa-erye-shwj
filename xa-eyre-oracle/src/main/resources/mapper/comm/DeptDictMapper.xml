@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.comm.mapper.DeptDictMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.comm.domain.DeptDict">
+    <id column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode" />
+    <result column="SERIAL_NO" jdbcType="NUMERIC" property="serialNo" />
+    <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
+    <result column="DEPT_ALIAS" jdbcType="VARCHAR" property="deptAlias" />
+    <result column="CLINIC_ATTR" jdbcType="NUMERIC" property="clinicAttr" />
+    <result column="OUTP_OR_INP" jdbcType="NUMERIC" property="outpOrInp" />
+    <result column="INTERNAL_OR_SERGERY" jdbcType="NUMERIC" property="internalOrSergery" />
+    <result column="INPUT_CODE" jdbcType="VARCHAR" property="inputCode" />
+    <result column="SIGN" jdbcType="VARCHAR" property="sign" />
+    <result column="POSITION" jdbcType="VARCHAR" property="position" />
+    <result column="INPUT_CODE_WB" jdbcType="VARCHAR" property="inputCodeWb" />
+    <result column="DISPENSING_CUMULATE" jdbcType="NUMERIC" property="dispensingCumulate" />
+    <result column="VIRTUAL_CABINET" jdbcType="NUMERIC" property="virtualCabinet" />
+    <result column="ORDER_CODE" jdbcType="NUMERIC" property="orderCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DEPT_CODE, SERIAL_NO, DEPT_NAME, DEPT_ALIAS, CLINIC_ATTR, OUTP_OR_INP, INTERNAL_OR_SERGERY, 
+    INPUT_CODE, SIGN, POSITION, INPUT_CODE_WB, DISPENSING_CUMULATE, VIRTUAL_CABINET, 
+    ORDER_CODE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DEPT_DICT
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+  </select>
+    <select id="selectDeptList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from (select
+      <include refid="Base_Column_List" />
+      from COMM.DEPT_DICT
+      ORDER BY SERIAL_NO DESC)
+      WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DEPT_DICT
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.comm.domain.DeptDict">
+    insert into DEPT_DICT (DEPT_CODE, SERIAL_NO, DEPT_NAME, 
+      DEPT_ALIAS, CLINIC_ATTR, OUTP_OR_INP, 
+      INTERNAL_OR_SERGERY, INPUT_CODE, SIGN, 
+      POSITION, INPUT_CODE_WB, DISPENSING_CUMULATE, 
+      VIRTUAL_CABINET, ORDER_CODE)
+    values (#{deptCode,jdbcType=VARCHAR}, #{serialNo,jdbcType=NUMERIC}, #{deptName,jdbcType=VARCHAR}, 
+      #{deptAlias,jdbcType=VARCHAR}, #{clinicAttr,jdbcType=NUMERIC}, #{outpOrInp,jdbcType=NUMERIC}, 
+      #{internalOrSergery,jdbcType=NUMERIC}, #{inputCode,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{inputCodeWb,jdbcType=VARCHAR}, #{dispensingCumulate,jdbcType=NUMERIC}, 
+      #{virtualCabinet,jdbcType=NUMERIC}, #{orderCode,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.comm.domain.DeptDict">
+    insert into DEPT_DICT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptCode != null">
+        DEPT_CODE,
+      </if>
+      <if test="serialNo != null">
+        SERIAL_NO,
+      </if>
+      <if test="deptName != null">
+        DEPT_NAME,
+      </if>
+      <if test="deptAlias != null">
+        DEPT_ALIAS,
+      </if>
+      <if test="clinicAttr != null">
+        CLINIC_ATTR,
+      </if>
+      <if test="outpOrInp != null">
+        OUTP_OR_INP,
+      </if>
+      <if test="internalOrSergery != null">
+        INTERNAL_OR_SERGERY,
+      </if>
+      <if test="inputCode != null">
+        INPUT_CODE,
+      </if>
+      <if test="sign != null">
+        SIGN,
+      </if>
+      <if test="position != null">
+        POSITION,
+      </if>
+      <if test="inputCodeWb != null">
+        INPUT_CODE_WB,
+      </if>
+      <if test="dispensingCumulate != null">
+        DISPENSING_CUMULATE,
+      </if>
+      <if test="virtualCabinet != null">
+        VIRTUAL_CABINET,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null">
+        #{serialNo,jdbcType=NUMERIC},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAlias != null">
+        #{deptAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicAttr != null">
+        #{clinicAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="outpOrInp != null">
+        #{outpOrInp,jdbcType=NUMERIC},
+      </if>
+      <if test="internalOrSergery != null">
+        #{internalOrSergery,jdbcType=NUMERIC},
+      </if>
+      <if test="inputCode != null">
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCodeWb != null">
+        #{inputCodeWb,jdbcType=VARCHAR},
+      </if>
+      <if test="dispensingCumulate != null">
+        #{dispensingCumulate,jdbcType=NUMERIC},
+      </if>
+      <if test="virtualCabinet != null">
+        #{virtualCabinet,jdbcType=NUMERIC},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.comm.domain.DeptDict">
+    update DEPT_DICT
+    <set>
+      <if test="serialNo != null">
+        SERIAL_NO = #{serialNo,jdbcType=NUMERIC},
+      </if>
+      <if test="deptName != null">
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAlias != null">
+        DEPT_ALIAS = #{deptAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicAttr != null">
+        CLINIC_ATTR = #{clinicAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="outpOrInp != null">
+        OUTP_OR_INP = #{outpOrInp,jdbcType=NUMERIC},
+      </if>
+      <if test="internalOrSergery != null">
+        INTERNAL_OR_SERGERY = #{internalOrSergery,jdbcType=NUMERIC},
+      </if>
+      <if test="inputCode != null">
+        INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCodeWb != null">
+        INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
+      </if>
+      <if test="dispensingCumulate != null">
+        DISPENSING_CUMULATE = #{dispensingCumulate,jdbcType=NUMERIC},
+      </if>
+      <if test="virtualCabinet != null">
+        VIRTUAL_CABINET = #{virtualCabinet,jdbcType=NUMERIC},
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.comm.domain.DeptDict">
+    update DEPT_DICT
+    set SERIAL_NO = #{serialNo,jdbcType=NUMERIC},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      DEPT_ALIAS = #{deptAlias,jdbcType=VARCHAR},
+      CLINIC_ATTR = #{clinicAttr,jdbcType=NUMERIC},
+      OUTP_OR_INP = #{outpOrInp,jdbcType=NUMERIC},
+      INTERNAL_OR_SERGERY = #{internalOrSergery,jdbcType=NUMERIC},
+      INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
+      DISPENSING_CUMULATE = #{dispensingCumulate,jdbcType=NUMERIC},
+      VIRTUAL_CABINET = #{virtualCabinet,jdbcType=NUMERIC},
+      ORDER_CODE = #{orderCode,jdbcType=NUMERIC}
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.system.dict.mapper.DatasetDiseaseDataMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.system.dict.domain.DatasetDiseaseData">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="disease_name" jdbcType="VARCHAR" property="diseaseName" />
+    <result column="disease_type" jdbcType="VARCHAR" property="diseaseType" />
+    <result column="icd10" jdbcType="VARCHAR" property="icd10" />
+    <result column="simple_disease_name" jdbcType="VARCHAR" property="simpleDiseaseName" />
+    <result column="available_count" jdbcType="VARCHAR" property="availableCount" />
+  </resultMap>
+  <insert id="insert" parameterType="cn.xa.eyre.system.dict.domain.DatasetDiseaseData">
+    insert into dataset_disease_data (id, disease_name, disease_type,
+      icd10, simple_disease_name, available_count
+      )
+    values (#{id,jdbcType=INTEGER}, #{diseaseName,jdbcType=VARCHAR}, #{diseaseType,jdbcType=VARCHAR}, 
+      #{icd10,jdbcType=VARCHAR}, #{simpleDiseaseName,jdbcType=VARCHAR}, #{availableCount,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.system.dict.domain.DatasetDiseaseData">
+    insert into dataset_disease_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="diseaseName != null">
+        disease_name,
+      </if>
+      <if test="diseaseType != null">
+        disease_type,
+      </if>
+      <if test="icd10 != null">
+        icd10,
+      </if>
+      <if test="simpleDiseaseName != null">
+        simple_disease_name,
+      </if>
+      <if test="availableCount != null">
+        available_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseName != null">
+        #{diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseType != null">
+        #{diseaseType,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10 != null">
+        #{icd10,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleDiseaseName != null">
+        #{simpleDiseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="availableCount != null">
+        #{availableCount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <select id="selectByCodes" resultMap = "BaseResultMap">
+      select id, disease_name, disease_type, icd10, simple_disease_name, available_count
+      from dataset_disease_data where icd10 in
+      <foreach item="code" collection="array" open="(" separator="," close=")">
+        #{code}
+      </foreach>
+    </select>
+  <select id="selectDistinctIcd10" resultType="java.lang.String">
+    SELECT DISTINCT icd10 FROM `dataset_disease_data`
+  </select>
+</mapper>

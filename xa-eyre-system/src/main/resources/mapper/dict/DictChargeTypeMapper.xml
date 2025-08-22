@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.system.dict.mapper.DictChargeTypeMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.system.dict.domain.DictChargeType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="emr_code" jdbcType="VARCHAR" property="emrCode" />
+    <result column="emr_name" jdbcType="VARCHAR" property="emrName" />
+    <result column="hub_code" jdbcType="VARCHAR" property="hubCode" />
+    <result column="hub_name" jdbcType="VARCHAR" property="hubName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="code_status" jdbcType="INTEGER" property="codeStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, emr_code, emr_name, hub_code, hub_name, remark, is_default, code_status, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dict_charge_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByEmrCode" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from dict_charge_type
+      where emr_code = #{emrCode,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict_charge_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.system.dict.domain.DictChargeType">
+    insert into dict_charge_type (id, emr_code, emr_name, 
+      hub_code, hub_name, remark, 
+      is_default, code_status, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{emrCode,jdbcType=VARCHAR}, #{emrName,jdbcType=VARCHAR}, 
+      #{hubCode,jdbcType=VARCHAR}, #{hubName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{isDefault,jdbcType=INTEGER}, #{codeStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.system.dict.domain.DictChargeType">
+    insert into dict_charge_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="emrCode != null">
+        emr_code,
+      </if>
+      <if test="emrName != null">
+        emr_name,
+      </if>
+      <if test="hubCode != null">
+        hub_code,
+      </if>
+      <if test="hubName != null">
+        hub_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="codeStatus != null">
+        code_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="emrCode != null">
+        #{emrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="emrName != null">
+        #{emrName,jdbcType=VARCHAR},
+      </if>
+      <if test="hubCode != null">
+        #{hubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hubName != null">
+        #{hubName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="codeStatus != null">
+        #{codeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.system.dict.domain.DictChargeType">
+    update dict_charge_type
+    <set>
+      <if test="emrCode != null">
+        emr_code = #{emrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="emrName != null">
+        emr_name = #{emrName,jdbcType=VARCHAR},
+      </if>
+      <if test="hubCode != null">
+        hub_code = #{hubCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hubName != null">
+        hub_name = #{hubName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="codeStatus != null">
+        code_status = #{codeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.system.dict.domain.DictChargeType">
+    update dict_charge_type
+    set emr_code = #{emrCode,jdbcType=VARCHAR},
+      emr_name = #{emrName,jdbcType=VARCHAR},
+      hub_code = #{hubCode,jdbcType=VARCHAR},
+      hub_name = #{hubName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=INTEGER},
+      code_status = #{codeStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

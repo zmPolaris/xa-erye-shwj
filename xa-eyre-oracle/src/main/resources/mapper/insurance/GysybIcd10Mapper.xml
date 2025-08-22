@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.insurance.mapper.GysybIcd10Mapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.insurance.domain.GysybIcd10">
+    <result column="ICD_CODE" jdbcType="VARCHAR" property="icdCode" />
+    <result column="ICD_CODE2" jdbcType="VARCHAR" property="icdCode2" />
+    <result column="ICD_NAME" jdbcType="VARCHAR" property="icdName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ICD_CODE, ICD_CODE2, ICD_NAME
+  </sql>
+  <insert id="insert" parameterType="cn.xa.eyre.insurance.domain.GysybIcd10">
+    insert into GYSYB_ICD10 (ICD_CODE, ICD_CODE2, ICD_NAME
+      )
+    values (#{icdCode,jdbcType=VARCHAR}, #{icdCode2,jdbcType=VARCHAR}, #{icdName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.insurance.domain.GysybIcd10">
+    insert into GYSYB_ICD10
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="icdCode != null">
+        ICD_CODE,
+      </if>
+      <if test="icdCode2 != null">
+        ICD_CODE2,
+      </if>
+      <if test="icdName != null">
+        ICD_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="icdCode != null">
+        #{icdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="icdCode2 != null">
+        #{icdCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="icdName != null">
+        #{icdName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <select id="selectList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from INSURANCE.GYSYB_ICD10 where ICD_CODE is not null
+    </select>
+</mapper>

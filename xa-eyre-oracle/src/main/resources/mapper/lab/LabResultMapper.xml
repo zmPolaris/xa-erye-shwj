@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.lab.mapper.LabResultMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.lab.domain.LabResult">
+    <id column="TEST_NO" jdbcType="VARCHAR" property="testNo" />
+    <id column="ITEM_NO" jdbcType="NUMERIC" property="itemNo" />
+    <id column="PRINT_ORDER" jdbcType="NUMERIC" property="printOrder" />
+    <result column="REPORT_ITEM_NAME" jdbcType="VARCHAR" property="reportItemName" />
+    <result column="REPORT_ITEM_CODE" jdbcType="VARCHAR" property="reportItemCode" />
+    <result column="RESULT" jdbcType="VARCHAR" property="result" />
+    <result column="UNITS" jdbcType="VARCHAR" property="units" />
+    <result column="ABNORMAL_INDICATOR" jdbcType="VARCHAR" property="abnormalIndicator" />
+    <result column="INSTRUMENT_ID" jdbcType="VARCHAR" property="instrumentId" />
+    <result column="RESULT_DATE_TIME" jdbcType="TIMESTAMP" property="resultDateTime" />
+    <result column="PRINT_CONTEXT" jdbcType="VARCHAR" property="printContext" />
+    <result column="RESULT_RANGE" jdbcType="VARCHAR" property="resultRange" />
+    <result column="REFER_CONTEXT" jdbcType="VARCHAR" property="referContext" />
+    <result column="SAMPLEID" jdbcType="VARCHAR" property="sampleid" />
+    <result column="REPORTID" jdbcType="VARCHAR" property="reportid" />
+    <result column="MICRO_DATA_ID2_RESULT2" jdbcType="VARCHAR" property="microDataId2Result2" />
+    <result column="MICRO_DATA_ID2_RESULT1" jdbcType="VARCHAR" property="microDataId2Result1" />
+    <result column="MICRO_DATA_ID2_NAME" jdbcType="VARCHAR" property="microDataId2Name" />
+    <result column="INFECT_HANDLE" jdbcType="VARCHAR" property="infectHandle" />
+    <result column="INFECT_HANDLE_TIME" jdbcType="VARCHAR" property="infectHandleTime" />
+    <result column="INFECT_HANDLE_DOCTOR_ID" jdbcType="VARCHAR" property="infectHandleDoctorId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TEST_NO, ITEM_NO, PRINT_ORDER, REPORT_ITEM_NAME, REPORT_ITEM_CODE, RESULT, UNITS, 
+    ABNORMAL_INDICATOR, INSTRUMENT_ID, RESULT_DATE_TIME, PRINT_CONTEXT, RESULT_RANGE, 
+    REFER_CONTEXT, SAMPLEID, REPORTID, MICRO_DATA_ID2_RESULT2, MICRO_DATA_ID2_RESULT1, 
+    MICRO_DATA_ID2_NAME, INFECT_HANDLE, INFECT_HANDLE_TIME, INFECT_HANDLE_DOCTOR_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabResultKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from LAB_RESULT
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+      and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+      and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabResultKey">
+    delete from LAB_RESULT
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+      and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+      and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.lab.domain.LabResult">
+    insert into LAB_RESULT (TEST_NO, ITEM_NO, PRINT_ORDER, 
+      REPORT_ITEM_NAME, REPORT_ITEM_CODE, RESULT, 
+      UNITS, ABNORMAL_INDICATOR, INSTRUMENT_ID, 
+      RESULT_DATE_TIME, PRINT_CONTEXT, RESULT_RANGE, 
+      REFER_CONTEXT, SAMPLEID, REPORTID, 
+      MICRO_DATA_ID2_RESULT2, MICRO_DATA_ID2_RESULT1, 
+      MICRO_DATA_ID2_NAME, INFECT_HANDLE, INFECT_HANDLE_TIME, 
+      INFECT_HANDLE_DOCTOR_ID)
+    values (#{testNo,jdbcType=VARCHAR}, #{itemNo,jdbcType=NUMERIC}, #{printOrder,jdbcType=NUMERIC}, 
+      #{reportItemName,jdbcType=VARCHAR}, #{reportItemCode,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{units,jdbcType=VARCHAR}, #{abnormalIndicator,jdbcType=VARCHAR}, #{instrumentId,jdbcType=VARCHAR}, 
+      #{resultDateTime,jdbcType=TIMESTAMP}, #{printContext,jdbcType=VARCHAR}, #{resultRange,jdbcType=VARCHAR}, 
+      #{referContext,jdbcType=VARCHAR}, #{sampleid,jdbcType=VARCHAR}, #{reportid,jdbcType=VARCHAR}, 
+      #{microDataId2Result2,jdbcType=VARCHAR}, #{microDataId2Result1,jdbcType=VARCHAR}, 
+      #{microDataId2Name,jdbcType=VARCHAR}, #{infectHandle,jdbcType=VARCHAR}, #{infectHandleTime,jdbcType=VARCHAR}, 
+      #{infectHandleDoctorId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.lab.domain.LabResult">
+    insert into LAB_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="testNo != null">
+        TEST_NO,
+      </if>
+      <if test="itemNo != null">
+        ITEM_NO,
+      </if>
+      <if test="printOrder != null">
+        PRINT_ORDER,
+      </if>
+      <if test="reportItemName != null">
+        REPORT_ITEM_NAME,
+      </if>
+      <if test="reportItemCode != null">
+        REPORT_ITEM_CODE,
+      </if>
+      <if test="result != null">
+        RESULT,
+      </if>
+      <if test="units != null">
+        UNITS,
+      </if>
+      <if test="abnormalIndicator != null">
+        ABNORMAL_INDICATOR,
+      </if>
+      <if test="instrumentId != null">
+        INSTRUMENT_ID,
+      </if>
+      <if test="resultDateTime != null">
+        RESULT_DATE_TIME,
+      </if>
+      <if test="printContext != null">
+        PRINT_CONTEXT,
+      </if>
+      <if test="resultRange != null">
+        RESULT_RANGE,
+      </if>
+      <if test="referContext != null">
+        REFER_CONTEXT,
+      </if>
+      <if test="sampleid != null">
+        SAMPLEID,
+      </if>
+      <if test="reportid != null">
+        REPORTID,
+      </if>
+      <if test="microDataId2Result2 != null">
+        MICRO_DATA_ID2_RESULT2,
+      </if>
+      <if test="microDataId2Result1 != null">
+        MICRO_DATA_ID2_RESULT1,
+      </if>
+      <if test="microDataId2Name != null">
+        MICRO_DATA_ID2_NAME,
+      </if>
+      <if test="infectHandle != null">
+        INFECT_HANDLE,
+      </if>
+      <if test="infectHandleTime != null">
+        INFECT_HANDLE_TIME,
+      </if>
+      <if test="infectHandleDoctorId != null">
+        INFECT_HANDLE_DOCTOR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="testNo != null">
+        #{testNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNo != null">
+        #{itemNo,jdbcType=NUMERIC},
+      </if>
+      <if test="printOrder != null">
+        #{printOrder,jdbcType=NUMERIC},
+      </if>
+      <if test="reportItemName != null">
+        #{reportItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportItemCode != null">
+        #{reportItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="units != null">
+        #{units,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalIndicator != null">
+        #{abnormalIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="instrumentId != null">
+        #{instrumentId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultDateTime != null">
+        #{resultDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printContext != null">
+        #{printContext,jdbcType=VARCHAR},
+      </if>
+      <if test="resultRange != null">
+        #{resultRange,jdbcType=VARCHAR},
+      </if>
+      <if test="referContext != null">
+        #{referContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleid != null">
+        #{sampleid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportid != null">
+        #{reportid,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Result2 != null">
+        #{microDataId2Result2,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Result1 != null">
+        #{microDataId2Result1,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Name != null">
+        #{microDataId2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandle != null">
+        #{infectHandle,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandleTime != null">
+        #{infectHandleTime,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandleDoctorId != null">
+        #{infectHandleDoctorId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.lab.domain.LabResult">
+    update LAB_RESULT
+    <set>
+      <if test="reportItemName != null">
+        REPORT_ITEM_NAME = #{reportItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportItemCode != null">
+        REPORT_ITEM_CODE = #{reportItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        RESULT = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="units != null">
+        UNITS = #{units,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalIndicator != null">
+        ABNORMAL_INDICATOR = #{abnormalIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="instrumentId != null">
+        INSTRUMENT_ID = #{instrumentId,jdbcType=VARCHAR},
+      </if>
+      <if test="resultDateTime != null">
+        RESULT_DATE_TIME = #{resultDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="printContext != null">
+        PRINT_CONTEXT = #{printContext,jdbcType=VARCHAR},
+      </if>
+      <if test="resultRange != null">
+        RESULT_RANGE = #{resultRange,jdbcType=VARCHAR},
+      </if>
+      <if test="referContext != null">
+        REFER_CONTEXT = #{referContext,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleid != null">
+        SAMPLEID = #{sampleid,jdbcType=VARCHAR},
+      </if>
+      <if test="reportid != null">
+        REPORTID = #{reportid,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Result2 != null">
+        MICRO_DATA_ID2_RESULT2 = #{microDataId2Result2,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Result1 != null">
+        MICRO_DATA_ID2_RESULT1 = #{microDataId2Result1,jdbcType=VARCHAR},
+      </if>
+      <if test="microDataId2Name != null">
+        MICRO_DATA_ID2_NAME = #{microDataId2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandle != null">
+        INFECT_HANDLE = #{infectHandle,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandleTime != null">
+        INFECT_HANDLE_TIME = #{infectHandleTime,jdbcType=VARCHAR},
+      </if>
+      <if test="infectHandleDoctorId != null">
+        INFECT_HANDLE_DOCTOR_ID = #{infectHandleDoctorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+      and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+      and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabResult">
+    update LAB_RESULT
+    set REPORT_ITEM_NAME = #{reportItemName,jdbcType=VARCHAR},
+      REPORT_ITEM_CODE = #{reportItemCode,jdbcType=VARCHAR},
+      RESULT = #{result,jdbcType=VARCHAR},
+      UNITS = #{units,jdbcType=VARCHAR},
+      ABNORMAL_INDICATOR = #{abnormalIndicator,jdbcType=VARCHAR},
+      INSTRUMENT_ID = #{instrumentId,jdbcType=VARCHAR},
+      RESULT_DATE_TIME = #{resultDateTime,jdbcType=TIMESTAMP},
+      PRINT_CONTEXT = #{printContext,jdbcType=VARCHAR},
+      RESULT_RANGE = #{resultRange,jdbcType=VARCHAR},
+      REFER_CONTEXT = #{referContext,jdbcType=VARCHAR},
+      SAMPLEID = #{sampleid,jdbcType=VARCHAR},
+      REPORTID = #{reportid,jdbcType=VARCHAR},
+      MICRO_DATA_ID2_RESULT2 = #{microDataId2Result2,jdbcType=VARCHAR},
+      MICRO_DATA_ID2_RESULT1 = #{microDataId2Result1,jdbcType=VARCHAR},
+      MICRO_DATA_ID2_NAME = #{microDataId2Name,jdbcType=VARCHAR},
+      INFECT_HANDLE = #{infectHandle,jdbcType=VARCHAR},
+      INFECT_HANDLE_TIME = #{infectHandleTime,jdbcType=VARCHAR},
+      INFECT_HANDLE_DOCTOR_ID = #{infectHandleDoctorId,jdbcType=VARCHAR}
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+      and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+      and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
+  </update>
+
+  <select id="selectResultItemsByTestNo" resultType="cn.xa.eyre.lab.domain.LabResultVo">
+    SELECT
+      r.TEST_NO AS testNo,
+      r.ITEM_NO AS itemNo,
+      r.PRINT_ORDER AS printOrder,
+      r.REPORT_ITEM_NAME AS reportItemName,
+      r.REPORT_ITEM_CODE AS reportItemCode,
+      r.RESULT AS result,
+      r.UNITS AS units,
+      r.ABNORMAL_INDICATOR AS abnormalIndicator,
+      r.INSTRUMENT_ID AS instrumentId,
+      r.RESULT_DATE_TIME AS resultDateTime,
+      r.PRINT_CONTEXT AS printContext,
+      r.RESULT_RANGE AS resultRange,
+      r.REFER_CONTEXT AS referContext,
+      r.SAMPLEID AS sampleId,
+      r.REPORTID AS reportId,
+      r.MICRO_DATA_ID2_RESULT2 AS microDataId2Result2,
+      r.MICRO_DATA_ID2_RESULT1 AS microDataId2Result1,
+      r.MICRO_DATA_ID2_NAME AS microDataId2Name,
+      r.INFECT_HANDLE AS infectHandle,
+      r.INFECT_HANDLE_TIME AS infectHandleTime,
+      r.INFECT_HANDLE_DOCTOR_ID AS infectHandleDoctorId,
+      i.ITEM_NAME AS itemName,
+      i.ITEM_CODE AS itemCode,
+      i.LAB_SHEET_ID AS labSheetId,
+      i.CLASS_NAME AS className,
+      i.LAB_SUBJECT AS labSubject,
+      i.REPORT_PRINT_INDICATOR AS reportPrintIndicator
+    FROM LAB_RESULT r LEFT JOIN LAB_TEST_ITEMS i
+    ON r.TEST_NO = i.TEST_NO AND r.ITEM_NO = i.ITEM_NO
+    WHERE r.TEST_NO = #{testNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

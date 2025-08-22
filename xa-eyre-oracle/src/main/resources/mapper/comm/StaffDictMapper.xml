@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.comm.mapper.StaffDictMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.comm.domain.StaffDict">
+    <id column="EMP_NO" jdbcType="VARCHAR" property="empNo" />
+    <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="INPUT_CODE" jdbcType="VARCHAR" property="inputCode" />
+    <result column="JOB" jdbcType="VARCHAR" property="job" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="INPUT_CODE_WB" jdbcType="VARCHAR" property="inputCodeWb" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="SYS_FLAG" jdbcType="NUMERIC" property="sysFlag" />
+    <result column="SURGERY_CLASS" jdbcType="VARCHAR" property="surgeryClass" />
+    <result column="CANCEL" jdbcType="VARCHAR" property="cancel" />
+    <result column="ANTIBIOTIC_DRUG_LIMIT" jdbcType="NUMERIC" property="antibioticDrugLimit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EMP_NO, DEPT_CODE, NAME, INPUT_CODE, JOB, TITLE, USER_NAME, INPUT_CODE_WB, ID, CREATE_DATE, 
+    PASSWORD, SYS_FLAG, SURGERY_CLASS, CANCEL, ANTIBIOTIC_DRUG_LIMIT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STAFF_DICT
+    where EMP_NO = #{empNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from STAFF_DICT
+    where EMP_NO = #{empNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.comm.domain.StaffDict">
+    insert into STAFF_DICT (EMP_NO, DEPT_CODE, NAME, 
+      INPUT_CODE, JOB, TITLE, 
+      USER_NAME, INPUT_CODE_WB, ID, 
+      CREATE_DATE, PASSWORD, SYS_FLAG, 
+      SURGERY_CLASS, CANCEL, ANTIBIOTIC_DRUG_LIMIT)
+    values (#{empNo,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{inputCodeWb,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, #{sysFlag,jdbcType=NUMERIC}, 
+      #{surgeryClass,jdbcType=VARCHAR}, #{cancel,jdbcType=VARCHAR}, #{antibioticDrugLimit,jdbcType=NUMERIC}, 
+      #{idNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.comm.domain.StaffDict">
+    insert into STAFF_DICT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empNo != null">
+        EMP_NO,
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="inputCode != null">
+        INPUT_CODE,
+      </if>
+      <if test="job != null">
+        JOB,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="inputCodeWb != null">
+        INPUT_CODE_WB,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="sysFlag != null">
+        SYS_FLAG,
+      </if>
+      <if test="surgeryClass != null">
+        SURGERY_CLASS,
+      </if>
+      <if test="cancel != null">
+        CANCEL,
+      </if>
+      <if test="antibioticDrugLimit != null">
+        ANTIBIOTIC_DRUG_LIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empNo != null">
+        #{empNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null">
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCodeWb != null">
+        #{inputCodeWb,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sysFlag != null">
+        #{sysFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="surgeryClass != null">
+        #{surgeryClass,jdbcType=VARCHAR},
+      </if>
+      <if test="cancel != null">
+        #{cancel,jdbcType=VARCHAR},
+      </if>
+      <if test="antibioticDrugLimit != null">
+        #{antibioticDrugLimit,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.comm.domain.StaffDict">
+    update STAFF_DICT
+    <set>
+      <if test="deptCode != null">
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null">
+        INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCodeWb != null">
+        INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sysFlag != null">
+        SYS_FLAG = #{sysFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="surgeryClass != null">
+        SURGERY_CLASS = #{surgeryClass,jdbcType=VARCHAR},
+      </if>
+      <if test="cancel != null">
+        CANCEL = #{cancel,jdbcType=VARCHAR},
+      </if>
+      <if test="antibioticDrugLimit != null">
+        ANTIBIOTIC_DRUG_LIMIT = #{antibioticDrugLimit,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where EMP_NO = #{empNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.comm.domain.StaffDict">
+    update STAFF_DICT
+    set DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
+      ID = #{id,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      SYS_FLAG = #{sysFlag,jdbcType=NUMERIC},
+      SURGERY_CLASS = #{surgeryClass,jdbcType=VARCHAR},
+      CANCEL = #{cancel,jdbcType=VARCHAR},
+      ANTIBIOTIC_DRUG_LIMIT = #{antibioticDrugLimit,jdbcType=NUMERIC},
+    where EMP_NO = #{empNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

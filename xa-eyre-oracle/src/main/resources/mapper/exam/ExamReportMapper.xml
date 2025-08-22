@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.exam.mapper.ExamReportMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.exam.domain.ExamReport">
+    <id column="EXAM_NO" jdbcType="VARCHAR" property="examNo" />
+    <result column="EXAM_PARA" jdbcType="VARCHAR" property="examPara" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="IMPRESSION" jdbcType="VARCHAR" property="impression" />
+    <result column="RECOMMENDATION" jdbcType="VARCHAR" property="recommendation" />
+    <result column="IS_ABNORMAL" jdbcType="VARCHAR" property="isAbnormal" />
+    <result column="USE_IMAGE" jdbcType="VARCHAR" property="useImage" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="REPORTNAME" jdbcType="VARCHAR" property="reportname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXAM_NO, EXAM_PARA, DESCRIPTION, IMPRESSION, RECOMMENDATION, IS_ABNORMAL, USE_IMAGE, 
+    MEMO, REPORTNAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from EXAM_REPORT
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from EXAM_REPORT
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.exam.domain.ExamReport">
+    insert into EXAM_REPORT (EXAM_NO, EXAM_PARA, DESCRIPTION, 
+      IMPRESSION, RECOMMENDATION, IS_ABNORMAL, 
+      USE_IMAGE, MEMO, REPORTNAME
+      )
+    values (#{examNo,jdbcType=VARCHAR}, #{examPara,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{impression,jdbcType=VARCHAR}, #{recommendation,jdbcType=VARCHAR}, #{isAbnormal,jdbcType=VARCHAR}, 
+      #{useImage,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{reportname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.exam.domain.ExamReport">
+    insert into EXAM_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examNo != null">
+        EXAM_NO,
+      </if>
+      <if test="examPara != null">
+        EXAM_PARA,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="impression != null">
+        IMPRESSION,
+      </if>
+      <if test="recommendation != null">
+        RECOMMENDATION,
+      </if>
+      <if test="isAbnormal != null">
+        IS_ABNORMAL,
+      </if>
+      <if test="useImage != null">
+        USE_IMAGE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="reportname != null">
+        REPORTNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examNo != null">
+        #{examNo,jdbcType=VARCHAR},
+      </if>
+      <if test="examPara != null">
+        #{examPara,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null">
+        #{impression,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendation != null">
+        #{recommendation,jdbcType=VARCHAR},
+      </if>
+      <if test="isAbnormal != null">
+        #{isAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="useImage != null">
+        #{useImage,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="reportname != null">
+        #{reportname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.exam.domain.ExamReport">
+    update EXAM_REPORT
+    <set>
+      <if test="examPara != null">
+        EXAM_PARA = #{examPara,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="impression != null">
+        IMPRESSION = #{impression,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendation != null">
+        RECOMMENDATION = #{recommendation,jdbcType=VARCHAR},
+      </if>
+      <if test="isAbnormal != null">
+        IS_ABNORMAL = #{isAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="useImage != null">
+        USE_IMAGE = #{useImage,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="reportname != null">
+        REPORTNAME = #{reportname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.exam.domain.ExamReport">
+    update EXAM_REPORT
+    set EXAM_PARA = #{examPara,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      IMPRESSION = #{impression,jdbcType=VARCHAR},
+      RECOMMENDATION = #{recommendation,jdbcType=VARCHAR},
+      IS_ABNORMAL = #{isAbnormal,jdbcType=VARCHAR},
+      USE_IMAGE = #{useImage,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      REPORTNAME = #{reportname,jdbcType=VARCHAR}
+    where EXAM_NO = #{examNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

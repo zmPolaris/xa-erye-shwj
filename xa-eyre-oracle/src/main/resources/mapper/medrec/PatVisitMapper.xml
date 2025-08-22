@@ -1,0 +1,1260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.medrec.mapper.PatVisitMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.medrec.domain.PatVisit">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="DEPT_ADMISSION_TO" jdbcType="VARCHAR" property="deptAdmissionTo" />
+    <result column="ADMISSION_DATE_TIME" jdbcType="TIMESTAMP" property="admissionDateTime" />
+    <result column="DEPT_DISCHARGE_FROM" jdbcType="VARCHAR" property="deptDischargeFrom" />
+    <result column="DISCHARGE_DATE_TIME" jdbcType="TIMESTAMP" property="dischargeDateTime" />
+    <result column="OCCUPATION" jdbcType="VARCHAR" property="occupation" />
+    <result column="MARITAL_STATUS" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="IDENTITY" jdbcType="VARCHAR" property="identity" />
+    <result column="ARMED_SERVICES" jdbcType="VARCHAR" property="armedServices" />
+    <result column="DUTY" jdbcType="VARCHAR" property="duty" />
+    <result column="UNIT_IN_CONTRACT" jdbcType="VARCHAR" property="unitInContract" />
+    <result column="CHARGE_TYPE" jdbcType="VARCHAR" property="chargeType" />
+    <result column="WORKING_STATUS" jdbcType="NUMERIC" property="workingStatus" />
+    <result column="INSURANCE_TYPE" jdbcType="VARCHAR" property="insuranceType" />
+    <result column="INSURANCE_NO" jdbcType="VARCHAR" property="insuranceNo" />
+    <result column="SERVICE_AGENCY" jdbcType="VARCHAR" property="serviceAgency" />
+    <result column="MAILING_ADDRESS" jdbcType="VARCHAR" property="mailingAddress" />
+    <result column="ZIP_CODE" jdbcType="VARCHAR" property="zipCode" />
+    <result column="NEXT_OF_KIN" jdbcType="VARCHAR" property="nextOfKin" />
+    <result column="RELATIONSHIP" jdbcType="VARCHAR" property="relationship" />
+    <result column="NEXT_OF_KIN_ADDR" jdbcType="VARCHAR" property="nextOfKinAddr" />
+    <result column="NEXT_OF_KIN_ZIPCODE" jdbcType="VARCHAR" property="nextOfKinZipcode" />
+    <result column="NEXT_OF_KIN_PHONE" jdbcType="VARCHAR" property="nextOfKinPhone" />
+    <result column="PATIENT_CLASS" jdbcType="VARCHAR" property="patientClass" />
+    <result column="ADMISSION_CAUSE" jdbcType="VARCHAR" property="admissionCause" />
+    <result column="CONSULTING_DATE" jdbcType="TIMESTAMP" property="consultingDate" />
+    <result column="PAT_ADM_CONDITION" jdbcType="VARCHAR" property="patAdmCondition" />
+    <result column="CONSULTING_DOCTOR" jdbcType="VARCHAR" property="consultingDoctor" />
+    <result column="ADMITTED_BY" jdbcType="VARCHAR" property="admittedBy" />
+    <result column="EMER_TREAT_TIMES" jdbcType="NUMERIC" property="emerTreatTimes" />
+    <result column="ESC_EMER_TIMES" jdbcType="NUMERIC" property="escEmerTimes" />
+    <result column="SERIOUS_COND_DAYS" jdbcType="NUMERIC" property="seriousCondDays" />
+    <result column="CRITICAL_COND_DAYS" jdbcType="NUMERIC" property="criticalCondDays" />
+    <result column="ICU_DAYS" jdbcType="NUMERIC" property="icuDays" />
+    <result column="CCU_DAYS" jdbcType="NUMERIC" property="ccuDays" />
+    <result column="SPEC_LEVEL_NURS_DAYS" jdbcType="NUMERIC" property="specLevelNursDays" />
+    <result column="FIRST_LEVEL_NURS_DAYS" jdbcType="NUMERIC" property="firstLevelNursDays" />
+    <result column="SECOND_LEVEL_NURS_DAYS" jdbcType="NUMERIC" property="secondLevelNursDays" />
+    <result column="AUTOPSY_INDICATOR" jdbcType="NUMERIC" property="autopsyIndicator" />
+    <result column="BLOOD_TYPE" jdbcType="VARCHAR" property="bloodType" />
+    <result column="BLOOD_TYPE_RH" jdbcType="VARCHAR" property="bloodTypeRh" />
+    <result column="INFUSION_REACT_TIMES" jdbcType="NUMERIC" property="infusionReactTimes" />
+    <result column="BLOOD_TRAN_TIMES" jdbcType="NUMERIC" property="bloodTranTimes" />
+    <result column="BLOOD_TRAN_VOL" jdbcType="NUMERIC" property="bloodTranVol" />
+    <result column="BLOOD_TRAN_REACT_TIMES" jdbcType="NUMERIC" property="bloodTranReactTimes" />
+    <result column="DECUBITAL_ULCER_TIMES" jdbcType="NUMERIC" property="decubitalUlcerTimes" />
+    <result column="ALERGY_DRUGS" jdbcType="VARCHAR" property="alergyDrugs" />
+    <result column="ADVERSE_REACTION_DRUGS" jdbcType="VARCHAR" property="adverseReactionDrugs" />
+    <result column="MR_VALUE" jdbcType="VARCHAR" property="mrValue" />
+    <result column="MR_QUALITY" jdbcType="VARCHAR" property="mrQuality" />
+    <result column="FOLLOW_INDICATOR" jdbcType="NUMERIC" property="followIndicator" />
+    <result column="FOLLOW_INTERVAL" jdbcType="NUMERIC" property="followInterval" />
+    <result column="FOLLOW_INTERVAL_UNITS" jdbcType="VARCHAR" property="followIntervalUnits" />
+    <result column="DIRECTOR" jdbcType="VARCHAR" property="director" />
+    <result column="ATTENDING_DOCTOR" jdbcType="VARCHAR" property="attendingDoctor" />
+    <result column="DOCTOR_IN_CHARGE" jdbcType="VARCHAR" property="doctorInCharge" />
+    <result column="DISCHARGE_DISPOSITION" jdbcType="VARCHAR" property="dischargeDisposition" />
+    <result column="TOTAL_COSTS" jdbcType="NUMERIC" property="totalCosts" />
+    <result column="TOTAL_PAYMENTS" jdbcType="NUMERIC" property="totalPayments" />
+    <result column="CATALOG_DATE" jdbcType="TIMESTAMP" property="catalogDate" />
+    <result column="CATALOGER" jdbcType="VARCHAR" property="cataloger" />
+    <result column="TOP_UNIT" jdbcType="VARCHAR" property="topUnit" />
+    <result column="SERVICE_SYSTEM_INDICATOR" jdbcType="NUMERIC" property="serviceSystemIndicator" />
+    <result column="INTERNAL_NO" jdbcType="VARCHAR" property="internalNo" />
+    <result column="IDENTITY_CLASS" jdbcType="VARCHAR" property="identityClass" />
+    <result column="MEDICAL_PAY_WAY" jdbcType="VARCHAR" property="medicalPayWay" />
+    <result column="HBSAG_INDICATOR" jdbcType="NUMERIC" property="hbsagIndicator" />
+    <result column="HCV_AB_INDICATOR" jdbcType="NUMERIC" property="hcvAbIndicator" />
+    <result column="HIV_AB_INDICATOR" jdbcType="NUMERIC" property="hivAbIndicator" />
+    <result column="CHIEF_DOCTOR" jdbcType="VARCHAR" property="chiefDoctor" />
+    <result column="ADVANCED_STUDIES_DOCTOR" jdbcType="VARCHAR" property="advancedStudiesDoctor" />
+    <result column="PRACTICE_DOCTOR_OF_GRADUATE" jdbcType="VARCHAR" property="practiceDoctorOfGraduate" />
+    <result column="PRACTICE_DOCTOR" jdbcType="VARCHAR" property="practiceDoctor" />
+    <result column="DOCTOR_OF_CONTROL_QUALITY" jdbcType="VARCHAR" property="doctorOfControlQuality" />
+    <result column="NURSE_OF_CONTROL_QUALITY" jdbcType="VARCHAR" property="nurseOfControlQuality" />
+    <result column="DATE_OF_CONTROL_QUALITY" jdbcType="TIMESTAMP" property="dateOfControlQuality" />
+    <result column="FIRST_CASE_INDICATOR" jdbcType="NUMERIC" property="firstCaseIndicator" />
+    <result column="THIRD_LEVEL_NURS_DAYS" jdbcType="NUMERIC" property="thirdLevelNursDays" />
+    <result column="X_EXAM_NO" jdbcType="VARCHAR" property="xExamNo" />
+    <result column="TRAINING_INJURY_INDICATOR" jdbcType="NUMERIC" property="trainingInjuryIndicator" />
+    <result column="BODY_WEIGHT" jdbcType="NUMERIC" property="bodyWeight" />
+    <result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
+    <result column="ZYLSH" jdbcType="VARCHAR" property="zylsh" />
+    <result column="HEALTH_LEVEL" jdbcType="VARCHAR" property="healthLevel" />
+    <result column="MR_INFECT_REPORT" jdbcType="VARCHAR" property="mrInfectReport" />
+    <result column="INFECT_INDICATOR" jdbcType="NUMERIC" property="infectIndicator" />
+    <result column="INQUIRY_INDICATOR" jdbcType="NUMERIC" property="inquiryIndicator" />
+    <result column="PIGEONHOLE" jdbcType="NUMERIC" property="pigeonhole" />
+    <result column="BODY_HEIGHT" jdbcType="NUMERIC" property="bodyHeight" />
+    <result column="NURSE_MR_COMMIT" jdbcType="NUMERIC" property="nurseMrCommit" />
+    <result column="NURSE_MR_COMMIT_TIME" jdbcType="TIMESTAMP" property="nurseMrCommitTime" />
+    <result column="ABNORMAL" jdbcType="VARCHAR" property="abnormal" />
+    <result column="SPECIAL_VALUE_INDICATOR" jdbcType="NUMERIC" property="specialValueIndicator" />
+    <result column="MR_DESC" jdbcType="VARCHAR" property="mrDesc" />
+    <result column="HEIGHT" jdbcType="NUMERIC" property="height" />
+    <result column="WEIGHT" jdbcType="NUMERIC" property="weight" />
+    <result column="PATIENT_CONDITION" jdbcType="VARCHAR" property="patientCondition" />
+    <result column="HOSPITAL_CODE" jdbcType="VARCHAR" property="hospitalCode" />
+    <result column="DISCHARGE_AGE" jdbcType="NUMERIC" property="dischargeAge" />
+    <result column="SETTLE_STATUS" jdbcType="NUMERIC" property="settleStatus" />
+    <result column="SECURITY_TYPE_CODE" jdbcType="VARCHAR" property="securityTypeCode" />
+    <result column="CAL_WAY" jdbcType="VARCHAR" property="calWay" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, DEPT_ADMISSION_TO, ADMISSION_DATE_TIME, DEPT_DISCHARGE_FROM, 
+    DISCHARGE_DATE_TIME, OCCUPATION, MARITAL_STATUS, IDENTITY, ARMED_SERVICES, DUTY, 
+    UNIT_IN_CONTRACT, CHARGE_TYPE, WORKING_STATUS, INSURANCE_TYPE, INSURANCE_NO, SERVICE_AGENCY, 
+    MAILING_ADDRESS, ZIP_CODE, NEXT_OF_KIN, RELATIONSHIP, NEXT_OF_KIN_ADDR, NEXT_OF_KIN_ZIPCODE, 
+    NEXT_OF_KIN_PHONE, PATIENT_CLASS, ADMISSION_CAUSE, CONSULTING_DATE, PAT_ADM_CONDITION, 
+    CONSULTING_DOCTOR, ADMITTED_BY, EMER_TREAT_TIMES, ESC_EMER_TIMES, SERIOUS_COND_DAYS, 
+    CRITICAL_COND_DAYS, ICU_DAYS, CCU_DAYS, SPEC_LEVEL_NURS_DAYS, FIRST_LEVEL_NURS_DAYS, 
+    SECOND_LEVEL_NURS_DAYS, AUTOPSY_INDICATOR, BLOOD_TYPE, BLOOD_TYPE_RH, INFUSION_REACT_TIMES, 
+    BLOOD_TRAN_TIMES, BLOOD_TRAN_VOL, BLOOD_TRAN_REACT_TIMES, DECUBITAL_ULCER_TIMES, 
+    ALERGY_DRUGS, ADVERSE_REACTION_DRUGS, MR_VALUE, MR_QUALITY, FOLLOW_INDICATOR, FOLLOW_INTERVAL, 
+    FOLLOW_INTERVAL_UNITS, DIRECTOR, ATTENDING_DOCTOR, DOCTOR_IN_CHARGE, DISCHARGE_DISPOSITION, 
+    TOTAL_COSTS, TOTAL_PAYMENTS, CATALOG_DATE, CATALOGER, TOP_UNIT, SERVICE_SYSTEM_INDICATOR, 
+    INTERNAL_NO, IDENTITY_CLASS, MEDICAL_PAY_WAY, HBSAG_INDICATOR, HCV_AB_INDICATOR, 
+    HIV_AB_INDICATOR, CHIEF_DOCTOR, ADVANCED_STUDIES_DOCTOR, PRACTICE_DOCTOR_OF_GRADUATE, 
+    PRACTICE_DOCTOR, DOCTOR_OF_CONTROL_QUALITY, NURSE_OF_CONTROL_QUALITY, DATE_OF_CONTROL_QUALITY, 
+    FIRST_CASE_INDICATOR, THIRD_LEVEL_NURS_DAYS, X_EXAM_NO, TRAINING_INJURY_INDICATOR, 
+    BODY_WEIGHT, CARD_NO, ZYLSH, HEALTH_LEVEL, MR_INFECT_REPORT, INFECT_INDICATOR, INQUIRY_INDICATOR, 
+    PIGEONHOLE, BODY_HEIGHT, NURSE_MR_COMMIT, NURSE_MR_COMMIT_TIME, ABNORMAL, SPECIAL_VALUE_INDICATOR, 
+    MR_DESC, HEIGHT, WEIGHT, PATIENT_CONDITION, HOSPITAL_CODE, DISCHARGE_AGE, SETTLE_STATUS, 
+    SECURITY_TYPE_CODE, CAL_WAY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatVisitKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PAT_VISIT
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatVisitKey">
+    delete from PAT_VISIT
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.PatVisit">
+    insert into PAT_VISIT (PATIENT_ID, VISIT_ID, DEPT_ADMISSION_TO, 
+      ADMISSION_DATE_TIME, DEPT_DISCHARGE_FROM, 
+      DISCHARGE_DATE_TIME, OCCUPATION, MARITAL_STATUS, 
+      IDENTITY, ARMED_SERVICES, DUTY, 
+      UNIT_IN_CONTRACT, CHARGE_TYPE, WORKING_STATUS, 
+      INSURANCE_TYPE, INSURANCE_NO, SERVICE_AGENCY, 
+      MAILING_ADDRESS, ZIP_CODE, NEXT_OF_KIN, 
+      RELATIONSHIP, NEXT_OF_KIN_ADDR, NEXT_OF_KIN_ZIPCODE, 
+      NEXT_OF_KIN_PHONE, PATIENT_CLASS, ADMISSION_CAUSE, 
+      CONSULTING_DATE, PAT_ADM_CONDITION, CONSULTING_DOCTOR, 
+      ADMITTED_BY, EMER_TREAT_TIMES, ESC_EMER_TIMES, 
+      SERIOUS_COND_DAYS, CRITICAL_COND_DAYS, ICU_DAYS, 
+      CCU_DAYS, SPEC_LEVEL_NURS_DAYS, FIRST_LEVEL_NURS_DAYS, 
+      SECOND_LEVEL_NURS_DAYS, AUTOPSY_INDICATOR, 
+      BLOOD_TYPE, BLOOD_TYPE_RH, INFUSION_REACT_TIMES, 
+      BLOOD_TRAN_TIMES, BLOOD_TRAN_VOL, BLOOD_TRAN_REACT_TIMES, 
+      DECUBITAL_ULCER_TIMES, ALERGY_DRUGS, ADVERSE_REACTION_DRUGS, 
+      MR_VALUE, MR_QUALITY, FOLLOW_INDICATOR, 
+      FOLLOW_INTERVAL, FOLLOW_INTERVAL_UNITS, DIRECTOR, 
+      ATTENDING_DOCTOR, DOCTOR_IN_CHARGE, DISCHARGE_DISPOSITION, 
+      TOTAL_COSTS, TOTAL_PAYMENTS, CATALOG_DATE, 
+      CATALOGER, TOP_UNIT, SERVICE_SYSTEM_INDICATOR, 
+      INTERNAL_NO, IDENTITY_CLASS, MEDICAL_PAY_WAY, 
+      HBSAG_INDICATOR, HCV_AB_INDICATOR, HIV_AB_INDICATOR, 
+      CHIEF_DOCTOR, ADVANCED_STUDIES_DOCTOR, PRACTICE_DOCTOR_OF_GRADUATE, 
+      PRACTICE_DOCTOR, DOCTOR_OF_CONTROL_QUALITY, 
+      NURSE_OF_CONTROL_QUALITY, DATE_OF_CONTROL_QUALITY, 
+      FIRST_CASE_INDICATOR, THIRD_LEVEL_NURS_DAYS, 
+      X_EXAM_NO, TRAINING_INJURY_INDICATOR, BODY_WEIGHT, 
+      CARD_NO, ZYLSH, HEALTH_LEVEL, 
+      MR_INFECT_REPORT, INFECT_INDICATOR, INQUIRY_INDICATOR, 
+      PIGEONHOLE, BODY_HEIGHT, NURSE_MR_COMMIT, 
+      NURSE_MR_COMMIT_TIME, ABNORMAL, SPECIAL_VALUE_INDICATOR, 
+      MR_DESC, HEIGHT, WEIGHT, 
+      PATIENT_CONDITION, HOSPITAL_CODE, DISCHARGE_AGE, 
+      SETTLE_STATUS, SECURITY_TYPE_CODE, CAL_WAY
+      )
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{deptAdmissionTo,jdbcType=VARCHAR}, 
+      #{admissionDateTime,jdbcType=TIMESTAMP}, #{deptDischargeFrom,jdbcType=VARCHAR}, 
+      #{dischargeDateTime,jdbcType=TIMESTAMP}, #{occupation,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{armedServices,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, 
+      #{unitInContract,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, #{workingStatus,jdbcType=NUMERIC}, 
+      #{insuranceType,jdbcType=VARCHAR}, #{insuranceNo,jdbcType=VARCHAR}, #{serviceAgency,jdbcType=VARCHAR}, 
+      #{mailingAddress,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{nextOfKin,jdbcType=VARCHAR}, 
+      #{relationship,jdbcType=VARCHAR}, #{nextOfKinAddr,jdbcType=VARCHAR}, #{nextOfKinZipcode,jdbcType=VARCHAR}, 
+      #{nextOfKinPhone,jdbcType=VARCHAR}, #{patientClass,jdbcType=VARCHAR}, #{admissionCause,jdbcType=VARCHAR}, 
+      #{consultingDate,jdbcType=TIMESTAMP}, #{patAdmCondition,jdbcType=VARCHAR}, #{consultingDoctor,jdbcType=VARCHAR}, 
+      #{admittedBy,jdbcType=VARCHAR}, #{emerTreatTimes,jdbcType=NUMERIC}, #{escEmerTimes,jdbcType=NUMERIC}, 
+      #{seriousCondDays,jdbcType=NUMERIC}, #{criticalCondDays,jdbcType=NUMERIC}, #{icuDays,jdbcType=NUMERIC}, 
+      #{ccuDays,jdbcType=NUMERIC}, #{specLevelNursDays,jdbcType=NUMERIC}, #{firstLevelNursDays,jdbcType=NUMERIC}, 
+      #{secondLevelNursDays,jdbcType=NUMERIC}, #{autopsyIndicator,jdbcType=NUMERIC}, 
+      #{bloodType,jdbcType=VARCHAR}, #{bloodTypeRh,jdbcType=VARCHAR}, #{infusionReactTimes,jdbcType=NUMERIC}, 
+      #{bloodTranTimes,jdbcType=NUMERIC}, #{bloodTranVol,jdbcType=NUMERIC}, #{bloodTranReactTimes,jdbcType=NUMERIC}, 
+      #{decubitalUlcerTimes,jdbcType=NUMERIC}, #{alergyDrugs,jdbcType=VARCHAR}, #{adverseReactionDrugs,jdbcType=VARCHAR}, 
+      #{mrValue,jdbcType=VARCHAR}, #{mrQuality,jdbcType=VARCHAR}, #{followIndicator,jdbcType=NUMERIC}, 
+      #{followInterval,jdbcType=NUMERIC}, #{followIntervalUnits,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, 
+      #{attendingDoctor,jdbcType=VARCHAR}, #{doctorInCharge,jdbcType=VARCHAR}, #{dischargeDisposition,jdbcType=VARCHAR}, 
+      #{totalCosts,jdbcType=NUMERIC}, #{totalPayments,jdbcType=NUMERIC}, #{catalogDate,jdbcType=TIMESTAMP}, 
+      #{cataloger,jdbcType=VARCHAR}, #{topUnit,jdbcType=VARCHAR}, #{serviceSystemIndicator,jdbcType=NUMERIC}, 
+      #{internalNo,jdbcType=VARCHAR}, #{identityClass,jdbcType=VARCHAR}, #{medicalPayWay,jdbcType=VARCHAR}, 
+      #{hbsagIndicator,jdbcType=NUMERIC}, #{hcvAbIndicator,jdbcType=NUMERIC}, #{hivAbIndicator,jdbcType=NUMERIC}, 
+      #{chiefDoctor,jdbcType=VARCHAR}, #{advancedStudiesDoctor,jdbcType=VARCHAR}, #{practiceDoctorOfGraduate,jdbcType=VARCHAR}, 
+      #{practiceDoctor,jdbcType=VARCHAR}, #{doctorOfControlQuality,jdbcType=VARCHAR}, 
+      #{nurseOfControlQuality,jdbcType=VARCHAR}, #{dateOfControlQuality,jdbcType=TIMESTAMP}, 
+      #{firstCaseIndicator,jdbcType=NUMERIC}, #{thirdLevelNursDays,jdbcType=NUMERIC}, 
+      #{xExamNo,jdbcType=VARCHAR}, #{trainingInjuryIndicator,jdbcType=NUMERIC}, #{bodyWeight,jdbcType=NUMERIC}, 
+      #{cardNo,jdbcType=VARCHAR}, #{zylsh,jdbcType=VARCHAR}, #{healthLevel,jdbcType=VARCHAR}, 
+      #{mrInfectReport,jdbcType=VARCHAR}, #{infectIndicator,jdbcType=NUMERIC}, #{inquiryIndicator,jdbcType=NUMERIC}, 
+      #{pigeonhole,jdbcType=NUMERIC}, #{bodyHeight,jdbcType=NUMERIC}, #{nurseMrCommit,jdbcType=NUMERIC}, 
+      #{nurseMrCommitTime,jdbcType=TIMESTAMP}, #{abnormal,jdbcType=VARCHAR}, #{specialValueIndicator,jdbcType=NUMERIC}, 
+      #{mrDesc,jdbcType=VARCHAR}, #{height,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, 
+      #{patientCondition,jdbcType=VARCHAR}, #{hospitalCode,jdbcType=VARCHAR}, #{dischargeAge,jdbcType=NUMERIC}, 
+      #{settleStatus,jdbcType=NUMERIC}, #{securityTypeCode,jdbcType=VARCHAR}, #{calWay,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.PatVisit">
+    insert into PAT_VISIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="deptAdmissionTo != null">
+        DEPT_ADMISSION_TO,
+      </if>
+      <if test="admissionDateTime != null">
+        ADMISSION_DATE_TIME,
+      </if>
+      <if test="deptDischargeFrom != null">
+        DEPT_DISCHARGE_FROM,
+      </if>
+      <if test="dischargeDateTime != null">
+        DISCHARGE_DATE_TIME,
+      </if>
+      <if test="occupation != null">
+        OCCUPATION,
+      </if>
+      <if test="maritalStatus != null">
+        MARITAL_STATUS,
+      </if>
+      <if test="identity != null">
+        IDENTITY,
+      </if>
+      <if test="armedServices != null">
+        ARMED_SERVICES,
+      </if>
+      <if test="duty != null">
+        DUTY,
+      </if>
+      <if test="unitInContract != null">
+        UNIT_IN_CONTRACT,
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE,
+      </if>
+      <if test="workingStatus != null">
+        WORKING_STATUS,
+      </if>
+      <if test="insuranceType != null">
+        INSURANCE_TYPE,
+      </if>
+      <if test="insuranceNo != null">
+        INSURANCE_NO,
+      </if>
+      <if test="serviceAgency != null">
+        SERVICE_AGENCY,
+      </if>
+      <if test="mailingAddress != null">
+        MAILING_ADDRESS,
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE,
+      </if>
+      <if test="nextOfKin != null">
+        NEXT_OF_KIN,
+      </if>
+      <if test="relationship != null">
+        RELATIONSHIP,
+      </if>
+      <if test="nextOfKinAddr != null">
+        NEXT_OF_KIN_ADDR,
+      </if>
+      <if test="nextOfKinZipcode != null">
+        NEXT_OF_KIN_ZIPCODE,
+      </if>
+      <if test="nextOfKinPhone != null">
+        NEXT_OF_KIN_PHONE,
+      </if>
+      <if test="patientClass != null">
+        PATIENT_CLASS,
+      </if>
+      <if test="admissionCause != null">
+        ADMISSION_CAUSE,
+      </if>
+      <if test="consultingDate != null">
+        CONSULTING_DATE,
+      </if>
+      <if test="patAdmCondition != null">
+        PAT_ADM_CONDITION,
+      </if>
+      <if test="consultingDoctor != null">
+        CONSULTING_DOCTOR,
+      </if>
+      <if test="admittedBy != null">
+        ADMITTED_BY,
+      </if>
+      <if test="emerTreatTimes != null">
+        EMER_TREAT_TIMES,
+      </if>
+      <if test="escEmerTimes != null">
+        ESC_EMER_TIMES,
+      </if>
+      <if test="seriousCondDays != null">
+        SERIOUS_COND_DAYS,
+      </if>
+      <if test="criticalCondDays != null">
+        CRITICAL_COND_DAYS,
+      </if>
+      <if test="icuDays != null">
+        ICU_DAYS,
+      </if>
+      <if test="ccuDays != null">
+        CCU_DAYS,
+      </if>
+      <if test="specLevelNursDays != null">
+        SPEC_LEVEL_NURS_DAYS,
+      </if>
+      <if test="firstLevelNursDays != null">
+        FIRST_LEVEL_NURS_DAYS,
+      </if>
+      <if test="secondLevelNursDays != null">
+        SECOND_LEVEL_NURS_DAYS,
+      </if>
+      <if test="autopsyIndicator != null">
+        AUTOPSY_INDICATOR,
+      </if>
+      <if test="bloodType != null">
+        BLOOD_TYPE,
+      </if>
+      <if test="bloodTypeRh != null">
+        BLOOD_TYPE_RH,
+      </if>
+      <if test="infusionReactTimes != null">
+        INFUSION_REACT_TIMES,
+      </if>
+      <if test="bloodTranTimes != null">
+        BLOOD_TRAN_TIMES,
+      </if>
+      <if test="bloodTranVol != null">
+        BLOOD_TRAN_VOL,
+      </if>
+      <if test="bloodTranReactTimes != null">
+        BLOOD_TRAN_REACT_TIMES,
+      </if>
+      <if test="decubitalUlcerTimes != null">
+        DECUBITAL_ULCER_TIMES,
+      </if>
+      <if test="alergyDrugs != null">
+        ALERGY_DRUGS,
+      </if>
+      <if test="adverseReactionDrugs != null">
+        ADVERSE_REACTION_DRUGS,
+      </if>
+      <if test="mrValue != null">
+        MR_VALUE,
+      </if>
+      <if test="mrQuality != null">
+        MR_QUALITY,
+      </if>
+      <if test="followIndicator != null">
+        FOLLOW_INDICATOR,
+      </if>
+      <if test="followInterval != null">
+        FOLLOW_INTERVAL,
+      </if>
+      <if test="followIntervalUnits != null">
+        FOLLOW_INTERVAL_UNITS,
+      </if>
+      <if test="director != null">
+        DIRECTOR,
+      </if>
+      <if test="attendingDoctor != null">
+        ATTENDING_DOCTOR,
+      </if>
+      <if test="doctorInCharge != null">
+        DOCTOR_IN_CHARGE,
+      </if>
+      <if test="dischargeDisposition != null">
+        DISCHARGE_DISPOSITION,
+      </if>
+      <if test="totalCosts != null">
+        TOTAL_COSTS,
+      </if>
+      <if test="totalPayments != null">
+        TOTAL_PAYMENTS,
+      </if>
+      <if test="catalogDate != null">
+        CATALOG_DATE,
+      </if>
+      <if test="cataloger != null">
+        CATALOGER,
+      </if>
+      <if test="topUnit != null">
+        TOP_UNIT,
+      </if>
+      <if test="serviceSystemIndicator != null">
+        SERVICE_SYSTEM_INDICATOR,
+      </if>
+      <if test="internalNo != null">
+        INTERNAL_NO,
+      </if>
+      <if test="identityClass != null">
+        IDENTITY_CLASS,
+      </if>
+      <if test="medicalPayWay != null">
+        MEDICAL_PAY_WAY,
+      </if>
+      <if test="hbsagIndicator != null">
+        HBSAG_INDICATOR,
+      </if>
+      <if test="hcvAbIndicator != null">
+        HCV_AB_INDICATOR,
+      </if>
+      <if test="hivAbIndicator != null">
+        HIV_AB_INDICATOR,
+      </if>
+      <if test="chiefDoctor != null">
+        CHIEF_DOCTOR,
+      </if>
+      <if test="advancedStudiesDoctor != null">
+        ADVANCED_STUDIES_DOCTOR,
+      </if>
+      <if test="practiceDoctorOfGraduate != null">
+        PRACTICE_DOCTOR_OF_GRADUATE,
+      </if>
+      <if test="practiceDoctor != null">
+        PRACTICE_DOCTOR,
+      </if>
+      <if test="doctorOfControlQuality != null">
+        DOCTOR_OF_CONTROL_QUALITY,
+      </if>
+      <if test="nurseOfControlQuality != null">
+        NURSE_OF_CONTROL_QUALITY,
+      </if>
+      <if test="dateOfControlQuality != null">
+        DATE_OF_CONTROL_QUALITY,
+      </if>
+      <if test="firstCaseIndicator != null">
+        FIRST_CASE_INDICATOR,
+      </if>
+      <if test="thirdLevelNursDays != null">
+        THIRD_LEVEL_NURS_DAYS,
+      </if>
+      <if test="xExamNo != null">
+        X_EXAM_NO,
+      </if>
+      <if test="trainingInjuryIndicator != null">
+        TRAINING_INJURY_INDICATOR,
+      </if>
+      <if test="bodyWeight != null">
+        BODY_WEIGHT,
+      </if>
+      <if test="cardNo != null">
+        CARD_NO,
+      </if>
+      <if test="zylsh != null">
+        ZYLSH,
+      </if>
+      <if test="healthLevel != null">
+        HEALTH_LEVEL,
+      </if>
+      <if test="mrInfectReport != null">
+        MR_INFECT_REPORT,
+      </if>
+      <if test="infectIndicator != null">
+        INFECT_INDICATOR,
+      </if>
+      <if test="inquiryIndicator != null">
+        INQUIRY_INDICATOR,
+      </if>
+      <if test="pigeonhole != null">
+        PIGEONHOLE,
+      </if>
+      <if test="bodyHeight != null">
+        BODY_HEIGHT,
+      </if>
+      <if test="nurseMrCommit != null">
+        NURSE_MR_COMMIT,
+      </if>
+      <if test="nurseMrCommitTime != null">
+        NURSE_MR_COMMIT_TIME,
+      </if>
+      <if test="abnormal != null">
+        ABNORMAL,
+      </if>
+      <if test="specialValueIndicator != null">
+        SPECIAL_VALUE_INDICATOR,
+      </if>
+      <if test="mrDesc != null">
+        MR_DESC,
+      </if>
+      <if test="height != null">
+        HEIGHT,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="patientCondition != null">
+        PATIENT_CONDITION,
+      </if>
+      <if test="hospitalCode != null">
+        HOSPITAL_CODE,
+      </if>
+      <if test="dischargeAge != null">
+        DISCHARGE_AGE,
+      </if>
+      <if test="settleStatus != null">
+        SETTLE_STATUS,
+      </if>
+      <if test="securityTypeCode != null">
+        SECURITY_TYPE_CODE,
+      </if>
+      <if test="calWay != null">
+        CAL_WAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="deptAdmissionTo != null">
+        #{deptAdmissionTo,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDateTime != null">
+        #{admissionDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptDischargeFrom != null">
+        #{deptDischargeFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeDateTime != null">
+        #{dischargeDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="armedServices != null">
+        #{armedServices,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="unitInContract != null">
+        #{unitInContract,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="workingStatus != null">
+        #{workingStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="insuranceType != null">
+        #{insuranceType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNo != null">
+        #{insuranceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAgency != null">
+        #{serviceAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingAddress != null">
+        #{mailingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKin != null">
+        #{nextOfKin,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinAddr != null">
+        #{nextOfKinAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinZipcode != null">
+        #{nextOfKinZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinPhone != null">
+        #{nextOfKinPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClass != null">
+        #{patientClass,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionCause != null">
+        #{admissionCause,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingDate != null">
+        #{consultingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patAdmCondition != null">
+        #{patAdmCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingDoctor != null">
+        #{consultingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="admittedBy != null">
+        #{admittedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="emerTreatTimes != null">
+        #{emerTreatTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="escEmerTimes != null">
+        #{escEmerTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="seriousCondDays != null">
+        #{seriousCondDays,jdbcType=NUMERIC},
+      </if>
+      <if test="criticalCondDays != null">
+        #{criticalCondDays,jdbcType=NUMERIC},
+      </if>
+      <if test="icuDays != null">
+        #{icuDays,jdbcType=NUMERIC},
+      </if>
+      <if test="ccuDays != null">
+        #{ccuDays,jdbcType=NUMERIC},
+      </if>
+      <if test="specLevelNursDays != null">
+        #{specLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="firstLevelNursDays != null">
+        #{firstLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="secondLevelNursDays != null">
+        #{secondLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="autopsyIndicator != null">
+        #{autopsyIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodType != null">
+        #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodTypeRh != null">
+        #{bloodTypeRh,jdbcType=VARCHAR},
+      </if>
+      <if test="infusionReactTimes != null">
+        #{infusionReactTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranTimes != null">
+        #{bloodTranTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranVol != null">
+        #{bloodTranVol,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranReactTimes != null">
+        #{bloodTranReactTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="decubitalUlcerTimes != null">
+        #{decubitalUlcerTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="alergyDrugs != null">
+        #{alergyDrugs,jdbcType=VARCHAR},
+      </if>
+      <if test="adverseReactionDrugs != null">
+        #{adverseReactionDrugs,jdbcType=VARCHAR},
+      </if>
+      <if test="mrValue != null">
+        #{mrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="mrQuality != null">
+        #{mrQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="followIndicator != null">
+        #{followIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="followInterval != null">
+        #{followInterval,jdbcType=NUMERIC},
+      </if>
+      <if test="followIntervalUnits != null">
+        #{followIntervalUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingDoctor != null">
+        #{attendingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInCharge != null">
+        #{doctorInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeDisposition != null">
+        #{dischargeDisposition,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCosts != null">
+        #{totalCosts,jdbcType=NUMERIC},
+      </if>
+      <if test="totalPayments != null">
+        #{totalPayments,jdbcType=NUMERIC},
+      </if>
+      <if test="catalogDate != null">
+        #{catalogDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cataloger != null">
+        #{cataloger,jdbcType=VARCHAR},
+      </if>
+      <if test="topUnit != null">
+        #{topUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSystemIndicator != null">
+        #{serviceSystemIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="internalNo != null">
+        #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="identityClass != null">
+        #{identityClass,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPayWay != null">
+        #{medicalPayWay,jdbcType=VARCHAR},
+      </if>
+      <if test="hbsagIndicator != null">
+        #{hbsagIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="hcvAbIndicator != null">
+        #{hcvAbIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="hivAbIndicator != null">
+        #{hivAbIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="chiefDoctor != null">
+        #{chiefDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="advancedStudiesDoctor != null">
+        #{advancedStudiesDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="practiceDoctorOfGraduate != null">
+        #{practiceDoctorOfGraduate,jdbcType=VARCHAR},
+      </if>
+      <if test="practiceDoctor != null">
+        #{practiceDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorOfControlQuality != null">
+        #{doctorOfControlQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseOfControlQuality != null">
+        #{nurseOfControlQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfControlQuality != null">
+        #{dateOfControlQuality,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstCaseIndicator != null">
+        #{firstCaseIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="thirdLevelNursDays != null">
+        #{thirdLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="xExamNo != null">
+        #{xExamNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingInjuryIndicator != null">
+        #{trainingInjuryIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="bodyWeight != null">
+        #{bodyWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="zylsh != null">
+        #{zylsh,jdbcType=VARCHAR},
+      </if>
+      <if test="healthLevel != null">
+        #{healthLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="mrInfectReport != null">
+        #{mrInfectReport,jdbcType=VARCHAR},
+      </if>
+      <if test="infectIndicator != null">
+        #{infectIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="inquiryIndicator != null">
+        #{inquiryIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="pigeonhole != null">
+        #{pigeonhole,jdbcType=NUMERIC},
+      </if>
+      <if test="bodyHeight != null">
+        #{bodyHeight,jdbcType=NUMERIC},
+      </if>
+      <if test="nurseMrCommit != null">
+        #{nurseMrCommit,jdbcType=NUMERIC},
+      </if>
+      <if test="nurseMrCommitTime != null">
+        #{nurseMrCommitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="abnormal != null">
+        #{abnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="specialValueIndicator != null">
+        #{specialValueIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="mrDesc != null">
+        #{mrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=NUMERIC},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=NUMERIC},
+      </if>
+      <if test="patientCondition != null">
+        #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCode != null">
+        #{hospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeAge != null">
+        #{dischargeAge,jdbcType=NUMERIC},
+      </if>
+      <if test="settleStatus != null">
+        #{settleStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="securityTypeCode != null">
+        #{securityTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="calWay != null">
+        #{calWay,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.PatVisit">
+    update PAT_VISIT
+    <set>
+      <if test="deptAdmissionTo != null">
+        DEPT_ADMISSION_TO = #{deptAdmissionTo,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionDateTime != null">
+        ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptDischargeFrom != null">
+        DEPT_DISCHARGE_FROM = #{deptDischargeFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeDateTime != null">
+        DISCHARGE_DATE_TIME = #{dischargeDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupation != null">
+        OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        MARITAL_STATUS = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        IDENTITY = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="armedServices != null">
+        ARMED_SERVICES = #{armedServices,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        DUTY = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="unitInContract != null">
+        UNIT_IN_CONTRACT = #{unitInContract,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="workingStatus != null">
+        WORKING_STATUS = #{workingStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="insuranceType != null">
+        INSURANCE_TYPE = #{insuranceType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNo != null">
+        INSURANCE_NO = #{insuranceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAgency != null">
+        SERVICE_AGENCY = #{serviceAgency,jdbcType=VARCHAR},
+      </if>
+      <if test="mailingAddress != null">
+        MAILING_ADDRESS = #{mailingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKin != null">
+        NEXT_OF_KIN = #{nextOfKin,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        RELATIONSHIP = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinAddr != null">
+        NEXT_OF_KIN_ADDR = #{nextOfKinAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinZipcode != null">
+        NEXT_OF_KIN_ZIPCODE = #{nextOfKinZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOfKinPhone != null">
+        NEXT_OF_KIN_PHONE = #{nextOfKinPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClass != null">
+        PATIENT_CLASS = #{patientClass,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionCause != null">
+        ADMISSION_CAUSE = #{admissionCause,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingDate != null">
+        CONSULTING_DATE = #{consultingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patAdmCondition != null">
+        PAT_ADM_CONDITION = #{patAdmCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="consultingDoctor != null">
+        CONSULTING_DOCTOR = #{consultingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="admittedBy != null">
+        ADMITTED_BY = #{admittedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="emerTreatTimes != null">
+        EMER_TREAT_TIMES = #{emerTreatTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="escEmerTimes != null">
+        ESC_EMER_TIMES = #{escEmerTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="seriousCondDays != null">
+        SERIOUS_COND_DAYS = #{seriousCondDays,jdbcType=NUMERIC},
+      </if>
+      <if test="criticalCondDays != null">
+        CRITICAL_COND_DAYS = #{criticalCondDays,jdbcType=NUMERIC},
+      </if>
+      <if test="icuDays != null">
+        ICU_DAYS = #{icuDays,jdbcType=NUMERIC},
+      </if>
+      <if test="ccuDays != null">
+        CCU_DAYS = #{ccuDays,jdbcType=NUMERIC},
+      </if>
+      <if test="specLevelNursDays != null">
+        SPEC_LEVEL_NURS_DAYS = #{specLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="firstLevelNursDays != null">
+        FIRST_LEVEL_NURS_DAYS = #{firstLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="secondLevelNursDays != null">
+        SECOND_LEVEL_NURS_DAYS = #{secondLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="autopsyIndicator != null">
+        AUTOPSY_INDICATOR = #{autopsyIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodType != null">
+        BLOOD_TYPE = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodTypeRh != null">
+        BLOOD_TYPE_RH = #{bloodTypeRh,jdbcType=VARCHAR},
+      </if>
+      <if test="infusionReactTimes != null">
+        INFUSION_REACT_TIMES = #{infusionReactTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranTimes != null">
+        BLOOD_TRAN_TIMES = #{bloodTranTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranVol != null">
+        BLOOD_TRAN_VOL = #{bloodTranVol,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodTranReactTimes != null">
+        BLOOD_TRAN_REACT_TIMES = #{bloodTranReactTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="decubitalUlcerTimes != null">
+        DECUBITAL_ULCER_TIMES = #{decubitalUlcerTimes,jdbcType=NUMERIC},
+      </if>
+      <if test="alergyDrugs != null">
+        ALERGY_DRUGS = #{alergyDrugs,jdbcType=VARCHAR},
+      </if>
+      <if test="adverseReactionDrugs != null">
+        ADVERSE_REACTION_DRUGS = #{adverseReactionDrugs,jdbcType=VARCHAR},
+      </if>
+      <if test="mrValue != null">
+        MR_VALUE = #{mrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="mrQuality != null">
+        MR_QUALITY = #{mrQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="followIndicator != null">
+        FOLLOW_INDICATOR = #{followIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="followInterval != null">
+        FOLLOW_INTERVAL = #{followInterval,jdbcType=NUMERIC},
+      </if>
+      <if test="followIntervalUnits != null">
+        FOLLOW_INTERVAL_UNITS = #{followIntervalUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null">
+        DIRECTOR = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingDoctor != null">
+        ATTENDING_DOCTOR = #{attendingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInCharge != null">
+        DOCTOR_IN_CHARGE = #{doctorInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeDisposition != null">
+        DISCHARGE_DISPOSITION = #{dischargeDisposition,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCosts != null">
+        TOTAL_COSTS = #{totalCosts,jdbcType=NUMERIC},
+      </if>
+      <if test="totalPayments != null">
+        TOTAL_PAYMENTS = #{totalPayments,jdbcType=NUMERIC},
+      </if>
+      <if test="catalogDate != null">
+        CATALOG_DATE = #{catalogDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cataloger != null">
+        CATALOGER = #{cataloger,jdbcType=VARCHAR},
+      </if>
+      <if test="topUnit != null">
+        TOP_UNIT = #{topUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSystemIndicator != null">
+        SERVICE_SYSTEM_INDICATOR = #{serviceSystemIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="internalNo != null">
+        INTERNAL_NO = #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="identityClass != null">
+        IDENTITY_CLASS = #{identityClass,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPayWay != null">
+        MEDICAL_PAY_WAY = #{medicalPayWay,jdbcType=VARCHAR},
+      </if>
+      <if test="hbsagIndicator != null">
+        HBSAG_INDICATOR = #{hbsagIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="hcvAbIndicator != null">
+        HCV_AB_INDICATOR = #{hcvAbIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="hivAbIndicator != null">
+        HIV_AB_INDICATOR = #{hivAbIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="chiefDoctor != null">
+        CHIEF_DOCTOR = #{chiefDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="advancedStudiesDoctor != null">
+        ADVANCED_STUDIES_DOCTOR = #{advancedStudiesDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="practiceDoctorOfGraduate != null">
+        PRACTICE_DOCTOR_OF_GRADUATE = #{practiceDoctorOfGraduate,jdbcType=VARCHAR},
+      </if>
+      <if test="practiceDoctor != null">
+        PRACTICE_DOCTOR = #{practiceDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorOfControlQuality != null">
+        DOCTOR_OF_CONTROL_QUALITY = #{doctorOfControlQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseOfControlQuality != null">
+        NURSE_OF_CONTROL_QUALITY = #{nurseOfControlQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfControlQuality != null">
+        DATE_OF_CONTROL_QUALITY = #{dateOfControlQuality,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstCaseIndicator != null">
+        FIRST_CASE_INDICATOR = #{firstCaseIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="thirdLevelNursDays != null">
+        THIRD_LEVEL_NURS_DAYS = #{thirdLevelNursDays,jdbcType=NUMERIC},
+      </if>
+      <if test="xExamNo != null">
+        X_EXAM_NO = #{xExamNo,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingInjuryIndicator != null">
+        TRAINING_INJURY_INDICATOR = #{trainingInjuryIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="bodyWeight != null">
+        BODY_WEIGHT = #{bodyWeight,jdbcType=NUMERIC},
+      </if>
+      <if test="cardNo != null">
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="zylsh != null">
+        ZYLSH = #{zylsh,jdbcType=VARCHAR},
+      </if>
+      <if test="healthLevel != null">
+        HEALTH_LEVEL = #{healthLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="mrInfectReport != null">
+        MR_INFECT_REPORT = #{mrInfectReport,jdbcType=VARCHAR},
+      </if>
+      <if test="infectIndicator != null">
+        INFECT_INDICATOR = #{infectIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="inquiryIndicator != null">
+        INQUIRY_INDICATOR = #{inquiryIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="pigeonhole != null">
+        PIGEONHOLE = #{pigeonhole,jdbcType=NUMERIC},
+      </if>
+      <if test="bodyHeight != null">
+        BODY_HEIGHT = #{bodyHeight,jdbcType=NUMERIC},
+      </if>
+      <if test="nurseMrCommit != null">
+        NURSE_MR_COMMIT = #{nurseMrCommit,jdbcType=NUMERIC},
+      </if>
+      <if test="nurseMrCommitTime != null">
+        NURSE_MR_COMMIT_TIME = #{nurseMrCommitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="abnormal != null">
+        ABNORMAL = #{abnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="specialValueIndicator != null">
+        SPECIAL_VALUE_INDICATOR = #{specialValueIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="mrDesc != null">
+        MR_DESC = #{mrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        HEIGHT = #{height,jdbcType=NUMERIC},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=NUMERIC},
+      </if>
+      <if test="patientCondition != null">
+        PATIENT_CONDITION = #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCode != null">
+        HOSPITAL_CODE = #{hospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeAge != null">
+        DISCHARGE_AGE = #{dischargeAge,jdbcType=NUMERIC},
+      </if>
+      <if test="settleStatus != null">
+        SETTLE_STATUS = #{settleStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="securityTypeCode != null">
+        SECURITY_TYPE_CODE = #{securityTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="calWay != null">
+        CAL_WAY = #{calWay,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatVisit">
+    update PAT_VISIT
+    set DEPT_ADMISSION_TO = #{deptAdmissionTo,jdbcType=VARCHAR},
+      ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP},
+      DEPT_DISCHARGE_FROM = #{deptDischargeFrom,jdbcType=VARCHAR},
+      DISCHARGE_DATE_TIME = #{dischargeDateTime,jdbcType=TIMESTAMP},
+      OCCUPATION = #{occupation,jdbcType=VARCHAR},
+      MARITAL_STATUS = #{maritalStatus,jdbcType=VARCHAR},
+      IDENTITY = #{identity,jdbcType=VARCHAR},
+      ARMED_SERVICES = #{armedServices,jdbcType=VARCHAR},
+      DUTY = #{duty,jdbcType=VARCHAR},
+      UNIT_IN_CONTRACT = #{unitInContract,jdbcType=VARCHAR},
+      CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      WORKING_STATUS = #{workingStatus,jdbcType=NUMERIC},
+      INSURANCE_TYPE = #{insuranceType,jdbcType=VARCHAR},
+      INSURANCE_NO = #{insuranceNo,jdbcType=VARCHAR},
+      SERVICE_AGENCY = #{serviceAgency,jdbcType=VARCHAR},
+      MAILING_ADDRESS = #{mailingAddress,jdbcType=VARCHAR},
+      ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+      NEXT_OF_KIN = #{nextOfKin,jdbcType=VARCHAR},
+      RELATIONSHIP = #{relationship,jdbcType=VARCHAR},
+      NEXT_OF_KIN_ADDR = #{nextOfKinAddr,jdbcType=VARCHAR},
+      NEXT_OF_KIN_ZIPCODE = #{nextOfKinZipcode,jdbcType=VARCHAR},
+      NEXT_OF_KIN_PHONE = #{nextOfKinPhone,jdbcType=VARCHAR},
+      PATIENT_CLASS = #{patientClass,jdbcType=VARCHAR},
+      ADMISSION_CAUSE = #{admissionCause,jdbcType=VARCHAR},
+      CONSULTING_DATE = #{consultingDate,jdbcType=TIMESTAMP},
+      PAT_ADM_CONDITION = #{patAdmCondition,jdbcType=VARCHAR},
+      CONSULTING_DOCTOR = #{consultingDoctor,jdbcType=VARCHAR},
+      ADMITTED_BY = #{admittedBy,jdbcType=VARCHAR},
+      EMER_TREAT_TIMES = #{emerTreatTimes,jdbcType=NUMERIC},
+      ESC_EMER_TIMES = #{escEmerTimes,jdbcType=NUMERIC},
+      SERIOUS_COND_DAYS = #{seriousCondDays,jdbcType=NUMERIC},
+      CRITICAL_COND_DAYS = #{criticalCondDays,jdbcType=NUMERIC},
+      ICU_DAYS = #{icuDays,jdbcType=NUMERIC},
+      CCU_DAYS = #{ccuDays,jdbcType=NUMERIC},
+      SPEC_LEVEL_NURS_DAYS = #{specLevelNursDays,jdbcType=NUMERIC},
+      FIRST_LEVEL_NURS_DAYS = #{firstLevelNursDays,jdbcType=NUMERIC},
+      SECOND_LEVEL_NURS_DAYS = #{secondLevelNursDays,jdbcType=NUMERIC},
+      AUTOPSY_INDICATOR = #{autopsyIndicator,jdbcType=NUMERIC},
+      BLOOD_TYPE = #{bloodType,jdbcType=VARCHAR},
+      BLOOD_TYPE_RH = #{bloodTypeRh,jdbcType=VARCHAR},
+      INFUSION_REACT_TIMES = #{infusionReactTimes,jdbcType=NUMERIC},
+      BLOOD_TRAN_TIMES = #{bloodTranTimes,jdbcType=NUMERIC},
+      BLOOD_TRAN_VOL = #{bloodTranVol,jdbcType=NUMERIC},
+      BLOOD_TRAN_REACT_TIMES = #{bloodTranReactTimes,jdbcType=NUMERIC},
+      DECUBITAL_ULCER_TIMES = #{decubitalUlcerTimes,jdbcType=NUMERIC},
+      ALERGY_DRUGS = #{alergyDrugs,jdbcType=VARCHAR},
+      ADVERSE_REACTION_DRUGS = #{adverseReactionDrugs,jdbcType=VARCHAR},
+      MR_VALUE = #{mrValue,jdbcType=VARCHAR},
+      MR_QUALITY = #{mrQuality,jdbcType=VARCHAR},
+      FOLLOW_INDICATOR = #{followIndicator,jdbcType=NUMERIC},
+      FOLLOW_INTERVAL = #{followInterval,jdbcType=NUMERIC},
+      FOLLOW_INTERVAL_UNITS = #{followIntervalUnits,jdbcType=VARCHAR},
+      DIRECTOR = #{director,jdbcType=VARCHAR},
+      ATTENDING_DOCTOR = #{attendingDoctor,jdbcType=VARCHAR},
+      DOCTOR_IN_CHARGE = #{doctorInCharge,jdbcType=VARCHAR},
+      DISCHARGE_DISPOSITION = #{dischargeDisposition,jdbcType=VARCHAR},
+      TOTAL_COSTS = #{totalCosts,jdbcType=NUMERIC},
+      TOTAL_PAYMENTS = #{totalPayments,jdbcType=NUMERIC},
+      CATALOG_DATE = #{catalogDate,jdbcType=TIMESTAMP},
+      CATALOGER = #{cataloger,jdbcType=VARCHAR},
+      TOP_UNIT = #{topUnit,jdbcType=VARCHAR},
+      SERVICE_SYSTEM_INDICATOR = #{serviceSystemIndicator,jdbcType=NUMERIC},
+      INTERNAL_NO = #{internalNo,jdbcType=VARCHAR},
+      IDENTITY_CLASS = #{identityClass,jdbcType=VARCHAR},
+      MEDICAL_PAY_WAY = #{medicalPayWay,jdbcType=VARCHAR},
+      HBSAG_INDICATOR = #{hbsagIndicator,jdbcType=NUMERIC},
+      HCV_AB_INDICATOR = #{hcvAbIndicator,jdbcType=NUMERIC},
+      HIV_AB_INDICATOR = #{hivAbIndicator,jdbcType=NUMERIC},
+      CHIEF_DOCTOR = #{chiefDoctor,jdbcType=VARCHAR},
+      ADVANCED_STUDIES_DOCTOR = #{advancedStudiesDoctor,jdbcType=VARCHAR},
+      PRACTICE_DOCTOR_OF_GRADUATE = #{practiceDoctorOfGraduate,jdbcType=VARCHAR},
+      PRACTICE_DOCTOR = #{practiceDoctor,jdbcType=VARCHAR},
+      DOCTOR_OF_CONTROL_QUALITY = #{doctorOfControlQuality,jdbcType=VARCHAR},
+      NURSE_OF_CONTROL_QUALITY = #{nurseOfControlQuality,jdbcType=VARCHAR},
+      DATE_OF_CONTROL_QUALITY = #{dateOfControlQuality,jdbcType=TIMESTAMP},
+      FIRST_CASE_INDICATOR = #{firstCaseIndicator,jdbcType=NUMERIC},
+      THIRD_LEVEL_NURS_DAYS = #{thirdLevelNursDays,jdbcType=NUMERIC},
+      X_EXAM_NO = #{xExamNo,jdbcType=VARCHAR},
+      TRAINING_INJURY_INDICATOR = #{trainingInjuryIndicator,jdbcType=NUMERIC},
+      BODY_WEIGHT = #{bodyWeight,jdbcType=NUMERIC},
+      CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      ZYLSH = #{zylsh,jdbcType=VARCHAR},
+      HEALTH_LEVEL = #{healthLevel,jdbcType=VARCHAR},
+      MR_INFECT_REPORT = #{mrInfectReport,jdbcType=VARCHAR},
+      INFECT_INDICATOR = #{infectIndicator,jdbcType=NUMERIC},
+      INQUIRY_INDICATOR = #{inquiryIndicator,jdbcType=NUMERIC},
+      PIGEONHOLE = #{pigeonhole,jdbcType=NUMERIC},
+      BODY_HEIGHT = #{bodyHeight,jdbcType=NUMERIC},
+      NURSE_MR_COMMIT = #{nurseMrCommit,jdbcType=NUMERIC},
+      NURSE_MR_COMMIT_TIME = #{nurseMrCommitTime,jdbcType=TIMESTAMP},
+      ABNORMAL = #{abnormal,jdbcType=VARCHAR},
+      SPECIAL_VALUE_INDICATOR = #{specialValueIndicator,jdbcType=NUMERIC},
+      MR_DESC = #{mrDesc,jdbcType=VARCHAR},
+      HEIGHT = #{height,jdbcType=NUMERIC},
+      WEIGHT = #{weight,jdbcType=NUMERIC},
+      PATIENT_CONDITION = #{patientCondition,jdbcType=VARCHAR},
+      HOSPITAL_CODE = #{hospitalCode,jdbcType=VARCHAR},
+      DISCHARGE_AGE = #{dischargeAge,jdbcType=NUMERIC},
+      SETTLE_STATUS = #{settleStatus,jdbcType=NUMERIC},
+      SECURITY_TYPE_CODE = #{securityTypeCode,jdbcType=VARCHAR},
+      CAL_WAY = #{calWay,jdbcType=VARCHAR}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </update>
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.medrec.mapper.MrIndexMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.medrec.domain.MrIndex">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="MR_STATUS" jdbcType="VARCHAR" property="mrStatus" />
+    <result column="STORAGE_VOLUME_LABEL" jdbcType="VARCHAR" property="storageVolumeLabel" />
+    <result column="ACCESS_PATH" jdbcType="VARCHAR" property="accessPath" />
+    <result column="LAST_ACCESS_DATE_TIME" jdbcType="TIMESTAMP" property="lastAccessDateTime" />
+    <result column="SUBMIT_DOCTOR_ID" jdbcType="VARCHAR" property="submitDoctorId" />
+    <result column="SELF_COMMENT" jdbcType="VARCHAR" property="selfComment" />
+    <result column="DEPT_COMMENT" jdbcType="VARCHAR" property="deptComment" />
+    <result column="HOS_COMMENT" jdbcType="VARCHAR" property="hosComment" />
+    <result column="SELF_ASSESS" jdbcType="NUMERIC" property="selfAssess" />
+    <result column="SELF_DATE" jdbcType="TIMESTAMP" property="selfDate" />
+    <result column="DEPT_ASSESS" jdbcType="NUMERIC" property="deptAssess" />
+    <result column="DEPT_DATE" jdbcType="TIMESTAMP" property="deptDate" />
+    <result column="DEPT_DIRECTOR" jdbcType="VARCHAR" property="deptDirector" />
+    <result column="HOS_ASSESS" jdbcType="NUMERIC" property="hosAssess" />
+    <result column="HOS_DATE" jdbcType="TIMESTAMP" property="hosDate" />
+    <result column="HOS_QCMAN" jdbcType="VARCHAR" property="hosQcman" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, MR_STATUS, STORAGE_VOLUME_LABEL, ACCESS_PATH, LAST_ACCESS_DATE_TIME, 
+    SUBMIT_DOCTOR_ID, SELF_COMMENT, DEPT_COMMENT, HOS_COMMENT, SELF_ASSESS, SELF_DATE, 
+    DEPT_ASSESS, DEPT_DATE, DEPT_DIRECTOR, HOS_ASSESS, HOS_DATE, HOS_QCMAN
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.MrIndexKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MR_INDEX
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.MrIndexKey">
+    delete from MR_INDEX
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.MrIndex">
+    insert into MR_INDEX (PATIENT_ID, VISIT_ID, MR_STATUS, 
+      STORAGE_VOLUME_LABEL, ACCESS_PATH, LAST_ACCESS_DATE_TIME, 
+      SUBMIT_DOCTOR_ID, SELF_COMMENT, DEPT_COMMENT, 
+      HOS_COMMENT, SELF_ASSESS, SELF_DATE, 
+      DEPT_ASSESS, DEPT_DATE, DEPT_DIRECTOR, 
+      HOS_ASSESS, HOS_DATE, HOS_QCMAN
+      )
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{mrStatus,jdbcType=VARCHAR}, 
+      #{storageVolumeLabel,jdbcType=VARCHAR}, #{accessPath,jdbcType=VARCHAR}, #{lastAccessDateTime,jdbcType=TIMESTAMP}, 
+      #{submitDoctorId,jdbcType=VARCHAR}, #{selfComment,jdbcType=VARCHAR}, #{deptComment,jdbcType=VARCHAR}, 
+      #{hosComment,jdbcType=VARCHAR}, #{selfAssess,jdbcType=NUMERIC}, #{selfDate,jdbcType=TIMESTAMP}, 
+      #{deptAssess,jdbcType=NUMERIC}, #{deptDate,jdbcType=TIMESTAMP}, #{deptDirector,jdbcType=VARCHAR}, 
+      #{hosAssess,jdbcType=NUMERIC}, #{hosDate,jdbcType=TIMESTAMP}, #{hosQcman,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.MrIndex">
+    insert into MR_INDEX
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="mrStatus != null">
+        MR_STATUS,
+      </if>
+      <if test="storageVolumeLabel != null">
+        STORAGE_VOLUME_LABEL,
+      </if>
+      <if test="accessPath != null">
+        ACCESS_PATH,
+      </if>
+      <if test="lastAccessDateTime != null">
+        LAST_ACCESS_DATE_TIME,
+      </if>
+      <if test="submitDoctorId != null">
+        SUBMIT_DOCTOR_ID,
+      </if>
+      <if test="selfComment != null">
+        SELF_COMMENT,
+      </if>
+      <if test="deptComment != null">
+        DEPT_COMMENT,
+      </if>
+      <if test="hosComment != null">
+        HOS_COMMENT,
+      </if>
+      <if test="selfAssess != null">
+        SELF_ASSESS,
+      </if>
+      <if test="selfDate != null">
+        SELF_DATE,
+      </if>
+      <if test="deptAssess != null">
+        DEPT_ASSESS,
+      </if>
+      <if test="deptDate != null">
+        DEPT_DATE,
+      </if>
+      <if test="deptDirector != null">
+        DEPT_DIRECTOR,
+      </if>
+      <if test="hosAssess != null">
+        HOS_ASSESS,
+      </if>
+      <if test="hosDate != null">
+        HOS_DATE,
+      </if>
+      <if test="hosQcman != null">
+        HOS_QCMAN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="mrStatus != null">
+        #{mrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="storageVolumeLabel != null">
+        #{storageVolumeLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="accessPath != null">
+        #{accessPath,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccessDateTime != null">
+        #{lastAccessDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitDoctorId != null">
+        #{submitDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="selfComment != null">
+        #{selfComment,jdbcType=VARCHAR},
+      </if>
+      <if test="deptComment != null">
+        #{deptComment,jdbcType=VARCHAR},
+      </if>
+      <if test="hosComment != null">
+        #{hosComment,jdbcType=VARCHAR},
+      </if>
+      <if test="selfAssess != null">
+        #{selfAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="selfDate != null">
+        #{selfDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptAssess != null">
+        #{deptAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="deptDate != null">
+        #{deptDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptDirector != null">
+        #{deptDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="hosAssess != null">
+        #{hosAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="hosDate != null">
+        #{hosDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hosQcman != null">
+        #{hosQcman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.MrIndex">
+    update MR_INDEX
+    <set>
+      <if test="mrStatus != null">
+        MR_STATUS = #{mrStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="storageVolumeLabel != null">
+        STORAGE_VOLUME_LABEL = #{storageVolumeLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="accessPath != null">
+        ACCESS_PATH = #{accessPath,jdbcType=VARCHAR},
+      </if>
+      <if test="lastAccessDateTime != null">
+        LAST_ACCESS_DATE_TIME = #{lastAccessDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitDoctorId != null">
+        SUBMIT_DOCTOR_ID = #{submitDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="selfComment != null">
+        SELF_COMMENT = #{selfComment,jdbcType=VARCHAR},
+      </if>
+      <if test="deptComment != null">
+        DEPT_COMMENT = #{deptComment,jdbcType=VARCHAR},
+      </if>
+      <if test="hosComment != null">
+        HOS_COMMENT = #{hosComment,jdbcType=VARCHAR},
+      </if>
+      <if test="selfAssess != null">
+        SELF_ASSESS = #{selfAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="selfDate != null">
+        SELF_DATE = #{selfDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptAssess != null">
+        DEPT_ASSESS = #{deptAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="deptDate != null">
+        DEPT_DATE = #{deptDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptDirector != null">
+        DEPT_DIRECTOR = #{deptDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="hosAssess != null">
+        HOS_ASSESS = #{hosAssess,jdbcType=NUMERIC},
+      </if>
+      <if test="hosDate != null">
+        HOS_DATE = #{hosDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hosQcman != null">
+        HOS_QCMAN = #{hosQcman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.MrIndex">
+    update MR_INDEX
+    set MR_STATUS = #{mrStatus,jdbcType=VARCHAR},
+      STORAGE_VOLUME_LABEL = #{storageVolumeLabel,jdbcType=VARCHAR},
+      ACCESS_PATH = #{accessPath,jdbcType=VARCHAR},
+      LAST_ACCESS_DATE_TIME = #{lastAccessDateTime,jdbcType=TIMESTAMP},
+      SUBMIT_DOCTOR_ID = #{submitDoctorId,jdbcType=VARCHAR},
+      SELF_COMMENT = #{selfComment,jdbcType=VARCHAR},
+      DEPT_COMMENT = #{deptComment,jdbcType=VARCHAR},
+      HOS_COMMENT = #{hosComment,jdbcType=VARCHAR},
+      SELF_ASSESS = #{selfAssess,jdbcType=NUMERIC},
+      SELF_DATE = #{selfDate,jdbcType=TIMESTAMP},
+      DEPT_ASSESS = #{deptAssess,jdbcType=NUMERIC},
+      DEPT_DATE = #{deptDate,jdbcType=TIMESTAMP},
+      DEPT_DIRECTOR = #{deptDirector,jdbcType=VARCHAR},
+      HOS_ASSESS = #{hosAssess,jdbcType=NUMERIC},
+      HOS_DATE = #{hosDate,jdbcType=TIMESTAMP},
+      HOS_QCMAN = #{hosQcman,jdbcType=VARCHAR}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </update>
+</mapper>

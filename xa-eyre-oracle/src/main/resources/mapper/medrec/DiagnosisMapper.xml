@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.medrec.mapper.DiagnosisMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.medrec.domain.Diagnosis">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <id column="DIAGNOSIS_TYPE" jdbcType="VARCHAR" property="diagnosisType" />
+    <id column="DIAGNOSIS_NO" jdbcType="NUMERIC" property="diagnosisNo" />
+    <result column="DIAGNOSIS_DESC" jdbcType="VARCHAR" property="diagnosisDesc" />
+    <result column="DIAGNOSIS_DATE" jdbcType="TIMESTAMP" property="diagnosisDate" />
+    <result column="TREAT_DAYS" jdbcType="NUMERIC" property="treatDays" />
+    <result column="TREAT_RESULT" jdbcType="VARCHAR" property="treatResult" />
+    <result column="OPER_TREAT_INDICATOR" jdbcType="NUMERIC" property="operTreatIndicator" />
+    <result column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
+    <result column="INSERT_INDICATOR" jdbcType="VARCHAR" property="insertIndicator" />
+    <result column="CODE_VERSION" jdbcType="VARCHAR" property="codeVersion" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, DIAGNOSIS_NO, DIAGNOSIS_DESC, DIAGNOSIS_DATE, 
+    TREAT_DAYS, TREAT_RESULT, OPER_TREAT_INDICATOR, DIAGNOSIS_CODE, INSERT_INDICATOR, 
+    CODE_VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosisKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DIAGNOSIS
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
+      <if test="diagnosisNo != null">
+        and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
+      </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosisKey">
+    delete from DIAGNOSIS
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.Diagnosis">
+    insert into DIAGNOSIS (PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, 
+      DIAGNOSIS_NO, DIAGNOSIS_DESC, DIAGNOSIS_DATE, 
+      TREAT_DAYS, TREAT_RESULT, OPER_TREAT_INDICATOR, 
+      DIAGNOSIS_CODE, INSERT_INDICATOR, CODE_VERSION
+      )
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{diagnosisType,jdbcType=VARCHAR}, 
+      #{diagnosisNo,jdbcType=NUMERIC}, #{diagnosisDesc,jdbcType=VARCHAR}, #{diagnosisDate,jdbcType=TIMESTAMP}, 
+      #{treatDays,jdbcType=NUMERIC}, #{treatResult,jdbcType=VARCHAR}, #{operTreatIndicator,jdbcType=NUMERIC}, 
+      #{diagnosisCode,jdbcType=VARCHAR}, #{insertIndicator,jdbcType=VARCHAR}, #{codeVersion,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.Diagnosis">
+    insert into DIAGNOSIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="diagnosisType != null">
+        DIAGNOSIS_TYPE,
+      </if>
+      <if test="diagnosisNo != null">
+        DIAGNOSIS_NO,
+      </if>
+      <if test="diagnosisDesc != null">
+        DIAGNOSIS_DESC,
+      </if>
+      <if test="diagnosisDate != null">
+        DIAGNOSIS_DATE,
+      </if>
+      <if test="treatDays != null">
+        TREAT_DAYS,
+      </if>
+      <if test="treatResult != null">
+        TREAT_RESULT,
+      </if>
+      <if test="operTreatIndicator != null">
+        OPER_TREAT_INDICATOR,
+      </if>
+      <if test="diagnosisCode != null">
+        DIAGNOSIS_CODE,
+      </if>
+      <if test="insertIndicator != null">
+        INSERT_INDICATOR,
+      </if>
+      <if test="codeVersion != null">
+        CODE_VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="diagnosisType != null">
+        #{diagnosisType,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisNo != null">
+        #{diagnosisNo,jdbcType=NUMERIC},
+      </if>
+      <if test="diagnosisDesc != null">
+        #{diagnosisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisDate != null">
+        #{diagnosisDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="treatDays != null">
+        #{treatDays,jdbcType=NUMERIC},
+      </if>
+      <if test="treatResult != null">
+        #{treatResult,jdbcType=VARCHAR},
+      </if>
+      <if test="operTreatIndicator != null">
+        #{operTreatIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="diagnosisCode != null">
+        #{diagnosisCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insertIndicator != null">
+        #{insertIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="codeVersion != null">
+        #{codeVersion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.Diagnosis">
+    update DIAGNOSIS
+    <set>
+      <if test="diagnosisDesc != null">
+        DIAGNOSIS_DESC = #{diagnosisDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisDate != null">
+        DIAGNOSIS_DATE = #{diagnosisDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="treatDays != null">
+        TREAT_DAYS = #{treatDays,jdbcType=NUMERIC},
+      </if>
+      <if test="treatResult != null">
+        TREAT_RESULT = #{treatResult,jdbcType=VARCHAR},
+      </if>
+      <if test="operTreatIndicator != null">
+        OPER_TREAT_INDICATOR = #{operTreatIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="diagnosisCode != null">
+        DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR},
+      </if>
+      <if test="insertIndicator != null">
+        INSERT_INDICATOR = #{insertIndicator,jdbcType=VARCHAR},
+      </if>
+      <if test="codeVersion != null">
+        CODE_VERSION = #{codeVersion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.Diagnosis">
+    update DIAGNOSIS
+    set DIAGNOSIS_DESC = #{diagnosisDesc,jdbcType=VARCHAR},
+      DIAGNOSIS_DATE = #{diagnosisDate,jdbcType=TIMESTAMP},
+      TREAT_DAYS = #{treatDays,jdbcType=NUMERIC},
+      TREAT_RESULT = #{treatResult,jdbcType=VARCHAR},
+      OPER_TREAT_INDICATOR = #{operTreatIndicator,jdbcType=NUMERIC},
+      DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR},
+      INSERT_INDICATOR = #{insertIndicator,jdbcType=VARCHAR},
+      CODE_VERSION = #{codeVersion,jdbcType=VARCHAR}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
+  </update>
+</mapper>

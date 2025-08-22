@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.pharmacy.mapper.DrugPrescDetailMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.pharmacy.domain.DrugPrescDetail">
+    <result column="PRESC_DATE" jdbcType="TIMESTAMP" property="prescDate" />
+    <result column="PRESC_NO" jdbcType="NUMERIC" property="prescNo" />
+    <result column="ITEM_NO" jdbcType="NUMERIC" property="itemNo" />
+    <result column="DRUG_CODE" jdbcType="VARCHAR" property="drugCode" />
+    <result column="DRUG_SPEC" jdbcType="VARCHAR" property="drugSpec" />
+    <result column="DRUG_NAME" jdbcType="VARCHAR" property="drugName" />
+    <result column="FIRM_ID" jdbcType="VARCHAR" property="firmId" />
+    <result column="PACKAGE_SPEC" jdbcType="VARCHAR" property="packageSpec" />
+    <result column="PACKAGE_UNITS" jdbcType="VARCHAR" property="packageUnits" />
+    <result column="QUANTITY" jdbcType="NUMERIC" property="quantity" />
+    <result column="COSTS" jdbcType="NUMERIC" property="costs" />
+    <result column="PAYMENTS" jdbcType="NUMERIC" property="payments" />
+    <result column="ORDER_NO" jdbcType="NUMERIC" property="orderNo" />
+    <result column="ORDER_SUB_NO" jdbcType="NUMERIC" property="orderSubNo" />
+    <result column="ADMINISTRATION" jdbcType="VARCHAR" property="administration" />
+    <result column="FLAG" jdbcType="NUMERIC" property="flag" />
+    <result column="DOSAGE_EACH" jdbcType="NUMERIC" property="dosageEach" />
+    <result column="DOSAGE_UNITS" jdbcType="VARCHAR" property="dosageUnits" />
+    <result column="FREQUENCY" jdbcType="VARCHAR" property="frequency" />
+    <result column="FREQ_DETAIL" jdbcType="VARCHAR" property="freqDetail" />
+    <result column="BATCH_NO" jdbcType="VARCHAR" property="batchNo" />
+    <result column="INVENTORY" jdbcType="NUMERIC" property="inventory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PRESC_DATE, PRESC_NO, ITEM_NO, DRUG_CODE, DRUG_SPEC, DRUG_NAME, FIRM_ID, PACKAGE_SPEC, PACKAGE_UNITS,
+      QUANTITY, COSTS, PAYMENTS, ORDER_NO, ORDER_SUB_NO, ADMINISTRATION, FLAG, DOSAGE_EACH, DOSAGE_UNITS,
+      FREQUENCY, FREQ_DETAIL, BATCH_NO, INVENTORY
+  </sql>
+  <insert id="insert" parameterType="cn.xa.eyre.pharmacy.domain.DrugPrescDetail">
+    insert into DRUG_PRESC_DETAIL (PRESC_DATE, PRESC_NO, ITEM_NO, 
+      DRUG_CODE, DRUG_SPEC, DRUG_NAME, 
+      FIRM_ID, PACKAGE_SPEC, PACKAGE_UNITS, 
+      QUANTITY, COSTS, PAYMENTS, 
+      ORDER_NO, ORDER_SUB_NO, ADMINISTRATION, 
+      FLAG, DOSAGE_EACH, DOSAGE_UNITS, 
+      FREQUENCY, FREQ_DETAIL, BATCH_NO, 
+      INVENTORY)
+    values (#{prescDate,jdbcType=TIMESTAMP}, #{prescNo,jdbcType=NUMERIC}, #{itemNo,jdbcType=NUMERIC}, 
+      #{drugCode,jdbcType=VARCHAR}, #{drugSpec,jdbcType=VARCHAR}, #{drugName,jdbcType=VARCHAR}, 
+      #{firmId,jdbcType=VARCHAR}, #{packageSpec,jdbcType=VARCHAR}, #{packageUnits,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=NUMERIC}, #{costs,jdbcType=NUMERIC}, #{payments,jdbcType=NUMERIC}, 
+      #{orderNo,jdbcType=NUMERIC}, #{orderSubNo,jdbcType=NUMERIC}, #{administration,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=NUMERIC}, #{dosageEach,jdbcType=NUMERIC}, #{dosageUnits,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=VARCHAR}, #{freqDetail,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, 
+      #{inventory,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.pharmacy.domain.DrugPrescDetail">
+    insert into DRUG_PRESC_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prescDate != null">
+        PRESC_DATE,
+      </if>
+      <if test="prescNo != null">
+        PRESC_NO,
+      </if>
+      <if test="itemNo != null">
+        ITEM_NO,
+      </if>
+      <if test="drugCode != null">
+        DRUG_CODE,
+      </if>
+      <if test="drugSpec != null">
+        DRUG_SPEC,
+      </if>
+      <if test="drugName != null">
+        DRUG_NAME,
+      </if>
+      <if test="firmId != null">
+        FIRM_ID,
+      </if>
+      <if test="packageSpec != null">
+        PACKAGE_SPEC,
+      </if>
+      <if test="packageUnits != null">
+        PACKAGE_UNITS,
+      </if>
+      <if test="quantity != null">
+        QUANTITY,
+      </if>
+      <if test="costs != null">
+        COSTS,
+      </if>
+      <if test="payments != null">
+        PAYMENTS,
+      </if>
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="orderSubNo != null">
+        ORDER_SUB_NO,
+      </if>
+      <if test="administration != null">
+        ADMINISTRATION,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+      <if test="dosageEach != null">
+        DOSAGE_EACH,
+      </if>
+      <if test="dosageUnits != null">
+        DOSAGE_UNITS,
+      </if>
+      <if test="frequency != null">
+        FREQUENCY,
+      </if>
+      <if test="freqDetail != null">
+        FREQ_DETAIL,
+      </if>
+      <if test="batchNo != null">
+        BATCH_NO,
+      </if>
+      <if test="inventory != null">
+        INVENTORY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prescDate != null">
+        #{prescDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prescNo != null">
+        #{prescNo,jdbcType=NUMERIC},
+      </if>
+      <if test="itemNo != null">
+        #{itemNo,jdbcType=NUMERIC},
+      </if>
+      <if test="drugCode != null">
+        #{drugCode,jdbcType=VARCHAR},
+      </if>
+      <if test="drugSpec != null">
+        #{drugSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="drugName != null">
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="firmId != null">
+        #{firmId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageSpec != null">
+        #{packageSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="packageUnits != null">
+        #{packageUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=NUMERIC},
+      </if>
+      <if test="costs != null">
+        #{costs,jdbcType=NUMERIC},
+      </if>
+      <if test="payments != null">
+        #{payments,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=NUMERIC},
+      </if>
+      <if test="orderSubNo != null">
+        #{orderSubNo,jdbcType=NUMERIC},
+      </if>
+      <if test="administration != null">
+        #{administration,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=NUMERIC},
+      </if>
+      <if test="dosageEach != null">
+        #{dosageEach,jdbcType=NUMERIC},
+      </if>
+      <if test="dosageUnits != null">
+        #{dosageUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="freqDetail != null">
+        #{freqDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inventory != null">
+        #{inventory,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="getDrugPrescDetailByVisitInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PHARMACY.DRUG_PRESC_DETAIL
+    where PRESC_DATE = #{prescDate,jdbcType=TIMESTAMP}
+    and PRESC_NO = #{prescNo,jdbcType=NUMERIC}
+  </select>
+  <select id="getDrugPrescDetailByPrescNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PHARMACY.DRUG_PRESC_DETAIL
+    where PRESC_NO = #{prescNo,jdbcType=NUMERIC}
+      and  PRESC_DATE <![CDATA[>=]]> TRUNC(SYSDATE) AND PRESC_DATE <![CDATA[<]]> TRUNC(SYSDATE) + 1
+  </select>
+</mapper>

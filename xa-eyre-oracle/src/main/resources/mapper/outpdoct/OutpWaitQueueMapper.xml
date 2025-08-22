@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.outpdoct.mapper.OutpWaitQueueMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.outpdoct.domain.OutpWaitQueue">
+    <id column="COUNSEL_NO" jdbcType="VARCHAR" property="counselNo" />
+    <id column="QUEUE_NAME" jdbcType="VARCHAR" property="queueName" />
+    <id column="REGISTER_DATE" jdbcType="TIMESTAMP" property="registerDate" />
+    <id column="REGISTER_DEPT" jdbcType="VARCHAR" property="registerDept" />
+    <id column="QUEUE_SEQUENCE" jdbcType="NUMERIC" property="queueSequence" />
+    <result column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <result column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
+    <result column="WORKED_INDICATOR" jdbcType="NUMERIC" property="workedIndicator" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COUNSEL_NO, QUEUE_NAME, REGISTER_DATE, REGISTER_DEPT, QUEUE_SEQUENCE, VISIT_DATE, 
+    VISIT_NO, WORKED_INDICATOR, DOCTOR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueueKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from OUTP_WAIT_QUEUE
+    where COUNSEL_NO = #{counselNo,jdbcType=VARCHAR}
+      and QUEUE_NAME = #{queueName,jdbcType=VARCHAR}
+      and REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP}
+      and REGISTER_DEPT = #{registerDept,jdbcType=VARCHAR}
+      and QUEUE_SEQUENCE = #{queueSequence,jdbcType=NUMERIC}
+  </select>
+    <select id="selectOutpWaitQueueByCondition" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueue" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from OUTP_WAIT_QUEUE
+      <where>
+        <if test="visitDateStr != null">
+          and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'YYYY/MM/DD')
+        </if>
+        <if test="visitNo != null">
+          and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+        </if>
+      </where>
+      order by VISIT_DATE desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueueKey">
+    delete from OUTP_WAIT_QUEUE
+    where COUNSEL_NO = #{counselNo,jdbcType=VARCHAR}
+      and QUEUE_NAME = #{queueName,jdbcType=VARCHAR}
+      and REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP}
+      and REGISTER_DEPT = #{registerDept,jdbcType=VARCHAR}
+      and QUEUE_SEQUENCE = #{queueSequence,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueue">
+    insert into OUTP_WAIT_QUEUE (COUNSEL_NO, QUEUE_NAME, REGISTER_DATE, 
+      REGISTER_DEPT, QUEUE_SEQUENCE, VISIT_DATE, 
+      VISIT_NO, WORKED_INDICATOR, DOCTOR
+      )
+    values (#{counselNo,jdbcType=VARCHAR}, #{queueName,jdbcType=VARCHAR}, #{registerDate,jdbcType=TIMESTAMP}, 
+      #{registerDept,jdbcType=VARCHAR}, #{queueSequence,jdbcType=NUMERIC}, #{visitDate,jdbcType=TIMESTAMP}, 
+      #{visitNo,jdbcType=NUMERIC}, #{workedIndicator,jdbcType=NUMERIC}, #{doctor,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueue">
+    insert into OUTP_WAIT_QUEUE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="counselNo != null">
+        COUNSEL_NO,
+      </if>
+      <if test="queueName != null">
+        QUEUE_NAME,
+      </if>
+      <if test="registerDate != null">
+        REGISTER_DATE,
+      </if>
+      <if test="registerDept != null">
+        REGISTER_DEPT,
+      </if>
+      <if test="queueSequence != null">
+        QUEUE_SEQUENCE,
+      </if>
+      <if test="visitDate != null">
+        VISIT_DATE,
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO,
+      </if>
+      <if test="workedIndicator != null">
+        WORKED_INDICATOR,
+      </if>
+      <if test="doctor != null">
+        DOCTOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="counselNo != null">
+        #{counselNo,jdbcType=VARCHAR},
+      </if>
+      <if test="queueName != null">
+        #{queueName,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null">
+        #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerDept != null">
+        #{registerDept,jdbcType=VARCHAR},
+      </if>
+      <if test="queueSequence != null">
+        #{queueSequence,jdbcType=NUMERIC},
+      </if>
+      <if test="visitDate != null">
+        #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="workedIndicator != null">
+        #{workedIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueue">
+    update OUTP_WAIT_QUEUE
+    <set>
+      <if test="visitDate != null">
+        VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO = #{visitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="workedIndicator != null">
+        WORKED_INDICATOR = #{workedIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="doctor != null">
+        DOCTOR = #{doctor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COUNSEL_NO = #{counselNo,jdbcType=VARCHAR}
+      and QUEUE_NAME = #{queueName,jdbcType=VARCHAR}
+      and REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP}
+      and REGISTER_DEPT = #{registerDept,jdbcType=VARCHAR}
+      and QUEUE_SEQUENCE = #{queueSequence,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpWaitQueue">
+    update OUTP_WAIT_QUEUE
+    set VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
+      VISIT_NO = #{visitNo,jdbcType=NUMERIC},
+      WORKED_INDICATOR = #{workedIndicator,jdbcType=NUMERIC},
+      DOCTOR = #{doctor,jdbcType=VARCHAR}
+    where COUNSEL_NO = #{counselNo,jdbcType=VARCHAR}
+      and QUEUE_NAME = #{queueName,jdbcType=VARCHAR}
+      and REGISTER_DATE = #{registerDate,jdbcType=TIMESTAMP}
+      and REGISTER_DEPT = #{registerDept,jdbcType=VARCHAR}
+      and QUEUE_SEQUENCE = #{queueSequence,jdbcType=NUMERIC}
+  </update>
+</mapper>

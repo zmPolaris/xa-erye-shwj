@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.lqt2024.mapper.LqtCrbZdMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.lqt2024.domain.LqtCrbZd">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_ID" jdbcType="VARCHAR" property="visitId" />
+    <id column="DIAGNOSIS_NO" jdbcType="VARCHAR" property="diagnosisNo" />
+    <result column="INP_NO" jdbcType="VARCHAR" property="inpNo" />
+    <result column="ICD10" jdbcType="VARCHAR" property="icd10" />
+    <result column="ICD10NAME" jdbcType="VARCHAR" property="icd10name" />
+    <result column="ACTIVITY_TIME" jdbcType="TIMESTAMP" property="activityTime" />
+    <result column="FILL_DOCTOR" jdbcType="VARCHAR" property="fillDoctor" />
+    <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, DIAGNOSIS_NO, INP_NO, ICD10, ICD10NAME, ACTIVITY_TIME, FILL_DOCTOR, 
+    DEPT_CODE, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZdKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from LQT_CRB_ZD
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZdKey">
+    delete from LQT_CRB_ZD
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZd">
+    insert into LQT_CRB_ZD (PATIENT_ID, VISIT_ID, DIAGNOSIS_NO, 
+      INP_NO, ICD10, ICD10NAME, 
+      ACTIVITY_TIME, FILL_DOCTOR, DEPT_CODE, 
+      CREATE_TIME)
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=VARCHAR}, #{diagnosisNo,jdbcType=VARCHAR}, 
+      #{inpNo,jdbcType=VARCHAR}, #{icd10,jdbcType=VARCHAR}, #{icd10name,jdbcType=VARCHAR}, 
+      #{activityTime,jdbcType=TIMESTAMP}, #{fillDoctor,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZd">
+    insert into LQT_CRB_ZD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="diagnosisNo != null">
+        DIAGNOSIS_NO,
+      </if>
+      <if test="inpNo != null">
+        INP_NO,
+      </if>
+      <if test="icd10 != null">
+        ICD10,
+      </if>
+      <if test="icd10name != null">
+        ICD10NAME,
+      </if>
+      <if test="activityTime != null">
+        ACTIVITY_TIME,
+      </if>
+      <if test="fillDoctor != null">
+        FILL_DOCTOR,
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisNo != null">
+        #{diagnosisNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inpNo != null">
+        #{inpNo,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10 != null">
+        #{icd10,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10name != null">
+        #{icd10name,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTime != null">
+        #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillDoctor != null">
+        #{fillDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZd">
+    update LQT_CRB_ZD
+    <set>
+      <if test="inpNo != null">
+        INP_NO = #{inpNo,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10 != null">
+        ICD10 = #{icd10,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10name != null">
+        ICD10NAME = #{icd10name,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTime != null">
+        ACTIVITY_TIME = #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillDoctor != null">
+        FILL_DOCTOR = #{fillDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.lqt2024.domain.LqtCrbZd">
+    update LQT_CRB_ZD
+    set INP_NO = #{inpNo,jdbcType=VARCHAR},
+      ICD10 = #{icd10,jdbcType=VARCHAR},
+      ICD10NAME = #{icd10name,jdbcType=VARCHAR},
+      ACTIVITY_TIME = #{activityTime,jdbcType=TIMESTAMP},
+      FILL_DOCTOR = #{fillDoctor,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=VARCHAR}
+      and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

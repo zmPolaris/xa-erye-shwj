@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.lab.mapper.LabTestMasterMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.lab.domain.LabTestMaster">
+    <id column="TEST_NO" jdbcType="VARCHAR" property="testNo" />
+    <result column="PRIORITY_INDICATOR" jdbcType="NUMERIC" property="priorityIndicator" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="WORKING_ID" jdbcType="VARCHAR" property="workingId" />
+    <result column="EXECUTE_DATE" jdbcType="TIMESTAMP" property="executeDate" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="NAME_PHONETIC" jdbcType="VARCHAR" property="namePhonetic" />
+    <result column="CHARGE_TYPE" jdbcType="VARCHAR" property="chargeType" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="AGE" jdbcType="NUMERIC" property="age" />
+    <result column="TEST_CAUSE" jdbcType="VARCHAR" property="testCause" />
+    <result column="RELEVANT_CLINIC_DIAG" jdbcType="VARCHAR" property="relevantClinicDiag" />
+    <result column="SPECIMEN" jdbcType="VARCHAR" property="specimen" />
+    <result column="NOTES_FOR_SPCM" jdbcType="VARCHAR" property="notesForSpcm" />
+    <result column="SPCM_RECEIVED_DATE_TIME" jdbcType="TIMESTAMP" property="spcmReceivedDateTime" />
+    <result column="SPCM_SAMPLE_DATE_TIME" jdbcType="TIMESTAMP" property="spcmSampleDateTime" />
+    <result column="REQUESTED_DATE_TIME" jdbcType="TIMESTAMP" property="requestedDateTime" />
+    <result column="ORDERING_DEPT" jdbcType="VARCHAR" property="orderingDept" />
+    <result column="ORDERING_PROVIDER" jdbcType="VARCHAR" property="orderingProvider" />
+    <result column="PERFORMED_BY" jdbcType="VARCHAR" property="performedBy" />
+    <result column="RESULT_STATUS" jdbcType="VARCHAR" property="resultStatus" />
+    <result column="RESULTS_RPT_DATE_TIME" jdbcType="TIMESTAMP" property="resultsRptDateTime" />
+    <result column="TRANSCRIPTIONIST" jdbcType="VARCHAR" property="transcriptionist" />
+    <result column="VERIFIED_BY" jdbcType="VARCHAR" property="verifiedBy" />
+    <result column="COSTS" jdbcType="NUMERIC" property="costs" />
+    <result column="CHARGES" jdbcType="NUMERIC" property="charges" />
+    <result column="BILLING_INDICATOR" jdbcType="NUMERIC" property="billingIndicator" />
+    <result column="PRINT_INDICATOR" jdbcType="NUMERIC" property="printIndicator" />
+    <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
+    <result column="DATE_OF_BIRTH" jdbcType="TIMESTAMP" property="dateOfBirth" />
+    <result column="PATIENT_SOURCE" jdbcType="CHAR" property="patientSource" />
+    <result column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <result column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TEST_NO, PRIORITY_INDICATOR, PATIENT_ID, VISIT_ID, WORKING_ID, EXECUTE_DATE, NAME, 
+    NAME_PHONETIC, CHARGE_TYPE, SEX, AGE, TEST_CAUSE, RELEVANT_CLINIC_DIAG, SPECIMEN, 
+    NOTES_FOR_SPCM, SPCM_RECEIVED_DATE_TIME, SPCM_SAMPLE_DATE_TIME, REQUESTED_DATE_TIME, 
+    ORDERING_DEPT, ORDERING_PROVIDER, PERFORMED_BY, RESULT_STATUS, RESULTS_RPT_DATE_TIME, 
+    TRANSCRIPTIONIST, VERIFIED_BY, COSTS, CHARGES, BILLING_INDICATOR, PRINT_INDICATOR, 
+    SUBJECT, DATE_OF_BIRTH, PATIENT_SOURCE, VISIT_DATE, VISIT_NO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from LAB_TEST_MASTER
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+    AND RESULT_STATUS ='4'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from LAB_TEST_MASTER
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.lab.domain.LabTestMaster">
+    insert into LAB_TEST_MASTER (TEST_NO, PRIORITY_INDICATOR, PATIENT_ID, 
+      VISIT_ID, WORKING_ID, EXECUTE_DATE, 
+      NAME, NAME_PHONETIC, CHARGE_TYPE, 
+      SEX, AGE, TEST_CAUSE, 
+      RELEVANT_CLINIC_DIAG, SPECIMEN, NOTES_FOR_SPCM, 
+      SPCM_RECEIVED_DATE_TIME, SPCM_SAMPLE_DATE_TIME, 
+      REQUESTED_DATE_TIME, ORDERING_DEPT, ORDERING_PROVIDER, 
+      PERFORMED_BY, RESULT_STATUS, RESULTS_RPT_DATE_TIME, 
+      TRANSCRIPTIONIST, VERIFIED_BY, COSTS, 
+      CHARGES, BILLING_INDICATOR, PRINT_INDICATOR, 
+      SUBJECT, DATE_OF_BIRTH, PATIENT_SOURCE, 
+      VISIT_DATE, VISIT_NO)
+    values (#{testNo,jdbcType=VARCHAR}, #{priorityIndicator,jdbcType=NUMERIC}, #{patientId,jdbcType=VARCHAR}, 
+      #{visitId,jdbcType=NUMERIC}, #{workingId,jdbcType=VARCHAR}, #{executeDate,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{namePhonetic,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=NUMERIC}, #{testCause,jdbcType=VARCHAR}, 
+      #{relevantClinicDiag,jdbcType=VARCHAR}, #{specimen,jdbcType=VARCHAR}, #{notesForSpcm,jdbcType=VARCHAR}, 
+      #{spcmReceivedDateTime,jdbcType=TIMESTAMP}, #{spcmSampleDateTime,jdbcType=TIMESTAMP}, 
+      #{requestedDateTime,jdbcType=TIMESTAMP}, #{orderingDept,jdbcType=VARCHAR}, #{orderingProvider,jdbcType=VARCHAR}, 
+      #{performedBy,jdbcType=VARCHAR}, #{resultStatus,jdbcType=VARCHAR}, #{resultsRptDateTime,jdbcType=TIMESTAMP}, 
+      #{transcriptionist,jdbcType=VARCHAR}, #{verifiedBy,jdbcType=VARCHAR}, #{costs,jdbcType=NUMERIC}, 
+      #{charges,jdbcType=NUMERIC}, #{billingIndicator,jdbcType=NUMERIC}, #{printIndicator,jdbcType=NUMERIC}, 
+      #{subject,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=TIMESTAMP}, #{patientSource,jdbcType=CHAR}, 
+      #{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.lab.domain.LabTestMaster">
+    insert into LAB_TEST_MASTER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="testNo != null">
+        TEST_NO,
+      </if>
+      <if test="priorityIndicator != null">
+        PRIORITY_INDICATOR,
+      </if>
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="workingId != null">
+        WORKING_ID,
+      </if>
+      <if test="executeDate != null">
+        EXECUTE_DATE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="namePhonetic != null">
+        NAME_PHONETIC,
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="testCause != null">
+        TEST_CAUSE,
+      </if>
+      <if test="relevantClinicDiag != null">
+        RELEVANT_CLINIC_DIAG,
+      </if>
+      <if test="specimen != null">
+        SPECIMEN,
+      </if>
+      <if test="notesForSpcm != null">
+        NOTES_FOR_SPCM,
+      </if>
+      <if test="spcmReceivedDateTime != null">
+        SPCM_RECEIVED_DATE_TIME,
+      </if>
+      <if test="spcmSampleDateTime != null">
+        SPCM_SAMPLE_DATE_TIME,
+      </if>
+      <if test="requestedDateTime != null">
+        REQUESTED_DATE_TIME,
+      </if>
+      <if test="orderingDept != null">
+        ORDERING_DEPT,
+      </if>
+      <if test="orderingProvider != null">
+        ORDERING_PROVIDER,
+      </if>
+      <if test="performedBy != null">
+        PERFORMED_BY,
+      </if>
+      <if test="resultStatus != null">
+        RESULT_STATUS,
+      </if>
+      <if test="resultsRptDateTime != null">
+        RESULTS_RPT_DATE_TIME,
+      </if>
+      <if test="transcriptionist != null">
+        TRANSCRIPTIONIST,
+      </if>
+      <if test="verifiedBy != null">
+        VERIFIED_BY,
+      </if>
+      <if test="costs != null">
+        COSTS,
+      </if>
+      <if test="charges != null">
+        CHARGES,
+      </if>
+      <if test="billingIndicator != null">
+        BILLING_INDICATOR,
+      </if>
+      <if test="printIndicator != null">
+        PRINT_INDICATOR,
+      </if>
+      <if test="subject != null">
+        SUBJECT,
+      </if>
+      <if test="dateOfBirth != null">
+        DATE_OF_BIRTH,
+      </if>
+      <if test="patientSource != null">
+        PATIENT_SOURCE,
+      </if>
+      <if test="visitDate != null">
+        VISIT_DATE,
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="testNo != null">
+        #{testNo,jdbcType=VARCHAR},
+      </if>
+      <if test="priorityIndicator != null">
+        #{priorityIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="workingId != null">
+        #{workingId,jdbcType=VARCHAR},
+      </if>
+      <if test="executeDate != null">
+        #{executeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namePhonetic != null">
+        #{namePhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="testCause != null">
+        #{testCause,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantClinicDiag != null">
+        #{relevantClinicDiag,jdbcType=VARCHAR},
+      </if>
+      <if test="specimen != null">
+        #{specimen,jdbcType=VARCHAR},
+      </if>
+      <if test="notesForSpcm != null">
+        #{notesForSpcm,jdbcType=VARCHAR},
+      </if>
+      <if test="spcmReceivedDateTime != null">
+        #{spcmReceivedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spcmSampleDateTime != null">
+        #{spcmSampleDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestedDateTime != null">
+        #{requestedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderingDept != null">
+        #{orderingDept,jdbcType=VARCHAR},
+      </if>
+      <if test="orderingProvider != null">
+        #{orderingProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="performedBy != null">
+        #{performedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="resultStatus != null">
+        #{resultStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="resultsRptDateTime != null">
+        #{resultsRptDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transcriptionist != null">
+        #{transcriptionist,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiedBy != null">
+        #{verifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="costs != null">
+        #{costs,jdbcType=NUMERIC},
+      </if>
+      <if test="charges != null">
+        #{charges,jdbcType=NUMERIC},
+      </if>
+      <if test="billingIndicator != null">
+        #{billingIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="printIndicator != null">
+        #{printIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null">
+        #{dateOfBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSource != null">
+        #{patientSource,jdbcType=CHAR},
+      </if>
+      <if test="visitDate != null">
+        #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.lab.domain.LabTestMaster">
+    update LAB_TEST_MASTER
+    <set>
+      <if test="priorityIndicator != null">
+        PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="patientId != null">
+        PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="workingId != null">
+        WORKING_ID = #{workingId,jdbcType=VARCHAR},
+      </if>
+      <if test="executeDate != null">
+        EXECUTE_DATE = #{executeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namePhonetic != null">
+        NAME_PHONETIC = #{namePhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="testCause != null">
+        TEST_CAUSE = #{testCause,jdbcType=VARCHAR},
+      </if>
+      <if test="relevantClinicDiag != null">
+        RELEVANT_CLINIC_DIAG = #{relevantClinicDiag,jdbcType=VARCHAR},
+      </if>
+      <if test="specimen != null">
+        SPECIMEN = #{specimen,jdbcType=VARCHAR},
+      </if>
+      <if test="notesForSpcm != null">
+        NOTES_FOR_SPCM = #{notesForSpcm,jdbcType=VARCHAR},
+      </if>
+      <if test="spcmReceivedDateTime != null">
+        SPCM_RECEIVED_DATE_TIME = #{spcmReceivedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spcmSampleDateTime != null">
+        SPCM_SAMPLE_DATE_TIME = #{spcmSampleDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestedDateTime != null">
+        REQUESTED_DATE_TIME = #{requestedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderingDept != null">
+        ORDERING_DEPT = #{orderingDept,jdbcType=VARCHAR},
+      </if>
+      <if test="orderingProvider != null">
+        ORDERING_PROVIDER = #{orderingProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="performedBy != null">
+        PERFORMED_BY = #{performedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="resultStatus != null">
+        RESULT_STATUS = #{resultStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="resultsRptDateTime != null">
+        RESULTS_RPT_DATE_TIME = #{resultsRptDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transcriptionist != null">
+        TRANSCRIPTIONIST = #{transcriptionist,jdbcType=VARCHAR},
+      </if>
+      <if test="verifiedBy != null">
+        VERIFIED_BY = #{verifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="costs != null">
+        COSTS = #{costs,jdbcType=NUMERIC},
+      </if>
+      <if test="charges != null">
+        CHARGES = #{charges,jdbcType=NUMERIC},
+      </if>
+      <if test="billingIndicator != null">
+        BILLING_INDICATOR = #{billingIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="printIndicator != null">
+        PRINT_INDICATOR = #{printIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="subject != null">
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null">
+        DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSource != null">
+        PATIENT_SOURCE = #{patientSource,jdbcType=CHAR},
+      </if>
+      <if test="visitDate != null">
+        VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO = #{visitNo,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabTestMaster">
+    update LAB_TEST_MASTER
+    set PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=NUMERIC},
+      PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+      VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      WORKING_ID = #{workingId,jdbcType=VARCHAR},
+      EXECUTE_DATE = #{executeDate,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      NAME_PHONETIC = #{namePhonetic,jdbcType=VARCHAR},
+      CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=NUMERIC},
+      TEST_CAUSE = #{testCause,jdbcType=VARCHAR},
+      RELEVANT_CLINIC_DIAG = #{relevantClinicDiag,jdbcType=VARCHAR},
+      SPECIMEN = #{specimen,jdbcType=VARCHAR},
+      NOTES_FOR_SPCM = #{notesForSpcm,jdbcType=VARCHAR},
+      SPCM_RECEIVED_DATE_TIME = #{spcmReceivedDateTime,jdbcType=TIMESTAMP},
+      SPCM_SAMPLE_DATE_TIME = #{spcmSampleDateTime,jdbcType=TIMESTAMP},
+      REQUESTED_DATE_TIME = #{requestedDateTime,jdbcType=TIMESTAMP},
+      ORDERING_DEPT = #{orderingDept,jdbcType=VARCHAR},
+      ORDERING_PROVIDER = #{orderingProvider,jdbcType=VARCHAR},
+      PERFORMED_BY = #{performedBy,jdbcType=VARCHAR},
+      RESULT_STATUS = #{resultStatus,jdbcType=VARCHAR},
+      RESULTS_RPT_DATE_TIME = #{resultsRptDateTime,jdbcType=TIMESTAMP},
+      TRANSCRIPTIONIST = #{transcriptionist,jdbcType=VARCHAR},
+      VERIFIED_BY = #{verifiedBy,jdbcType=VARCHAR},
+      COSTS = #{costs,jdbcType=NUMERIC},
+      CHARGES = #{charges,jdbcType=NUMERIC},
+      BILLING_INDICATOR = #{billingIndicator,jdbcType=NUMERIC},
+      PRINT_INDICATOR = #{printIndicator,jdbcType=NUMERIC},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
+      PATIENT_SOURCE = #{patientSource,jdbcType=CHAR},
+      VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
+      VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
