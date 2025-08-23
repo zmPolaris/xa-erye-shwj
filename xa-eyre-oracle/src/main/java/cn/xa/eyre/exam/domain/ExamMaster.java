@@ -80,43 +80,17 @@ public class ExamMaster {
 
     private String chargeType;
 
-    private String rptstatus;
-
-    private String printStatus;
-
-    private String examSubdept;
-
-    private String confirmDoct;
-
-    private String studyUid;
-
-    private String verifier;
-
-    private String examReason;
-
-    private Date confirmDateTime;
-
-    private String photoStatus;
-
-    private String auditingDoct;
-
-    private Date auditingDateTime;
-
-    private String artificer;
+    private String treatProcess;
 
     private String errorComment;
 
-    private Short priorityIndicator;
-
-    private String treatProcess;
+    private String visitNo;
 
     private Date visitDate;
 
-    private Short visitNo;
+    private String priorityIndicator;
 
-    private Short bedNo;
-
-    private String accessionNo;
+    private String verifier;
 
     public String getExamNo() {
         return examNo;
@@ -422,100 +396,12 @@ public class ExamMaster {
         this.chargeType = chargeType == null ? null : chargeType.trim();
     }
 
-    public String getRptstatus() {
-        return rptstatus;
+    public String getTreatProcess() {
+        return treatProcess;
     }
 
-    public void setRptstatus(String rptstatus) {
-        this.rptstatus = rptstatus == null ? null : rptstatus.trim();
-    }
-
-    public String getPrintStatus() {
-        return printStatus;
-    }
-
-    public void setPrintStatus(String printStatus) {
-        this.printStatus = printStatus == null ? null : printStatus.trim();
-    }
-
-    public String getExamSubdept() {
-        return examSubdept;
-    }
-
-    public void setExamSubdept(String examSubdept) {
-        this.examSubdept = examSubdept == null ? null : examSubdept.trim();
-    }
-
-    public String getConfirmDoct() {
-        return confirmDoct;
-    }
-
-    public void setConfirmDoct(String confirmDoct) {
-        this.confirmDoct = confirmDoct == null ? null : confirmDoct.trim();
-    }
-
-    public String getStudyUid() {
-        return studyUid;
-    }
-
-    public void setStudyUid(String studyUid) {
-        this.studyUid = studyUid == null ? null : studyUid.trim();
-    }
-
-    public String getVerifier() {
-        return verifier;
-    }
-
-    public void setVerifier(String verifier) {
-        this.verifier = verifier == null ? null : verifier.trim();
-    }
-
-    public String getExamReason() {
-        return examReason;
-    }
-
-    public void setExamReason(String examReason) {
-        this.examReason = examReason == null ? null : examReason.trim();
-    }
-
-    public Date getConfirmDateTime() {
-        return confirmDateTime;
-    }
-
-    public void setConfirmDateTime(Date confirmDateTime) {
-        this.confirmDateTime = confirmDateTime;
-    }
-
-    public String getPhotoStatus() {
-        return photoStatus;
-    }
-
-    public void setPhotoStatus(String photoStatus) {
-        this.photoStatus = photoStatus == null ? null : photoStatus.trim();
-    }
-
-    public String getAuditingDoct() {
-        return auditingDoct;
-    }
-
-    public void setAuditingDoct(String auditingDoct) {
-        this.auditingDoct = auditingDoct == null ? null : auditingDoct.trim();
-    }
-
-    public Date getAuditingDateTime() {
-        return auditingDateTime;
-    }
-
-    public void setAuditingDateTime(Date auditingDateTime) {
-        this.auditingDateTime = auditingDateTime;
-    }
-
-    public String getArtificer() {
-        return artificer;
-    }
-
-    public void setArtificer(String artificer) {
-        this.artificer = artificer == null ? null : artificer.trim();
+    public void setTreatProcess(String treatProcess) {
+        this.treatProcess = treatProcess == null ? null : treatProcess.trim();
     }
 
     public String getErrorComment() {
@@ -526,20 +412,12 @@ public class ExamMaster {
         this.errorComment = errorComment == null ? null : errorComment.trim();
     }
 
-    public Short getPriorityIndicator() {
-        return priorityIndicator;
+    public String getVisitNo() {
+        return visitNo;
     }
 
-    public void setPriorityIndicator(Short priorityIndicator) {
-        this.priorityIndicator = priorityIndicator;
-    }
-
-    public String getTreatProcess() {
-        return treatProcess;
-    }
-
-    public void setTreatProcess(String treatProcess) {
-        this.treatProcess = treatProcess == null ? null : treatProcess.trim();
+    public void setVisitNo(String visitNo) {
+        this.visitNo = visitNo == null ? null : visitNo.trim();
     }
 
     public Date getVisitDate() {
@@ -550,27 +428,19 @@ public class ExamMaster {
         this.visitDate = visitDate;
     }
 
-    public Short getVisitNo() {
-        return visitNo;
+    public String getPriorityIndicator() {
+        return priorityIndicator;
     }
 
-    public void setVisitNo(Short visitNo) {
-        this.visitNo = visitNo;
+    public void setPriorityIndicator(String priorityIndicator) {
+        this.priorityIndicator = priorityIndicator == null ? null : priorityIndicator.trim();
     }
 
-    public Short getBedNo() {
-        return bedNo;
+    public String getVerifier() {
+        return verifier;
     }
 
-    public void setBedNo(Short bedNo) {
-        this.bedNo = bedNo;
-    }
-
-    public String getAccessionNo() {
-        return accessionNo;
-    }
-
-    public void setAccessionNo(String accessionNo) {
-        this.accessionNo = accessionNo == null ? null : accessionNo.trim();
+    public void setVerifier(String verifier) {
+        this.verifier = verifier == null ? null : verifier.trim();
     }
 }

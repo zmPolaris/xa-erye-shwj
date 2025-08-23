@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.outpadm.mapper.ClinicMasterMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.outpadm.domain.ClinicMaster">
+    <id column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <id column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
+    <result column="CLINIC_LABEL" jdbcType="VARCHAR" property="clinicLabel" />
+    <result column="VISIT_TIME_DESC" jdbcType="VARCHAR" property="visitTimeDesc" />
+    <result column="SERIAL_NO" jdbcType="NUMERIC" property="serialNo" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="NAME_PHONETIC" jdbcType="VARCHAR" property="namePhonetic" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="AGE" jdbcType="NUMERIC" property="age" />
+    <result column="IDENTITY" jdbcType="VARCHAR" property="identity" />
+    <result column="CHARGE_TYPE" jdbcType="VARCHAR" property="chargeType" />
+    <result column="INSURANCE_TYPE" jdbcType="VARCHAR" property="insuranceType" />
+    <result column="INSURANCE_NO" jdbcType="VARCHAR" property="insuranceNo" />
+    <result column="UNIT_IN_CONTRACT" jdbcType="VARCHAR" property="unitInContract" />
+    <result column="CLINIC_TYPE" jdbcType="VARCHAR" property="clinicType" />
+    <result column="FIRST_VISIT_INDICATOR" jdbcType="NUMERIC" property="firstVisitIndicator" />
+    <result column="VISIT_DEPT" jdbcType="VARCHAR" property="visitDept" />
+    <result column="VISIT_SPECIAL_CLINIC" jdbcType="VARCHAR" property="visitSpecialClinic" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+    <result column="MR_PROVIDED_INDICATOR" jdbcType="NUMERIC" property="mrProvidedIndicator" />
+    <result column="REGISTRATION_STATUS" jdbcType="NUMERIC" property="registrationStatus" />
+    <result column="REGISTERING_DATE" jdbcType="TIMESTAMP" property="registeringDate" />
+    <result column="SYMPTOM" jdbcType="VARCHAR" property="symptom" />
+    <result column="CLINIC_CLASS" jdbcType="VARCHAR" property="clinicClass" />
+    <result column="REGIST_FEE" jdbcType="NUMERIC" property="registFee" />
+    <result column="CLINIC_FEE" jdbcType="NUMERIC" property="clinicFee" />
+    <result column="OTHER_FEE" jdbcType="NUMERIC" property="otherFee" />
+    <result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+    <result column="RETURNED_DATE" jdbcType="TIMESTAMP" property="returnedDate" />
+    <result column="RETURNED_OPERATOR" jdbcType="VARCHAR" property="returnedOperator" />
+    <result column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
+    <result column="MR_PROVIDE_INDICATOR" jdbcType="NUMERIC" property="mrProvideIndicator" />
+    <result column="RCPT_NO" jdbcType="VARCHAR" property="rcptNo" />
+    <result column="PRINT_FLAG" jdbcType="NUMERIC" property="printFlag" />
+    <result column="ACCT_FLAG" jdbcType="NUMERIC" property="acctFlag" />
+    <result column="INTERNAL_NO" jdbcType="VARCHAR" property="internalNo" />
+    <result column="IDENTITY_CLASS" jdbcType="VARCHAR" property="identityClass" />
+    <result column="CLINIC_CHARGE" jdbcType="NUMERIC" property="clinicCharge" />
+    <result column="RETURNED_ACCT_NO" jdbcType="VARCHAR" property="returnedAcctNo" />
+    <result column="ACCT_NO" jdbcType="VARCHAR" property="acctNo" />
+    <result column="PAY_WAY" jdbcType="VARCHAR" property="payWay" />
+    <result column="GSID" jdbcType="VARCHAR" property="gsid" />
+    <result column="VISIT_TIME" jdbcType="TIMESTAMP" property="visitTime" />
+    <result column="SERVICE_CLASS" jdbcType="VARCHAR" property="serviceClass" />
+    <result column="ARMED_SERVICES" jdbcType="VARCHAR" property="armedServices" />
+    <result column="SERVICE_SYSTEM_INDICATOR" jdbcType="NUMERIC" property="serviceSystemIndicator" />
+    <result column="JZDYH" jdbcType="VARCHAR" property="jzdyh" />
+    <result column="YD_RETURNED_FEE" jdbcType="NUMERIC" property="ydReturnedFee" />
+    <result column="YGFUND_PAY_SUMAMT" jdbcType="NUMERIC" property="ygfundPaySumamt" />
+    <result column="SECURITY_TYPE_CODE" jdbcType="VARCHAR" property="securityTypeCode" />
+    <result column="POWERPAYCHANNEL" jdbcType="VARCHAR" property="powerpaychannel" />
+    <result column="POWERTRANID" jdbcType="VARCHAR" property="powertranid" />
+    <result column="SETL_ID" jdbcType="VARCHAR" property="setlId" />
+    <result column="MED_TYPE" jdbcType="VARCHAR" property="medType" />
+    <result column="CHECKUPID" jdbcType="VARCHAR" property="checkupid" />
+    <result column="POWERTRANID_REFUND" jdbcType="VARCHAR" property="powertranidRefund" />
+    <result column="TOTAL_REGIST" jdbcType="NUMERIC" property="totalRegist" />
+    <result column="TOTAL_CLINIC" jdbcType="NUMERIC" property="totalClinic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    VISIT_DATE, VISIT_NO, CLINIC_LABEL, VISIT_TIME_DESC, SERIAL_NO, PATIENT_ID, NAME, 
+    NAME_PHONETIC, SEX, AGE, IDENTITY, CHARGE_TYPE, INSURANCE_TYPE, INSURANCE_NO, UNIT_IN_CONTRACT, 
+    CLINIC_TYPE, FIRST_VISIT_INDICATOR, VISIT_DEPT, VISIT_SPECIAL_CLINIC, DOCTOR, MR_PROVIDED_INDICATOR, 
+    REGISTRATION_STATUS, REGISTERING_DATE, SYMPTOM, CLINIC_CLASS, REGIST_FEE, CLINIC_FEE, 
+    OTHER_FEE, OPERATOR, RETURNED_DATE, RETURNED_OPERATOR, DIAGNOSIS_CODE, MR_PROVIDE_INDICATOR, 
+    RCPT_NO, PRINT_FLAG, ACCT_FLAG, INTERNAL_NO, IDENTITY_CLASS, CLINIC_CHARGE, RETURNED_ACCT_NO, 
+    ACCT_NO, PAY_WAY, GSID, VISIT_TIME, SERVICE_CLASS, ARMED_SERVICES, SERVICE_SYSTEM_INDICATOR, 
+    JZDYH, YD_RETURNED_FEE, YGFUND_PAY_SUMAMT, SECURITY_TYPE_CODE, POWERPAYCHANNEL, POWERTRANID, 
+    SETL_ID, MED_TYPE, CHECKUPID, POWERTRANID_REFUND, TOTAL_REGIST, TOTAL_CLINIC
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.outpadm.domain.ClinicMasterKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CLINIC_MASTER
+    where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </select>
+  <select id="selectClinicMaster" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from CLINIC_MASTER c
+    <where>
+      <if test="visitDate != null">
+        and c.VISIT_DATE = TO_DATE(#{visitDate,jdbcType=TIMESTAMP}, 'YYYY-MM-DD')
+      </if>
+      <if test="visitNo != null">
+        and c.VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+      </if>
+      <if test="patientId != null">
+        and c.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.outpadm.domain.ClinicMasterKey">
+    delete from CLINIC_MASTER
+    where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.outpadm.domain.ClinicMaster">
+    insert into CLINIC_MASTER (VISIT_DATE, VISIT_NO, CLINIC_LABEL, 
+      VISIT_TIME_DESC, SERIAL_NO, PATIENT_ID, 
+      NAME, NAME_PHONETIC, SEX, 
+      AGE, IDENTITY, CHARGE_TYPE, 
+      INSURANCE_TYPE, INSURANCE_NO, UNIT_IN_CONTRACT, 
+      CLINIC_TYPE, FIRST_VISIT_INDICATOR, VISIT_DEPT, 
+      VISIT_SPECIAL_CLINIC, DOCTOR, MR_PROVIDED_INDICATOR, 
+      REGISTRATION_STATUS, REGISTERING_DATE, 
+      SYMPTOM, CLINIC_CLASS, REGIST_FEE, 
+      CLINIC_FEE, OTHER_FEE, OPERATOR, 
+      RETURNED_DATE, RETURNED_OPERATOR, DIAGNOSIS_CODE, 
+      MR_PROVIDE_INDICATOR, RCPT_NO, PRINT_FLAG, 
+      ACCT_FLAG, INTERNAL_NO, IDENTITY_CLASS, 
+      CLINIC_CHARGE, RETURNED_ACCT_NO, ACCT_NO, 
+      PAY_WAY, GSID, VISIT_TIME, 
+      SERVICE_CLASS, ARMED_SERVICES, SERVICE_SYSTEM_INDICATOR, 
+      JZDYH, YD_RETURNED_FEE, YGFUND_PAY_SUMAMT, 
+      SECURITY_TYPE_CODE, POWERPAYCHANNEL, POWERTRANID, 
+      SETL_ID, MED_TYPE, CHECKUPID, 
+      POWERTRANID_REFUND, TOTAL_REGIST, TOTAL_CLINIC
+      )
+    values (#{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC}, #{clinicLabel,jdbcType=VARCHAR}, 
+      #{visitTimeDesc,jdbcType=VARCHAR}, #{serialNo,jdbcType=NUMERIC}, #{patientId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{namePhonetic,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{age,jdbcType=NUMERIC}, #{identity,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, 
+      #{insuranceType,jdbcType=VARCHAR}, #{insuranceNo,jdbcType=VARCHAR}, #{unitInContract,jdbcType=VARCHAR}, 
+      #{clinicType,jdbcType=VARCHAR}, #{firstVisitIndicator,jdbcType=NUMERIC}, #{visitDept,jdbcType=VARCHAR}, 
+      #{visitSpecialClinic,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, #{mrProvidedIndicator,jdbcType=NUMERIC}, 
+      #{registrationStatus,jdbcType=NUMERIC}, #{registeringDate,jdbcType=TIMESTAMP}, 
+      #{symptom,jdbcType=VARCHAR}, #{clinicClass,jdbcType=VARCHAR}, #{registFee,jdbcType=NUMERIC}, 
+      #{clinicFee,jdbcType=NUMERIC}, #{otherFee,jdbcType=NUMERIC}, #{operator,jdbcType=VARCHAR}, 
+      #{returnedDate,jdbcType=TIMESTAMP}, #{returnedOperator,jdbcType=VARCHAR}, #{diagnosisCode,jdbcType=VARCHAR}, 
+      #{mrProvideIndicator,jdbcType=NUMERIC}, #{rcptNo,jdbcType=VARCHAR}, #{printFlag,jdbcType=NUMERIC}, 
+      #{acctFlag,jdbcType=NUMERIC}, #{internalNo,jdbcType=VARCHAR}, #{identityClass,jdbcType=VARCHAR}, 
+      #{clinicCharge,jdbcType=NUMERIC}, #{returnedAcctNo,jdbcType=VARCHAR}, #{acctNo,jdbcType=VARCHAR}, 
+      #{payWay,jdbcType=VARCHAR}, #{gsid,jdbcType=VARCHAR}, #{visitTime,jdbcType=TIMESTAMP}, 
+      #{serviceClass,jdbcType=VARCHAR}, #{armedServices,jdbcType=VARCHAR}, #{serviceSystemIndicator,jdbcType=NUMERIC}, 
+      #{jzdyh,jdbcType=VARCHAR}, #{ydReturnedFee,jdbcType=NUMERIC}, #{ygfundPaySumamt,jdbcType=NUMERIC}, 
+      #{securityTypeCode,jdbcType=VARCHAR}, #{powerpaychannel,jdbcType=VARCHAR}, #{powertranid,jdbcType=VARCHAR}, 
+      #{setlId,jdbcType=VARCHAR}, #{medType,jdbcType=VARCHAR}, #{checkupid,jdbcType=VARCHAR}, 
+      #{powertranidRefund,jdbcType=VARCHAR}, #{totalRegist,jdbcType=NUMERIC}, #{totalClinic,jdbcType=NUMERIC}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.outpadm.domain.ClinicMaster">
+    insert into CLINIC_MASTER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="visitDate != null">
+        VISIT_DATE,
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO,
+      </if>
+      <if test="clinicLabel != null">
+        CLINIC_LABEL,
+      </if>
+      <if test="visitTimeDesc != null">
+        VISIT_TIME_DESC,
+      </if>
+      <if test="serialNo != null">
+        SERIAL_NO,
+      </if>
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="namePhonetic != null">
+        NAME_PHONETIC,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="identity != null">
+        IDENTITY,
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE,
+      </if>
+      <if test="insuranceType != null">
+        INSURANCE_TYPE,
+      </if>
+      <if test="insuranceNo != null">
+        INSURANCE_NO,
+      </if>
+      <if test="unitInContract != null">
+        UNIT_IN_CONTRACT,
+      </if>
+      <if test="clinicType != null">
+        CLINIC_TYPE,
+      </if>
+      <if test="firstVisitIndicator != null">
+        FIRST_VISIT_INDICATOR,
+      </if>
+      <if test="visitDept != null">
+        VISIT_DEPT,
+      </if>
+      <if test="visitSpecialClinic != null">
+        VISIT_SPECIAL_CLINIC,
+      </if>
+      <if test="doctor != null">
+        DOCTOR,
+      </if>
+      <if test="mrProvidedIndicator != null">
+        MR_PROVIDED_INDICATOR,
+      </if>
+      <if test="registrationStatus != null">
+        REGISTRATION_STATUS,
+      </if>
+      <if test="registeringDate != null">
+        REGISTERING_DATE,
+      </if>
+      <if test="symptom != null">
+        SYMPTOM,
+      </if>
+      <if test="clinicClass != null">
+        CLINIC_CLASS,
+      </if>
+      <if test="registFee != null">
+        REGIST_FEE,
+      </if>
+      <if test="clinicFee != null">
+        CLINIC_FEE,
+      </if>
+      <if test="otherFee != null">
+        OTHER_FEE,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="returnedDate != null">
+        RETURNED_DATE,
+      </if>
+      <if test="returnedOperator != null">
+        RETURNED_OPERATOR,
+      </if>
+      <if test="diagnosisCode != null">
+        DIAGNOSIS_CODE,
+      </if>
+      <if test="mrProvideIndicator != null">
+        MR_PROVIDE_INDICATOR,
+      </if>
+      <if test="rcptNo != null">
+        RCPT_NO,
+      </if>
+      <if test="printFlag != null">
+        PRINT_FLAG,
+      </if>
+      <if test="acctFlag != null">
+        ACCT_FLAG,
+      </if>
+      <if test="internalNo != null">
+        INTERNAL_NO,
+      </if>
+      <if test="identityClass != null">
+        IDENTITY_CLASS,
+      </if>
+      <if test="clinicCharge != null">
+        CLINIC_CHARGE,
+      </if>
+      <if test="returnedAcctNo != null">
+        RETURNED_ACCT_NO,
+      </if>
+      <if test="acctNo != null">
+        ACCT_NO,
+      </if>
+      <if test="payWay != null">
+        PAY_WAY,
+      </if>
+      <if test="gsid != null">
+        GSID,
+      </if>
+      <if test="visitTime != null">
+        VISIT_TIME,
+      </if>
+      <if test="serviceClass != null">
+        SERVICE_CLASS,
+      </if>
+      <if test="armedServices != null">
+        ARMED_SERVICES,
+      </if>
+      <if test="serviceSystemIndicator != null">
+        SERVICE_SYSTEM_INDICATOR,
+      </if>
+      <if test="jzdyh != null">
+        JZDYH,
+      </if>
+      <if test="ydReturnedFee != null">
+        YD_RETURNED_FEE,
+      </if>
+      <if test="ygfundPaySumamt != null">
+        YGFUND_PAY_SUMAMT,
+      </if>
+      <if test="securityTypeCode != null">
+        SECURITY_TYPE_CODE,
+      </if>
+      <if test="powerpaychannel != null">
+        POWERPAYCHANNEL,
+      </if>
+      <if test="powertranid != null">
+        POWERTRANID,
+      </if>
+      <if test="setlId != null">
+        SETL_ID,
+      </if>
+      <if test="medType != null">
+        MED_TYPE,
+      </if>
+      <if test="checkupid != null">
+        CHECKUPID,
+      </if>
+      <if test="powertranidRefund != null">
+        POWERTRANID_REFUND,
+      </if>
+      <if test="totalRegist != null">
+        TOTAL_REGIST,
+      </if>
+      <if test="totalClinic != null">
+        TOTAL_CLINIC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="visitDate != null">
+        #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=NUMERIC},
+      </if>
+      <if test="clinicLabel != null">
+        #{clinicLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTimeDesc != null">
+        #{visitTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null">
+        #{serialNo,jdbcType=NUMERIC},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namePhonetic != null">
+        #{namePhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceType != null">
+        #{insuranceType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNo != null">
+        #{insuranceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="unitInContract != null">
+        #{unitInContract,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicType != null">
+        #{clinicType,jdbcType=VARCHAR},
+      </if>
+      <if test="firstVisitIndicator != null">
+        #{firstVisitIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="visitDept != null">
+        #{visitDept,jdbcType=VARCHAR},
+      </if>
+      <if test="visitSpecialClinic != null">
+        #{visitSpecialClinic,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="mrProvidedIndicator != null">
+        #{mrProvidedIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="registrationStatus != null">
+        #{registrationStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="registeringDate != null">
+        #{registeringDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="symptom != null">
+        #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicClass != null">
+        #{clinicClass,jdbcType=VARCHAR},
+      </if>
+      <if test="registFee != null">
+        #{registFee,jdbcType=NUMERIC},
+      </if>
+      <if test="clinicFee != null">
+        #{clinicFee,jdbcType=NUMERIC},
+      </if>
+      <if test="otherFee != null">
+        #{otherFee,jdbcType=NUMERIC},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="returnedDate != null">
+        #{returnedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedOperator != null">
+        #{returnedOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisCode != null">
+        #{diagnosisCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mrProvideIndicator != null">
+        #{mrProvideIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="rcptNo != null">
+        #{rcptNo,jdbcType=VARCHAR},
+      </if>
+      <if test="printFlag != null">
+        #{printFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="acctFlag != null">
+        #{acctFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="internalNo != null">
+        #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="identityClass != null">
+        #{identityClass,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicCharge != null">
+        #{clinicCharge,jdbcType=NUMERIC},
+      </if>
+      <if test="returnedAcctNo != null">
+        #{returnedAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null">
+        #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="gsid != null">
+        #{gsid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTime != null">
+        #{visitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceClass != null">
+        #{serviceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="armedServices != null">
+        #{armedServices,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSystemIndicator != null">
+        #{serviceSystemIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="jzdyh != null">
+        #{jzdyh,jdbcType=VARCHAR},
+      </if>
+      <if test="ydReturnedFee != null">
+        #{ydReturnedFee,jdbcType=NUMERIC},
+      </if>
+      <if test="ygfundPaySumamt != null">
+        #{ygfundPaySumamt,jdbcType=NUMERIC},
+      </if>
+      <if test="securityTypeCode != null">
+        #{securityTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="powerpaychannel != null">
+        #{powerpaychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="powertranid != null">
+        #{powertranid,jdbcType=VARCHAR},
+      </if>
+      <if test="setlId != null">
+        #{setlId,jdbcType=VARCHAR},
+      </if>
+      <if test="medType != null">
+        #{medType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkupid != null">
+        #{checkupid,jdbcType=VARCHAR},
+      </if>
+      <if test="powertranidRefund != null">
+        #{powertranidRefund,jdbcType=VARCHAR},
+      </if>
+      <if test="totalRegist != null">
+        #{totalRegist,jdbcType=NUMERIC},
+      </if>
+      <if test="totalClinic != null">
+        #{totalClinic,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.outpadm.domain.ClinicMaster">
+    update CLINIC_MASTER
+    <set>
+      <if test="clinicLabel != null">
+        CLINIC_LABEL = #{clinicLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTimeDesc != null">
+        VISIT_TIME_DESC = #{visitTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNo != null">
+        SERIAL_NO = #{serialNo,jdbcType=NUMERIC},
+      </if>
+      <if test="patientId != null">
+        PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="namePhonetic != null">
+        NAME_PHONETIC = #{namePhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=NUMERIC},
+      </if>
+      <if test="identity != null">
+        IDENTITY = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeType != null">
+        CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceType != null">
+        INSURANCE_TYPE = #{insuranceType,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNo != null">
+        INSURANCE_NO = #{insuranceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="unitInContract != null">
+        UNIT_IN_CONTRACT = #{unitInContract,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicType != null">
+        CLINIC_TYPE = #{clinicType,jdbcType=VARCHAR},
+      </if>
+      <if test="firstVisitIndicator != null">
+        FIRST_VISIT_INDICATOR = #{firstVisitIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="visitDept != null">
+        VISIT_DEPT = #{visitDept,jdbcType=VARCHAR},
+      </if>
+      <if test="visitSpecialClinic != null">
+        VISIT_SPECIAL_CLINIC = #{visitSpecialClinic,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        DOCTOR = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="mrProvidedIndicator != null">
+        MR_PROVIDED_INDICATOR = #{mrProvidedIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="registrationStatus != null">
+        REGISTRATION_STATUS = #{registrationStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="registeringDate != null">
+        REGISTERING_DATE = #{registeringDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="symptom != null">
+        SYMPTOM = #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicClass != null">
+        CLINIC_CLASS = #{clinicClass,jdbcType=VARCHAR},
+      </if>
+      <if test="registFee != null">
+        REGIST_FEE = #{registFee,jdbcType=NUMERIC},
+      </if>
+      <if test="clinicFee != null">
+        CLINIC_FEE = #{clinicFee,jdbcType=NUMERIC},
+      </if>
+      <if test="otherFee != null">
+        OTHER_FEE = #{otherFee,jdbcType=NUMERIC},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="returnedDate != null">
+        RETURNED_DATE = #{returnedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnedOperator != null">
+        RETURNED_OPERATOR = #{returnedOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisCode != null">
+        DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mrProvideIndicator != null">
+        MR_PROVIDE_INDICATOR = #{mrProvideIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="rcptNo != null">
+        RCPT_NO = #{rcptNo,jdbcType=VARCHAR},
+      </if>
+      <if test="printFlag != null">
+        PRINT_FLAG = #{printFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="acctFlag != null">
+        ACCT_FLAG = #{acctFlag,jdbcType=NUMERIC},
+      </if>
+      <if test="internalNo != null">
+        INTERNAL_NO = #{internalNo,jdbcType=VARCHAR},
+      </if>
+      <if test="identityClass != null">
+        IDENTITY_CLASS = #{identityClass,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicCharge != null">
+        CLINIC_CHARGE = #{clinicCharge,jdbcType=NUMERIC},
+      </if>
+      <if test="returnedAcctNo != null">
+        RETURNED_ACCT_NO = #{returnedAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctNo != null">
+        ACCT_NO = #{acctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null">
+        PAY_WAY = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="gsid != null">
+        GSID = #{gsid,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTime != null">
+        VISIT_TIME = #{visitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceClass != null">
+        SERVICE_CLASS = #{serviceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="armedServices != null">
+        ARMED_SERVICES = #{armedServices,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSystemIndicator != null">
+        SERVICE_SYSTEM_INDICATOR = #{serviceSystemIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="jzdyh != null">
+        JZDYH = #{jzdyh,jdbcType=VARCHAR},
+      </if>
+      <if test="ydReturnedFee != null">
+        YD_RETURNED_FEE = #{ydReturnedFee,jdbcType=NUMERIC},
+      </if>
+      <if test="ygfundPaySumamt != null">
+        YGFUND_PAY_SUMAMT = #{ygfundPaySumamt,jdbcType=NUMERIC},
+      </if>
+      <if test="securityTypeCode != null">
+        SECURITY_TYPE_CODE = #{securityTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="powerpaychannel != null">
+        POWERPAYCHANNEL = #{powerpaychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="powertranid != null">
+        POWERTRANID = #{powertranid,jdbcType=VARCHAR},
+      </if>
+      <if test="setlId != null">
+        SETL_ID = #{setlId,jdbcType=VARCHAR},
+      </if>
+      <if test="medType != null">
+        MED_TYPE = #{medType,jdbcType=VARCHAR},
+      </if>
+      <if test="checkupid != null">
+        CHECKUPID = #{checkupid,jdbcType=VARCHAR},
+      </if>
+      <if test="powertranidRefund != null">
+        POWERTRANID_REFUND = #{powertranidRefund,jdbcType=VARCHAR},
+      </if>
+      <if test="totalRegist != null">
+        TOTAL_REGIST = #{totalRegist,jdbcType=NUMERIC},
+      </if>
+      <if test="totalClinic != null">
+        TOTAL_CLINIC = #{totalClinic,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.outpadm.domain.ClinicMaster">
+    update CLINIC_MASTER
+    set CLINIC_LABEL = #{clinicLabel,jdbcType=VARCHAR},
+      VISIT_TIME_DESC = #{visitTimeDesc,jdbcType=VARCHAR},
+      SERIAL_NO = #{serialNo,jdbcType=NUMERIC},
+      PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      NAME_PHONETIC = #{namePhonetic,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=NUMERIC},
+      IDENTITY = #{identity,jdbcType=VARCHAR},
+      CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
+      INSURANCE_TYPE = #{insuranceType,jdbcType=VARCHAR},
+      INSURANCE_NO = #{insuranceNo,jdbcType=VARCHAR},
+      UNIT_IN_CONTRACT = #{unitInContract,jdbcType=VARCHAR},
+      CLINIC_TYPE = #{clinicType,jdbcType=VARCHAR},
+      FIRST_VISIT_INDICATOR = #{firstVisitIndicator,jdbcType=NUMERIC},
+      VISIT_DEPT = #{visitDept,jdbcType=VARCHAR},
+      VISIT_SPECIAL_CLINIC = #{visitSpecialClinic,jdbcType=VARCHAR},
+      DOCTOR = #{doctor,jdbcType=VARCHAR},
+      MR_PROVIDED_INDICATOR = #{mrProvidedIndicator,jdbcType=NUMERIC},
+      REGISTRATION_STATUS = #{registrationStatus,jdbcType=NUMERIC},
+      REGISTERING_DATE = #{registeringDate,jdbcType=TIMESTAMP},
+      SYMPTOM = #{symptom,jdbcType=VARCHAR},
+      CLINIC_CLASS = #{clinicClass,jdbcType=VARCHAR},
+      REGIST_FEE = #{registFee,jdbcType=NUMERIC},
+      CLINIC_FEE = #{clinicFee,jdbcType=NUMERIC},
+      OTHER_FEE = #{otherFee,jdbcType=NUMERIC},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      RETURNED_DATE = #{returnedDate,jdbcType=TIMESTAMP},
+      RETURNED_OPERATOR = #{returnedOperator,jdbcType=VARCHAR},
+      DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR},
+      MR_PROVIDE_INDICATOR = #{mrProvideIndicator,jdbcType=NUMERIC},
+      RCPT_NO = #{rcptNo,jdbcType=VARCHAR},
+      PRINT_FLAG = #{printFlag,jdbcType=NUMERIC},
+      ACCT_FLAG = #{acctFlag,jdbcType=NUMERIC},
+      INTERNAL_NO = #{internalNo,jdbcType=VARCHAR},
+      IDENTITY_CLASS = #{identityClass,jdbcType=VARCHAR},
+      CLINIC_CHARGE = #{clinicCharge,jdbcType=NUMERIC},
+      RETURNED_ACCT_NO = #{returnedAcctNo,jdbcType=VARCHAR},
+      ACCT_NO = #{acctNo,jdbcType=VARCHAR},
+      PAY_WAY = #{payWay,jdbcType=VARCHAR},
+      GSID = #{gsid,jdbcType=VARCHAR},
+      VISIT_TIME = #{visitTime,jdbcType=TIMESTAMP},
+      SERVICE_CLASS = #{serviceClass,jdbcType=VARCHAR},
+      ARMED_SERVICES = #{armedServices,jdbcType=VARCHAR},
+      SERVICE_SYSTEM_INDICATOR = #{serviceSystemIndicator,jdbcType=NUMERIC},
+      JZDYH = #{jzdyh,jdbcType=VARCHAR},
+      YD_RETURNED_FEE = #{ydReturnedFee,jdbcType=NUMERIC},
+      YGFUND_PAY_SUMAMT = #{ygfundPaySumamt,jdbcType=NUMERIC},
+      SECURITY_TYPE_CODE = #{securityTypeCode,jdbcType=VARCHAR},
+      POWERPAYCHANNEL = #{powerpaychannel,jdbcType=VARCHAR},
+      POWERTRANID = #{powertranid,jdbcType=VARCHAR},
+      SETL_ID = #{setlId,jdbcType=VARCHAR},
+      MED_TYPE = #{medType,jdbcType=VARCHAR},
+      CHECKUPID = #{checkupid,jdbcType=VARCHAR},
+      POWERTRANID_REFUND = #{powertranidRefund,jdbcType=VARCHAR},
+      TOTAL_REGIST = #{totalRegist,jdbcType=NUMERIC},
+      TOTAL_CLINIC = #{totalClinic,jdbcType=NUMERIC}
+    where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
+      and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+  </update>
+</mapper>

@@ -2,52 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xa.eyre.comm.mapper.DiagnosisDictMapper">
   <resultMap id="BaseResultMap" type="cn.xa.eyre.comm.domain.DiagnosisDict">
-    <id column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
-    <id column="DIAGNOSIS_NAME" jdbcType="VARCHAR" property="diagnosisName" />
+    <result column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
+    <result column="DIAGNOSIS_NAME" jdbcType="VARCHAR" property="diagnosisName" />
     <result column="STD_INDICATOR" jdbcType="NUMERIC" property="stdIndicator" />
     <result column="APPROVED_INDICATOR" jdbcType="NUMERIC" property="approvedIndicator" />
     <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
     <result column="INPUT_CODE" jdbcType="VARCHAR" property="inputCode" />
-    <result column="HEALTH_LEVEL" jdbcType="VARCHAR" property="healthLevel" />
-    <result column="INFECT_INDICATOR" jdbcType="VARCHAR" property="infectIndicator" />
-    <result column="INPUT_CODE_WB" jdbcType="VARCHAR" property="inputCodeWb" />
-    <result column="DISEASE_SORT" jdbcType="VARCHAR" property="diseaseSort" />
-    <result column="CONTAGIONCODE" jdbcType="VARCHAR" property="contagioncode" />
-    <result column="DIAG_INDICATOR" jdbcType="NUMERIC" property="diagIndicator" />
-    <result column="NM1" jdbcType="VARCHAR" property="nm1" />
-    <result column="NM2" jdbcType="VARCHAR" property="nm2" />
-    <result column="CODE_VERSION" jdbcType="VARCHAR" property="codeVersion" />
+    <result column="GJYSIGN" jdbcType="NUMERIC" property="gjysign" />
   </resultMap>
-  <sql id="Base_Column_List">
-    DIAGNOSIS_CODE, DIAGNOSIS_NAME, STD_INDICATOR, APPROVED_INDICATOR, CREATE_DATE, INPUT_CODE, 
-    HEALTH_LEVEL, INFECT_INDICATOR, INPUT_CODE_WB, DISEASE_SORT, CONTAGIONCODE, DIAG_INDICATOR, 
-    NM1, NM2, CODE_VERSION
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.comm.domain.DiagnosisDictKey" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from DIAGNOSIS_DICT
-    where DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
-      and DIAGNOSIS_NAME = #{diagnosisName,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.comm.domain.DiagnosisDictKey">
-    delete from DIAGNOSIS_DICT
-    where DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
-      and DIAGNOSIS_NAME = #{diagnosisName,jdbcType=VARCHAR}
-  </delete>
   <insert id="insert" parameterType="cn.xa.eyre.comm.domain.DiagnosisDict">
     insert into DIAGNOSIS_DICT (DIAGNOSIS_CODE, DIAGNOSIS_NAME, STD_INDICATOR, 
       APPROVED_INDICATOR, CREATE_DATE, INPUT_CODE, 
-      HEALTH_LEVEL, INFECT_INDICATOR, INPUT_CODE_WB, 
-      DISEASE_SORT, CONTAGIONCODE, DIAG_INDICATOR, 
-      NM1, NM2, CODE_VERSION
-      )
+      GJYSIGN)
     values (#{diagnosisCode,jdbcType=VARCHAR}, #{diagnosisName,jdbcType=VARCHAR}, #{stdIndicator,jdbcType=NUMERIC}, 
       #{approvedIndicator,jdbcType=NUMERIC}, #{createDate,jdbcType=TIMESTAMP}, #{inputCode,jdbcType=VARCHAR}, 
-      #{healthLevel,jdbcType=VARCHAR}, #{infectIndicator,jdbcType=VARCHAR}, #{inputCodeWb,jdbcType=VARCHAR}, 
-      #{diseaseSort,jdbcType=VARCHAR}, #{contagioncode,jdbcType=VARCHAR}, #{diagIndicator,jdbcType=NUMERIC}, 
-      #{nm1,jdbcType=VARCHAR}, #{nm2,jdbcType=VARCHAR}, #{codeVersion,jdbcType=VARCHAR}
-      )
+      #{gjysign,jdbcType=NUMERIC})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.comm.domain.DiagnosisDict">
     insert into DIAGNOSIS_DICT
@@ -70,32 +39,8 @@
       <if test="inputCode != null">
         INPUT_CODE,
       </if>
-      <if test="healthLevel != null">
-        HEALTH_LEVEL,
-      </if>
-      <if test="infectIndicator != null">
-        INFECT_INDICATOR,
-      </if>
-      <if test="inputCodeWb != null">
-        INPUT_CODE_WB,
-      </if>
-      <if test="diseaseSort != null">
-        DISEASE_SORT,
-      </if>
-      <if test="contagioncode != null">
-        CONTAGIONCODE,
-      </if>
-      <if test="diagIndicator != null">
-        DIAG_INDICATOR,
-      </if>
-      <if test="nm1 != null">
-        NM1,
-      </if>
-      <if test="nm2 != null">
-        NM2,
-      </if>
-      <if test="codeVersion != null">
-        CODE_VERSION,
+      <if test="gjysign != null">
+        GJYSIGN,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -117,97 +62,9 @@
       <if test="inputCode != null">
         #{inputCode,jdbcType=VARCHAR},
       </if>
-      <if test="healthLevel != null">
-        #{healthLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="infectIndicator != null">
-        #{infectIndicator,jdbcType=VARCHAR},
-      </if>
-      <if test="inputCodeWb != null">
-        #{inputCodeWb,jdbcType=VARCHAR},
-      </if>
-      <if test="diseaseSort != null">
-        #{diseaseSort,jdbcType=VARCHAR},
-      </if>
-      <if test="contagioncode != null">
-        #{contagioncode,jdbcType=VARCHAR},
-      </if>
-      <if test="diagIndicator != null">
-        #{diagIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="nm1 != null">
-        #{nm1,jdbcType=VARCHAR},
-      </if>
-      <if test="nm2 != null">
-        #{nm2,jdbcType=VARCHAR},
-      </if>
-      <if test="codeVersion != null">
-        #{codeVersion,jdbcType=VARCHAR},
+      <if test="gjysign != null">
+        #{gjysign,jdbcType=NUMERIC},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.comm.domain.DiagnosisDict">
-    update DIAGNOSIS_DICT
-    <set>
-      <if test="stdIndicator != null">
-        STD_INDICATOR = #{stdIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="approvedIndicator != null">
-        APPROVED_INDICATOR = #{approvedIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="createDate != null">
-        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="inputCode != null">
-        INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
-      </if>
-      <if test="healthLevel != null">
-        HEALTH_LEVEL = #{healthLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="infectIndicator != null">
-        INFECT_INDICATOR = #{infectIndicator,jdbcType=VARCHAR},
-      </if>
-      <if test="inputCodeWb != null">
-        INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
-      </if>
-      <if test="diseaseSort != null">
-        DISEASE_SORT = #{diseaseSort,jdbcType=VARCHAR},
-      </if>
-      <if test="contagioncode != null">
-        CONTAGIONCODE = #{contagioncode,jdbcType=VARCHAR},
-      </if>
-      <if test="diagIndicator != null">
-        DIAG_INDICATOR = #{diagIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="nm1 != null">
-        NM1 = #{nm1,jdbcType=VARCHAR},
-      </if>
-      <if test="nm2 != null">
-        NM2 = #{nm2,jdbcType=VARCHAR},
-      </if>
-      <if test="codeVersion != null">
-        CODE_VERSION = #{codeVersion,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
-      and DIAGNOSIS_NAME = #{diagnosisName,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.comm.domain.DiagnosisDict">
-    update DIAGNOSIS_DICT
-    set STD_INDICATOR = #{stdIndicator,jdbcType=NUMERIC},
-      APPROVED_INDICATOR = #{approvedIndicator,jdbcType=NUMERIC},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
-      HEALTH_LEVEL = #{healthLevel,jdbcType=VARCHAR},
-      INFECT_INDICATOR = #{infectIndicator,jdbcType=VARCHAR},
-      INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
-      DISEASE_SORT = #{diseaseSort,jdbcType=VARCHAR},
-      CONTAGIONCODE = #{contagioncode,jdbcType=VARCHAR},
-      DIAG_INDICATOR = #{diagIndicator,jdbcType=NUMERIC},
-      NM1 = #{nm1,jdbcType=VARCHAR},
-      NM2 = #{nm2,jdbcType=VARCHAR},
-      CODE_VERSION = #{codeVersion,jdbcType=VARCHAR}
-    where DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
-      and DIAGNOSIS_NAME = #{diagnosisName,jdbcType=VARCHAR}
-  </update>
 </mapper>

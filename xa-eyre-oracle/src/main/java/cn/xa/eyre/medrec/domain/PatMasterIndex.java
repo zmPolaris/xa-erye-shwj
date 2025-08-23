@@ -55,49 +55,13 @@ public class PatMasterIndex {
 
     private String operator;
 
-    private Short secretLevel;
+    private Short homeIndicator;
 
-    private String tag;
+    private String deathNo;
 
-    private String cardNo;
+    private Date deathDate;
 
-    private String workunit;
-
-    private String modifyStaffId;
-
-    private Date modifyTime;
-
-    private String occupation;
-
-    private Date identityExpireDate;
-
-    private String mailingAreaCode4;
-
-    private String sexCode;
-
-    private String mpi;
-
-    private String orgAreaId;
-
-    private String orgId;
-
-    private String mentalPrintFlag;
-
-    private String stopFlag;
-
-    private String idCardShowed;
-
-    private String mailingAreaCode1;
-
-    private String mailingAreaCode2;
-
-    private String mailingAreaCode3;
-
-    private String guardianName;
-
-    private String guardianPhone;
-
-    private String guardianOccupation;
+    private String secretLevel;
 
     public String getPatientId() {
         return patientId;
@@ -307,179 +271,35 @@ public class PatMasterIndex {
         this.operator = operator == null ? null : operator.trim();
     }
 
-    public Short getSecretLevel() {
+    public Short getHomeIndicator() {
+        return homeIndicator;
+    }
+
+    public void setHomeIndicator(Short homeIndicator) {
+        this.homeIndicator = homeIndicator;
+    }
+
+    public String getDeathNo() {
+        return deathNo;
+    }
+
+    public void setDeathNo(String deathNo) {
+        this.deathNo = deathNo == null ? null : deathNo.trim();
+    }
+
+    public Date getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(Date deathDate) {
+        this.deathDate = deathDate;
+    }
+
+    public String getSecretLevel() {
         return secretLevel;
     }
 
-    public void setSecretLevel(Short secretLevel) {
-        this.secretLevel = secretLevel;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag == null ? null : tag.trim();
-    }
-
-    public String getCardNo() {
-        return cardNo;
-    }
-
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
-    }
-
-    public String getWorkunit() {
-        return workunit;
-    }
-
-    public void setWorkunit(String workunit) {
-        this.workunit = workunit == null ? null : workunit.trim();
-    }
-
-    public String getModifyStaffId() {
-        return modifyStaffId;
-    }
-
-    public void setModifyStaffId(String modifyStaffId) {
-        this.modifyStaffId = modifyStaffId == null ? null : modifyStaffId.trim();
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation == null ? null : occupation.trim();
-    }
-
-    public Date getIdentityExpireDate() {
-        return identityExpireDate;
-    }
-
-    public void setIdentityExpireDate(Date identityExpireDate) {
-        this.identityExpireDate = identityExpireDate;
-    }
-
-    public String getMailingAreaCode4() {
-        return mailingAreaCode4;
-    }
-
-    public void setMailingAreaCode4(String mailingAreaCode4) {
-        this.mailingAreaCode4 = mailingAreaCode4 == null ? null : mailingAreaCode4.trim();
-    }
-
-    public String getSexCode() {
-        return sexCode;
-    }
-
-    public void setSexCode(String sexCode) {
-        this.sexCode = sexCode == null ? null : sexCode.trim();
-    }
-
-    public String getMpi() {
-        return mpi;
-    }
-
-    public void setMpi(String mpi) {
-        this.mpi = mpi == null ? null : mpi.trim();
-    }
-
-    public String getOrgAreaId() {
-        return orgAreaId;
-    }
-
-    public void setOrgAreaId(String orgAreaId) {
-        this.orgAreaId = orgAreaId == null ? null : orgAreaId.trim();
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId == null ? null : orgId.trim();
-    }
-
-    public String getMentalPrintFlag() {
-        return mentalPrintFlag;
-    }
-
-    public void setMentalPrintFlag(String mentalPrintFlag) {
-        this.mentalPrintFlag = mentalPrintFlag == null ? null : mentalPrintFlag.trim();
-    }
-
-    public String getStopFlag() {
-        return stopFlag;
-    }
-
-    public void setStopFlag(String stopFlag) {
-        this.stopFlag = stopFlag == null ? null : stopFlag.trim();
-    }
-
-    public String getIdCardShowed() {
-        return idCardShowed;
-    }
-
-    public void setIdCardShowed(String idCardShowed) {
-        this.idCardShowed = idCardShowed == null ? null : idCardShowed.trim();
-    }
-
-    public String getMailingAreaCode1() {
-        return mailingAreaCode1;
-    }
-
-    public void setMailingAreaCode1(String mailingAreaCode1) {
-        this.mailingAreaCode1 = mailingAreaCode1 == null ? null : mailingAreaCode1.trim();
-    }
-
-    public String getMailingAreaCode2() {
-        return mailingAreaCode2;
-    }
-
-    public void setMailingAreaCode2(String mailingAreaCode2) {
-        this.mailingAreaCode2 = mailingAreaCode2 == null ? null : mailingAreaCode2.trim();
-    }
-
-    public String getMailingAreaCode3() {
-        return mailingAreaCode3;
-    }
-
-    public void setMailingAreaCode3(String mailingAreaCode3) {
-        this.mailingAreaCode3 = mailingAreaCode3 == null ? null : mailingAreaCode3.trim();
-    }
-
-    public String getGuardianName() {
-        return guardianName;
-    }
-
-    public void setGuardianName(String guardianName) {
-        this.guardianName = guardianName == null ? null : guardianName.trim();
-    }
-
-    public String getGuardianPhone() {
-        return guardianPhone;
-    }
-
-    public void setGuardianPhone(String guardianPhone) {
-        this.guardianPhone = guardianPhone == null ? null : guardianPhone.trim();
-    }
-
-    public String getGuardianOccupation() {
-        return guardianOccupation;
-    }
-
-    public void setGuardianOccupation(String guardianOccupation) {
-        this.guardianOccupation = guardianOccupation == null ? null : guardianOccupation.trim();
+    public void setSecretLevel(String secretLevel) {
+        this.secretLevel = secretLevel == null ? null : secretLevel.trim();
     }
 }

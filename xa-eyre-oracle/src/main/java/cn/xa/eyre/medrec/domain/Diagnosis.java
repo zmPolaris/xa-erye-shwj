@@ -13,12 +13,6 @@ public class Diagnosis extends DiagnosisKey {
 
     private Short operTreatIndicator;
 
-    private String diagnosisCode;
-
-    private String insertIndicator;
-
-    private String codeVersion;
-
     public String getDiagnosisDesc() {
         return diagnosisDesc;
     }
@@ -57,29 +51,5 @@ public class Diagnosis extends DiagnosisKey {
 
     public void setOperTreatIndicator(Short operTreatIndicator) {
         this.operTreatIndicator = operTreatIndicator;
-    }
-
-    public String getDiagnosisCode() {
-        return diagnosisCode;
-    }
-
-    public void setDiagnosisCode(String diagnosisCode) {
-        this.diagnosisCode = diagnosisCode == null ? null : diagnosisCode.trim();
-    }
-
-    public String getInsertIndicator() {
-        return insertIndicator;
-    }
-
-    public void setInsertIndicator(String insertIndicator) {
-        this.insertIndicator = insertIndicator == null ? null : insertIndicator.trim();
-    }
-
-    public String getCodeVersion() {
-        return codeVersion;
-    }
-
-    public void setCodeVersion(String codeVersion) {
-        this.codeVersion = codeVersion == null ? null : codeVersion.trim();
     }
 }

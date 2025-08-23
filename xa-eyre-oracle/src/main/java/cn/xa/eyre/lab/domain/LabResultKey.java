@@ -5,7 +5,7 @@ public class LabResultKey {
 
     private Short itemNo;
 
-    private Integer printOrder;
+    private Short printOrder;
 
     public String getTestNo() {
         return testNo;
@@ -23,11 +23,11 @@ public class LabResultKey {
         this.itemNo = itemNo;
     }
 
-    public Integer getPrintOrder() {
+    public Short getPrintOrder() {
         return printOrder;
     }
 
-    public void setPrintOrder(Integer printOrder) {
+    public void setPrintOrder(Short printOrder) {
         this.printOrder = printOrder;
     }
 }

@@ -17,8 +17,6 @@ public class ExamReport {
 
     private String memo;
 
-    private String reportname;
-
     public String getExamNo() {
         return examNo;
     }
@@ -81,13 +79,5 @@ public class ExamReport {
 
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
-    }
-
-    public String getReportname() {
-        return reportname;
-    }
-
-    public void setReportname(String reportname) {
-        this.reportname = reportname == null ? null : reportname.trim();
     }
 }

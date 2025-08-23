@@ -32,10 +32,15 @@
     <result column="BILLING_INDICATOR" jdbcType="NUMERIC" property="billingIndicator" />
     <result column="PRINT_INDICATOR" jdbcType="NUMERIC" property="printIndicator" />
     <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
-    <result column="DATE_OF_BIRTH" jdbcType="TIMESTAMP" property="dateOfBirth" />
-    <result column="PATIENT_SOURCE" jdbcType="CHAR" property="patientSource" />
-    <result column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <result column="ALARMFLAG" jdbcType="VARCHAR" property="alarmflag" />
+    <result column="REJECT_STATUS" jdbcType="CHAR" property="rejectStatus" />
+    <result column="REJECT_DATE" jdbcType="TIMESTAMP" property="rejectDate" />
+    <result column="REJECT_REASON" jdbcType="VARCHAR" property="rejectReason" />
+    <result column="BGDDH" jdbcType="VARCHAR" property="bgddh" />
     <result column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
+    <result column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
+    <result column="PATIENT_SOURCE" jdbcType="VARCHAR" property="patientSource" />
+    <result column="DATE_OF_BIRTH" jdbcType="TIMESTAMP" property="dateOfBirth" />
   </resultMap>
   <sql id="Base_Column_List">
     TEST_NO, PRIORITY_INDICATOR, PATIENT_ID, VISIT_ID, WORKING_ID, EXECUTE_DATE, NAME, 
@@ -43,14 +48,14 @@
     NOTES_FOR_SPCM, SPCM_RECEIVED_DATE_TIME, SPCM_SAMPLE_DATE_TIME, REQUESTED_DATE_TIME, 
     ORDERING_DEPT, ORDERING_PROVIDER, PERFORMED_BY, RESULT_STATUS, RESULTS_RPT_DATE_TIME, 
     TRANSCRIPTIONIST, VERIFIED_BY, COSTS, CHARGES, BILLING_INDICATOR, PRINT_INDICATOR, 
-    SUBJECT, DATE_OF_BIRTH, PATIENT_SOURCE, VISIT_DATE, VISIT_NO
+    SUBJECT, ALARMFLAG, REJECT_STATUS, REJECT_DATE, REJECT_REASON, BGDDH, VISIT_NO, VISIT_DATE, 
+    PATIENT_SOURCE, DATE_OF_BIRTH
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from LAB_TEST_MASTER
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
-    AND RESULT_STATUS ='4'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from LAB_TEST_MASTER
@@ -67,8 +72,10 @@
       PERFORMED_BY, RESULT_STATUS, RESULTS_RPT_DATE_TIME, 
       TRANSCRIPTIONIST, VERIFIED_BY, COSTS, 
       CHARGES, BILLING_INDICATOR, PRINT_INDICATOR, 
-      SUBJECT, DATE_OF_BIRTH, PATIENT_SOURCE, 
-      VISIT_DATE, VISIT_NO)
+      SUBJECT, ALARMFLAG, REJECT_STATUS, 
+      REJECT_DATE, REJECT_REASON, BGDDH, 
+      VISIT_NO, VISIT_DATE, PATIENT_SOURCE, 
+      DATE_OF_BIRTH)
     values (#{testNo,jdbcType=VARCHAR}, #{priorityIndicator,jdbcType=NUMERIC}, #{patientId,jdbcType=VARCHAR}, 
       #{visitId,jdbcType=NUMERIC}, #{workingId,jdbcType=VARCHAR}, #{executeDate,jdbcType=TIMESTAMP}, 
       #{name,jdbcType=VARCHAR}, #{namePhonetic,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, 
@@ -79,8 +86,10 @@
       #{performedBy,jdbcType=VARCHAR}, #{resultStatus,jdbcType=VARCHAR}, #{resultsRptDateTime,jdbcType=TIMESTAMP}, 
       #{transcriptionist,jdbcType=VARCHAR}, #{verifiedBy,jdbcType=VARCHAR}, #{costs,jdbcType=NUMERIC}, 
       #{charges,jdbcType=NUMERIC}, #{billingIndicator,jdbcType=NUMERIC}, #{printIndicator,jdbcType=NUMERIC}, 
-      #{subject,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=TIMESTAMP}, #{patientSource,jdbcType=CHAR}, 
-      #{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC})
+      #{subject,jdbcType=VARCHAR}, #{alarmflag,jdbcType=VARCHAR}, #{rejectStatus,jdbcType=CHAR}, 
+      #{rejectDate,jdbcType=TIMESTAMP}, #{rejectReason,jdbcType=VARCHAR}, #{bgddh,jdbcType=VARCHAR}, 
+      #{visitNo,jdbcType=NUMERIC}, #{visitDate,jdbcType=TIMESTAMP}, #{patientSource,jdbcType=VARCHAR}, 
+      #{dateOfBirth,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.lab.domain.LabTestMaster">
     insert into LAB_TEST_MASTER
@@ -175,17 +184,32 @@
       <if test="subject != null">
         SUBJECT,
       </if>
-      <if test="dateOfBirth != null">
-        DATE_OF_BIRTH,
+      <if test="alarmflag != null">
+        ALARMFLAG,
       </if>
-      <if test="patientSource != null">
-        PATIENT_SOURCE,
+      <if test="rejectStatus != null">
+        REJECT_STATUS,
+      </if>
+      <if test="rejectDate != null">
+        REJECT_DATE,
+      </if>
+      <if test="rejectReason != null">
+        REJECT_REASON,
+      </if>
+      <if test="bgddh != null">
+        BGDDH,
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO,
       </if>
       <if test="visitDate != null">
         VISIT_DATE,
       </if>
-      <if test="visitNo != null">
-        VISIT_NO,
+      <if test="patientSource != null">
+        PATIENT_SOURCE,
+      </if>
+      <if test="dateOfBirth != null">
+        DATE_OF_BIRTH,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -279,17 +303,32 @@
       <if test="subject != null">
         #{subject,jdbcType=VARCHAR},
       </if>
-      <if test="dateOfBirth != null">
-        #{dateOfBirth,jdbcType=TIMESTAMP},
+      <if test="alarmflag != null">
+        #{alarmflag,jdbcType=VARCHAR},
       </if>
-      <if test="patientSource != null">
-        #{patientSource,jdbcType=CHAR},
+      <if test="rejectStatus != null">
+        #{rejectStatus,jdbcType=CHAR},
+      </if>
+      <if test="rejectDate != null">
+        #{rejectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rejectReason != null">
+        #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="bgddh != null">
+        #{bgddh,jdbcType=VARCHAR},
+      </if>
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=NUMERIC},
       </if>
       <if test="visitDate != null">
         #{visitDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitNo != null">
-        #{visitNo,jdbcType=NUMERIC},
+      <if test="patientSource != null">
+        #{patientSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null">
+        #{dateOfBirth,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -383,17 +422,32 @@
       <if test="subject != null">
         SUBJECT = #{subject,jdbcType=VARCHAR},
       </if>
-      <if test="dateOfBirth != null">
-        DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
+      <if test="alarmflag != null">
+        ALARMFLAG = #{alarmflag,jdbcType=VARCHAR},
       </if>
-      <if test="patientSource != null">
-        PATIENT_SOURCE = #{patientSource,jdbcType=CHAR},
+      <if test="rejectStatus != null">
+        REJECT_STATUS = #{rejectStatus,jdbcType=CHAR},
+      </if>
+      <if test="rejectDate != null">
+        REJECT_DATE = #{rejectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rejectReason != null">
+        REJECT_REASON = #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="bgddh != null">
+        BGDDH = #{bgddh,jdbcType=VARCHAR},
+      </if>
+      <if test="visitNo != null">
+        VISIT_NO = #{visitNo,jdbcType=NUMERIC},
       </if>
       <if test="visitDate != null">
         VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitNo != null">
-        VISIT_NO = #{visitNo,jdbcType=NUMERIC},
+      <if test="patientSource != null">
+        PATIENT_SOURCE = #{patientSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dateOfBirth != null">
+        DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
       </if>
     </set>
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
@@ -429,10 +483,15 @@
       BILLING_INDICATOR = #{billingIndicator,jdbcType=NUMERIC},
       PRINT_INDICATOR = #{printIndicator,jdbcType=NUMERIC},
       SUBJECT = #{subject,jdbcType=VARCHAR},
-      DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
-      PATIENT_SOURCE = #{patientSource,jdbcType=CHAR},
+      ALARMFLAG = #{alarmflag,jdbcType=VARCHAR},
+      REJECT_STATUS = #{rejectStatus,jdbcType=CHAR},
+      REJECT_DATE = #{rejectDate,jdbcType=TIMESTAMP},
+      REJECT_REASON = #{rejectReason,jdbcType=VARCHAR},
+      BGDDH = #{bgddh,jdbcType=VARCHAR},
+      VISIT_NO = #{visitNo,jdbcType=NUMERIC},
       VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
-      VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+      PATIENT_SOURCE = #{patientSource,jdbcType=VARCHAR},
+      DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP}
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
   </update>
 </mapper>

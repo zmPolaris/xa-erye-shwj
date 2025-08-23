@@ -10,11 +10,10 @@
     <result column="IS_ABNORMAL" jdbcType="VARCHAR" property="isAbnormal" />
     <result column="USE_IMAGE" jdbcType="VARCHAR" property="useImage" />
     <result column="MEMO" jdbcType="VARCHAR" property="memo" />
-    <result column="REPORTNAME" jdbcType="VARCHAR" property="reportname" />
   </resultMap>
   <sql id="Base_Column_List">
     EXAM_NO, EXAM_PARA, DESCRIPTION, IMPRESSION, RECOMMENDATION, IS_ABNORMAL, USE_IMAGE, 
-    MEMO, REPORTNAME
+    MEMO
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,12 +28,10 @@
   <insert id="insert" parameterType="cn.xa.eyre.exam.domain.ExamReport">
     insert into EXAM_REPORT (EXAM_NO, EXAM_PARA, DESCRIPTION, 
       IMPRESSION, RECOMMENDATION, IS_ABNORMAL, 
-      USE_IMAGE, MEMO, REPORTNAME
-      )
+      USE_IMAGE, MEMO)
     values (#{examNo,jdbcType=VARCHAR}, #{examPara,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{impression,jdbcType=VARCHAR}, #{recommendation,jdbcType=VARCHAR}, #{isAbnormal,jdbcType=VARCHAR}, 
-      #{useImage,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{reportname,jdbcType=VARCHAR}
-      )
+      #{useImage,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.exam.domain.ExamReport">
     insert into EXAM_REPORT
@@ -63,9 +60,6 @@
       <if test="memo != null">
         MEMO,
       </if>
-      <if test="reportname != null">
-        REPORTNAME,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="examNo != null">
@@ -91,9 +85,6 @@
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="reportname != null">
-        #{reportname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -121,9 +112,6 @@
       <if test="memo != null">
         MEMO = #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="reportname != null">
-        REPORTNAME = #{reportname,jdbcType=VARCHAR},
-      </if>
     </set>
     where EXAM_NO = #{examNo,jdbcType=VARCHAR}
   </update>
@@ -135,8 +123,7 @@
       RECOMMENDATION = #{recommendation,jdbcType=VARCHAR},
       IS_ABNORMAL = #{isAbnormal,jdbcType=VARCHAR},
       USE_IMAGE = #{useImage,jdbcType=VARCHAR},
-      MEMO = #{memo,jdbcType=VARCHAR},
-      REPORTNAME = #{reportname,jdbcType=VARCHAR}
+      MEMO = #{memo,jdbcType=VARCHAR}
     where EXAM_NO = #{examNo,jdbcType=VARCHAR}
   </update>
 </mapper>

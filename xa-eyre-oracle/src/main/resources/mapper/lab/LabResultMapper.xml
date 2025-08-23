@@ -12,23 +12,13 @@
     <result column="ABNORMAL_INDICATOR" jdbcType="VARCHAR" property="abnormalIndicator" />
     <result column="INSTRUMENT_ID" jdbcType="VARCHAR" property="instrumentId" />
     <result column="RESULT_DATE_TIME" jdbcType="TIMESTAMP" property="resultDateTime" />
+    <result column="RECHECK" jdbcType="VARCHAR" property="recheck" />
+    <result column="RECHECKDATE" jdbcType="TIMESTAMP" property="recheckdate" />
     <result column="PRINT_CONTEXT" jdbcType="VARCHAR" property="printContext" />
-    <result column="RESULT_RANGE" jdbcType="VARCHAR" property="resultRange" />
-    <result column="REFER_CONTEXT" jdbcType="VARCHAR" property="referContext" />
-    <result column="SAMPLEID" jdbcType="VARCHAR" property="sampleid" />
-    <result column="REPORTID" jdbcType="VARCHAR" property="reportid" />
-    <result column="MICRO_DATA_ID2_RESULT2" jdbcType="VARCHAR" property="microDataId2Result2" />
-    <result column="MICRO_DATA_ID2_RESULT1" jdbcType="VARCHAR" property="microDataId2Result1" />
-    <result column="MICRO_DATA_ID2_NAME" jdbcType="VARCHAR" property="microDataId2Name" />
-    <result column="INFECT_HANDLE" jdbcType="VARCHAR" property="infectHandle" />
-    <result column="INFECT_HANDLE_TIME" jdbcType="VARCHAR" property="infectHandleTime" />
-    <result column="INFECT_HANDLE_DOCTOR_ID" jdbcType="VARCHAR" property="infectHandleDoctorId" />
   </resultMap>
   <sql id="Base_Column_List">
     TEST_NO, ITEM_NO, PRINT_ORDER, REPORT_ITEM_NAME, REPORT_ITEM_CODE, RESULT, UNITS, 
-    ABNORMAL_INDICATOR, INSTRUMENT_ID, RESULT_DATE_TIME, PRINT_CONTEXT, RESULT_RANGE, 
-    REFER_CONTEXT, SAMPLEID, REPORTID, MICRO_DATA_ID2_RESULT2, MICRO_DATA_ID2_RESULT1, 
-    MICRO_DATA_ID2_NAME, INFECT_HANDLE, INFECT_HANDLE_TIME, INFECT_HANDLE_DOCTOR_ID
+    ABNORMAL_INDICATOR, INSTRUMENT_ID, RESULT_DATE_TIME, RECHECK, RECHECKDATE, PRINT_CONTEXT
   </sql>
   <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabResultKey" resultMap="BaseResultMap">
     select 
@@ -48,19 +38,13 @@
     insert into LAB_RESULT (TEST_NO, ITEM_NO, PRINT_ORDER, 
       REPORT_ITEM_NAME, REPORT_ITEM_CODE, RESULT, 
       UNITS, ABNORMAL_INDICATOR, INSTRUMENT_ID, 
-      RESULT_DATE_TIME, PRINT_CONTEXT, RESULT_RANGE, 
-      REFER_CONTEXT, SAMPLEID, REPORTID, 
-      MICRO_DATA_ID2_RESULT2, MICRO_DATA_ID2_RESULT1, 
-      MICRO_DATA_ID2_NAME, INFECT_HANDLE, INFECT_HANDLE_TIME, 
-      INFECT_HANDLE_DOCTOR_ID)
+      RESULT_DATE_TIME, RECHECK, RECHECKDATE, 
+      PRINT_CONTEXT)
     values (#{testNo,jdbcType=VARCHAR}, #{itemNo,jdbcType=NUMERIC}, #{printOrder,jdbcType=NUMERIC}, 
       #{reportItemName,jdbcType=VARCHAR}, #{reportItemCode,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
       #{units,jdbcType=VARCHAR}, #{abnormalIndicator,jdbcType=VARCHAR}, #{instrumentId,jdbcType=VARCHAR}, 
-      #{resultDateTime,jdbcType=TIMESTAMP}, #{printContext,jdbcType=VARCHAR}, #{resultRange,jdbcType=VARCHAR}, 
-      #{referContext,jdbcType=VARCHAR}, #{sampleid,jdbcType=VARCHAR}, #{reportid,jdbcType=VARCHAR}, 
-      #{microDataId2Result2,jdbcType=VARCHAR}, #{microDataId2Result1,jdbcType=VARCHAR}, 
-      #{microDataId2Name,jdbcType=VARCHAR}, #{infectHandle,jdbcType=VARCHAR}, #{infectHandleTime,jdbcType=VARCHAR}, 
-      #{infectHandleDoctorId,jdbcType=VARCHAR})
+      #{resultDateTime,jdbcType=TIMESTAMP}, #{recheck,jdbcType=VARCHAR}, #{recheckdate,jdbcType=TIMESTAMP}, 
+      #{printContext,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.lab.domain.LabResult">
     insert into LAB_RESULT
@@ -95,38 +79,14 @@
       <if test="resultDateTime != null">
         RESULT_DATE_TIME,
       </if>
+      <if test="recheck != null">
+        RECHECK,
+      </if>
+      <if test="recheckdate != null">
+        RECHECKDATE,
+      </if>
       <if test="printContext != null">
         PRINT_CONTEXT,
-      </if>
-      <if test="resultRange != null">
-        RESULT_RANGE,
-      </if>
-      <if test="referContext != null">
-        REFER_CONTEXT,
-      </if>
-      <if test="sampleid != null">
-        SAMPLEID,
-      </if>
-      <if test="reportid != null">
-        REPORTID,
-      </if>
-      <if test="microDataId2Result2 != null">
-        MICRO_DATA_ID2_RESULT2,
-      </if>
-      <if test="microDataId2Result1 != null">
-        MICRO_DATA_ID2_RESULT1,
-      </if>
-      <if test="microDataId2Name != null">
-        MICRO_DATA_ID2_NAME,
-      </if>
-      <if test="infectHandle != null">
-        INFECT_HANDLE,
-      </if>
-      <if test="infectHandleTime != null">
-        INFECT_HANDLE_TIME,
-      </if>
-      <if test="infectHandleDoctorId != null">
-        INFECT_HANDLE_DOCTOR_ID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -160,38 +120,14 @@
       <if test="resultDateTime != null">
         #{resultDateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="recheck != null">
+        #{recheck,jdbcType=VARCHAR},
+      </if>
+      <if test="recheckdate != null">
+        #{recheckdate,jdbcType=TIMESTAMP},
+      </if>
       <if test="printContext != null">
         #{printContext,jdbcType=VARCHAR},
-      </if>
-      <if test="resultRange != null">
-        #{resultRange,jdbcType=VARCHAR},
-      </if>
-      <if test="referContext != null">
-        #{referContext,jdbcType=VARCHAR},
-      </if>
-      <if test="sampleid != null">
-        #{sampleid,jdbcType=VARCHAR},
-      </if>
-      <if test="reportid != null">
-        #{reportid,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Result2 != null">
-        #{microDataId2Result2,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Result1 != null">
-        #{microDataId2Result1,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Name != null">
-        #{microDataId2Name,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandle != null">
-        #{infectHandle,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandleTime != null">
-        #{infectHandleTime,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandleDoctorId != null">
-        #{infectHandleDoctorId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -219,38 +155,14 @@
       <if test="resultDateTime != null">
         RESULT_DATE_TIME = #{resultDateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="recheck != null">
+        RECHECK = #{recheck,jdbcType=VARCHAR},
+      </if>
+      <if test="recheckdate != null">
+        RECHECKDATE = #{recheckdate,jdbcType=TIMESTAMP},
+      </if>
       <if test="printContext != null">
         PRINT_CONTEXT = #{printContext,jdbcType=VARCHAR},
-      </if>
-      <if test="resultRange != null">
-        RESULT_RANGE = #{resultRange,jdbcType=VARCHAR},
-      </if>
-      <if test="referContext != null">
-        REFER_CONTEXT = #{referContext,jdbcType=VARCHAR},
-      </if>
-      <if test="sampleid != null">
-        SAMPLEID = #{sampleid,jdbcType=VARCHAR},
-      </if>
-      <if test="reportid != null">
-        REPORTID = #{reportid,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Result2 != null">
-        MICRO_DATA_ID2_RESULT2 = #{microDataId2Result2,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Result1 != null">
-        MICRO_DATA_ID2_RESULT1 = #{microDataId2Result1,jdbcType=VARCHAR},
-      </if>
-      <if test="microDataId2Name != null">
-        MICRO_DATA_ID2_NAME = #{microDataId2Name,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandle != null">
-        INFECT_HANDLE = #{infectHandle,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandleTime != null">
-        INFECT_HANDLE_TIME = #{infectHandleTime,jdbcType=VARCHAR},
-      </if>
-      <if test="infectHandleDoctorId != null">
-        INFECT_HANDLE_DOCTOR_ID = #{infectHandleDoctorId,jdbcType=VARCHAR},
       </if>
     </set>
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
@@ -266,53 +178,11 @@
       ABNORMAL_INDICATOR = #{abnormalIndicator,jdbcType=VARCHAR},
       INSTRUMENT_ID = #{instrumentId,jdbcType=VARCHAR},
       RESULT_DATE_TIME = #{resultDateTime,jdbcType=TIMESTAMP},
-      PRINT_CONTEXT = #{printContext,jdbcType=VARCHAR},
-      RESULT_RANGE = #{resultRange,jdbcType=VARCHAR},
-      REFER_CONTEXT = #{referContext,jdbcType=VARCHAR},
-      SAMPLEID = #{sampleid,jdbcType=VARCHAR},
-      REPORTID = #{reportid,jdbcType=VARCHAR},
-      MICRO_DATA_ID2_RESULT2 = #{microDataId2Result2,jdbcType=VARCHAR},
-      MICRO_DATA_ID2_RESULT1 = #{microDataId2Result1,jdbcType=VARCHAR},
-      MICRO_DATA_ID2_NAME = #{microDataId2Name,jdbcType=VARCHAR},
-      INFECT_HANDLE = #{infectHandle,jdbcType=VARCHAR},
-      INFECT_HANDLE_TIME = #{infectHandleTime,jdbcType=VARCHAR},
-      INFECT_HANDLE_DOCTOR_ID = #{infectHandleDoctorId,jdbcType=VARCHAR}
+      RECHECK = #{recheck,jdbcType=VARCHAR},
+      RECHECKDATE = #{recheckdate,jdbcType=TIMESTAMP},
+      PRINT_CONTEXT = #{printContext,jdbcType=VARCHAR}
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
       and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
       and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
   </update>
-
-  <select id="selectResultItemsByTestNo" resultType="cn.xa.eyre.lab.domain.LabResultVo">
-    SELECT
-      r.TEST_NO AS testNo,
-      r.ITEM_NO AS itemNo,
-      r.PRINT_ORDER AS printOrder,
-      r.REPORT_ITEM_NAME AS reportItemName,
-      r.REPORT_ITEM_CODE AS reportItemCode,
-      r.RESULT AS result,
-      r.UNITS AS units,
-      r.ABNORMAL_INDICATOR AS abnormalIndicator,
-      r.INSTRUMENT_ID AS instrumentId,
-      r.RESULT_DATE_TIME AS resultDateTime,
-      r.PRINT_CONTEXT AS printContext,
-      r.RESULT_RANGE AS resultRange,
-      r.REFER_CONTEXT AS referContext,
-      r.SAMPLEID AS sampleId,
-      r.REPORTID AS reportId,
-      r.MICRO_DATA_ID2_RESULT2 AS microDataId2Result2,
-      r.MICRO_DATA_ID2_RESULT1 AS microDataId2Result1,
-      r.MICRO_DATA_ID2_NAME AS microDataId2Name,
-      r.INFECT_HANDLE AS infectHandle,
-      r.INFECT_HANDLE_TIME AS infectHandleTime,
-      r.INFECT_HANDLE_DOCTOR_ID AS infectHandleDoctorId,
-      i.ITEM_NAME AS itemName,
-      i.ITEM_CODE AS itemCode,
-      i.LAB_SHEET_ID AS labSheetId,
-      i.CLASS_NAME AS className,
-      i.LAB_SUBJECT AS labSubject,
-      i.REPORT_PRINT_INDICATOR AS reportPrintIndicator
-    FROM LAB_RESULT r LEFT JOIN LAB_TEST_ITEMS i
-    ON r.TEST_NO = i.TEST_NO AND r.ITEM_NO = i.ITEM_NO
-    WHERE r.TEST_NO = #{testNo,jdbcType=VARCHAR}
-  </select>
 </mapper>

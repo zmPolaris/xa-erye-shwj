@@ -10,17 +10,11 @@
     <result column="OUTP_OR_INP" jdbcType="NUMERIC" property="outpOrInp" />
     <result column="INTERNAL_OR_SERGERY" jdbcType="NUMERIC" property="internalOrSergery" />
     <result column="INPUT_CODE" jdbcType="VARCHAR" property="inputCode" />
-    <result column="SIGN" jdbcType="VARCHAR" property="sign" />
-    <result column="POSITION" jdbcType="VARCHAR" property="position" />
-    <result column="INPUT_CODE_WB" jdbcType="VARCHAR" property="inputCodeWb" />
-    <result column="DISPENSING_CUMULATE" jdbcType="NUMERIC" property="dispensingCumulate" />
-    <result column="VIRTUAL_CABINET" jdbcType="NUMERIC" property="virtualCabinet" />
-    <result column="ORDER_CODE" jdbcType="NUMERIC" property="orderCode" />
+    <result column="SIGN" jdbcType="CHAR" property="sign" />
   </resultMap>
   <sql id="Base_Column_List">
     DEPT_CODE, SERIAL_NO, DEPT_NAME, DEPT_ALIAS, CLINIC_ATTR, OUTP_OR_INP, INTERNAL_OR_SERGERY, 
-    INPUT_CODE, SIGN, POSITION, INPUT_CODE_WB, DISPENSING_CUMULATE, VIRTUAL_CABINET, 
-    ORDER_CODE
+    INPUT_CODE, SIGN
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,30 +22,19 @@
     from DEPT_DICT
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
   </select>
-    <select id="selectDeptList" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from (select
-      <include refid="Base_Column_List" />
-      from COMM.DEPT_DICT
-      ORDER BY SERIAL_NO DESC)
-      WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from DEPT_DICT
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.comm.domain.DeptDict">
     insert into DEPT_DICT (DEPT_CODE, SERIAL_NO, DEPT_NAME, 
       DEPT_ALIAS, CLINIC_ATTR, OUTP_OR_INP, 
-      INTERNAL_OR_SERGERY, INPUT_CODE, SIGN, 
-      POSITION, INPUT_CODE_WB, DISPENSING_CUMULATE, 
-      VIRTUAL_CABINET, ORDER_CODE)
+      INTERNAL_OR_SERGERY, INPUT_CODE, SIGN
+      )
     values (#{deptCode,jdbcType=VARCHAR}, #{serialNo,jdbcType=NUMERIC}, #{deptName,jdbcType=VARCHAR}, 
       #{deptAlias,jdbcType=VARCHAR}, #{clinicAttr,jdbcType=NUMERIC}, #{outpOrInp,jdbcType=NUMERIC}, 
-      #{internalOrSergery,jdbcType=NUMERIC}, #{inputCode,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{inputCodeWb,jdbcType=VARCHAR}, #{dispensingCumulate,jdbcType=NUMERIC}, 
-      #{virtualCabinet,jdbcType=NUMERIC}, #{orderCode,jdbcType=NUMERIC})
+      #{internalOrSergery,jdbcType=NUMERIC}, #{inputCode,jdbcType=VARCHAR}, #{sign,jdbcType=CHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.comm.domain.DeptDict">
     insert into DEPT_DICT
@@ -83,21 +66,6 @@
       <if test="sign != null">
         SIGN,
       </if>
-      <if test="position != null">
-        POSITION,
-      </if>
-      <if test="inputCodeWb != null">
-        INPUT_CODE_WB,
-      </if>
-      <if test="dispensingCumulate != null">
-        DISPENSING_CUMULATE,
-      </if>
-      <if test="virtualCabinet != null">
-        VIRTUAL_CABINET,
-      </if>
-      <if test="orderCode != null">
-        ORDER_CODE,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="deptCode != null">
@@ -125,22 +93,7 @@
         #{inputCode,jdbcType=VARCHAR},
       </if>
       <if test="sign != null">
-        #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="inputCodeWb != null">
-        #{inputCodeWb,jdbcType=VARCHAR},
-      </if>
-      <if test="dispensingCumulate != null">
-        #{dispensingCumulate,jdbcType=NUMERIC},
-      </if>
-      <if test="virtualCabinet != null">
-        #{virtualCabinet,jdbcType=NUMERIC},
-      </if>
-      <if test="orderCode != null">
-        #{orderCode,jdbcType=NUMERIC},
+        #{sign,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -169,22 +122,7 @@
         INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
       </if>
       <if test="sign != null">
-        SIGN = #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="position != null">
-        POSITION = #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="inputCodeWb != null">
-        INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
-      </if>
-      <if test="dispensingCumulate != null">
-        DISPENSING_CUMULATE = #{dispensingCumulate,jdbcType=NUMERIC},
-      </if>
-      <if test="virtualCabinet != null">
-        VIRTUAL_CABINET = #{virtualCabinet,jdbcType=NUMERIC},
-      </if>
-      <if test="orderCode != null">
-        ORDER_CODE = #{orderCode,jdbcType=NUMERIC},
+        SIGN = #{sign,jdbcType=CHAR},
       </if>
     </set>
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
@@ -198,12 +136,7 @@
       OUTP_OR_INP = #{outpOrInp,jdbcType=NUMERIC},
       INTERNAL_OR_SERGERY = #{internalOrSergery,jdbcType=NUMERIC},
       INPUT_CODE = #{inputCode,jdbcType=VARCHAR},
-      SIGN = #{sign,jdbcType=VARCHAR},
-      POSITION = #{position,jdbcType=VARCHAR},
-      INPUT_CODE_WB = #{inputCodeWb,jdbcType=VARCHAR},
-      DISPENSING_CUMULATE = #{dispensingCumulate,jdbcType=NUMERIC},
-      VIRTUAL_CABINET = #{virtualCabinet,jdbcType=NUMERIC},
-      ORDER_CODE = #{orderCode,jdbcType=NUMERIC}
+      SIGN = #{sign,jdbcType=CHAR}
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
   </update>
 </mapper>

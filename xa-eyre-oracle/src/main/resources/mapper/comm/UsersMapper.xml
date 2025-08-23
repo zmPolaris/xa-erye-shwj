@@ -7,12 +7,11 @@
     <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
     <result column="USER_DEPT" jdbcType="VARCHAR" property="userDept" />
     <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="SYS_FLAG" jdbcType="NUMERIC" property="sysFlag" />
-    <result column="WORKING_STATUS" jdbcType="VARCHAR" property="workingStatus" />
-    <result column="LEAVE_DATE" jdbcType="TIMESTAMP" property="leaveDate" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="GJYSIGN" jdbcType="NUMERIC" property="gjysign" />
   </resultMap>
   <sql id="Base_Column_List">
-    DB_USER, USER_ID, USER_NAME, USER_DEPT, CREATE_DATE, SYS_FLAG, WORKING_STATUS, LEAVE_DATE
+    DB_USER, USER_ID, USER_NAME, USER_DEPT, CREATE_DATE, PASSWORD, GJYSIGN
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -20,34 +19,17 @@
     from USERS
     where DB_USER = #{dbUser,jdbcType=VARCHAR}
   </select>
-    <select id="selectUserByName" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from COMM.USERS u
-      where u.USER_NAME = #{userName,jdbcType=VARCHAR}
-      and (u.WORKING_STATUS != '离职' or u.WORKING_STATUS is null)
-      order by u.CREATE_DATE desc
-    </select>
-    <select id="selectUserList" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from (select
-      <include refid="Base_Column_List" />
-      from COMM.USERS
-      ORDER BY CREATE_DATE DESC)
-      WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from USERS
     where DB_USER = #{dbUser,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.comm.domain.Users">
     insert into USERS (DB_USER, USER_ID, USER_NAME, 
-      USER_DEPT, CREATE_DATE, SYS_FLAG, 
-      WORKING_STATUS, LEAVE_DATE)
+      USER_DEPT, CREATE_DATE, PASSWORD, 
+      GJYSIGN)
     values (#{dbUser,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{userDept,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{sysFlag,jdbcType=NUMERIC}, 
-      #{workingStatus,jdbcType=VARCHAR}, #{leaveDate,jdbcType=TIMESTAMP})
+      #{userDept,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, 
+      #{gjysign,jdbcType=NUMERIC})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.comm.domain.Users">
     insert into USERS
@@ -67,14 +49,11 @@
       <if test="createDate != null">
         CREATE_DATE,
       </if>
-      <if test="sysFlag != null">
-        SYS_FLAG,
+      <if test="password != null">
+        PASSWORD,
       </if>
-      <if test="workingStatus != null">
-        WORKING_STATUS,
-      </if>
-      <if test="leaveDate != null">
-        LEAVE_DATE,
+      <if test="gjysign != null">
+        GJYSIGN,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -93,14 +72,11 @@
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="sysFlag != null">
-        #{sysFlag,jdbcType=NUMERIC},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="workingStatus != null">
-        #{workingStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="leaveDate != null">
-        #{leaveDate,jdbcType=TIMESTAMP},
+      <if test="gjysign != null">
+        #{gjysign,jdbcType=NUMERIC},
       </if>
     </trim>
   </insert>
@@ -119,14 +95,11 @@
       <if test="createDate != null">
         CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="sysFlag != null">
-        SYS_FLAG = #{sysFlag,jdbcType=NUMERIC},
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="workingStatus != null">
-        WORKING_STATUS = #{workingStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="leaveDate != null">
-        LEAVE_DATE = #{leaveDate,jdbcType=TIMESTAMP},
+      <if test="gjysign != null">
+        GJYSIGN = #{gjysign,jdbcType=NUMERIC},
       </if>
     </set>
     where DB_USER = #{dbUser,jdbcType=VARCHAR}
@@ -137,9 +110,8 @@
       USER_NAME = #{userName,jdbcType=VARCHAR},
       USER_DEPT = #{userDept,jdbcType=VARCHAR},
       CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      SYS_FLAG = #{sysFlag,jdbcType=NUMERIC},
-      WORKING_STATUS = #{workingStatus,jdbcType=VARCHAR},
-      LEAVE_DATE = #{leaveDate,jdbcType=TIMESTAMP}
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      GJYSIGN = #{gjysign,jdbcType=NUMERIC}
     where DB_USER = #{dbUser,jdbcType=VARCHAR}
   </update>
 </mapper>

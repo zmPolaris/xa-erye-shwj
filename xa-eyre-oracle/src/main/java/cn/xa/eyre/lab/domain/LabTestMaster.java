@@ -10,7 +10,7 @@ public class LabTestMaster {
 
     private String patientId;
 
-    private Short visitId;
+    private Integer visitId;
 
     private String workingId;
 
@@ -24,7 +24,7 @@ public class LabTestMaster {
 
     private String sex;
 
-    private BigDecimal age;
+    private Short age;
 
     private String testCause;
 
@@ -64,13 +64,23 @@ public class LabTestMaster {
 
     private String subject;
 
-    private Date dateOfBirth;
+    private String alarmflag;
 
-    private String patientSource;
+    private String rejectStatus;
+
+    private Date rejectDate;
+
+    private String rejectReason;
+
+    private String bgddh;
+
+    private Integer visitNo;
 
     private Date visitDate;
 
-    private Short visitNo;
+    private String patientSource;
+
+    private Date dateOfBirth;
 
     public String getTestNo() {
         return testNo;
@@ -96,11 +106,11 @@ public class LabTestMaster {
         this.patientId = patientId == null ? null : patientId.trim();
     }
 
-    public Short getVisitId() {
+    public Integer getVisitId() {
         return visitId;
     }
 
-    public void setVisitId(Short visitId) {
+    public void setVisitId(Integer visitId) {
         this.visitId = visitId;
     }
 
@@ -152,11 +162,11 @@ public class LabTestMaster {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public BigDecimal getAge() {
+    public Short getAge() {
         return age;
     }
 
-    public void setAge(BigDecimal age) {
+    public void setAge(Short age) {
         this.age = age;
     }
 
@@ -312,20 +322,52 @@ public class LabTestMaster {
         this.subject = subject == null ? null : subject.trim();
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getAlarmflag() {
+        return alarmflag;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setAlarmflag(String alarmflag) {
+        this.alarmflag = alarmflag == null ? null : alarmflag.trim();
     }
 
-    public String getPatientSource() {
-        return patientSource;
+    public String getRejectStatus() {
+        return rejectStatus;
     }
 
-    public void setPatientSource(String patientSource) {
-        this.patientSource = patientSource == null ? null : patientSource.trim();
+    public void setRejectStatus(String rejectStatus) {
+        this.rejectStatus = rejectStatus == null ? null : rejectStatus.trim();
+    }
+
+    public Date getRejectDate() {
+        return rejectDate;
+    }
+
+    public void setRejectDate(Date rejectDate) {
+        this.rejectDate = rejectDate;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason == null ? null : rejectReason.trim();
+    }
+
+    public String getBgddh() {
+        return bgddh;
+    }
+
+    public void setBgddh(String bgddh) {
+        this.bgddh = bgddh == null ? null : bgddh.trim();
+    }
+
+    public Integer getVisitNo() {
+        return visitNo;
+    }
+
+    public void setVisitNo(Integer visitNo) {
+        this.visitNo = visitNo;
     }
 
     public Date getVisitDate() {
@@ -336,11 +378,19 @@ public class LabTestMaster {
         this.visitDate = visitDate;
     }
 
-    public Short getVisitNo() {
-        return visitNo;
+    public String getPatientSource() {
+        return patientSource;
     }
 
-    public void setVisitNo(Short visitNo) {
-        this.visitNo = visitNo;
+    public void setPatientSource(String patientSource) {
+        this.patientSource = patientSource == null ? null : patientSource.trim();
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

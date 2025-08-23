@@ -40,25 +40,12 @@
     <result column="CHARGE_INDICATOR" jdbcType="NUMERIC" property="chargeIndicator" />
     <result column="IDENTITY" jdbcType="VARCHAR" property="identity" />
     <result column="CHARGE_TYPE" jdbcType="VARCHAR" property="chargeType" />
-    <result column="RPTSTATUS" jdbcType="VARCHAR" property="rptstatus" />
-    <result column="PRINT_STATUS" jdbcType="VARCHAR" property="printStatus" />
-    <result column="EXAM_SUBDEPT" jdbcType="VARCHAR" property="examSubdept" />
-    <result column="CONFIRM_DOCT" jdbcType="VARCHAR" property="confirmDoct" />
-    <result column="STUDY_UID" jdbcType="VARCHAR" property="studyUid" />
-    <result column="VERIFIER" jdbcType="VARCHAR" property="verifier" />
-    <result column="EXAM_REASON" jdbcType="VARCHAR" property="examReason" />
-    <result column="CONFIRM_DATE_TIME" jdbcType="TIMESTAMP" property="confirmDateTime" />
-    <result column="PHOTO_STATUS" jdbcType="VARCHAR" property="photoStatus" />
-    <result column="AUDITING_DOCT" jdbcType="VARCHAR" property="auditingDoct" />
-    <result column="AUDITING_DATE_TIME" jdbcType="TIMESTAMP" property="auditingDateTime" />
-    <result column="ARTIFICER" jdbcType="VARCHAR" property="artificer" />
-    <result column="ERROR_COMMENT" jdbcType="VARCHAR" property="errorComment" />
-    <result column="PRIORITY_INDICATOR" jdbcType="NUMERIC" property="priorityIndicator" />
     <result column="TREAT_PROCESS" jdbcType="VARCHAR" property="treatProcess" />
+    <result column="ERROR_COMMENT" jdbcType="VARCHAR" property="errorComment" />
+    <result column="VISIT_NO" jdbcType="VARCHAR" property="visitNo" />
     <result column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
-    <result column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
-    <result column="BED_NO" jdbcType="NUMERIC" property="bedNo" />
-    <result column="ACCESSION_NO" jdbcType="VARCHAR" property="accessionNo" />
+    <result column="PRIORITY_INDICATOR" jdbcType="VARCHAR" property="priorityIndicator" />
+    <result column="VERIFIER" jdbcType="VARCHAR" property="verifier" />
   </resultMap>
   <sql id="Base_Column_List">
     EXAM_NO, LOCAL_ID_CLASS, PATIENT_LOCAL_ID, PATIENT_ID, VISIT_ID, NAME, SEX, DATE_OF_BIRTH, 
@@ -66,17 +53,14 @@
     RELEVANT_DIAG, CLIN_DIAG, EXAM_MODE, EXAM_GROUP, DEVICE, PERFORMED_BY, PATIENT_SOURCE, 
     FACILITY, REQ_DATE_TIME, REQ_DEPT, REQ_PHYSICIAN, REQ_MEMO, SCHEDULED_DATE_TIME, 
     NOTICE, EXAM_DATE_TIME, REPORT_DATE_TIME, TECHNICIAN, REPORTER, RESULT_STATUS, COSTS, 
-    CHARGES, CHARGE_INDICATOR, IDENTITY, CHARGE_TYPE, RPTSTATUS, PRINT_STATUS, EXAM_SUBDEPT, 
-    CONFIRM_DOCT, STUDY_UID, VERIFIER, EXAM_REASON, CONFIRM_DATE_TIME, PHOTO_STATUS, 
-    AUDITING_DOCT, AUDITING_DATE_TIME, ARTIFICER, ERROR_COMMENT, PRIORITY_INDICATOR, 
-    TREAT_PROCESS, VISIT_DATE, VISIT_NO, BED_NO, ACCESSION_NO
+    CHARGES, CHARGE_INDICATOR, IDENTITY, CHARGE_TYPE, TREAT_PROCESS, ERROR_COMMENT, VISIT_NO, 
+    VISIT_DATE, PRIORITY_INDICATOR, VERIFIER
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from EXAM_MASTER
     where EXAM_NO = #{examNo,jdbcType=VARCHAR}
-    AND RESULT_STATUS ='4'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from EXAM_MASTER
@@ -95,14 +79,9 @@
       NOTICE, EXAM_DATE_TIME, REPORT_DATE_TIME, 
       TECHNICIAN, REPORTER, RESULT_STATUS, 
       COSTS, CHARGES, CHARGE_INDICATOR, 
-      IDENTITY, CHARGE_TYPE, RPTSTATUS, 
-      PRINT_STATUS, EXAM_SUBDEPT, CONFIRM_DOCT, 
-      STUDY_UID, VERIFIER, EXAM_REASON, 
-      CONFIRM_DATE_TIME, PHOTO_STATUS, AUDITING_DOCT, 
-      AUDITING_DATE_TIME, ARTIFICER, ERROR_COMMENT, 
-      PRIORITY_INDICATOR, TREAT_PROCESS, VISIT_DATE, 
-      VISIT_NO, BED_NO, ACCESSION_NO
-      )
+      IDENTITY, CHARGE_TYPE, TREAT_PROCESS, 
+      ERROR_COMMENT, VISIT_NO, VISIT_DATE, 
+      PRIORITY_INDICATOR, VERIFIER)
     values (#{examNo,jdbcType=VARCHAR}, #{localIdClass,jdbcType=VARCHAR}, #{patientLocalId,jdbcType=VARCHAR}, 
       #{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{name,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=TIMESTAMP}, #{examClass,jdbcType=VARCHAR}, 
@@ -115,14 +94,9 @@
       #{notice,jdbcType=VARCHAR}, #{examDateTime,jdbcType=TIMESTAMP}, #{reportDateTime,jdbcType=TIMESTAMP}, 
       #{technician,jdbcType=VARCHAR}, #{reporter,jdbcType=VARCHAR}, #{resultStatus,jdbcType=VARCHAR}, 
       #{costs,jdbcType=NUMERIC}, #{charges,jdbcType=NUMERIC}, #{chargeIndicator,jdbcType=NUMERIC}, 
-      #{identity,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, #{rptstatus,jdbcType=VARCHAR}, 
-      #{printStatus,jdbcType=VARCHAR}, #{examSubdept,jdbcType=VARCHAR}, #{confirmDoct,jdbcType=VARCHAR}, 
-      #{studyUid,jdbcType=VARCHAR}, #{verifier,jdbcType=VARCHAR}, #{examReason,jdbcType=VARCHAR}, 
-      #{confirmDateTime,jdbcType=TIMESTAMP}, #{photoStatus,jdbcType=VARCHAR}, #{auditingDoct,jdbcType=VARCHAR}, 
-      #{auditingDateTime,jdbcType=TIMESTAMP}, #{artificer,jdbcType=VARCHAR}, #{errorComment,jdbcType=VARCHAR}, 
-      #{priorityIndicator,jdbcType=NUMERIC}, #{treatProcess,jdbcType=VARCHAR}, #{visitDate,jdbcType=TIMESTAMP}, 
-      #{visitNo,jdbcType=NUMERIC}, #{bedNo,jdbcType=NUMERIC}, #{accessionNo,jdbcType=VARCHAR}
-      )
+      #{identity,jdbcType=VARCHAR}, #{chargeType,jdbcType=VARCHAR}, #{treatProcess,jdbcType=VARCHAR}, 
+      #{errorComment,jdbcType=VARCHAR}, #{visitNo,jdbcType=VARCHAR}, #{visitDate,jdbcType=TIMESTAMP}, 
+      #{priorityIndicator,jdbcType=VARCHAR}, #{verifier,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.exam.domain.ExamMaster">
     insert into EXAM_MASTER
@@ -241,62 +215,23 @@
       <if test="chargeType != null">
         CHARGE_TYPE,
       </if>
-      <if test="rptstatus != null">
-        RPTSTATUS,
-      </if>
-      <if test="printStatus != null">
-        PRINT_STATUS,
-      </if>
-      <if test="examSubdept != null">
-        EXAM_SUBDEPT,
-      </if>
-      <if test="confirmDoct != null">
-        CONFIRM_DOCT,
-      </if>
-      <if test="studyUid != null">
-        STUDY_UID,
-      </if>
-      <if test="verifier != null">
-        VERIFIER,
-      </if>
-      <if test="examReason != null">
-        EXAM_REASON,
-      </if>
-      <if test="confirmDateTime != null">
-        CONFIRM_DATE_TIME,
-      </if>
-      <if test="photoStatus != null">
-        PHOTO_STATUS,
-      </if>
-      <if test="auditingDoct != null">
-        AUDITING_DOCT,
-      </if>
-      <if test="auditingDateTime != null">
-        AUDITING_DATE_TIME,
-      </if>
-      <if test="artificer != null">
-        ARTIFICER,
+      <if test="treatProcess != null">
+        TREAT_PROCESS,
       </if>
       <if test="errorComment != null">
         ERROR_COMMENT,
       </if>
-      <if test="priorityIndicator != null">
-        PRIORITY_INDICATOR,
-      </if>
-      <if test="treatProcess != null">
-        TREAT_PROCESS,
+      <if test="visitNo != null">
+        VISIT_NO,
       </if>
       <if test="visitDate != null">
         VISIT_DATE,
       </if>
-      <if test="visitNo != null">
-        VISIT_NO,
+      <if test="priorityIndicator != null">
+        PRIORITY_INDICATOR,
       </if>
-      <if test="bedNo != null">
-        BED_NO,
-      </if>
-      <if test="accessionNo != null">
-        ACCESSION_NO,
+      <if test="verifier != null">
+        VERIFIER,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -414,62 +349,23 @@
       <if test="chargeType != null">
         #{chargeType,jdbcType=VARCHAR},
       </if>
-      <if test="rptstatus != null">
-        #{rptstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="printStatus != null">
-        #{printStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="examSubdept != null">
-        #{examSubdept,jdbcType=VARCHAR},
-      </if>
-      <if test="confirmDoct != null">
-        #{confirmDoct,jdbcType=VARCHAR},
-      </if>
-      <if test="studyUid != null">
-        #{studyUid,jdbcType=VARCHAR},
-      </if>
-      <if test="verifier != null">
-        #{verifier,jdbcType=VARCHAR},
-      </if>
-      <if test="examReason != null">
-        #{examReason,jdbcType=VARCHAR},
-      </if>
-      <if test="confirmDateTime != null">
-        #{confirmDateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="photoStatus != null">
-        #{photoStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="auditingDoct != null">
-        #{auditingDoct,jdbcType=VARCHAR},
-      </if>
-      <if test="auditingDateTime != null">
-        #{auditingDateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="artificer != null">
-        #{artificer,jdbcType=VARCHAR},
+      <if test="treatProcess != null">
+        #{treatProcess,jdbcType=VARCHAR},
       </if>
       <if test="errorComment != null">
         #{errorComment,jdbcType=VARCHAR},
       </if>
-      <if test="priorityIndicator != null">
-        #{priorityIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="treatProcess != null">
-        #{treatProcess,jdbcType=VARCHAR},
+      <if test="visitNo != null">
+        #{visitNo,jdbcType=VARCHAR},
       </if>
       <if test="visitDate != null">
         #{visitDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitNo != null">
-        #{visitNo,jdbcType=NUMERIC},
+      <if test="priorityIndicator != null">
+        #{priorityIndicator,jdbcType=VARCHAR},
       </if>
-      <if test="bedNo != null">
-        #{bedNo,jdbcType=NUMERIC},
-      </if>
-      <if test="accessionNo != null">
-        #{accessionNo,jdbcType=VARCHAR},
+      <if test="verifier != null">
+        #{verifier,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -587,62 +483,23 @@
       <if test="chargeType != null">
         CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
       </if>
-      <if test="rptstatus != null">
-        RPTSTATUS = #{rptstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="printStatus != null">
-        PRINT_STATUS = #{printStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="examSubdept != null">
-        EXAM_SUBDEPT = #{examSubdept,jdbcType=VARCHAR},
-      </if>
-      <if test="confirmDoct != null">
-        CONFIRM_DOCT = #{confirmDoct,jdbcType=VARCHAR},
-      </if>
-      <if test="studyUid != null">
-        STUDY_UID = #{studyUid,jdbcType=VARCHAR},
-      </if>
-      <if test="verifier != null">
-        VERIFIER = #{verifier,jdbcType=VARCHAR},
-      </if>
-      <if test="examReason != null">
-        EXAM_REASON = #{examReason,jdbcType=VARCHAR},
-      </if>
-      <if test="confirmDateTime != null">
-        CONFIRM_DATE_TIME = #{confirmDateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="photoStatus != null">
-        PHOTO_STATUS = #{photoStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="auditingDoct != null">
-        AUDITING_DOCT = #{auditingDoct,jdbcType=VARCHAR},
-      </if>
-      <if test="auditingDateTime != null">
-        AUDITING_DATE_TIME = #{auditingDateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="artificer != null">
-        ARTIFICER = #{artificer,jdbcType=VARCHAR},
+      <if test="treatProcess != null">
+        TREAT_PROCESS = #{treatProcess,jdbcType=VARCHAR},
       </if>
       <if test="errorComment != null">
         ERROR_COMMENT = #{errorComment,jdbcType=VARCHAR},
       </if>
-      <if test="priorityIndicator != null">
-        PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=NUMERIC},
-      </if>
-      <if test="treatProcess != null">
-        TREAT_PROCESS = #{treatProcess,jdbcType=VARCHAR},
+      <if test="visitNo != null">
+        VISIT_NO = #{visitNo,jdbcType=VARCHAR},
       </if>
       <if test="visitDate != null">
         VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitNo != null">
-        VISIT_NO = #{visitNo,jdbcType=NUMERIC},
+      <if test="priorityIndicator != null">
+        PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=VARCHAR},
       </if>
-      <if test="bedNo != null">
-        BED_NO = #{bedNo,jdbcType=NUMERIC},
-      </if>
-      <if test="accessionNo != null">
-        ACCESSION_NO = #{accessionNo,jdbcType=VARCHAR},
+      <if test="verifier != null">
+        VERIFIER = #{verifier,jdbcType=VARCHAR},
       </if>
     </set>
     where EXAM_NO = #{examNo,jdbcType=VARCHAR}
@@ -686,25 +543,12 @@
       CHARGE_INDICATOR = #{chargeIndicator,jdbcType=NUMERIC},
       IDENTITY = #{identity,jdbcType=VARCHAR},
       CHARGE_TYPE = #{chargeType,jdbcType=VARCHAR},
-      RPTSTATUS = #{rptstatus,jdbcType=VARCHAR},
-      PRINT_STATUS = #{printStatus,jdbcType=VARCHAR},
-      EXAM_SUBDEPT = #{examSubdept,jdbcType=VARCHAR},
-      CONFIRM_DOCT = #{confirmDoct,jdbcType=VARCHAR},
-      STUDY_UID = #{studyUid,jdbcType=VARCHAR},
-      VERIFIER = #{verifier,jdbcType=VARCHAR},
-      EXAM_REASON = #{examReason,jdbcType=VARCHAR},
-      CONFIRM_DATE_TIME = #{confirmDateTime,jdbcType=TIMESTAMP},
-      PHOTO_STATUS = #{photoStatus,jdbcType=VARCHAR},
-      AUDITING_DOCT = #{auditingDoct,jdbcType=VARCHAR},
-      AUDITING_DATE_TIME = #{auditingDateTime,jdbcType=TIMESTAMP},
-      ARTIFICER = #{artificer,jdbcType=VARCHAR},
-      ERROR_COMMENT = #{errorComment,jdbcType=VARCHAR},
-      PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=NUMERIC},
       TREAT_PROCESS = #{treatProcess,jdbcType=VARCHAR},
+      ERROR_COMMENT = #{errorComment,jdbcType=VARCHAR},
+      VISIT_NO = #{visitNo,jdbcType=VARCHAR},
       VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP},
-      VISIT_NO = #{visitNo,jdbcType=NUMERIC},
-      BED_NO = #{bedNo,jdbcType=NUMERIC},
-      ACCESSION_NO = #{accessionNo,jdbcType=VARCHAR}
+      PRIORITY_INDICATOR = #{priorityIndicator,jdbcType=VARCHAR},
+      VERIFIER = #{verifier,jdbcType=VARCHAR}
     where EXAM_NO = #{examNo,jdbcType=VARCHAR}
   </update>
 </mapper>

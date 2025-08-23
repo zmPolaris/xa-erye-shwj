@@ -8,9 +8,19 @@
     <id column="DIAGNOSIS_NO" jdbcType="NUMERIC" property="diagnosisNo" />
     <id column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
     <result column="CODE_NO" jdbcType="NUMERIC" property="codeNo" />
+    <result column="INSURANCE_ICD10_CODE" jdbcType="VARCHAR" property="insuranceIcd10Code" />
+    <result column="INSURANCE_ICD10_CODE_PLUS" jdbcType="VARCHAR" property="insuranceIcd10CodePlus" />
+    <result column="SH_ICD10_CODE" jdbcType="VARCHAR" property="shIcd10Code" />
+    <result column="SH_ICD10_CODE_PLUS" jdbcType="VARCHAR" property="shIcd10CodePlus" />
+    <result column="CLINIC_ICD10_CODE" jdbcType="VARCHAR" property="clinicIcd10Code" />
+    <result column="CLINIC_ICD10_CODE_PLUS" jdbcType="VARCHAR" property="clinicIcd10CodePlus" />
+    <result column="ICD10_CODE" jdbcType="VARCHAR" property="icd10Code" />
+    <result column="ICD10_CODE_PLUS" jdbcType="VARCHAR" property="icd10CodePlus" />
   </resultMap>
   <sql id="Base_Column_List">
-    PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, DIAGNOSIS_NO, DIAGNOSIS_CODE, CODE_NO
+    PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, DIAGNOSIS_NO, DIAGNOSIS_CODE, CODE_NO, INSURANCE_ICD10_CODE, 
+    INSURANCE_ICD10_CODE_PLUS, SH_ICD10_CODE, SH_ICD10_CODE_PLUS, CLINIC_ICD10_CODE, 
+    CLINIC_ICD10_CODE_PLUS, ICD10_CODE, ICD10_CODE_PLUS
   </sql>
   <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategoryKey" resultMap="BaseResultMap">
     select 
@@ -20,9 +30,7 @@
       and VISIT_ID = #{visitId,jdbcType=NUMERIC}
       and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
       and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
-    <if test="diagnosisCode != null">
       and DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
-    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategoryKey">
     delete from DIAGNOSTIC_CATEGORY
@@ -34,10 +42,16 @@
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategory">
     insert into DIAGNOSTIC_CATEGORY (PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, 
-      DIAGNOSIS_NO, DIAGNOSIS_CODE, CODE_NO
+      DIAGNOSIS_NO, DIAGNOSIS_CODE, CODE_NO, 
+      INSURANCE_ICD10_CODE, INSURANCE_ICD10_CODE_PLUS, 
+      SH_ICD10_CODE, SH_ICD10_CODE_PLUS, CLINIC_ICD10_CODE, 
+      CLINIC_ICD10_CODE_PLUS, ICD10_CODE, ICD10_CODE_PLUS
       )
     values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{diagnosisType,jdbcType=VARCHAR}, 
-      #{diagnosisNo,jdbcType=NUMERIC}, #{diagnosisCode,jdbcType=VARCHAR}, #{codeNo,jdbcType=NUMERIC}
+      #{diagnosisNo,jdbcType=NUMERIC}, #{diagnosisCode,jdbcType=VARCHAR}, #{codeNo,jdbcType=NUMERIC}, 
+      #{insuranceIcd10Code,jdbcType=VARCHAR}, #{insuranceIcd10CodePlus,jdbcType=VARCHAR}, 
+      #{shIcd10Code,jdbcType=VARCHAR}, #{shIcd10CodePlus,jdbcType=VARCHAR}, #{clinicIcd10Code,jdbcType=VARCHAR}, 
+      #{clinicIcd10CodePlus,jdbcType=VARCHAR}, #{icd10Code,jdbcType=VARCHAR}, #{icd10CodePlus,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategory">
@@ -61,6 +75,30 @@
       <if test="codeNo != null">
         CODE_NO,
       </if>
+      <if test="insuranceIcd10Code != null">
+        INSURANCE_ICD10_CODE,
+      </if>
+      <if test="insuranceIcd10CodePlus != null">
+        INSURANCE_ICD10_CODE_PLUS,
+      </if>
+      <if test="shIcd10Code != null">
+        SH_ICD10_CODE,
+      </if>
+      <if test="shIcd10CodePlus != null">
+        SH_ICD10_CODE_PLUS,
+      </if>
+      <if test="clinicIcd10Code != null">
+        CLINIC_ICD10_CODE,
+      </if>
+      <if test="clinicIcd10CodePlus != null">
+        CLINIC_ICD10_CODE_PLUS,
+      </if>
+      <if test="icd10Code != null">
+        ICD10_CODE,
+      </if>
+      <if test="icd10CodePlus != null">
+        ICD10_CODE_PLUS,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="patientId != null">
@@ -81,6 +119,30 @@
       <if test="codeNo != null">
         #{codeNo,jdbcType=NUMERIC},
       </if>
+      <if test="insuranceIcd10Code != null">
+        #{insuranceIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceIcd10CodePlus != null">
+        #{insuranceIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="shIcd10Code != null">
+        #{shIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="shIcd10CodePlus != null">
+        #{shIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIcd10Code != null">
+        #{clinicIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIcd10CodePlus != null">
+        #{clinicIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10Code != null">
+        #{icd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10CodePlus != null">
+        #{icd10CodePlus,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategory">
@@ -88,6 +150,30 @@
     <set>
       <if test="codeNo != null">
         CODE_NO = #{codeNo,jdbcType=NUMERIC},
+      </if>
+      <if test="insuranceIcd10Code != null">
+        INSURANCE_ICD10_CODE = #{insuranceIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceIcd10CodePlus != null">
+        INSURANCE_ICD10_CODE_PLUS = #{insuranceIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="shIcd10Code != null">
+        SH_ICD10_CODE = #{shIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="shIcd10CodePlus != null">
+        SH_ICD10_CODE_PLUS = #{shIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIcd10Code != null">
+        CLINIC_ICD10_CODE = #{clinicIcd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIcd10CodePlus != null">
+        CLINIC_ICD10_CODE_PLUS = #{clinicIcd10CodePlus,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10Code != null">
+        ICD10_CODE = #{icd10Code,jdbcType=VARCHAR},
+      </if>
+      <if test="icd10CodePlus != null">
+        ICD10_CODE_PLUS = #{icd10CodePlus,jdbcType=VARCHAR},
       </if>
     </set>
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
@@ -98,7 +184,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategory">
     update DIAGNOSTIC_CATEGORY
-    set CODE_NO = #{codeNo,jdbcType=NUMERIC}
+    set CODE_NO = #{codeNo,jdbcType=NUMERIC},
+      INSURANCE_ICD10_CODE = #{insuranceIcd10Code,jdbcType=VARCHAR},
+      INSURANCE_ICD10_CODE_PLUS = #{insuranceIcd10CodePlus,jdbcType=VARCHAR},
+      SH_ICD10_CODE = #{shIcd10Code,jdbcType=VARCHAR},
+      SH_ICD10_CODE_PLUS = #{shIcd10CodePlus,jdbcType=VARCHAR},
+      CLINIC_ICD10_CODE = #{clinicIcd10Code,jdbcType=VARCHAR},
+      CLINIC_ICD10_CODE_PLUS = #{clinicIcd10CodePlus,jdbcType=VARCHAR},
+      ICD10_CODE = #{icd10Code,jdbcType=VARCHAR},
+      ICD10_CODE_PLUS = #{icd10CodePlus,jdbcType=VARCHAR}
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
       and VISIT_ID = #{visitId,jdbcType=NUMERIC}
       and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}

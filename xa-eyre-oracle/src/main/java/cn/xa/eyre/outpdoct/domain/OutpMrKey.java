@@ -7,8 +7,6 @@ public class OutpMrKey {
 
     private Short visitNo;
 
-    private Short ordinal;
-
     public Date getVisitDate() {
         return visitDate;
     }
@@ -23,13 +21,5 @@ public class OutpMrKey {
 
     public void setVisitNo(Short visitNo) {
         this.visitNo = visitNo;
-    }
-
-    public Short getOrdinal() {
-        return ordinal;
-    }
-
-    public void setOrdinal(Short ordinal) {
-        this.ordinal = ordinal;
     }
 }

@@ -6,13 +6,9 @@
     <id column="ITEM_NO" jdbcType="NUMERIC" property="itemNo" />
     <result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName" />
     <result column="ITEM_CODE" jdbcType="VARCHAR" property="itemCode" />
-    <result column="LAB_SHEET_ID" jdbcType="VARCHAR" property="labSheetId" />
-    <result column="CLASS_NAME" jdbcType="VARCHAR" property="className" />
-    <result column="LAB_SUBJECT" jdbcType="VARCHAR" property="labSubject" />
-    <result column="REPORT_PRINT_INDICATOR" jdbcType="NUMERIC" property="reportPrintIndicator" />
   </resultMap>
   <sql id="Base_Column_List">
-    TEST_NO, ITEM_NO, ITEM_NAME, ITEM_CODE, LAB_SHEET_ID, CLASS_NAME, LAB_SUBJECT, REPORT_PRINT_INDICATOR
+    TEST_NO, ITEM_NO, ITEM_NAME, ITEM_CODE
   </sql>
   <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabTestItemsKey" resultMap="BaseResultMap">
     select 
@@ -28,11 +24,9 @@
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.lab.domain.LabTestItems">
     insert into LAB_TEST_ITEMS (TEST_NO, ITEM_NO, ITEM_NAME, 
-      ITEM_CODE, LAB_SHEET_ID, CLASS_NAME, 
-      LAB_SUBJECT, REPORT_PRINT_INDICATOR)
+      ITEM_CODE)
     values (#{testNo,jdbcType=VARCHAR}, #{itemNo,jdbcType=NUMERIC}, #{itemName,jdbcType=VARCHAR}, 
-      #{itemCode,jdbcType=VARCHAR}, #{labSheetId,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
-      #{labSubject,jdbcType=VARCHAR}, #{reportPrintIndicator,jdbcType=NUMERIC})
+      #{itemCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.lab.domain.LabTestItems">
     insert into LAB_TEST_ITEMS
@@ -49,18 +43,6 @@
       <if test="itemCode != null">
         ITEM_CODE,
       </if>
-      <if test="labSheetId != null">
-        LAB_SHEET_ID,
-      </if>
-      <if test="className != null">
-        CLASS_NAME,
-      </if>
-      <if test="labSubject != null">
-        LAB_SUBJECT,
-      </if>
-      <if test="reportPrintIndicator != null">
-        REPORT_PRINT_INDICATOR,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="testNo != null">
@@ -75,18 +57,6 @@
       <if test="itemCode != null">
         #{itemCode,jdbcType=VARCHAR},
       </if>
-      <if test="labSheetId != null">
-        #{labSheetId,jdbcType=VARCHAR},
-      </if>
-      <if test="className != null">
-        #{className,jdbcType=VARCHAR},
-      </if>
-      <if test="labSubject != null">
-        #{labSubject,jdbcType=VARCHAR},
-      </if>
-      <if test="reportPrintIndicator != null">
-        #{reportPrintIndicator,jdbcType=NUMERIC},
-      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.lab.domain.LabTestItems">
@@ -98,18 +68,6 @@
       <if test="itemCode != null">
         ITEM_CODE = #{itemCode,jdbcType=VARCHAR},
       </if>
-      <if test="labSheetId != null">
-        LAB_SHEET_ID = #{labSheetId,jdbcType=VARCHAR},
-      </if>
-      <if test="className != null">
-        CLASS_NAME = #{className,jdbcType=VARCHAR},
-      </if>
-      <if test="labSubject != null">
-        LAB_SUBJECT = #{labSubject,jdbcType=VARCHAR},
-      </if>
-      <if test="reportPrintIndicator != null">
-        REPORT_PRINT_INDICATOR = #{reportPrintIndicator,jdbcType=NUMERIC},
-      </if>
     </set>
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
       and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
@@ -117,11 +75,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabTestItems">
     update LAB_TEST_ITEMS
     set ITEM_NAME = #{itemName,jdbcType=VARCHAR},
-      ITEM_CODE = #{itemCode,jdbcType=VARCHAR},
-      LAB_SHEET_ID = #{labSheetId,jdbcType=VARCHAR},
-      CLASS_NAME = #{className,jdbcType=VARCHAR},
-      LAB_SUBJECT = #{labSubject,jdbcType=VARCHAR},
-      REPORT_PRINT_INDICATOR = #{reportPrintIndicator,jdbcType=NUMERIC}
+      ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
     where TEST_NO = #{testNo,jdbcType=VARCHAR}
       and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
   </update>

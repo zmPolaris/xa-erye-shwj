@@ -18,7 +18,7 @@ public class ClinicMaster extends ClinicMasterKey {
 
     private String sex;
 
-    private BigDecimal age;
+    private Short age;
 
     private String identity;
 
@@ -40,13 +40,15 @@ public class ClinicMaster extends ClinicMasterKey {
 
     private String doctor;
 
-    private Short mrProvideIndicator;
+    private Short mrProvidedIndicator;
 
     private Short registrationStatus;
 
     private Date registeringDate;
 
     private String symptom;
+
+    private String clinicClass;
 
     private BigDecimal registFee;
 
@@ -60,47 +62,31 @@ public class ClinicMaster extends ClinicMasterKey {
 
     private String returnedOperator;
 
-    private BigDecimal clinicCharge;
+    private String diagnosisCode;
+
+    private Short mrProvideIndicator;
+
+    private String rcptNo;
+
+    private Short printFlag;
+
+    private Short acctFlag;
 
     private String internalNo;
 
     private String identityClass;
 
-    private String invoiceNo;
+    private BigDecimal clinicCharge;
 
-    private String modeCode;
-
-    private String cardName;
-
-    private String cardNo;
-
-    private Date acctDateTime;
+    private String returnedAcctNo;
 
     private String acctNo;
 
     private String payWay;
 
-    private Short mrProvidedIndicator;
+    private String gsid;
 
-    private Date tallyDate;
-
-    private String tallyUser;
-
-    private String clinicNo;
-
-    private String realSort;
-
-    private String idNo;
-
-    private String ghlsh;
-
-    private Short outpId;
-
-    private String diagcode;
-
-    private String rcptNo;
-
-    private String returnedAcctNo;
+    private Date visitTime;
 
     private String serviceClass;
 
@@ -108,57 +94,29 @@ public class ClinicMaster extends ClinicMasterKey {
 
     private Short serviceSystemIndicator;
 
+    private String jzdyh;
+
+    private BigDecimal ydReturnedFee;
+
     private BigDecimal ygfundPaySumamt;
 
     private String securityTypeCode;
 
-    private String calWay;
+    private String powerpaychannel;
 
-    private String postradeno;
+    private String powertranid;
 
-    private String eciRegId;
+    private String setlId;
 
-    private String diagnoseRoomId;
+    private String medType;
 
-    private String doctorId;
+    private String checkupid;
 
-    private Date visitTime;
+    private String powertranidRefund;
 
-    private String registrationTypeId;
+    private BigDecimal totalRegist;
 
-    private String regDoctorId;
-
-    private String regDeptId;
-
-    private String regClinicDeptId;
-
-    private String waitingAreaId;
-
-    private String dutySettingId;
-
-    private String dutyTimeRangeId;
-
-    private String diagnosisDesc;
-
-    private String ygfundPayWay;
-
-    private String patientLabel;
-
-    private String lastLabelStaffId;
-
-    private Date lastLabelTime;
-
-    private String arrangeDetailId;
-
-    private Short rVisitNo;
-
-    private Date rVisitDate;
-
-    private String verifyCode;
-
-    private String patientClass;
-
-    private String transferMark;
+    private BigDecimal totalClinic;
 
     public String getClinicLabel() {
         return clinicLabel;
@@ -216,11 +174,11 @@ public class ClinicMaster extends ClinicMasterKey {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public BigDecimal getAge() {
+    public Short getAge() {
         return age;
     }
 
-    public void setAge(BigDecimal age) {
+    public void setAge(Short age) {
         this.age = age;
     }
 
@@ -304,12 +262,12 @@ public class ClinicMaster extends ClinicMasterKey {
         this.doctor = doctor == null ? null : doctor.trim();
     }
 
-    public Short getMrProvideIndicator() {
-        return mrProvideIndicator;
+    public Short getMrProvidedIndicator() {
+        return mrProvidedIndicator;
     }
 
-    public void setMrProvideIndicator(Short mrProvideIndicator) {
-        this.mrProvideIndicator = mrProvideIndicator;
+    public void setMrProvidedIndicator(Short mrProvidedIndicator) {
+        this.mrProvidedIndicator = mrProvidedIndicator;
     }
 
     public Short getRegistrationStatus() {
@@ -334,6 +292,14 @@ public class ClinicMaster extends ClinicMasterKey {
 
     public void setSymptom(String symptom) {
         this.symptom = symptom == null ? null : symptom.trim();
+    }
+
+    public String getClinicClass() {
+        return clinicClass;
+    }
+
+    public void setClinicClass(String clinicClass) {
+        this.clinicClass = clinicClass == null ? null : clinicClass.trim();
     }
 
     public BigDecimal getRegistFee() {
@@ -384,12 +350,44 @@ public class ClinicMaster extends ClinicMasterKey {
         this.returnedOperator = returnedOperator == null ? null : returnedOperator.trim();
     }
 
-    public BigDecimal getClinicCharge() {
-        return clinicCharge;
+    public String getDiagnosisCode() {
+        return diagnosisCode;
     }
 
-    public void setClinicCharge(BigDecimal clinicCharge) {
-        this.clinicCharge = clinicCharge;
+    public void setDiagnosisCode(String diagnosisCode) {
+        this.diagnosisCode = diagnosisCode == null ? null : diagnosisCode.trim();
+    }
+
+    public Short getMrProvideIndicator() {
+        return mrProvideIndicator;
+    }
+
+    public void setMrProvideIndicator(Short mrProvideIndicator) {
+        this.mrProvideIndicator = mrProvideIndicator;
+    }
+
+    public String getRcptNo() {
+        return rcptNo;
+    }
+
+    public void setRcptNo(String rcptNo) {
+        this.rcptNo = rcptNo == null ? null : rcptNo.trim();
+    }
+
+    public Short getPrintFlag() {
+        return printFlag;
+    }
+
+    public void setPrintFlag(Short printFlag) {
+        this.printFlag = printFlag;
+    }
+
+    public Short getAcctFlag() {
+        return acctFlag;
+    }
+
+    public void setAcctFlag(Short acctFlag) {
+        this.acctFlag = acctFlag;
     }
 
     public String getInternalNo() {
@@ -408,44 +406,20 @@ public class ClinicMaster extends ClinicMasterKey {
         this.identityClass = identityClass == null ? null : identityClass.trim();
     }
 
-    public String getInvoiceNo() {
-        return invoiceNo;
+    public BigDecimal getClinicCharge() {
+        return clinicCharge;
     }
 
-    public void setInvoiceNo(String invoiceNo) {
-        this.invoiceNo = invoiceNo == null ? null : invoiceNo.trim();
+    public void setClinicCharge(BigDecimal clinicCharge) {
+        this.clinicCharge = clinicCharge;
     }
 
-    public String getModeCode() {
-        return modeCode;
+    public String getReturnedAcctNo() {
+        return returnedAcctNo;
     }
 
-    public void setModeCode(String modeCode) {
-        this.modeCode = modeCode == null ? null : modeCode.trim();
-    }
-
-    public String getCardName() {
-        return cardName;
-    }
-
-    public void setCardName(String cardName) {
-        this.cardName = cardName == null ? null : cardName.trim();
-    }
-
-    public String getCardNo() {
-        return cardNo;
-    }
-
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
-    }
-
-    public Date getAcctDateTime() {
-        return acctDateTime;
-    }
-
-    public void setAcctDateTime(Date acctDateTime) {
-        this.acctDateTime = acctDateTime;
+    public void setReturnedAcctNo(String returnedAcctNo) {
+        this.returnedAcctNo = returnedAcctNo == null ? null : returnedAcctNo.trim();
     }
 
     public String getAcctNo() {
@@ -464,92 +438,20 @@ public class ClinicMaster extends ClinicMasterKey {
         this.payWay = payWay == null ? null : payWay.trim();
     }
 
-    public Short getMrProvidedIndicator() {
-        return mrProvidedIndicator;
+    public String getGsid() {
+        return gsid;
     }
 
-    public void setMrProvidedIndicator(Short mrProvidedIndicator) {
-        this.mrProvidedIndicator = mrProvidedIndicator;
+    public void setGsid(String gsid) {
+        this.gsid = gsid == null ? null : gsid.trim();
     }
 
-    public Date getTallyDate() {
-        return tallyDate;
+    public Date getVisitTime() {
+        return visitTime;
     }
 
-    public void setTallyDate(Date tallyDate) {
-        this.tallyDate = tallyDate;
-    }
-
-    public String getTallyUser() {
-        return tallyUser;
-    }
-
-    public void setTallyUser(String tallyUser) {
-        this.tallyUser = tallyUser == null ? null : tallyUser.trim();
-    }
-
-    public String getClinicNo() {
-        return clinicNo;
-    }
-
-    public void setClinicNo(String clinicNo) {
-        this.clinicNo = clinicNo == null ? null : clinicNo.trim();
-    }
-
-    public String getRealSort() {
-        return realSort;
-    }
-
-    public void setRealSort(String realSort) {
-        this.realSort = realSort == null ? null : realSort.trim();
-    }
-
-    public String getIdNo() {
-        return idNo;
-    }
-
-    public void setIdNo(String idNo) {
-        this.idNo = idNo == null ? null : idNo.trim();
-    }
-
-    public String getGhlsh() {
-        return ghlsh;
-    }
-
-    public void setGhlsh(String ghlsh) {
-        this.ghlsh = ghlsh == null ? null : ghlsh.trim();
-    }
-
-    public Short getOutpId() {
-        return outpId;
-    }
-
-    public void setOutpId(Short outpId) {
-        this.outpId = outpId;
-    }
-
-    public String getDiagcode() {
-        return diagcode;
-    }
-
-    public void setDiagcode(String diagcode) {
-        this.diagcode = diagcode == null ? null : diagcode.trim();
-    }
-
-    public String getRcptNo() {
-        return rcptNo;
-    }
-
-    public void setRcptNo(String rcptNo) {
-        this.rcptNo = rcptNo == null ? null : rcptNo.trim();
-    }
-
-    public String getReturnedAcctNo() {
-        return returnedAcctNo;
-    }
-
-    public void setReturnedAcctNo(String returnedAcctNo) {
-        this.returnedAcctNo = returnedAcctNo == null ? null : returnedAcctNo.trim();
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
     }
 
     public String getServiceClass() {
@@ -576,6 +478,22 @@ public class ClinicMaster extends ClinicMasterKey {
         this.serviceSystemIndicator = serviceSystemIndicator;
     }
 
+    public String getJzdyh() {
+        return jzdyh;
+    }
+
+    public void setJzdyh(String jzdyh) {
+        this.jzdyh = jzdyh == null ? null : jzdyh.trim();
+    }
+
+    public BigDecimal getYdReturnedFee() {
+        return ydReturnedFee;
+    }
+
+    public void setYdReturnedFee(BigDecimal ydReturnedFee) {
+        this.ydReturnedFee = ydReturnedFee;
+    }
+
     public BigDecimal getYgfundPaySumamt() {
         return ygfundPaySumamt;
     }
@@ -592,195 +510,67 @@ public class ClinicMaster extends ClinicMasterKey {
         this.securityTypeCode = securityTypeCode == null ? null : securityTypeCode.trim();
     }
 
-    public String getCalWay() {
-        return calWay;
+    public String getPowerpaychannel() {
+        return powerpaychannel;
     }
 
-    public void setCalWay(String calWay) {
-        this.calWay = calWay == null ? null : calWay.trim();
+    public void setPowerpaychannel(String powerpaychannel) {
+        this.powerpaychannel = powerpaychannel == null ? null : powerpaychannel.trim();
     }
 
-    public String getPostradeno() {
-        return postradeno;
+    public String getPowertranid() {
+        return powertranid;
     }
 
-    public void setPostradeno(String postradeno) {
-        this.postradeno = postradeno == null ? null : postradeno.trim();
+    public void setPowertranid(String powertranid) {
+        this.powertranid = powertranid == null ? null : powertranid.trim();
     }
 
-    public String getEciRegId() {
-        return eciRegId;
+    public String getSetlId() {
+        return setlId;
     }
 
-    public void setEciRegId(String eciRegId) {
-        this.eciRegId = eciRegId == null ? null : eciRegId.trim();
+    public void setSetlId(String setlId) {
+        this.setlId = setlId == null ? null : setlId.trim();
     }
 
-    public String getDiagnoseRoomId() {
-        return diagnoseRoomId;
+    public String getMedType() {
+        return medType;
     }
 
-    public void setDiagnoseRoomId(String diagnoseRoomId) {
-        this.diagnoseRoomId = diagnoseRoomId == null ? null : diagnoseRoomId.trim();
+    public void setMedType(String medType) {
+        this.medType = medType == null ? null : medType.trim();
     }
 
-    public String getDoctorId() {
-        return doctorId;
+    public String getCheckupid() {
+        return checkupid;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId == null ? null : doctorId.trim();
+    public void setCheckupid(String checkupid) {
+        this.checkupid = checkupid == null ? null : checkupid.trim();
     }
 
-    public Date getVisitTime() {
-        return visitTime;
+    public String getPowertranidRefund() {
+        return powertranidRefund;
     }
 
-    public void setVisitTime(Date visitTime) {
-        this.visitTime = visitTime;
+    public void setPowertranidRefund(String powertranidRefund) {
+        this.powertranidRefund = powertranidRefund == null ? null : powertranidRefund.trim();
     }
 
-    public String getRegistrationTypeId() {
-        return registrationTypeId;
+    public BigDecimal getTotalRegist() {
+        return totalRegist;
     }
 
-    public void setRegistrationTypeId(String registrationTypeId) {
-        this.registrationTypeId = registrationTypeId == null ? null : registrationTypeId.trim();
+    public void setTotalRegist(BigDecimal totalRegist) {
+        this.totalRegist = totalRegist;
     }
 
-    public String getRegDoctorId() {
-        return regDoctorId;
+    public BigDecimal getTotalClinic() {
+        return totalClinic;
     }
 
-    public void setRegDoctorId(String regDoctorId) {
-        this.regDoctorId = regDoctorId == null ? null : regDoctorId.trim();
-    }
-
-    public String getRegDeptId() {
-        return regDeptId;
-    }
-
-    public void setRegDeptId(String regDeptId) {
-        this.regDeptId = regDeptId == null ? null : regDeptId.trim();
-    }
-
-    public String getRegClinicDeptId() {
-        return regClinicDeptId;
-    }
-
-    public void setRegClinicDeptId(String regClinicDeptId) {
-        this.regClinicDeptId = regClinicDeptId == null ? null : regClinicDeptId.trim();
-    }
-
-    public String getWaitingAreaId() {
-        return waitingAreaId;
-    }
-
-    public void setWaitingAreaId(String waitingAreaId) {
-        this.waitingAreaId = waitingAreaId == null ? null : waitingAreaId.trim();
-    }
-
-    public String getDutySettingId() {
-        return dutySettingId;
-    }
-
-    public void setDutySettingId(String dutySettingId) {
-        this.dutySettingId = dutySettingId == null ? null : dutySettingId.trim();
-    }
-
-    public String getDutyTimeRangeId() {
-        return dutyTimeRangeId;
-    }
-
-    public void setDutyTimeRangeId(String dutyTimeRangeId) {
-        this.dutyTimeRangeId = dutyTimeRangeId == null ? null : dutyTimeRangeId.trim();
-    }
-
-    public String getDiagnosisDesc() {
-        return diagnosisDesc;
-    }
-
-    public void setDiagnosisDesc(String diagnosisDesc) {
-        this.diagnosisDesc = diagnosisDesc == null ? null : diagnosisDesc.trim();
-    }
-
-    public String getYgfundPayWay() {
-        return ygfundPayWay;
-    }
-
-    public void setYgfundPayWay(String ygfundPayWay) {
-        this.ygfundPayWay = ygfundPayWay == null ? null : ygfundPayWay.trim();
-    }
-
-    public String getPatientLabel() {
-        return patientLabel;
-    }
-
-    public void setPatientLabel(String patientLabel) {
-        this.patientLabel = patientLabel == null ? null : patientLabel.trim();
-    }
-
-    public String getLastLabelStaffId() {
-        return lastLabelStaffId;
-    }
-
-    public void setLastLabelStaffId(String lastLabelStaffId) {
-        this.lastLabelStaffId = lastLabelStaffId == null ? null : lastLabelStaffId.trim();
-    }
-
-    public Date getLastLabelTime() {
-        return lastLabelTime;
-    }
-
-    public void setLastLabelTime(Date lastLabelTime) {
-        this.lastLabelTime = lastLabelTime;
-    }
-
-    public String getArrangeDetailId() {
-        return arrangeDetailId;
-    }
-
-    public void setArrangeDetailId(String arrangeDetailId) {
-        this.arrangeDetailId = arrangeDetailId == null ? null : arrangeDetailId.trim();
-    }
-
-    public Short getrVisitNo() {
-        return rVisitNo;
-    }
-
-    public void setrVisitNo(Short rVisitNo) {
-        this.rVisitNo = rVisitNo;
-    }
-
-    public Date getrVisitDate() {
-        return rVisitDate;
-    }
-
-    public void setrVisitDate(Date rVisitDate) {
-        this.rVisitDate = rVisitDate;
-    }
-
-    public String getVerifyCode() {
-        return verifyCode;
-    }
-
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode == null ? null : verifyCode.trim();
-    }
-
-    public String getPatientClass() {
-        return patientClass;
-    }
-
-    public void setPatientClass(String patientClass) {
-        this.patientClass = patientClass == null ? null : patientClass.trim();
-    }
-
-    public String getTransferMark() {
-        return transferMark;
-    }
-
-    public void setTransferMark(String transferMark) {
-        this.transferMark = transferMark == null ? null : transferMark.trim();
+    public void setTotalClinic(BigDecimal totalClinic) {
+        this.totalClinic = totalClinic;
     }
 }

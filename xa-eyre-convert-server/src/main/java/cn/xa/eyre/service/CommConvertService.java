@@ -2,7 +2,6 @@ package cn.xa.eyre.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.xa.eyre.comm.domain.DeptDict;
-import cn.xa.eyre.comm.domain.StaffDict;
 import cn.xa.eyre.comm.domain.Users;
 import cn.xa.eyre.common.constant.Constants;
 import cn.xa.eyre.common.core.kafka.DBMessage;
@@ -12,7 +11,6 @@ import cn.xa.eyre.hub.domain.base.BaseDept;
 import cn.xa.eyre.hub.domain.base.BaseUser;
 import cn.xa.eyre.hub.service.SynchroBaseService;
 import cn.xa.eyre.hub.staticvalue.HubCodeEnum;
-import cn.xa.eyre.inpadm.domain.PatsInHospital;
 import cn.xa.eyre.system.dict.domain.DictDisDept;
 import cn.xa.eyre.system.dict.mapper.DictDisDeptMapper;
 import org.slf4j.Logger;
@@ -91,11 +89,6 @@ public class CommConvertService {
                     deptParam.setEmrCode(null);
                     deptParam.setIsDefault(Constants.IS_DEFAULT);
                     dictDisDept = dictDisDeptMapper.selectByCondition(deptParam);
-//                            dictDisDept.setEmrCode(deptDict.getDeptCode());
-//                            dictDisDept.setEmrName(deptDict.getDeptName());
-//                            dictDisDept.setCreateTime(DateUtils.getNowDate());
-//                            dictDisDept.setId(null);
-//                            dictDisDeptMapper.insertSelective(dictDisDept);
                 }
             }else {
                 // 更新转码表
@@ -128,9 +121,6 @@ public class CommConvertService {
             httpMethod = Constants.HTTP_METHOD_POST;
             data = dbMessage.getAfterData();
         }
-//        users = BeanUtil.toBeanIgnoreError(data, Users.class);
-//        users.setCreateDate(DateUtils.getLongDate(data.get("createDate")));
-//        users.setLeaveDate(DateUtils.getLongDate(data.get("leaveDate")));
         try {
             users = BeanUtils.mapToObject(data, Users.class);
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {

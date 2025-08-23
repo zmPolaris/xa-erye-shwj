@@ -17,27 +17,11 @@ public class LabResult extends LabResultKey {
 
     private Date resultDateTime;
 
+    private String recheck;
+
+    private Date recheckdate;
+
     private String printContext;
-
-    private String resultRange;
-
-    private String referContext;
-
-    private String sampleid;
-
-    private String reportid;
-
-    private String microDataId2Result2;
-
-    private String microDataId2Result1;
-
-    private String microDataId2Name;
-
-    private String infectHandle;
-
-    private String infectHandleTime;
-
-    private String infectHandleDoctorId;
 
     public String getReportItemName() {
         return reportItemName;
@@ -95,91 +79,27 @@ public class LabResult extends LabResultKey {
         this.resultDateTime = resultDateTime;
     }
 
+    public String getRecheck() {
+        return recheck;
+    }
+
+    public void setRecheck(String recheck) {
+        this.recheck = recheck == null ? null : recheck.trim();
+    }
+
+    public Date getRecheckdate() {
+        return recheckdate;
+    }
+
+    public void setRecheckdate(Date recheckdate) {
+        this.recheckdate = recheckdate;
+    }
+
     public String getPrintContext() {
         return printContext;
     }
 
     public void setPrintContext(String printContext) {
         this.printContext = printContext == null ? null : printContext.trim();
-    }
-
-    public String getResultRange() {
-        return resultRange;
-    }
-
-    public void setResultRange(String resultRange) {
-        this.resultRange = resultRange == null ? null : resultRange.trim();
-    }
-
-    public String getReferContext() {
-        return referContext;
-    }
-
-    public void setReferContext(String referContext) {
-        this.referContext = referContext == null ? null : referContext.trim();
-    }
-
-    public String getSampleid() {
-        return sampleid;
-    }
-
-    public void setSampleid(String sampleid) {
-        this.sampleid = sampleid == null ? null : sampleid.trim();
-    }
-
-    public String getReportid() {
-        return reportid;
-    }
-
-    public void setReportid(String reportid) {
-        this.reportid = reportid == null ? null : reportid.trim();
-    }
-
-    public String getMicroDataId2Result2() {
-        return microDataId2Result2;
-    }
-
-    public void setMicroDataId2Result2(String microDataId2Result2) {
-        this.microDataId2Result2 = microDataId2Result2 == null ? null : microDataId2Result2.trim();
-    }
-
-    public String getMicroDataId2Result1() {
-        return microDataId2Result1;
-    }
-
-    public void setMicroDataId2Result1(String microDataId2Result1) {
-        this.microDataId2Result1 = microDataId2Result1 == null ? null : microDataId2Result1.trim();
-    }
-
-    public String getMicroDataId2Name() {
-        return microDataId2Name;
-    }
-
-    public void setMicroDataId2Name(String microDataId2Name) {
-        this.microDataId2Name = microDataId2Name == null ? null : microDataId2Name.trim();
-    }
-
-    public String getInfectHandle() {
-        return infectHandle;
-    }
-
-    public void setInfectHandle(String infectHandle) {
-        this.infectHandle = infectHandle == null ? null : infectHandle.trim();
-    }
-
-    public String getInfectHandleTime() {
-        return infectHandleTime;
-    }
-
-    public void setInfectHandleTime(String infectHandleTime) {
-        this.infectHandleTime = infectHandleTime == null ? null : infectHandleTime.trim();
-    }
-
-    public String getInfectHandleDoctorId() {
-        return infectHandleDoctorId;
-    }
-
-    public void setInfectHandleDoctorId(String infectHandleDoctorId) {
-        this.infectHandleDoctorId = infectHandleDoctorId == null ? null : infectHandleDoctorId.trim();
     }
 }

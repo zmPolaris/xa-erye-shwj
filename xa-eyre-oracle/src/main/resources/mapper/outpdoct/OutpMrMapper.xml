@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="cn.xa.eyre.outpdoct.domain.OutpMr">
     <id column="VISIT_DATE" jdbcType="TIMESTAMP" property="visitDate" />
     <id column="VISIT_NO" jdbcType="NUMERIC" property="visitNo" />
-    <id column="ORDINAL" jdbcType="NUMERIC" property="ordinal" />
     <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
     <result column="ILLNESS_DESC" jdbcType="VARCHAR" property="illnessDesc" />
     <result column="ANAMNESIS" jdbcType="VARCHAR" property="anamnesis" />
@@ -17,20 +16,25 @@
     <result column="DIAG_DESC" jdbcType="VARCHAR" property="diagDesc" />
     <result column="ADVICE" jdbcType="VARCHAR" property="advice" />
     <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
-    <result column="OPERATION_RECORD" jdbcType="VARCHAR" property="operationRecord" />
+    <result column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="MR_NO" jdbcType="NUMERIC" property="mrNo" />
+    <result column="DIAG_CODE" jdbcType="VARCHAR" property="diagCode" />
+    <result column="BLOOD_PRESSURE_MARK" jdbcType="NUMERIC" property="bloodPressureMark" />
+    <result column="BLOOD_PRESSURE_LOW" jdbcType="NUMERIC" property="bloodPressureLow" />
+    <result column="BLOOD_PRESSURE_HIGH" jdbcType="NUMERIC" property="bloodPressureHigh" />
+    <result column="SBP" jdbcType="NUMERIC" property="sbp" />
+    <result column="DBP" jdbcType="NUMERIC" property="dbp" />
     <result column="MEDICAL_RECORD" jdbcType="VARCHAR" property="medicalRecord" />
-    <result column="ASSIST_EXAM" jdbcType="VARCHAR" property="assistExam" />
-    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
-    <result column="DIAGNOSIS_MZ1" jdbcType="VARCHAR" property="diagnosisMz1" />
-    <result column="DIAGNOSIS_CODE_MZ1" jdbcType="VARCHAR" property="diagnosisCodeMz1" />
-    <result column="DIAGNOSIS_MZ2" jdbcType="VARCHAR" property="diagnosisMz2" />
-    <result column="DIAGNOSIS_CODE_MZ2" jdbcType="VARCHAR" property="diagnosisCodeMz2" />
+    <result column="OPERATION_RECORD" jdbcType="VARCHAR" property="operationRecord" />
+    <result column="ORDINAL" jdbcType="VARCHAR" property="ordinal" />
+    <result column="HEART_RATE" jdbcType="NUMERIC" property="heartRate" />
+    <result column="REDOSAGE" jdbcType="NUMERIC" property="redosage" />
   </resultMap>
   <sql id="Base_Column_List">
-    VISIT_DATE, VISIT_NO, ORDINAL, PATIENT_ID, ILLNESS_DESC, ANAMNESIS, FAMILY_ILL, MARRITAL, 
-    INDIVIDUAL, MENSES, MED_HISTORY, BODY_EXAM, DIAG_DESC, ADVICE, DOCTOR, OPERATION_RECORD, 
-    MEDICAL_RECORD, ASSIST_EXAM, SPECIALTY, DIAGNOSIS_MZ1, DIAGNOSIS_CODE_MZ1, DIAGNOSIS_MZ2, 
-    DIAGNOSIS_CODE_MZ2
+    VISIT_DATE, VISIT_NO, PATIENT_ID, ILLNESS_DESC, ANAMNESIS, FAMILY_ILL, MARRITAL, 
+    INDIVIDUAL, MENSES, MED_HISTORY, BODY_EXAM, DIAG_DESC, ADVICE, DOCTOR, VISIT_ID, 
+    MR_NO, DIAG_CODE, BLOOD_PRESSURE_MARK, BLOOD_PRESSURE_LOW, BLOOD_PRESSURE_HIGH, SBP, 
+    DBP, MEDICAL_RECORD, OPERATION_RECORD, ORDINAL, HEART_RATE, REDOSAGE
   </sql>
   <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpMrKey" resultMap="BaseResultMap">
     select 
@@ -38,68 +42,33 @@
     from OUTP_MR
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
       and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
-      and ORDINAL = #{ordinal,jdbcType=NUMERIC}
   </select>
-    <select id="selectOutpMrList" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from (select
-      <include refid="Base_Column_List" />
-      from OUTPDOCT.OUTP_MR
-      ORDER BY VISIT_DATE DESC)
-      WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
-    </select>
-    <select id="selectOutpMrByCondition" parameterType="cn.xa.eyre.outpdoct.domain.OutpMr" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from OUTPDOCT.OUTP_MR
-      <where>
-        <if test="visitDateStr != null">
-          and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'YYYY-MM-DD')
-        </if>
-        <if test="visitNo != null">
-          and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
-        </if>
-        <if test="ordinal != null">
-          and ORDINAL = #{ordinal,jdbcType=NUMERIC}
-        </if>
-        <if test="patientId != null">
-          and VISIT_DATE = #{patientId,jdbcType=VARCHAR}
-        </if>
-        <if test="doctor != null">
-          and VISIT_DATE = #{doctor,jdbcType=VARCHAR}
-        </if>
-        <if test="beginVisitDate != null and endVisitDate != null">
-          and VISIT_DATE BETWEEN TO_DATE(#{beginVisitDate,jdbcType=TIMESTAMP}, 'YYYY-MM-DD')
-          AND TO_DATE(#{endVisitDate,jdbcType=TIMESTAMP}, 'YYYY-MM-DD')
-        </if>
-        order by visit_date desc
-      </where>
-
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpMrKey">
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpMrKey">
     delete from OUTP_MR
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
       and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
-      and ORDINAL = #{ordinal,jdbcType=NUMERIC}
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.outpdoct.domain.OutpMr">
-    insert into OUTP_MR (VISIT_DATE, VISIT_NO, ORDINAL, 
-      PATIENT_ID, ILLNESS_DESC, ANAMNESIS, 
-      FAMILY_ILL, MARRITAL, INDIVIDUAL, 
-      MENSES, MED_HISTORY, BODY_EXAM, 
-      DIAG_DESC, ADVICE, DOCTOR, 
-      OPERATION_RECORD, MEDICAL_RECORD, ASSIST_EXAM, 
-      SPECIALTY, DIAGNOSIS_MZ1, DIAGNOSIS_CODE_MZ1, 
-      DIAGNOSIS_MZ2, DIAGNOSIS_CODE_MZ2)
-    values (#{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC}, #{ordinal,jdbcType=NUMERIC}, 
-      #{patientId,jdbcType=VARCHAR}, #{illnessDesc,jdbcType=VARCHAR}, #{anamnesis,jdbcType=VARCHAR}, 
-      #{familyIll,jdbcType=VARCHAR}, #{marrital,jdbcType=VARCHAR}, #{individual,jdbcType=VARCHAR}, 
-      #{menses,jdbcType=VARCHAR}, #{medHistory,jdbcType=VARCHAR}, #{bodyExam,jdbcType=VARCHAR}, 
-      #{diagDesc,jdbcType=VARCHAR}, #{advice,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, 
-      #{operationRecord,jdbcType=VARCHAR}, #{medicalRecord,jdbcType=VARCHAR}, #{assistExam,jdbcType=VARCHAR}, 
-      #{specialty,jdbcType=VARCHAR}, #{diagnosisMz1,jdbcType=VARCHAR}, #{diagnosisCodeMz1,jdbcType=VARCHAR}, 
-      #{diagnosisMz2,jdbcType=VARCHAR}, #{diagnosisCodeMz2,jdbcType=VARCHAR})
+    insert into OUTP_MR (VISIT_DATE, VISIT_NO, PATIENT_ID, 
+      ILLNESS_DESC, ANAMNESIS, FAMILY_ILL, 
+      MARRITAL, INDIVIDUAL, MENSES, 
+      MED_HISTORY, BODY_EXAM, DIAG_DESC, 
+      ADVICE, DOCTOR, VISIT_ID, 
+      MR_NO, DIAG_CODE, BLOOD_PRESSURE_MARK, 
+      BLOOD_PRESSURE_LOW, BLOOD_PRESSURE_HIGH, SBP, 
+      DBP, MEDICAL_RECORD, OPERATION_RECORD, 
+      ORDINAL, HEART_RATE, REDOSAGE
+      )
+    values (#{visitDate,jdbcType=TIMESTAMP}, #{visitNo,jdbcType=NUMERIC}, #{patientId,jdbcType=VARCHAR}, 
+      #{illnessDesc,jdbcType=VARCHAR}, #{anamnesis,jdbcType=VARCHAR}, #{familyIll,jdbcType=VARCHAR}, 
+      #{marrital,jdbcType=VARCHAR}, #{individual,jdbcType=VARCHAR}, #{menses,jdbcType=VARCHAR}, 
+      #{medHistory,jdbcType=VARCHAR}, #{bodyExam,jdbcType=VARCHAR}, #{diagDesc,jdbcType=VARCHAR}, 
+      #{advice,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, 
+      #{mrNo,jdbcType=NUMERIC}, #{diagCode,jdbcType=VARCHAR}, #{bloodPressureMark,jdbcType=NUMERIC}, 
+      #{bloodPressureLow,jdbcType=NUMERIC}, #{bloodPressureHigh,jdbcType=NUMERIC}, #{sbp,jdbcType=NUMERIC}, 
+      #{dbp,jdbcType=NUMERIC}, #{medicalRecord,jdbcType=VARCHAR}, #{operationRecord,jdbcType=VARCHAR}, 
+      #{ordinal,jdbcType=VARCHAR}, #{heartRate,jdbcType=NUMERIC}, #{redosage,jdbcType=NUMERIC}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.outpdoct.domain.OutpMr">
     insert into OUTP_MR
@@ -109,9 +78,6 @@
       </if>
       <if test="visitNo != null">
         VISIT_NO,
-      </if>
-      <if test="ordinal != null">
-        ORDINAL,
       </if>
       <if test="patientId != null">
         PATIENT_ID,
@@ -149,29 +115,44 @@
       <if test="doctor != null">
         DOCTOR,
       </if>
-      <if test="operationRecord != null">
-        OPERATION_RECORD,
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="mrNo != null">
+        MR_NO,
+      </if>
+      <if test="diagCode != null">
+        DIAG_CODE,
+      </if>
+      <if test="bloodPressureMark != null">
+        BLOOD_PRESSURE_MARK,
+      </if>
+      <if test="bloodPressureLow != null">
+        BLOOD_PRESSURE_LOW,
+      </if>
+      <if test="bloodPressureHigh != null">
+        BLOOD_PRESSURE_HIGH,
+      </if>
+      <if test="sbp != null">
+        SBP,
+      </if>
+      <if test="dbp != null">
+        DBP,
       </if>
       <if test="medicalRecord != null">
         MEDICAL_RECORD,
       </if>
-      <if test="assistExam != null">
-        ASSIST_EXAM,
+      <if test="operationRecord != null">
+        OPERATION_RECORD,
       </if>
-      <if test="specialty != null">
-        SPECIALTY,
+      <if test="ordinal != null">
+        ORDINAL,
       </if>
-      <if test="diagnosisMz1 != null">
-        DIAGNOSIS_MZ1,
+      <if test="heartRate != null">
+        HEART_RATE,
       </if>
-      <if test="diagnosisCodeMz1 != null">
-        DIAGNOSIS_CODE_MZ1,
-      </if>
-      <if test="diagnosisMz2 != null">
-        DIAGNOSIS_MZ2,
-      </if>
-      <if test="diagnosisCodeMz2 != null">
-        DIAGNOSIS_CODE_MZ2,
+      <if test="redosage != null">
+        REDOSAGE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -180,9 +161,6 @@
       </if>
       <if test="visitNo != null">
         #{visitNo,jdbcType=NUMERIC},
-      </if>
-      <if test="ordinal != null">
-        #{ordinal,jdbcType=NUMERIC},
       </if>
       <if test="patientId != null">
         #{patientId,jdbcType=VARCHAR},
@@ -220,29 +198,44 @@
       <if test="doctor != null">
         #{doctor,jdbcType=VARCHAR},
       </if>
-      <if test="operationRecord != null">
-        #{operationRecord,jdbcType=VARCHAR},
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="mrNo != null">
+        #{mrNo,jdbcType=NUMERIC},
+      </if>
+      <if test="diagCode != null">
+        #{diagCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressureMark != null">
+        #{bloodPressureMark,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodPressureLow != null">
+        #{bloodPressureLow,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodPressureHigh != null">
+        #{bloodPressureHigh,jdbcType=NUMERIC},
+      </if>
+      <if test="sbp != null">
+        #{sbp,jdbcType=NUMERIC},
+      </if>
+      <if test="dbp != null">
+        #{dbp,jdbcType=NUMERIC},
       </if>
       <if test="medicalRecord != null">
         #{medicalRecord,jdbcType=VARCHAR},
       </if>
-      <if test="assistExam != null">
-        #{assistExam,jdbcType=VARCHAR},
+      <if test="operationRecord != null">
+        #{operationRecord,jdbcType=VARCHAR},
       </if>
-      <if test="specialty != null">
-        #{specialty,jdbcType=VARCHAR},
+      <if test="ordinal != null">
+        #{ordinal,jdbcType=VARCHAR},
       </if>
-      <if test="diagnosisMz1 != null">
-        #{diagnosisMz1,jdbcType=VARCHAR},
+      <if test="heartRate != null">
+        #{heartRate,jdbcType=NUMERIC},
       </if>
-      <if test="diagnosisCodeMz1 != null">
-        #{diagnosisCodeMz1,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosisMz2 != null">
-        #{diagnosisMz2,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosisCodeMz2 != null">
-        #{diagnosisCodeMz2,jdbcType=VARCHAR},
+      <if test="redosage != null">
+        #{redosage,jdbcType=NUMERIC},
       </if>
     </trim>
   </insert>
@@ -285,34 +278,48 @@
       <if test="doctor != null">
         DOCTOR = #{doctor,jdbcType=VARCHAR},
       </if>
-      <if test="operationRecord != null">
-        OPERATION_RECORD = #{operationRecord,jdbcType=VARCHAR},
+      <if test="visitId != null">
+        VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="mrNo != null">
+        MR_NO = #{mrNo,jdbcType=NUMERIC},
+      </if>
+      <if test="diagCode != null">
+        DIAG_CODE = #{diagCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodPressureMark != null">
+        BLOOD_PRESSURE_MARK = #{bloodPressureMark,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodPressureLow != null">
+        BLOOD_PRESSURE_LOW = #{bloodPressureLow,jdbcType=NUMERIC},
+      </if>
+      <if test="bloodPressureHigh != null">
+        BLOOD_PRESSURE_HIGH = #{bloodPressureHigh,jdbcType=NUMERIC},
+      </if>
+      <if test="sbp != null">
+        SBP = #{sbp,jdbcType=NUMERIC},
+      </if>
+      <if test="dbp != null">
+        DBP = #{dbp,jdbcType=NUMERIC},
       </if>
       <if test="medicalRecord != null">
         MEDICAL_RECORD = #{medicalRecord,jdbcType=VARCHAR},
       </if>
-      <if test="assistExam != null">
-        ASSIST_EXAM = #{assistExam,jdbcType=VARCHAR},
+      <if test="operationRecord != null">
+        OPERATION_RECORD = #{operationRecord,jdbcType=VARCHAR},
       </if>
-      <if test="specialty != null">
-        SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      <if test="ordinal != null">
+        ORDINAL = #{ordinal,jdbcType=VARCHAR},
       </if>
-      <if test="diagnosisMz1 != null">
-        DIAGNOSIS_MZ1 = #{diagnosisMz1,jdbcType=VARCHAR},
+      <if test="heartRate != null">
+        HEART_RATE = #{heartRate,jdbcType=NUMERIC},
       </if>
-      <if test="diagnosisCodeMz1 != null">
-        DIAGNOSIS_CODE_MZ1 = #{diagnosisCodeMz1,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosisMz2 != null">
-        DIAGNOSIS_MZ2 = #{diagnosisMz2,jdbcType=VARCHAR},
-      </if>
-      <if test="diagnosisCodeMz2 != null">
-        DIAGNOSIS_CODE_MZ2 = #{diagnosisCodeMz2,jdbcType=VARCHAR},
+      <if test="redosage != null">
+        REDOSAGE = #{redosage,jdbcType=NUMERIC},
       </if>
     </set>
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
       and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
-      and ORDINAL = #{ordinal,jdbcType=NUMERIC}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpMr">
     update OUTP_MR
@@ -328,16 +335,20 @@
       DIAG_DESC = #{diagDesc,jdbcType=VARCHAR},
       ADVICE = #{advice,jdbcType=VARCHAR},
       DOCTOR = #{doctor,jdbcType=VARCHAR},
-      OPERATION_RECORD = #{operationRecord,jdbcType=VARCHAR},
+      VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      MR_NO = #{mrNo,jdbcType=NUMERIC},
+      DIAG_CODE = #{diagCode,jdbcType=VARCHAR},
+      BLOOD_PRESSURE_MARK = #{bloodPressureMark,jdbcType=NUMERIC},
+      BLOOD_PRESSURE_LOW = #{bloodPressureLow,jdbcType=NUMERIC},
+      BLOOD_PRESSURE_HIGH = #{bloodPressureHigh,jdbcType=NUMERIC},
+      SBP = #{sbp,jdbcType=NUMERIC},
+      DBP = #{dbp,jdbcType=NUMERIC},
       MEDICAL_RECORD = #{medicalRecord,jdbcType=VARCHAR},
-      ASSIST_EXAM = #{assistExam,jdbcType=VARCHAR},
-      SPECIALTY = #{specialty,jdbcType=VARCHAR},
-      DIAGNOSIS_MZ1 = #{diagnosisMz1,jdbcType=VARCHAR},
-      DIAGNOSIS_CODE_MZ1 = #{diagnosisCodeMz1,jdbcType=VARCHAR},
-      DIAGNOSIS_MZ2 = #{diagnosisMz2,jdbcType=VARCHAR},
-      DIAGNOSIS_CODE_MZ2 = #{diagnosisCodeMz2,jdbcType=VARCHAR}
+      OPERATION_RECORD = #{operationRecord,jdbcType=VARCHAR},
+      ORDINAL = #{ordinal,jdbcType=VARCHAR},
+      HEART_RATE = #{heartRate,jdbcType=NUMERIC},
+      REDOSAGE = #{redosage,jdbcType=NUMERIC}
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
       and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
-      and ORDINAL = #{ordinal,jdbcType=NUMERIC}
   </update>
 </mapper>

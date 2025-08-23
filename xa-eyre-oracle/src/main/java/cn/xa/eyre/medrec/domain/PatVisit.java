@@ -128,11 +128,17 @@ public class PatVisit extends PatVisitKey {
 
     private Short serviceSystemIndicator;
 
+    private String directorDbuser;
+
+    private String attendingDoctorDbuser;
+
+    private String doctorInChargeDbuser;
+
+    private String insuranceDiagnosisCode;
+
     private String internalNo;
 
     private String identityClass;
-
-    private String medicalPayWay;
 
     private Short hbsagIndicator;
 
@@ -160,51 +166,33 @@ public class PatVisit extends PatVisitKey {
 
     private String xExamNo;
 
+    private String medicalPayWay;
+
     private Short trainingInjuryIndicator;
+
+    private String insuranceDiagnosisName;
+
+    private String insuranceAdmissionType;
 
     private BigDecimal bodyWeight;
 
-    private String cardNo;
+    private BigDecimal bodyHeight;
 
-    private String zylsh;
-
-    private String healthLevel;
+    private String infectIndicator;
 
     private String mrInfectReport;
 
-    private Short infectIndicator;
+    private String healthLevel;
 
-    private Short inquiryIndicator;
-
-    private Short pigeonhole;
-
-    private BigDecimal bodyHeight;
-
-    private Short nurseMrCommit;
-
-    private Date nurseMrCommitTime;
-
-    private String abnormal;
-
-    private Short specialValueIndicator;
-
-    private String mrDesc;
-
-    private Short height;
-
-    private Short weight;
-
-    private String patientCondition;
-
-    private String hospitalCode;
-
-    private BigDecimal dischargeAge;
-
-    private Short settleStatus;
+    private String jzdyh;
 
     private String securityTypeCode;
 
-    private String calWay;
+    private String mdtrtId;
+
+    private Short childFundTrtFlag;
+
+    private Short bedNo;
 
     public String getDeptAdmissionTo() {
         return deptAdmissionTo;
@@ -702,6 +690,38 @@ public class PatVisit extends PatVisitKey {
         this.serviceSystemIndicator = serviceSystemIndicator;
     }
 
+    public String getDirectorDbuser() {
+        return directorDbuser;
+    }
+
+    public void setDirectorDbuser(String directorDbuser) {
+        this.directorDbuser = directorDbuser == null ? null : directorDbuser.trim();
+    }
+
+    public String getAttendingDoctorDbuser() {
+        return attendingDoctorDbuser;
+    }
+
+    public void setAttendingDoctorDbuser(String attendingDoctorDbuser) {
+        this.attendingDoctorDbuser = attendingDoctorDbuser == null ? null : attendingDoctorDbuser.trim();
+    }
+
+    public String getDoctorInChargeDbuser() {
+        return doctorInChargeDbuser;
+    }
+
+    public void setDoctorInChargeDbuser(String doctorInChargeDbuser) {
+        this.doctorInChargeDbuser = doctorInChargeDbuser == null ? null : doctorInChargeDbuser.trim();
+    }
+
+    public String getInsuranceDiagnosisCode() {
+        return insuranceDiagnosisCode;
+    }
+
+    public void setInsuranceDiagnosisCode(String insuranceDiagnosisCode) {
+        this.insuranceDiagnosisCode = insuranceDiagnosisCode == null ? null : insuranceDiagnosisCode.trim();
+    }
+
     public String getInternalNo() {
         return internalNo;
     }
@@ -716,14 +736,6 @@ public class PatVisit extends PatVisitKey {
 
     public void setIdentityClass(String identityClass) {
         this.identityClass = identityClass == null ? null : identityClass.trim();
-    }
-
-    public String getMedicalPayWay() {
-        return medicalPayWay;
-    }
-
-    public void setMedicalPayWay(String medicalPayWay) {
-        this.medicalPayWay = medicalPayWay == null ? null : medicalPayWay.trim();
     }
 
     public Short getHbsagIndicator() {
@@ -830,12 +842,36 @@ public class PatVisit extends PatVisitKey {
         this.xExamNo = xExamNo == null ? null : xExamNo.trim();
     }
 
+    public String getMedicalPayWay() {
+        return medicalPayWay;
+    }
+
+    public void setMedicalPayWay(String medicalPayWay) {
+        this.medicalPayWay = medicalPayWay == null ? null : medicalPayWay.trim();
+    }
+
     public Short getTrainingInjuryIndicator() {
         return trainingInjuryIndicator;
     }
 
     public void setTrainingInjuryIndicator(Short trainingInjuryIndicator) {
         this.trainingInjuryIndicator = trainingInjuryIndicator;
+    }
+
+    public String getInsuranceDiagnosisName() {
+        return insuranceDiagnosisName;
+    }
+
+    public void setInsuranceDiagnosisName(String insuranceDiagnosisName) {
+        this.insuranceDiagnosisName = insuranceDiagnosisName == null ? null : insuranceDiagnosisName.trim();
+    }
+
+    public String getInsuranceAdmissionType() {
+        return insuranceAdmissionType;
+    }
+
+    public void setInsuranceAdmissionType(String insuranceAdmissionType) {
+        this.insuranceAdmissionType = insuranceAdmissionType == null ? null : insuranceAdmissionType.trim();
     }
 
     public BigDecimal getBodyWeight() {
@@ -846,28 +882,20 @@ public class PatVisit extends PatVisitKey {
         this.bodyWeight = bodyWeight;
     }
 
-    public String getCardNo() {
-        return cardNo;
+    public BigDecimal getBodyHeight() {
+        return bodyHeight;
     }
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
+    public void setBodyHeight(BigDecimal bodyHeight) {
+        this.bodyHeight = bodyHeight;
     }
 
-    public String getZylsh() {
-        return zylsh;
+    public String getInfectIndicator() {
+        return infectIndicator;
     }
 
-    public void setZylsh(String zylsh) {
-        this.zylsh = zylsh == null ? null : zylsh.trim();
-    }
-
-    public String getHealthLevel() {
-        return healthLevel;
-    }
-
-    public void setHealthLevel(String healthLevel) {
-        this.healthLevel = healthLevel == null ? null : healthLevel.trim();
+    public void setInfectIndicator(String infectIndicator) {
+        this.infectIndicator = infectIndicator == null ? null : infectIndicator.trim();
     }
 
     public String getMrInfectReport() {
@@ -878,124 +906,20 @@ public class PatVisit extends PatVisitKey {
         this.mrInfectReport = mrInfectReport == null ? null : mrInfectReport.trim();
     }
 
-    public Short getInfectIndicator() {
-        return infectIndicator;
+    public String getHealthLevel() {
+        return healthLevel;
     }
 
-    public void setInfectIndicator(Short infectIndicator) {
-        this.infectIndicator = infectIndicator;
+    public void setHealthLevel(String healthLevel) {
+        this.healthLevel = healthLevel == null ? null : healthLevel.trim();
     }
 
-    public Short getInquiryIndicator() {
-        return inquiryIndicator;
+    public String getJzdyh() {
+        return jzdyh;
     }
 
-    public void setInquiryIndicator(Short inquiryIndicator) {
-        this.inquiryIndicator = inquiryIndicator;
-    }
-
-    public Short getPigeonhole() {
-        return pigeonhole;
-    }
-
-    public void setPigeonhole(Short pigeonhole) {
-        this.pigeonhole = pigeonhole;
-    }
-
-    public BigDecimal getBodyHeight() {
-        return bodyHeight;
-    }
-
-    public void setBodyHeight(BigDecimal bodyHeight) {
-        this.bodyHeight = bodyHeight;
-    }
-
-    public Short getNurseMrCommit() {
-        return nurseMrCommit;
-    }
-
-    public void setNurseMrCommit(Short nurseMrCommit) {
-        this.nurseMrCommit = nurseMrCommit;
-    }
-
-    public Date getNurseMrCommitTime() {
-        return nurseMrCommitTime;
-    }
-
-    public void setNurseMrCommitTime(Date nurseMrCommitTime) {
-        this.nurseMrCommitTime = nurseMrCommitTime;
-    }
-
-    public String getAbnormal() {
-        return abnormal;
-    }
-
-    public void setAbnormal(String abnormal) {
-        this.abnormal = abnormal == null ? null : abnormal.trim();
-    }
-
-    public Short getSpecialValueIndicator() {
-        return specialValueIndicator;
-    }
-
-    public void setSpecialValueIndicator(Short specialValueIndicator) {
-        this.specialValueIndicator = specialValueIndicator;
-    }
-
-    public String getMrDesc() {
-        return mrDesc;
-    }
-
-    public void setMrDesc(String mrDesc) {
-        this.mrDesc = mrDesc == null ? null : mrDesc.trim();
-    }
-
-    public Short getHeight() {
-        return height;
-    }
-
-    public void setHeight(Short height) {
-        this.height = height;
-    }
-
-    public Short getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Short weight) {
-        this.weight = weight;
-    }
-
-    public String getPatientCondition() {
-        return patientCondition;
-    }
-
-    public void setPatientCondition(String patientCondition) {
-        this.patientCondition = patientCondition == null ? null : patientCondition.trim();
-    }
-
-    public String getHospitalCode() {
-        return hospitalCode;
-    }
-
-    public void setHospitalCode(String hospitalCode) {
-        this.hospitalCode = hospitalCode == null ? null : hospitalCode.trim();
-    }
-
-    public BigDecimal getDischargeAge() {
-        return dischargeAge;
-    }
-
-    public void setDischargeAge(BigDecimal dischargeAge) {
-        this.dischargeAge = dischargeAge;
-    }
-
-    public Short getSettleStatus() {
-        return settleStatus;
-    }
-
-    public void setSettleStatus(Short settleStatus) {
-        this.settleStatus = settleStatus;
+    public void setJzdyh(String jzdyh) {
+        this.jzdyh = jzdyh == null ? null : jzdyh.trim();
     }
 
     public String getSecurityTypeCode() {
@@ -1006,11 +930,27 @@ public class PatVisit extends PatVisitKey {
         this.securityTypeCode = securityTypeCode == null ? null : securityTypeCode.trim();
     }
 
-    public String getCalWay() {
-        return calWay;
+    public String getMdtrtId() {
+        return mdtrtId;
     }
 
-    public void setCalWay(String calWay) {
-        this.calWay = calWay == null ? null : calWay.trim();
+    public void setMdtrtId(String mdtrtId) {
+        this.mdtrtId = mdtrtId == null ? null : mdtrtId.trim();
+    }
+
+    public Short getChildFundTrtFlag() {
+        return childFundTrtFlag;
+    }
+
+    public void setChildFundTrtFlag(Short childFundTrtFlag) {
+        this.childFundTrtFlag = childFundTrtFlag;
+    }
+
+    public Short getBedNo() {
+        return bedNo;
+    }
+
+    public void setBedNo(Short bedNo) {
+        this.bedNo = bedNo;
     }
 }

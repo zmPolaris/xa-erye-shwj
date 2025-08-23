@@ -29,6 +29,15 @@
       from dict_disease_icd10
       where emr_code = #{emrCode,jdbcType=VARCHAR}
     </select>
+    <select id="selectByEmrCodeList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from dict_disease_icd10
+      where emr_code in
+      <foreach collection="array" item="diagCode" open="(" separator="," close=")">
+        #{diagCode}
+      </foreach>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from dict_disease_icd10
     where id = #{id,jdbcType=INTEGER}

@@ -28,60 +28,30 @@
     <result column="VIP_INDICATOR" jdbcType="NUMERIC" property="vipIndicator" />
     <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
     <result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
-    <result column="SECRET_LEVEL" jdbcType="NUMERIC" property="secretLevel" />
-    <result column="TAG" jdbcType="VARCHAR" property="tag" />
-    <result column="CARD_NO" jdbcType="VARCHAR" property="cardNo" />
-    <result column="WORKUNIT" jdbcType="VARCHAR" property="workunit" />
-    <result column="MODIFY_STAFF_ID" jdbcType="VARCHAR" property="modifyStaffId" />
-    <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
-    <result column="OCCUPATION" jdbcType="VARCHAR" property="occupation" />
-    <result column="IDENTITY_EXPIRE_DATE" jdbcType="TIMESTAMP" property="identityExpireDate" />
-    <result column="MAILING_AREA_CODE_4" jdbcType="VARCHAR" property="mailingAreaCode4" />
-    <result column="SEX_CODE" jdbcType="VARCHAR" property="sexCode" />
-    <result column="MPI" jdbcType="VARCHAR" property="mpi" />
-    <result column="ORG_AREA_ID" jdbcType="VARCHAR" property="orgAreaId" />
-    <result column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
-    <result column="MENTAL_PRINT_FLAG" jdbcType="CHAR" property="mentalPrintFlag" />
-    <result column="STOP_FLAG" jdbcType="CHAR" property="stopFlag" />
-    <result column="ID_CARD_SHOWED" jdbcType="CHAR" property="idCardShowed" />
-    <result column="MAILING_AREA_CODE_1" jdbcType="VARCHAR" property="mailingAreaCode1" />
-    <result column="MAILING_AREA_CODE_2" jdbcType="VARCHAR" property="mailingAreaCode2" />
-    <result column="MAILING_AREA_CODE_3" jdbcType="VARCHAR" property="mailingAreaCode3" />
-    <result column="GUARDIAN_NAME" jdbcType="VARCHAR" property="guardianName" />
-    <result column="GUARDIAN_PHONE" jdbcType="VARCHAR" property="guardianPhone" />
-    <result column="GUARDIAN_OCCUPATION" jdbcType="VARCHAR" property="guardianOccupation" />
+    <result column="HOME_INDICATOR" jdbcType="NUMERIC" property="homeIndicator" />
+    <result column="DEATH_NO" jdbcType="VARCHAR" property="deathNo" />
+    <result column="DEATH_DATE" jdbcType="TIMESTAMP" property="deathDate" />
+    <result column="SECRET_LEVEL" jdbcType="VARCHAR" property="secretLevel" />
   </resultMap>
   <sql id="Base_Column_List">
     PATIENT_ID, INP_NO, NAME, NAME_PHONETIC, SEX, DATE_OF_BIRTH, BIRTH_PLACE, CITIZENSHIP, 
     NATION, ID_NO, IDENTITY, CHARGE_TYPE, UNIT_IN_CONTRACT, MAILING_ADDRESS, ZIP_CODE, 
     PHONE_NUMBER_HOME, PHONE_NUMBER_BUSINESS, NEXT_OF_KIN, RELATIONSHIP, NEXT_OF_KIN_ADDR, 
     NEXT_OF_KIN_ZIP_CODE, NEXT_OF_KIN_PHONE, LAST_VISIT_DATE, VIP_INDICATOR, CREATE_DATE, 
-    OPERATOR, SECRET_LEVEL, TAG, CARD_NO, WORKUNIT, MODIFY_STAFF_ID, MODIFY_TIME, OCCUPATION, 
-    IDENTITY_EXPIRE_DATE, MAILING_AREA_CODE_4, SEX_CODE, MPI, ORG_AREA_ID, ORG_ID, MENTAL_PRINT_FLAG, 
-    STOP_FLAG, ID_CARD_SHOWED, MAILING_AREA_CODE_1, MAILING_AREA_CODE_2, MAILING_AREA_CODE_3, 
-    GUARDIAN_NAME, GUARDIAN_PHONE, GUARDIAN_OCCUPATION
+    OPERATOR, HOME_INDICATOR, DEATH_NO, DEATH_DATE, SECRET_LEVEL
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from MEDREC.PAT_MASTER_INDEX
+    from PAT_MASTER_INDEX
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </select>
-    <select id="selectPatMasterIndexList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from (select
-          <include refid="Base_Column_List" />
-          from MEDREC.PAT_MASTER_INDEX
-          ORDER BY CREATE_DATE DESC)
-      WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from MEDREC.PAT_MASTER_INDEX
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PAT_MASTER_INDEX
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.PatMasterIndex">
-    insert into MEDREC.PAT_MASTER_INDEX (PATIENT_ID, INP_NO, NAME, 
+    insert into PAT_MASTER_INDEX (PATIENT_ID, INP_NO, NAME, 
       NAME_PHONETIC, SEX, DATE_OF_BIRTH, 
       BIRTH_PLACE, CITIZENSHIP, NATION, 
       ID_NO, IDENTITY, CHARGE_TYPE, 
@@ -89,15 +59,9 @@
       PHONE_NUMBER_HOME, PHONE_NUMBER_BUSINESS, NEXT_OF_KIN, 
       RELATIONSHIP, NEXT_OF_KIN_ADDR, NEXT_OF_KIN_ZIP_CODE, 
       NEXT_OF_KIN_PHONE, LAST_VISIT_DATE, VIP_INDICATOR, 
-      CREATE_DATE, OPERATOR, SECRET_LEVEL, 
-      TAG, CARD_NO, WORKUNIT, 
-      MODIFY_STAFF_ID, MODIFY_TIME, OCCUPATION, 
-      IDENTITY_EXPIRE_DATE, MAILING_AREA_CODE_4, 
-      SEX_CODE, MPI, ORG_AREA_ID, 
-      ORG_ID, MENTAL_PRINT_FLAG, STOP_FLAG, 
-      ID_CARD_SHOWED, MAILING_AREA_CODE_1, MAILING_AREA_CODE_2, 
-      MAILING_AREA_CODE_3, GUARDIAN_NAME, GUARDIAN_PHONE, 
-      GUARDIAN_OCCUPATION)
+      CREATE_DATE, OPERATOR, HOME_INDICATOR, 
+      DEATH_NO, DEATH_DATE, SECRET_LEVEL
+      )
     values (#{patientId,jdbcType=VARCHAR}, #{inpNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{namePhonetic,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=TIMESTAMP}, 
       #{birthPlace,jdbcType=VARCHAR}, #{citizenship,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
@@ -106,18 +70,12 @@
       #{phoneNumberHome,jdbcType=VARCHAR}, #{phoneNumberBusiness,jdbcType=VARCHAR}, #{nextOfKin,jdbcType=VARCHAR}, 
       #{relationship,jdbcType=VARCHAR}, #{nextOfKinAddr,jdbcType=VARCHAR}, #{nextOfKinZipCode,jdbcType=VARCHAR}, 
       #{nextOfKinPhone,jdbcType=VARCHAR}, #{lastVisitDate,jdbcType=TIMESTAMP}, #{vipIndicator,jdbcType=NUMERIC}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{secretLevel,jdbcType=NUMERIC}, 
-      #{tag,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, #{workunit,jdbcType=VARCHAR}, 
-      #{modifyStaffId,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, #{occupation,jdbcType=VARCHAR}, 
-      #{identityExpireDate,jdbcType=TIMESTAMP}, #{mailingAreaCode4,jdbcType=VARCHAR}, 
-      #{sexCode,jdbcType=VARCHAR}, #{mpi,jdbcType=VARCHAR}, #{orgAreaId,jdbcType=VARCHAR}, 
-      #{orgId,jdbcType=VARCHAR}, #{mentalPrintFlag,jdbcType=CHAR}, #{stopFlag,jdbcType=CHAR}, 
-      #{idCardShowed,jdbcType=CHAR}, #{mailingAreaCode1,jdbcType=VARCHAR}, #{mailingAreaCode2,jdbcType=VARCHAR}, 
-      #{mailingAreaCode3,jdbcType=VARCHAR}, #{guardianName,jdbcType=VARCHAR}, #{guardianPhone,jdbcType=VARCHAR}, 
-      #{guardianOccupation,jdbcType=VARCHAR})
+      #{createDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{homeIndicator,jdbcType=NUMERIC}, 
+      #{deathNo,jdbcType=VARCHAR}, #{deathDate,jdbcType=TIMESTAMP}, #{secretLevel,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.PatMasterIndex">
-    insert into MEDREC.PAT_MASTER_INDEX
+    insert into PAT_MASTER_INDEX
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="patientId != null">
         PATIENT_ID,
@@ -197,71 +155,17 @@
       <if test="operator != null">
         OPERATOR,
       </if>
+      <if test="homeIndicator != null">
+        HOME_INDICATOR,
+      </if>
+      <if test="deathNo != null">
+        DEATH_NO,
+      </if>
+      <if test="deathDate != null">
+        DEATH_DATE,
+      </if>
       <if test="secretLevel != null">
         SECRET_LEVEL,
-      </if>
-      <if test="tag != null">
-        TAG,
-      </if>
-      <if test="cardNo != null">
-        CARD_NO,
-      </if>
-      <if test="workunit != null">
-        WORKUNIT,
-      </if>
-      <if test="modifyStaffId != null">
-        MODIFY_STAFF_ID,
-      </if>
-      <if test="modifyTime != null">
-        MODIFY_TIME,
-      </if>
-      <if test="occupation != null">
-        OCCUPATION,
-      </if>
-      <if test="identityExpireDate != null">
-        IDENTITY_EXPIRE_DATE,
-      </if>
-      <if test="mailingAreaCode4 != null">
-        MAILING_AREA_CODE_4,
-      </if>
-      <if test="sexCode != null">
-        SEX_CODE,
-      </if>
-      <if test="mpi != null">
-        MPI,
-      </if>
-      <if test="orgAreaId != null">
-        ORG_AREA_ID,
-      </if>
-      <if test="orgId != null">
-        ORG_ID,
-      </if>
-      <if test="mentalPrintFlag != null">
-        MENTAL_PRINT_FLAG,
-      </if>
-      <if test="stopFlag != null">
-        STOP_FLAG,
-      </if>
-      <if test="idCardShowed != null">
-        ID_CARD_SHOWED,
-      </if>
-      <if test="mailingAreaCode1 != null">
-        MAILING_AREA_CODE_1,
-      </if>
-      <if test="mailingAreaCode2 != null">
-        MAILING_AREA_CODE_2,
-      </if>
-      <if test="mailingAreaCode3 != null">
-        MAILING_AREA_CODE_3,
-      </if>
-      <if test="guardianName != null">
-        GUARDIAN_NAME,
-      </if>
-      <if test="guardianPhone != null">
-        GUARDIAN_PHONE,
-      </if>
-      <if test="guardianOccupation != null">
-        GUARDIAN_OCCUPATION,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -343,76 +247,22 @@
       <if test="operator != null">
         #{operator,jdbcType=VARCHAR},
       </if>
+      <if test="homeIndicator != null">
+        #{homeIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="deathNo != null">
+        #{deathNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deathDate != null">
+        #{deathDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="secretLevel != null">
-        #{secretLevel,jdbcType=NUMERIC},
-      </if>
-      <if test="tag != null">
-        #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="cardNo != null">
-        #{cardNo,jdbcType=VARCHAR},
-      </if>
-      <if test="workunit != null">
-        #{workunit,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyStaffId != null">
-        #{modifyStaffId,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="occupation != null">
-        #{occupation,jdbcType=VARCHAR},
-      </if>
-      <if test="identityExpireDate != null">
-        #{identityExpireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="mailingAreaCode4 != null">
-        #{mailingAreaCode4,jdbcType=VARCHAR},
-      </if>
-      <if test="sexCode != null">
-        #{sexCode,jdbcType=VARCHAR},
-      </if>
-      <if test="mpi != null">
-        #{mpi,jdbcType=VARCHAR},
-      </if>
-      <if test="orgAreaId != null">
-        #{orgAreaId,jdbcType=VARCHAR},
-      </if>
-      <if test="orgId != null">
-        #{orgId,jdbcType=VARCHAR},
-      </if>
-      <if test="mentalPrintFlag != null">
-        #{mentalPrintFlag,jdbcType=CHAR},
-      </if>
-      <if test="stopFlag != null">
-        #{stopFlag,jdbcType=CHAR},
-      </if>
-      <if test="idCardShowed != null">
-        #{idCardShowed,jdbcType=CHAR},
-      </if>
-      <if test="mailingAreaCode1 != null">
-        #{mailingAreaCode1,jdbcType=VARCHAR},
-      </if>
-      <if test="mailingAreaCode2 != null">
-        #{mailingAreaCode2,jdbcType=VARCHAR},
-      </if>
-      <if test="mailingAreaCode3 != null">
-        #{mailingAreaCode3,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianName != null">
-        #{guardianName,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianPhone != null">
-        #{guardianPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianOccupation != null">
-        #{guardianOccupation,jdbcType=VARCHAR},
+        #{secretLevel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.PatMasterIndex">
-    update MEDREC.PAT_MASTER_INDEX
+    update PAT_MASTER_INDEX
     <set>
       <if test="inpNo != null">
         INP_NO = #{inpNo,jdbcType=VARCHAR},
@@ -489,77 +339,23 @@
       <if test="operator != null">
         OPERATOR = #{operator,jdbcType=VARCHAR},
       </if>
+      <if test="homeIndicator != null">
+        HOME_INDICATOR = #{homeIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="deathNo != null">
+        DEATH_NO = #{deathNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deathDate != null">
+        DEATH_DATE = #{deathDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="secretLevel != null">
-        SECRET_LEVEL = #{secretLevel,jdbcType=NUMERIC},
-      </if>
-      <if test="tag != null">
-        TAG = #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="cardNo != null">
-        CARD_NO = #{cardNo,jdbcType=VARCHAR},
-      </if>
-      <if test="workunit != null">
-        WORKUNIT = #{workunit,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyStaffId != null">
-        MODIFY_STAFF_ID = #{modifyStaffId,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyTime != null">
-        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="occupation != null">
-        OCCUPATION = #{occupation,jdbcType=VARCHAR},
-      </if>
-      <if test="identityExpireDate != null">
-        IDENTITY_EXPIRE_DATE = #{identityExpireDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="mailingAreaCode4 != null">
-        MAILING_AREA_CODE_4 = #{mailingAreaCode4,jdbcType=VARCHAR},
-      </if>
-      <if test="sexCode != null">
-        SEX_CODE = #{sexCode,jdbcType=VARCHAR},
-      </if>
-      <if test="mpi != null">
-        MPI = #{mpi,jdbcType=VARCHAR},
-      </if>
-      <if test="orgAreaId != null">
-        ORG_AREA_ID = #{orgAreaId,jdbcType=VARCHAR},
-      </if>
-      <if test="orgId != null">
-        ORG_ID = #{orgId,jdbcType=VARCHAR},
-      </if>
-      <if test="mentalPrintFlag != null">
-        MENTAL_PRINT_FLAG = #{mentalPrintFlag,jdbcType=CHAR},
-      </if>
-      <if test="stopFlag != null">
-        STOP_FLAG = #{stopFlag,jdbcType=CHAR},
-      </if>
-      <if test="idCardShowed != null">
-        ID_CARD_SHOWED = #{idCardShowed,jdbcType=CHAR},
-      </if>
-      <if test="mailingAreaCode1 != null">
-        MAILING_AREA_CODE_1 = #{mailingAreaCode1,jdbcType=VARCHAR},
-      </if>
-      <if test="mailingAreaCode2 != null">
-        MAILING_AREA_CODE_2 = #{mailingAreaCode2,jdbcType=VARCHAR},
-      </if>
-      <if test="mailingAreaCode3 != null">
-        MAILING_AREA_CODE_3 = #{mailingAreaCode3,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianName != null">
-        GUARDIAN_NAME = #{guardianName,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianPhone != null">
-        GUARDIAN_PHONE = #{guardianPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="guardianOccupation != null">
-        GUARDIAN_OCCUPATION = #{guardianOccupation,jdbcType=VARCHAR},
+        SECRET_LEVEL = #{secretLevel,jdbcType=VARCHAR},
       </if>
     </set>
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatMasterIndex">
-    update MEDREC.PAT_MASTER_INDEX
+    update PAT_MASTER_INDEX
     set INP_NO = #{inpNo,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
       NAME_PHONETIC = #{namePhonetic,jdbcType=VARCHAR},
@@ -585,28 +381,10 @@
       VIP_INDICATOR = #{vipIndicator,jdbcType=NUMERIC},
       CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
       OPERATOR = #{operator,jdbcType=VARCHAR},
-      SECRET_LEVEL = #{secretLevel,jdbcType=NUMERIC},
-      TAG = #{tag,jdbcType=VARCHAR},
-      CARD_NO = #{cardNo,jdbcType=VARCHAR},
-      WORKUNIT = #{workunit,jdbcType=VARCHAR},
-      MODIFY_STAFF_ID = #{modifyStaffId,jdbcType=VARCHAR},
-      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
-      OCCUPATION = #{occupation,jdbcType=VARCHAR},
-      IDENTITY_EXPIRE_DATE = #{identityExpireDate,jdbcType=TIMESTAMP},
-      MAILING_AREA_CODE_4 = #{mailingAreaCode4,jdbcType=VARCHAR},
-      SEX_CODE = #{sexCode,jdbcType=VARCHAR},
-      MPI = #{mpi,jdbcType=VARCHAR},
-      ORG_AREA_ID = #{orgAreaId,jdbcType=VARCHAR},
-      ORG_ID = #{orgId,jdbcType=VARCHAR},
-      MENTAL_PRINT_FLAG = #{mentalPrintFlag,jdbcType=CHAR},
-      STOP_FLAG = #{stopFlag,jdbcType=CHAR},
-      ID_CARD_SHOWED = #{idCardShowed,jdbcType=CHAR},
-      MAILING_AREA_CODE_1 = #{mailingAreaCode1,jdbcType=VARCHAR},
-      MAILING_AREA_CODE_2 = #{mailingAreaCode2,jdbcType=VARCHAR},
-      MAILING_AREA_CODE_3 = #{mailingAreaCode3,jdbcType=VARCHAR},
-      GUARDIAN_NAME = #{guardianName,jdbcType=VARCHAR},
-      GUARDIAN_PHONE = #{guardianPhone,jdbcType=VARCHAR},
-      GUARDIAN_OCCUPATION = #{guardianOccupation,jdbcType=VARCHAR}
+      HOME_INDICATOR = #{homeIndicator,jdbcType=NUMERIC},
+      DEATH_NO = #{deathNo,jdbcType=VARCHAR},
+      DEATH_DATE = #{deathDate,jdbcType=TIMESTAMP},
+      SECRET_LEVEL = #{secretLevel,jdbcType=VARCHAR}
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </update>
 </mapper>

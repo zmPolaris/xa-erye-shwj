@@ -41,11 +41,6 @@ public class MedrecController {
         return AjaxResult.success("接口调用成功", medrecService.selectDiagnosis(diagnosisKey));
     }
 
-    @PostMapping("/getOutpMrYb")
-    public AjaxResult getOutpMrYb(@RequestBody OutpMrYb outpMrYb){
-        return AjaxResult.success("接口调用成功", medrecService.selectOutpMrYb(outpMrYb));
-    }
-
     @PostMapping("/getPatVisit")
     public AjaxResult getPatVisit(@RequestBody PatVisitKey patVisitKey){
         return AjaxResult.success("接口调用成功", medrecService.selectPatVisit(patVisitKey));

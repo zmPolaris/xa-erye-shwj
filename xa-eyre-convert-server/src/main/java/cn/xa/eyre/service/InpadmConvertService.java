@@ -75,13 +75,6 @@ public class InpadmConvertService {
             httpMethod = Constants.HTTP_METHOD_POST;
             data = dbMessage.getAfterData();
         }
-//        patsInHospital = BeanUtil.toBeanIgnoreError(data, PatsInHospital.class);
-//        patsInHospital.setAdmissionDateTime(DateUtils.getLongDate(data.get("admissionDateTime")));
-//        patsInHospital.setAdmWardDateTime(DateUtils.getLongDate(data.get("admWardDateTime")));
-//        patsInHospital.setOperatingDate(DateUtils.getLongDate(data.get("operatingDate")));
-//        patsInHospital.setBillingDateTime(DateUtils.getLongDate(data.get("billingDateTime")));
-//        patsInHospital.setBillCheckedDateTime(DateUtils.getLongDate(data.get("billCheckedDateTime")));
-//        patsInHospital.setStartDateTime(DateUtils.getLongDate(data.get("startDateTime")));
         try {
             patsInHospital = BeanUtils.mapToObject(data, PatsInHospital.class);
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
@@ -140,65 +133,9 @@ public class InpadmConvertService {
             emrAdmissionInfo.setDeptCode(dictDisDept.getHubCode());
             emrAdmissionInfo.setDeptName(dictDisDept.getHubName());
 
-            /*// 查询7天内门诊信息补充病情
-            OutpMr outpMr = new OutpMr();
-            outpMr.setPatientId(patsInHospital.getPatientId());
-            outpMr.setBeginVisitDate(DateUtils.addDays(patsInHospital.getAdmissionDateTime(), -7));
-            outpMr.setEndVisitDate(patsInHospital.getAdmissionDateTime());
-            R<List<OutpMr>> mrResult = outpdoctFeignClient.getOutpMrByCondition(outpMr);
-            if (R.SUCCESS == mrResult.getCode() &&mrResult.getData() != null){
-                outpMr = mrResult.getData().get(0);
-                emrAdmissionInfo.setChiefComplaint(outpMr.getIllnessDesc());
-                emrAdmissionInfo.setPresentIllnessHis(outpMr.getMedHistory());
-                emrAdmissionInfo.setPastIllnessHis(outpMr.getAnamnesis());
-                emrAdmissionInfo.setOperationHis(outpMr.getMedicalRecord());
-                emrAdmissionInfo.setMaritalHis(outpMr.getMarrital());
-                if(StringUtils.isNotBlank(outpMr.getIndividual())){
-                    emrAdmissionInfo.setAllergyHis(outpMr.getIndividual());
-                }
-                emrAdmissionInfo.setMenstrualHis(outpMr.getMenses());
-                emrAdmissionInfo.setFamilyHis(outpMr.getFamilyIll());
-                emrAdmissionInfo.setPhysicalExamination(outpMr.getBodyExam());
-                emrAdmissionInfo.setStudiesSummaryResult(outpMr.getAssistExam());
-                // 诊断代码
-                List<String> diseases = new ArrayList<>();
-                if (StringUtils.isNotBlank(outpMr.getDiagnosisCodeMz1())){
-                    DictDiseaseIcd10 dictDiseaseIcd10 = dictDiseaseIcd10Mapper.selectByEmrCode(outpMr.getDiagnosisCodeMz1());
-                    if(dictDiseaseIcd10 == null || dictDiseaseIcd10.getHubCode().equals(HubCodeEnum.DISEASE_ICD10_CODE.getCode())){
-                        emrAdmissionInfo.setWmInitalDiagnosisCode(outpMr.getDiagnosisCodeMz1());
-                        emrAdmissionInfo.setWmInitalDiagnosisName(outpMr.getDiagnosisMz1());
-                    }else {
-                        diseases.add(dictDiseaseIcd10.getHubCode());
-                        emrAdmissionInfo.setWmInitalDiagnosisCode(dictDiseaseIcd10.getHubCode());
-                        emrAdmissionInfo.setWmInitalDiagnosisName(dictDiseaseIcd10.getHubName());
-                    }
-                }
-                emrAdmissionInfo.setTreatment(outpMr.getAdvice());
-                emrAdmissionInfo.setInitalDiagnosisDate(outpMr.getVisitDate());
-                if (StringUtils.isNotBlank(outpMr.getDoctor())){
-                    R<Users> user = commFeignClient.getUserByName(patsInHospital.getDoctorInCharge());
-                    if (R.SUCCESS == user.getCode() && user.getData() != null){
-                        emrAdmissionInfo.setVisitingPhysicianId(user.getData().getUserId());
-                    }
-                }
-                // 查询是否传染病
-                if (!diseases.isEmpty()){
-                    List<DatasetDiseaseData> datasetDiseaseDatas = datasetDiseaseDataMapper.selectByCodes(diseases.toArray(new String[diseases.size()]));
-                    if (!datasetDiseaseDatas.isEmpty()){
-                        emrAdmissionInfo.setInfectionCode("1");
-                    }
-                }
-            }*/
-
-            DictDiseaseIcd10 dictDiseaseIcd10 = dictDiseaseIcd10Mapper.selectByEmrCode(diagnosticCatResult.getData().getDiagnosisCode());
-            if(dictDiseaseIcd10 == null || dictDiseaseIcd10.getHubCode().equals(HubCodeEnum.DISEASE_ICD10_CODE.getCode())){
-                emrAdmissionInfo.setWmConfirmedDiagnosisCode(diagnosticCatResult.getData().getDiagnosisCode());
-                emrAdmissionInfo.setWmConfirmedDiagnosisName(diagnosisResult.getData().getDiagnosisDesc());
-            }else {
-                emrAdmissionInfo.setInfectionCode("1");
-                emrAdmissionInfo.setWmConfirmedDiagnosisCode(dictDiseaseIcd10.getHubCode());
-                emrAdmissionInfo.setWmConfirmedDiagnosisName(dictDiseaseIcd10.getHubName());
-            }
+            DictDiseaseIcd10 dictDiseaseIcd10 = hubToolService.getDiseaseIcd10(diagnosticCatResult.getData().getDiagnosisCode(), diagnosisResult.getData().getDiagnosisDesc());
+            emrAdmissionInfo.setWmConfirmedDiagnosisCode(dictDiseaseIcd10.getHubCode());
+            emrAdmissionInfo.setWmConfirmedDiagnosisName(dictDiseaseIcd10.getHubName());
 
             emrAdmissionInfo.setConfirmedDiagnosisDate(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, diagnosisResult.getData().getDiagnosisDate()));
 

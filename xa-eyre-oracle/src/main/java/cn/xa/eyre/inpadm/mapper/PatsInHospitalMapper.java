@@ -2,8 +2,6 @@ package cn.xa.eyre.inpadm.mapper;
 
 import cn.xa.eyre.inpadm.domain.PatsInHospital;
 
-import java.util.Map;
-
 public interface PatsInHospitalMapper {
     int deleteByPrimaryKey(String patientId);
 
@@ -16,8 +14,4 @@ public interface PatsInHospitalMapper {
     int updateByPrimaryKeySelective(PatsInHospital record);
 
     int updateByPrimaryKey(PatsInHospital record);
-
-    PatsInHospital selectPatsInHospital(Map<String, Object> params);
-
-    PatsInHospital selectPatsInHospitalByPatientId(String patientId);
 }

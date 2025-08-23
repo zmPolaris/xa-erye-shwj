@@ -36,8 +36,6 @@ public class DataConvertCoiontroller {
     private PharmacyConvertService pharmacyConvertService;
     @Autowired
     private LabConvertService labConvertService;
-    @Autowired
-    private Lqt2024ConvertService lqt2024ConvertService;
 
     /**
      * 部门信息转码
@@ -100,20 +98,11 @@ public class DataConvertCoiontroller {
             case "exam.exam_master":
                 examConvertService.examMaster(dbMessage);
                 break;
-            /*case "exam.exam_report":
-                examConvertService.examReport(dbMessage);
-                break;*/
             case "lab.lab_test_master":
                 labConvertService.labTestMaster(dbMessage);
                 break;
-            /*case "lab.lab_result":
-                labConvertService.labResult(dbMessage);
-                break;*/
             case "pharmacy.drug_presc_master":
                 pharmacyConvertService.drugPrescMaster(dbMessage);
-                break;
-            case "lqt2024.lqt_crb_zd":
-                lqt2024ConvertService.lqtCrbZd(dbMessage);
                 break;
             default:
 

@@ -20,7 +20,7 @@ public class FeignConfig {
 
     @Bean
     Logger.Level feignLoggerLevel() {
-        return Logger.Level.NONE; // 上线后改为BASIC或NONE
+        return Logger.Level.FULL; // 上线后改为BASIC或NONE
     }
 }
 

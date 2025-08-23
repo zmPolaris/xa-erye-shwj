@@ -13,11 +13,9 @@ public class Users {
 
     private Date createDate;
 
-    private Integer sysFlag;
+    private String password;
 
-    private String workingStatus;
-
-    private Date leaveDate;
+    private Short gjysign;
 
     public String getDbUser() {
         return dbUser;
@@ -59,27 +57,19 @@ public class Users {
         this.createDate = createDate;
     }
 
-    public Integer getSysFlag() {
-        return sysFlag;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSysFlag(Integer sysFlag) {
-        this.sysFlag = sysFlag;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public String getWorkingStatus() {
-        return workingStatus;
+    public Short getGjysign() {
+        return gjysign;
     }
 
-    public void setWorkingStatus(String workingStatus) {
-        this.workingStatus = workingStatus == null ? null : workingStatus.trim();
-    }
-
-    public Date getLeaveDate() {
-        return leaveDate;
-    }
-
-    public void setLeaveDate(Date leaveDate) {
-        this.leaveDate = leaveDate;
+    public void setGjysign(Short gjysign) {
+        this.gjysign = gjysign;
     }
 }

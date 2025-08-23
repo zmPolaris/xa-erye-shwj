@@ -2,7 +2,11 @@ package cn.xa.eyre.comm.domain;
 
 import java.util.Date;
 
-public class DiagnosisDict extends DiagnosisDictKey {
+public class DiagnosisDict {
+    private String diagnosisCode;
+
+    private String diagnosisName;
+
     private Short stdIndicator;
 
     private Short approvedIndicator;
@@ -11,23 +15,23 @@ public class DiagnosisDict extends DiagnosisDictKey {
 
     private String inputCode;
 
-    private String healthLevel;
+    private Short gjysign;
 
-    private String infectIndicator;
+    public String getDiagnosisCode() {
+        return diagnosisCode;
+    }
 
-    private String inputCodeWb;
+    public void setDiagnosisCode(String diagnosisCode) {
+        this.diagnosisCode = diagnosisCode == null ? null : diagnosisCode.trim();
+    }
 
-    private String diseaseSort;
+    public String getDiagnosisName() {
+        return diagnosisName;
+    }
 
-    private String contagioncode;
-
-    private Short diagIndicator;
-
-    private String nm1;
-
-    private String nm2;
-
-    private String codeVersion;
+    public void setDiagnosisName(String diagnosisName) {
+        this.diagnosisName = diagnosisName == null ? null : diagnosisName.trim();
+    }
 
     public Short getStdIndicator() {
         return stdIndicator;
@@ -61,75 +65,11 @@ public class DiagnosisDict extends DiagnosisDictKey {
         this.inputCode = inputCode == null ? null : inputCode.trim();
     }
 
-    public String getHealthLevel() {
-        return healthLevel;
+    public Short getGjysign() {
+        return gjysign;
     }
 
-    public void setHealthLevel(String healthLevel) {
-        this.healthLevel = healthLevel == null ? null : healthLevel.trim();
-    }
-
-    public String getInfectIndicator() {
-        return infectIndicator;
-    }
-
-    public void setInfectIndicator(String infectIndicator) {
-        this.infectIndicator = infectIndicator == null ? null : infectIndicator.trim();
-    }
-
-    public String getInputCodeWb() {
-        return inputCodeWb;
-    }
-
-    public void setInputCodeWb(String inputCodeWb) {
-        this.inputCodeWb = inputCodeWb == null ? null : inputCodeWb.trim();
-    }
-
-    public String getDiseaseSort() {
-        return diseaseSort;
-    }
-
-    public void setDiseaseSort(String diseaseSort) {
-        this.diseaseSort = diseaseSort == null ? null : diseaseSort.trim();
-    }
-
-    public String getContagioncode() {
-        return contagioncode;
-    }
-
-    public void setContagioncode(String contagioncode) {
-        this.contagioncode = contagioncode == null ? null : contagioncode.trim();
-    }
-
-    public Short getDiagIndicator() {
-        return diagIndicator;
-    }
-
-    public void setDiagIndicator(Short diagIndicator) {
-        this.diagIndicator = diagIndicator;
-    }
-
-    public String getNm1() {
-        return nm1;
-    }
-
-    public void setNm1(String nm1) {
-        this.nm1 = nm1 == null ? null : nm1.trim();
-    }
-
-    public String getNm2() {
-        return nm2;
-    }
-
-    public void setNm2(String nm2) {
-        this.nm2 = nm2 == null ? null : nm2.trim();
-    }
-
-    public String getCodeVersion() {
-        return codeVersion;
-    }
-
-    public void setCodeVersion(String codeVersion) {
-        this.codeVersion = codeVersion == null ? null : codeVersion.trim();
+    public void setGjysign(Short gjysign) {
+        this.gjysign = gjysign;
     }
 }

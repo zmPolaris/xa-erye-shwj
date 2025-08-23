@@ -26,8 +26,6 @@ public class MedrecService {
     @Autowired
     private DiagnosisMapper diagnosisMapper;
     @Autowired
-    private OutpMrYbMapper outpMrYbMapper;
-    @Autowired
     private PatVisitMapper patVisitMapper;
     @Autowired
     private DrugPrescMasterMapper drugPrescMasterMapper;
@@ -37,7 +35,8 @@ public class MedrecService {
     }
 
     public List<PatMasterIndex> selectPatMasterIndexList(Integer num) {
-        return patMasterIndexMapper.selectPatMasterIndexList(num);
+//        return patMasterIndexMapper.selectPatMasterIndexList(num);
+        return null;
     }
 
     public DiagnosticCategory selectDiagnosticCategory(DiagnosticCategoryKey diagnosticCategoryKey) {
@@ -45,11 +44,7 @@ public class MedrecService {
     }
 
     public Diagnosis selectDiagnosis(DiagnosisKey diagnosisKey) {
-        return diagnosisMapper.selectByPrimaryKey(diagnosisKey);
-    }
-
-    public OutpMrYb selectOutpMrYb(OutpMrYb outpMrYb) {
-        return outpMrYbMapper.selectOutpMrYb(outpMrYb);
+        return diagnosisMapper.selectByPartPrimaryKey(diagnosisKey).get(0);
     }
 
     public PatVisit selectPatVisit(PatVisitKey patVisitKey) {

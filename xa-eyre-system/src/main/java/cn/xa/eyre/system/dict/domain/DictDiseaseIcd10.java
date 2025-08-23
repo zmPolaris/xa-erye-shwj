@@ -23,6 +23,14 @@ public class DictDiseaseIcd10 {
 
     private Date updateTime;
 
+    public DictDiseaseIcd10() {
+    }
+
+    public DictDiseaseIcd10(String hubCode, String hubName) {
+        this.hubCode = hubCode;
+        this.hubName = hubName;
+    }
+
     public Integer getId() {
         return id;
     }

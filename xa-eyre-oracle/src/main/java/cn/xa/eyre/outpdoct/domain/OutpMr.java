@@ -1,7 +1,5 @@
 package cn.xa.eyre.outpdoct.domain;
 
-import java.util.Date;
-
 public class OutpMr extends OutpMrKey {
     private String patientId;
 
@@ -27,27 +25,31 @@ public class OutpMr extends OutpMrKey {
 
     private String doctor;
 
-    private String operationRecord;
+    private Short visitId;
+
+    private Short mrNo;
+
+    private String diagCode;
+
+    private Integer bloodPressureMark;
+
+    private Integer bloodPressureLow;
+
+    private Integer bloodPressureHigh;
+
+    private Short sbp;
+
+    private Short dbp;
 
     private String medicalRecord;
 
-    private String assistExam;
+    private String operationRecord;
 
-    private String specialty;
+    private String ordinal;
 
-    private String diagnosisMz1;
+    private Short heartRate;
 
-    private String diagnosisCodeMz1;
-
-    private String diagnosisMz2;
-
-    private String diagnosisCodeMz2;
-
-    private Date beginVisitDate; // 补充参数
-
-    private Date endVisitDate;
-
-    private String visitDateStr;
+    private Short redosage;
 
     public String getPatientId() {
         return patientId;
@@ -145,12 +147,68 @@ public class OutpMr extends OutpMrKey {
         this.doctor = doctor == null ? null : doctor.trim();
     }
 
-    public String getOperationRecord() {
-        return operationRecord;
+    public Short getVisitId() {
+        return visitId;
     }
 
-    public void setOperationRecord(String operationRecord) {
-        this.operationRecord = operationRecord == null ? null : operationRecord.trim();
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    public Short getMrNo() {
+        return mrNo;
+    }
+
+    public void setMrNo(Short mrNo) {
+        this.mrNo = mrNo;
+    }
+
+    public String getDiagCode() {
+        return diagCode;
+    }
+
+    public void setDiagCode(String diagCode) {
+        this.diagCode = diagCode == null ? null : diagCode.trim();
+    }
+
+    public Integer getBloodPressureMark() {
+        return bloodPressureMark;
+    }
+
+    public void setBloodPressureMark(Integer bloodPressureMark) {
+        this.bloodPressureMark = bloodPressureMark;
+    }
+
+    public Integer getBloodPressureLow() {
+        return bloodPressureLow;
+    }
+
+    public void setBloodPressureLow(Integer bloodPressureLow) {
+        this.bloodPressureLow = bloodPressureLow;
+    }
+
+    public Integer getBloodPressureHigh() {
+        return bloodPressureHigh;
+    }
+
+    public void setBloodPressureHigh(Integer bloodPressureHigh) {
+        this.bloodPressureHigh = bloodPressureHigh;
+    }
+
+    public Short getSbp() {
+        return sbp;
+    }
+
+    public void setSbp(Short sbp) {
+        this.sbp = sbp;
+    }
+
+    public Short getDbp() {
+        return dbp;
+    }
+
+    public void setDbp(Short dbp) {
+        this.dbp = dbp;
     }
 
     public String getMedicalRecord() {
@@ -161,75 +219,35 @@ public class OutpMr extends OutpMrKey {
         this.medicalRecord = medicalRecord == null ? null : medicalRecord.trim();
     }
 
-    public String getAssistExam() {
-        return assistExam;
+    public String getOperationRecord() {
+        return operationRecord;
     }
 
-    public void setAssistExam(String assistExam) {
-        this.assistExam = assistExam == null ? null : assistExam.trim();
+    public void setOperationRecord(String operationRecord) {
+        this.operationRecord = operationRecord == null ? null : operationRecord.trim();
     }
 
-    public String getSpecialty() {
-        return specialty;
+    public String getOrdinal() {
+        return ordinal;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty == null ? null : specialty.trim();
+    public void setOrdinal(String ordinal) {
+        this.ordinal = ordinal == null ? null : ordinal.trim();
     }
 
-    public String getDiagnosisMz1() {
-        return diagnosisMz1;
+    public Short getHeartRate() {
+        return heartRate;
     }
 
-    public void setDiagnosisMz1(String diagnosisMz1) {
-        this.diagnosisMz1 = diagnosisMz1 == null ? null : diagnosisMz1.trim();
+    public void setHeartRate(Short heartRate) {
+        this.heartRate = heartRate;
     }
 
-    public String getDiagnosisCodeMz1() {
-        return diagnosisCodeMz1;
+    public Short getRedosage() {
+        return redosage;
     }
 
-    public void setDiagnosisCodeMz1(String diagnosisCodeMz1) {
-        this.diagnosisCodeMz1 = diagnosisCodeMz1 == null ? null : diagnosisCodeMz1.trim();
-    }
-
-    public String getDiagnosisMz2() {
-        return diagnosisMz2;
-    }
-
-    public void setDiagnosisMz2(String diagnosisMz2) {
-        this.diagnosisMz2 = diagnosisMz2 == null ? null : diagnosisMz2.trim();
-    }
-
-    public String getDiagnosisCodeMz2() {
-        return diagnosisCodeMz2;
-    }
-
-    public void setDiagnosisCodeMz2(String diagnosisCodeMz2) {
-        this.diagnosisCodeMz2 = diagnosisCodeMz2 == null ? null : diagnosisCodeMz2.trim();
-    }
-
-    public Date getBeginVisitDate() {
-        return beginVisitDate;
-    }
-
-    public void setBeginVisitDate(Date beginVisitDate) {
-        this.beginVisitDate = beginVisitDate;
-    }
-
-    public Date getEndVisitDate() {
-        return endVisitDate;
-    }
-
-    public void setEndVisitDate(Date endVisitDate) {
-        this.endVisitDate = endVisitDate;
-    }
-
-    public String getVisitDateStr() {
-        return visitDateStr;
-    }
-
-    public void setVisitDateStr(String visitDateStr) {
-        this.visitDateStr = visitDateStr;
+    public void setRedosage(Short redosage) {
+        this.redosage = redosage;
     }
 }

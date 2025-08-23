@@ -36,6 +36,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class HubToolService {
     @Autowired
     private DictDiseaseIcd10Mapper dictDiseaseIcd10Mapper;// ICD10转码表
     public boolean synchroPatient(Integer num) {
-        R<List<PatMasterIndex>> patsResult = medrecFeignClient.getPatMasterIndexList(num);
+        /*R<List<PatMasterIndex>> patsResult = medrecFeignClient.getPatMasterIndexList(num);
         if (R.SUCCESS == patsResult.getCode() && !patsResult.getData().isEmpty()){
             for (PatMasterIndex patMasterIndex : patsResult.getData()) {
                 EmrPatientInfo emrPatientInfo = new EmrPatientInfo();
@@ -117,7 +119,7 @@ public class HubToolService {
                 synchroEmrRealService.syncEmrPatientInfo(emrPatientInfo, Constants.HTTP_METHOD_POST);
             }
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -226,7 +228,7 @@ public class HubToolService {
     }
 
     public boolean synchroActivity(Integer num) {
-        R<List<OutpMr>> outpMrsResult = outpdoctFeignClient.getOutpMrList(num);
+        /*R<List<OutpMr>> outpMrsResult = outpdoctFeignClient.getOutpMrList(num);
         if (R.SUCCESS == outpMrsResult.getCode() && !outpMrsResult.getData().isEmpty()){
             for (OutpMr outpMr : outpMrsResult.getData()){
                 R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(outpMr.getPatientId());
@@ -329,7 +331,7 @@ public class HubToolService {
             }
             return true;
         }
-        return false;
+        return false;*/
     }
 
     public void syncPatInfo(PatMasterIndex patMasterIndex){
@@ -353,19 +355,14 @@ public class HubToolService {
                 emrPatientInfo.setIdCard(patMasterIndex.getIdNo());
             }
         }
-        if (StringUtils.isBlank(patMasterIndex.getSexCode())){
-            emrPatientInfo.setGenderCode(HubCodeEnum.SEX_OTHER.getCode());
-            if(StringUtils.isNotBlank(patMasterIndex.getSex())){
-                if (patMasterIndex.getSex().equals("男")){
-                    emrPatientInfo.setGenderCode("1");
-                } else if (patMasterIndex.getSex().equals("女")) {
-                    emrPatientInfo.setGenderCode("2");
-                } else {
-                    emrPatientInfo.setGenderCode(HubCodeEnum.SEX_OTHER.getCode());
-                }
+        if(StringUtils.isNotBlank(patMasterIndex.getSex())){
+            if (patMasterIndex.getSex().equals("男")){
+                emrPatientInfo.setGenderCode("1");
+            } else if (patMasterIndex.getSex().equals("女")) {
+                emrPatientInfo.setGenderCode("2");
+            } else {
+                emrPatientInfo.setGenderCode(HubCodeEnum.SEX_OTHER.getCode());
             }
-        }else {
-            emrPatientInfo.setGenderCode(patMasterIndex.getSexCode());
         }
         emrPatientInfo.setGenderName(patMasterIndex.getSex());
         emrPatientInfo.setBirthDate(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, patMasterIndex.getDateOfBirth()));
@@ -378,20 +375,18 @@ public class HubToolService {
             emrPatientInfo.setNationCode(ddNation.getCode());
             emrPatientInfo.setNationName(ddNation.getName());
         }
-//        else {
-//            emrPatientInfo.setNationCode(HubCodeEnum.NATION_CODE.getCode());
-//            emrPatientInfo.setNationName(HubCodeEnum.NATION_CODE.getName());
-//        }
-        emrPatientInfo.setCurrentAddrCode(patMasterIndex.getMailingAreaCode4());
         emrPatientInfo.setCurrentAddrName(patMasterIndex.getMailingAddress());
         emrPatientInfo.setCurrentAddrDetail(patMasterIndex.getNextOfKinAddr());
-        emrPatientInfo.setWorkunit(patMasterIndex.getWorkunit());
-        if(patMasterIndex.getNextOfKin() != null){
-            emrPatientInfo.setContacts(patMasterIndex.getNextOfKin());
-            emrPatientInfo.setContactsTel(patMasterIndex.getNextOfKinPhone());
-        }else {
-            emrPatientInfo.setContacts(patMasterIndex.getGuardianName());
-            emrPatientInfo.setContactsTel(patMasterIndex.getGuardianPhone());
+        Date birthDate = patMasterIndex.getDateOfBirth();
+        if (null != birthDate) {
+            LocalDate localDate = DateUtils.convertDateToLocalDate(birthDate);
+            Period period = Period.between(localDate, LocalDate.now());
+            if (period.getYears() <= 14) {
+                if(patMasterIndex.getNextOfKin() != null){
+                    emrPatientInfo.setContacts(patMasterIndex.getNextOfKin());
+                    emrPatientInfo.setContactsTel(patMasterIndex.getNextOfKinPhone());
+                }
+            }
         }
         emrPatientInfo.setOrgCode(HubCodeEnum.ORG_CODE.getCode());
         emrPatientInfo.setOrgName(HubCodeEnum.ORG_CODE.getName());
@@ -425,6 +420,14 @@ public class HubToolService {
             }
         }
         return dictDisDept;
+    }
+
+    public DictDiseaseIcd10 getDiseaseIcd10(String code, String name){
+        DictDiseaseIcd10 dictDiseaseIcd10 = dictDiseaseIcd10Mapper.selectByEmrCode(code);
+        if(dictDiseaseIcd10 == null || dictDiseaseIcd10.getHubCode().equals(HubCodeEnum.DISEASE_ICD10_CODE.getCode())){
+            dictDiseaseIcd10 = new DictDiseaseIcd10(code, name);
+        }
+        return dictDiseaseIcd10;
     }
 
 }
