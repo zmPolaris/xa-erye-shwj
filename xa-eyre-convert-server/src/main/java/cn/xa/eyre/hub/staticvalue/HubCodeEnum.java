@@ -6,7 +6,7 @@ package cn.xa.eyre.hub.staticvalue;
 public enum HubCodeEnum {
     ID_CARD_TYPE("01", "居民身份证"),
     ID_CARD_TYPE_OTHER("99", "其他法定有效证件"),
-    ORG_CODE("520111021", "中国人民解放军联勤保障部队第九二五医院"),
+    ORG_CODE("310105018", "中国人民武装警察部队上海市总队医院"),
     NATIONALITY_CODE("156", "中国"),
     NATION_CODE("97", "其他"),
     DISEASE_ICD10_CODE("143", "其他"),
