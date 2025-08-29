@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,11 +17,11 @@ import java.util.Map;
 @RequestMapping("/ordadm")
 public class OrdadmController {
 
-    @Autowired
+    @Resource
     OrdersMapper ordersMapper;
 
-    @GetMapping("/getICUAndAMVInfo")
-    public AjaxResult getICUAndAMVInfo(){
-        return AjaxResult.success("接口调用成功", ordersMapper.getICUAndAMVInfo());
+    @GetMapping("/getDeathInfo")
+    public AjaxResult getDeathInfo(){
+        return AjaxResult.success("接口调用成功", ordersMapper.getDeathInfo());
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/medrec")
@@ -60,4 +61,24 @@ public class MedrecController {
     public AjaxResult selectDrugPrescMasterByPatientId(@RequestBody DrugPrescMaster drugPrescMaster){
         return AjaxResult.success("接口调用成功", medrecService.selectDrugPrescMasterByPatientId(drugPrescMaster));
     };
+
+    @PostMapping("/selectPatVisitDeathInfoList")
+    public AjaxResult selectPatVisitDeathInfoList(){
+        return AjaxResult.success("接口调用成功", medrecService.selectPatVisitDeathInfoList());
+    };
+
+    @PostMapping("/getTransfer")
+    public AjaxResult getTransfer(){
+        return AjaxResult.success("接口调用成功", medrecService.selectTransfer());
+    }
+
+    @PostMapping("/getCPAPDeptInfo")
+    public AjaxResult getCPAPDeptInfo(@RequestBody List<String> cpapInfoList){
+        return AjaxResult.success("接口调用成功", medrecService.getCPAPDeptInfo(cpapInfoList));
+    }
+
+    @PostMapping("/getDiagnosticDescCode")
+    public AjaxResult getDiagnosticDescCode(@RequestBody String patientId){
+        return AjaxResult.success("接口调用成功", medrecService.getDiagnosticDescCode(patientId));
+    }
 }

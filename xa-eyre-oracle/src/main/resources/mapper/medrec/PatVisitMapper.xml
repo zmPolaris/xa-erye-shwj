@@ -128,6 +128,12 @@
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
       and VISIT_ID = #{visitId,jdbcType=NUMERIC}
   </select>
+  <select id="selectPatVisitDeathInfoList" resultType="cn.xa.eyre.medrec.domain.PatVisit">
+    select
+    <include refid="Base_Column_List" />
+    from PAT_VISIT
+    where DISCHARGE_DISPOSITION =  '3'
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatVisitKey">
     delete from PAT_VISIT
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}

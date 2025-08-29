@@ -35,4 +35,18 @@ public interface MedrecFeignClient {
 
     @PostMapping("/medrec/selectDrugPrescMasterByPatientId")
     public R<DrugPrescMaster> selectDrugPrescMasterByPatientId(@RequestBody DrugPrescMaster drugPrescMaster);
+
+    @PostMapping("/medrec/selectPatVisitDeathInfoList")
+    public R<List<PatVisit>> selectPatVisitDeathInfoList();
+
+    @PostMapping("/medrec/getTransfer")
+    public R<List<Transfer>> getTransfer();
+
+    @PostMapping("/medrec/getCPAPDeptInfo")
+    public R<List<Transfer>> getCPAPDeptInfo(@RequestBody List<String> cpapInfoList);
+
+    @PostMapping("/medrec/getDiagnosticDescCode")
+    public R<DiagnosticDescCode> getDiagnosticDescCode(@RequestBody String patientId);
+
+
 }

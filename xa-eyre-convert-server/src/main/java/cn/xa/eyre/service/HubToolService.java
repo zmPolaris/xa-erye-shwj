@@ -1,13 +1,13 @@
 package cn.xa.eyre.service;
 
 import cn.hutool.core.util.IdcardUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.json.JSONUtil;
 import cn.xa.eyre.comm.domain.DeptDict;
 import cn.xa.eyre.comm.domain.Users;
+import cn.xa.eyre.common.constant.CacheConstants;
 import cn.xa.eyre.common.constant.Constants;
 import cn.xa.eyre.common.core.domain.R;
+import cn.xa.eyre.common.core.redis.RedisCache;
 import cn.xa.eyre.common.utils.DateUtils;
 import cn.xa.eyre.common.utils.StringUtils;
 import cn.xa.eyre.hisapi.CommFeignClient;
@@ -16,14 +16,11 @@ import cn.xa.eyre.hisapi.OutpadmFeignClient;
 import cn.xa.eyre.hisapi.OutpdoctFeignClient;
 import cn.xa.eyre.hub.domain.base.BaseDept;
 import cn.xa.eyre.hub.domain.base.BaseUser;
-import cn.xa.eyre.hub.domain.emrreal.EmrActivityInfo;
 import cn.xa.eyre.hub.domain.emrreal.EmrPatientInfo;
 import cn.xa.eyre.hub.service.SynchroBaseService;
 import cn.xa.eyre.hub.service.SynchroEmrRealService;
 import cn.xa.eyre.hub.staticvalue.HubCodeEnum;
 import cn.xa.eyre.medrec.domain.PatMasterIndex;
-import cn.xa.eyre.outpadm.domain.ClinicMaster;
-import cn.xa.eyre.outpdoct.domain.OutpMr;
 import cn.xa.eyre.system.dict.domain.DdNation;
 import cn.xa.eyre.system.dict.domain.DictDisDept;
 import cn.xa.eyre.system.dict.domain.DictDiseaseIcd10;
@@ -38,6 +35,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +60,10 @@ public class HubToolService {
     private OutpadmFeignClient outpadmFeignClient;
     @Autowired
     private DictDiseaseIcd10Mapper dictDiseaseIcd10Mapper;// ICD10转码表
+
+    @Autowired
+    private RedisCache redisCache;
+
     public boolean synchroPatient(Integer num) {
         /*R<List<PatMasterIndex>> patsResult = medrecFeignClient.getPatMasterIndexList(num);
         if (R.SUCCESS == patsResult.getCode() && !patsResult.getData().isEmpty()){
@@ -171,7 +173,9 @@ public class HubToolService {
                     baseDept.setTargetDeptCode(dictDisDept.getHubCode());
                     baseDept.setTargetDeptName(dictDisDept.getHubName());
                     baseDept.setCreateTime(DateUtils.getNowDate());
-
+                    Collection<String> keys = redisCache.keys(CacheConstants.SYS_DICT_DEPT_KEY + "*");
+                    redisCache.deleteObject(keys);
+                    redisCache.setCacheObject(CacheConstants.SYS_DICT_DEPT_KEY + dictDisDept.getEmrCode(), dictDisDept);
                     synchroBaseService.syncBaseDept(baseDept, Constants.HTTP_METHOD_POST);
                 }
                 return true;
@@ -330,11 +334,16 @@ public class HubToolService {
                 }
             }
             return true;
-        }
-        return false;*/
+        }*/
+        return false;
     }
 
-    public void syncPatInfo(PatMasterIndex patMasterIndex){
+    /**
+     * 同步患者信息
+     * @param patMasterIndex
+     * @return
+     */
+    public EmrPatientInfo syncPatInfo(PatMasterIndex patMasterIndex){
         logger.debug("构造emrPatientInfo接口数据...");
         // 构造请求参数
         EmrPatientInfo emrPatientInfo = new EmrPatientInfo();
@@ -400,6 +409,7 @@ public class HubToolService {
 
         emrPatientInfo.setOperationTime(DateUtils.getTime());
         synchroEmrRealService.syncEmrPatientInfo(emrPatientInfo, Constants.HTTP_METHOD_POST);
+        return emrPatientInfo;
     }
 
     public DictDisDept getDept(String code){

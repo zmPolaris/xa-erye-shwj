@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.inpbill.mapper.InpBillDetailMapper">
+    <resultMap id="BaseResultMap" type="cn.xa.eyre.inpbill.domain.InpBillDetail">
+        <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId"/>
+        <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId"/>
+        <id column="ITEM_NO" jdbcType="NUMERIC" property="itemNo"/>
+        <result column="ITEM_CLASS" jdbcType="VARCHAR" property="itemClass"/>
+        <result column="ITEM_NAME" jdbcType="VARCHAR" property="itemName"/>
+        <result column="ITEM_CODE" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="ITEM_SPEC" jdbcType="VARCHAR" property="itemSpec"/>
+        <result column="AMOUNT" jdbcType="NUMERIC" property="amount"/>
+        <result column="UNITS" jdbcType="VARCHAR" property="units"/>
+        <result column="ORDERED_BY" jdbcType="VARCHAR" property="orderedBy"/>
+        <result column="PERFORMED_BY" jdbcType="VARCHAR" property="performedBy"/>
+        <result column="COSTS" jdbcType="NUMERIC" property="costs"/>
+        <result column="CHARGES" jdbcType="NUMERIC" property="charges"/>
+        <result column="BILLING_DATE_TIME" jdbcType="TIMESTAMP" property="billingDateTime"/>
+        <result column="OPERATOR_NO" jdbcType="VARCHAR" property="operatorNo"/>
+        <result column="RCPT_NO" jdbcType="VARCHAR" property="rcptNo"/>
+        <result column="FREE_COSTS" jdbcType="NUMERIC" property="freeCosts"/>
+        <result column="UNIT_PRICE" jdbcType="NUMERIC" property="unitPrice"/>
+        <result column="FL_ITEM_COSTS" jdbcType="NUMERIC" property="flItemCosts"/>
+        <result column="JY_ITEM_COSTS" jdbcType="NUMERIC" property="jyItemCosts"/>
+        <result column="CLASS_ON_INP_RCPT" jdbcType="VARCHAR" property="classOnInpRcpt"/>
+        <result column="SPECIAL_CHARGES" jdbcType="NUMERIC" property="specialCharges"/>
+        <result column="COSTBURDENS_FLAG" jdbcType="NUMERIC" property="costburdensFlag"/>
+        <result column="SUB_ITEM_NO" jdbcType="NUMERIC" property="subItemNo"/>
+        <result column="ZF_ITEM_COSTS" jdbcType="NUMERIC" property="zfItemCosts"/>
+        <result column="FREE_LIMIT" jdbcType="VARCHAR" property="freeLimit"/>
+        <result column="GJY_FLAG" jdbcType="NUMERIC" property="gjyFlag"/>
+        <result column="INSURANCE_CODE" jdbcType="VARCHAR" property="insuranceCode"/>
+        <result column="CHILDREN_JY_ITEM_COSTS" jdbcType="NUMERIC" property="childrenJyItemCosts"/>
+        <result column="EXAM_LAB_REQNO" jdbcType="VARCHAR" property="examLabReqno"/>
+        <result column="MXZDH" jdbcType="VARCHAR" property="mxzdh"/>
+        <result column="ORDER_NO" jdbcType="NUMERIC" property="orderNo"/>
+        <result column="ORDER_SUB_NO" jdbcType="NUMERIC" property="orderSubNo"/>
+        <result column="SPECIAL_INFO" jdbcType="VARCHAR" property="specialInfo"/>
+        <result column="RECIPETYPE" jdbcType="NUMERIC" property="recipetype"/>
+        <result column="PACK_NO" jdbcType="NUMERIC" property="packNo"/>
+        <result column="TRANS_FLAG" jdbcType="VARCHAR" property="transFlag"/>
+        <result column="FEEDETL_SN" jdbcType="VARCHAR" property="feedetlSn"/>
+        <result column="COMB_NO" jdbcType="VARCHAR" property="combNo"/>
+        <result column="NATION_CODE" jdbcType="VARCHAR" property="nationCode"/>
+        <result column="INIT_FEEDETL_SN" jdbcType="VARCHAR" property="initFeedetlSn"/>
+        <result column="REFUND_ITEM_NO" jdbcType="NUMERIC" property="refundItemNo"/>
+        <result column="MINPACUNT_DRUG_TRAC_CNT" jdbcType="NUMERIC" property="minpacuntDrugTracCnt"/>
+        <result column="MCS_TRAC_CNT" jdbcType="NUMERIC" property="mcsTracCnt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PATIENT_ID
+        , VISIT_ID, ITEM_NO, ITEM_CLASS, ITEM_NAME, ITEM_CODE, ITEM_SPEC, AMOUNT,
+    UNITS, ORDERED_BY, PERFORMED_BY, COSTS, CHARGES, BILLING_DATE_TIME, OPERATOR_NO, 
+    RCPT_NO, FREE_COSTS, UNIT_PRICE, FL_ITEM_COSTS, JY_ITEM_COSTS, CLASS_ON_INP_RCPT, 
+    SPECIAL_CHARGES, COSTBURDENS_FLAG, SUB_ITEM_NO, ZF_ITEM_COSTS, FREE_LIMIT, GJY_FLAG, 
+    INSURANCE_CODE, CHILDREN_JY_ITEM_COSTS, EXAM_LAB_REQNO, MXZDH, ORDER_NO, ORDER_SUB_NO, 
+    SPECIAL_INFO, RECIPETYPE, PACK_NO, TRANS_FLAG, FEEDETL_SN, COMB_NO, NATION_CODE, 
+    INIT_FEEDETL_SN, REFUND_ITEM_NO, MINPACUNT_DRUG_TRAC_CNT, MCS_TRAC_CNT
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetailKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from INPBILL.INP_BILL_DETAIL
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+        and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+    </select>
+    <select id="selectCPAPInfo" resultType="java.lang.String">
+        SELECT
+          PATIENT_ID
+        FROM INPBILL.INP_BILL_DETAIL
+        WHERE item_code = '310603001'
+        AND billing_date_time <![CDATA[>=]]> TRUNC(SYSDATE)
+        AND billing_date_time <![CDATA[<]]> TRUNC(SYSDATE) + 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetailKey">
+        delete
+        from INPBILL.INP_BILL_DETAIL
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+          and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+          and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+    </delete>
+    <insert id="insert" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetail">
+        insert into INPBILL.INP_BILL_DETAIL (PATIENT_ID, VISIT_ID, ITEM_NO,
+                                             ITEM_CLASS, ITEM_NAME, ITEM_CODE,
+                                             ITEM_SPEC, AMOUNT, UNITS,
+                                             ORDERED_BY, PERFORMED_BY, COSTS,
+                                             CHARGES, BILLING_DATE_TIME, OPERATOR_NO,
+                                             RCPT_NO, FREE_COSTS, UNIT_PRICE,
+                                             FL_ITEM_COSTS, JY_ITEM_COSTS, CLASS_ON_INP_RCPT,
+                                             SPECIAL_CHARGES, COSTBURDENS_FLAG, SUB_ITEM_NO,
+                                             ZF_ITEM_COSTS, FREE_LIMIT, GJY_FLAG,
+                                             INSURANCE_CODE, CHILDREN_JY_ITEM_COSTS, EXAM_LAB_REQNO,
+                                             MXZDH, ORDER_NO, ORDER_SUB_NO,
+                                             SPECIAL_INFO, RECIPETYPE, PACK_NO,
+                                             TRANS_FLAG, FEEDETL_SN, COMB_NO,
+                                             NATION_CODE, INIT_FEEDETL_SN, REFUND_ITEM_NO,
+                                             MINPACUNT_DRUG_TRAC_CNT, MCS_TRAC_CNT)
+        values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{itemNo,jdbcType=NUMERIC},
+                #{itemClass,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{itemCode,jdbcType=VARCHAR},
+                #{itemSpec,jdbcType=VARCHAR}, #{amount,jdbcType=NUMERIC}, #{units,jdbcType=VARCHAR},
+                #{orderedBy,jdbcType=VARCHAR}, #{performedBy,jdbcType=VARCHAR}, #{costs,jdbcType=NUMERIC},
+                #{charges,jdbcType=NUMERIC}, #{billingDateTime,jdbcType=TIMESTAMP}, #{operatorNo,jdbcType=VARCHAR},
+                #{rcptNo,jdbcType=VARCHAR}, #{freeCosts,jdbcType=NUMERIC}, #{unitPrice,jdbcType=NUMERIC},
+                #{flItemCosts,jdbcType=NUMERIC}, #{jyItemCosts,jdbcType=NUMERIC}, #{classOnInpRcpt,jdbcType=VARCHAR},
+                #{specialCharges,jdbcType=NUMERIC}, #{costburdensFlag,jdbcType=NUMERIC}, #{subItemNo,jdbcType=NUMERIC},
+                #{zfItemCosts,jdbcType=NUMERIC}, #{freeLimit,jdbcType=VARCHAR}, #{gjyFlag,jdbcType=NUMERIC},
+                #{insuranceCode,jdbcType=VARCHAR}, #{childrenJyItemCosts,jdbcType=NUMERIC},
+                #{examLabReqno,jdbcType=VARCHAR},
+                #{mxzdh,jdbcType=VARCHAR}, #{orderNo,jdbcType=NUMERIC}, #{orderSubNo,jdbcType=NUMERIC},
+                #{specialInfo,jdbcType=VARCHAR}, #{recipetype,jdbcType=NUMERIC}, #{packNo,jdbcType=NUMERIC},
+                #{transFlag,jdbcType=VARCHAR}, #{feedetlSn,jdbcType=VARCHAR}, #{combNo,jdbcType=VARCHAR},
+                #{nationCode,jdbcType=VARCHAR}, #{initFeedetlSn,jdbcType=VARCHAR}, #{refundItemNo,jdbcType=NUMERIC},
+                #{minpacuntDrugTracCnt,jdbcType=NUMERIC}, #{mcsTracCnt,jdbcType=NUMERIC})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetail">
+        insert into INPBILL.INP_BILL_DETAIL
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">
+                PATIENT_ID,
+            </if>
+            <if test="visitId != null">
+                VISIT_ID,
+            </if>
+            <if test="itemNo != null">
+                ITEM_NO,
+            </if>
+            <if test="itemClass != null">
+                ITEM_CLASS,
+            </if>
+            <if test="itemName != null">
+                ITEM_NAME,
+            </if>
+            <if test="itemCode != null">
+                ITEM_CODE,
+            </if>
+            <if test="itemSpec != null">
+                ITEM_SPEC,
+            </if>
+            <if test="amount != null">
+                AMOUNT,
+            </if>
+            <if test="units != null">
+                UNITS,
+            </if>
+            <if test="orderedBy != null">
+                ORDERED_BY,
+            </if>
+            <if test="performedBy != null">
+                PERFORMED_BY,
+            </if>
+            <if test="costs != null">
+                COSTS,
+            </if>
+            <if test="charges != null">
+                CHARGES,
+            </if>
+            <if test="billingDateTime != null">
+                BILLING_DATE_TIME,
+            </if>
+            <if test="operatorNo != null">
+                OPERATOR_NO,
+            </if>
+            <if test="rcptNo != null">
+                RCPT_NO,
+            </if>
+            <if test="freeCosts != null">
+                FREE_COSTS,
+            </if>
+            <if test="unitPrice != null">
+                UNIT_PRICE,
+            </if>
+            <if test="flItemCosts != null">
+                FL_ITEM_COSTS,
+            </if>
+            <if test="jyItemCosts != null">
+                JY_ITEM_COSTS,
+            </if>
+            <if test="classOnInpRcpt != null">
+                CLASS_ON_INP_RCPT,
+            </if>
+            <if test="specialCharges != null">
+                SPECIAL_CHARGES,
+            </if>
+            <if test="costburdensFlag != null">
+                COSTBURDENS_FLAG,
+            </if>
+            <if test="subItemNo != null">
+                SUB_ITEM_NO,
+            </if>
+            <if test="zfItemCosts != null">
+                ZF_ITEM_COSTS,
+            </if>
+            <if test="freeLimit != null">
+                FREE_LIMIT,
+            </if>
+            <if test="gjyFlag != null">
+                GJY_FLAG,
+            </if>
+            <if test="insuranceCode != null">
+                INSURANCE_CODE,
+            </if>
+            <if test="childrenJyItemCosts != null">
+                CHILDREN_JY_ITEM_COSTS,
+            </if>
+            <if test="examLabReqno != null">
+                EXAM_LAB_REQNO,
+            </if>
+            <if test="mxzdh != null">
+                MXZDH,
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO,
+            </if>
+            <if test="orderSubNo != null">
+                ORDER_SUB_NO,
+            </if>
+            <if test="specialInfo != null">
+                SPECIAL_INFO,
+            </if>
+            <if test="recipetype != null">
+                RECIPETYPE,
+            </if>
+            <if test="packNo != null">
+                PACK_NO,
+            </if>
+            <if test="transFlag != null">
+                TRANS_FLAG,
+            </if>
+            <if test="feedetlSn != null">
+                FEEDETL_SN,
+            </if>
+            <if test="combNo != null">
+                COMB_NO,
+            </if>
+            <if test="nationCode != null">
+                NATION_CODE,
+            </if>
+            <if test="initFeedetlSn != null">
+                INIT_FEEDETL_SN,
+            </if>
+            <if test="refundItemNo != null">
+                REFUND_ITEM_NO,
+            </if>
+            <if test="minpacuntDrugTracCnt != null">
+                MINPACUNT_DRUG_TRAC_CNT,
+            </if>
+            <if test="mcsTracCnt != null">
+                MCS_TRAC_CNT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">
+                #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="visitId != null">
+                #{visitId,jdbcType=NUMERIC},
+            </if>
+            <if test="itemNo != null">
+                #{itemNo,jdbcType=NUMERIC},
+            </if>
+            <if test="itemClass != null">
+                #{itemClass,jdbcType=VARCHAR},
+            </if>
+            <if test="itemName != null">
+                #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemSpec != null">
+                #{itemSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=NUMERIC},
+            </if>
+            <if test="units != null">
+                #{units,jdbcType=VARCHAR},
+            </if>
+            <if test="orderedBy != null">
+                #{orderedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="performedBy != null">
+                #{performedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="costs != null">
+                #{costs,jdbcType=NUMERIC},
+            </if>
+            <if test="charges != null">
+                #{charges,jdbcType=NUMERIC},
+            </if>
+            <if test="billingDateTime != null">
+                #{billingDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorNo != null">
+                #{operatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rcptNo != null">
+                #{rcptNo,jdbcType=VARCHAR},
+            </if>
+            <if test="freeCosts != null">
+                #{freeCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="flItemCosts != null">
+                #{flItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="jyItemCosts != null">
+                #{jyItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="classOnInpRcpt != null">
+                #{classOnInpRcpt,jdbcType=VARCHAR},
+            </if>
+            <if test="specialCharges != null">
+                #{specialCharges,jdbcType=NUMERIC},
+            </if>
+            <if test="costburdensFlag != null">
+                #{costburdensFlag,jdbcType=NUMERIC},
+            </if>
+            <if test="subItemNo != null">
+                #{subItemNo,jdbcType=NUMERIC},
+            </if>
+            <if test="zfItemCosts != null">
+                #{zfItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="freeLimit != null">
+                #{freeLimit,jdbcType=VARCHAR},
+            </if>
+            <if test="gjyFlag != null">
+                #{gjyFlag,jdbcType=NUMERIC},
+            </if>
+            <if test="insuranceCode != null">
+                #{insuranceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="childrenJyItemCosts != null">
+                #{childrenJyItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="examLabReqno != null">
+                #{examLabReqno,jdbcType=VARCHAR},
+            </if>
+            <if test="mxzdh != null">
+                #{mxzdh,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=NUMERIC},
+            </if>
+            <if test="orderSubNo != null">
+                #{orderSubNo,jdbcType=NUMERIC},
+            </if>
+            <if test="specialInfo != null">
+                #{specialInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="recipetype != null">
+                #{recipetype,jdbcType=NUMERIC},
+            </if>
+            <if test="packNo != null">
+                #{packNo,jdbcType=NUMERIC},
+            </if>
+            <if test="transFlag != null">
+                #{transFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="feedetlSn != null">
+                #{feedetlSn,jdbcType=VARCHAR},
+            </if>
+            <if test="combNo != null">
+                #{combNo,jdbcType=VARCHAR},
+            </if>
+            <if test="nationCode != null">
+                #{nationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="initFeedetlSn != null">
+                #{initFeedetlSn,jdbcType=VARCHAR},
+            </if>
+            <if test="refundItemNo != null">
+                #{refundItemNo,jdbcType=NUMERIC},
+            </if>
+            <if test="minpacuntDrugTracCnt != null">
+                #{minpacuntDrugTracCnt,jdbcType=NUMERIC},
+            </if>
+            <if test="mcsTracCnt != null">
+                #{mcsTracCnt,jdbcType=NUMERIC},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetail">
+        update INPBILL.INP_BILL_DETAIL
+        <set>
+            <if test="itemClass != null">
+                ITEM_CLASS = #{itemClass,jdbcType=VARCHAR},
+            </if>
+            <if test="itemName != null">
+                ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                ITEM_CODE = #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemSpec != null">
+                ITEM_SPEC = #{itemSpec,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                AMOUNT = #{amount,jdbcType=NUMERIC},
+            </if>
+            <if test="units != null">
+                UNITS = #{units,jdbcType=VARCHAR},
+            </if>
+            <if test="orderedBy != null">
+                ORDERED_BY = #{orderedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="performedBy != null">
+                PERFORMED_BY = #{performedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="costs != null">
+                COSTS = #{costs,jdbcType=NUMERIC},
+            </if>
+            <if test="charges != null">
+                CHARGES = #{charges,jdbcType=NUMERIC},
+            </if>
+            <if test="billingDateTime != null">
+                BILLING_DATE_TIME = #{billingDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorNo != null">
+                OPERATOR_NO = #{operatorNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rcptNo != null">
+                RCPT_NO = #{rcptNo,jdbcType=VARCHAR},
+            </if>
+            <if test="freeCosts != null">
+                FREE_COSTS = #{freeCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="unitPrice != null">
+                UNIT_PRICE = #{unitPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="flItemCosts != null">
+                FL_ITEM_COSTS = #{flItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="jyItemCosts != null">
+                JY_ITEM_COSTS = #{jyItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="classOnInpRcpt != null">
+                CLASS_ON_INP_RCPT = #{classOnInpRcpt,jdbcType=VARCHAR},
+            </if>
+            <if test="specialCharges != null">
+                SPECIAL_CHARGES = #{specialCharges,jdbcType=NUMERIC},
+            </if>
+            <if test="costburdensFlag != null">
+                COSTBURDENS_FLAG = #{costburdensFlag,jdbcType=NUMERIC},
+            </if>
+            <if test="subItemNo != null">
+                SUB_ITEM_NO = #{subItemNo,jdbcType=NUMERIC},
+            </if>
+            <if test="zfItemCosts != null">
+                ZF_ITEM_COSTS = #{zfItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="freeLimit != null">
+                FREE_LIMIT = #{freeLimit,jdbcType=VARCHAR},
+            </if>
+            <if test="gjyFlag != null">
+                GJY_FLAG = #{gjyFlag,jdbcType=NUMERIC},
+            </if>
+            <if test="insuranceCode != null">
+                INSURANCE_CODE = #{insuranceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="childrenJyItemCosts != null">
+                CHILDREN_JY_ITEM_COSTS = #{childrenJyItemCosts,jdbcType=NUMERIC},
+            </if>
+            <if test="examLabReqno != null">
+                EXAM_LAB_REQNO = #{examLabReqno,jdbcType=VARCHAR},
+            </if>
+            <if test="mxzdh != null">
+                MXZDH = #{mxzdh,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo,jdbcType=NUMERIC},
+            </if>
+            <if test="orderSubNo != null">
+                ORDER_SUB_NO = #{orderSubNo,jdbcType=NUMERIC},
+            </if>
+            <if test="specialInfo != null">
+                SPECIAL_INFO = #{specialInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="recipetype != null">
+                RECIPETYPE = #{recipetype,jdbcType=NUMERIC},
+            </if>
+            <if test="packNo != null">
+                PACK_NO = #{packNo,jdbcType=NUMERIC},
+            </if>
+            <if test="transFlag != null">
+                TRANS_FLAG = #{transFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="feedetlSn != null">
+                FEEDETL_SN = #{feedetlSn,jdbcType=VARCHAR},
+            </if>
+            <if test="combNo != null">
+                COMB_NO = #{combNo,jdbcType=VARCHAR},
+            </if>
+            <if test="nationCode != null">
+                NATION_CODE = #{nationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="initFeedetlSn != null">
+                INIT_FEEDETL_SN = #{initFeedetlSn,jdbcType=VARCHAR},
+            </if>
+            <if test="refundItemNo != null">
+                REFUND_ITEM_NO = #{refundItemNo,jdbcType=NUMERIC},
+            </if>
+            <if test="minpacuntDrugTracCnt != null">
+                MINPACUNT_DRUG_TRAC_CNT = #{minpacuntDrugTracCnt,jdbcType=NUMERIC},
+            </if>
+            <if test="mcsTracCnt != null">
+                MCS_TRAC_CNT = #{mcsTracCnt,jdbcType=NUMERIC},
+            </if>
+        </set>
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+        and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.inpbill.domain.InpBillDetail">
+        update INPBILL.INP_BILL_DETAIL
+        set ITEM_CLASS              = #{itemClass,jdbcType=VARCHAR},
+            ITEM_NAME               = #{itemName,jdbcType=VARCHAR},
+            ITEM_CODE               = #{itemCode,jdbcType=VARCHAR},
+            ITEM_SPEC               = #{itemSpec,jdbcType=VARCHAR},
+            AMOUNT                  = #{amount,jdbcType=NUMERIC},
+            UNITS                   = #{units,jdbcType=VARCHAR},
+            ORDERED_BY              = #{orderedBy,jdbcType=VARCHAR},
+            PERFORMED_BY            = #{performedBy,jdbcType=VARCHAR},
+            COSTS                   = #{costs,jdbcType=NUMERIC},
+            CHARGES                 = #{charges,jdbcType=NUMERIC},
+            BILLING_DATE_TIME       = #{billingDateTime,jdbcType=TIMESTAMP},
+            OPERATOR_NO             = #{operatorNo,jdbcType=VARCHAR},
+            RCPT_NO                 = #{rcptNo,jdbcType=VARCHAR},
+            FREE_COSTS              = #{freeCosts,jdbcType=NUMERIC},
+            UNIT_PRICE              = #{unitPrice,jdbcType=NUMERIC},
+            FL_ITEM_COSTS           = #{flItemCosts,jdbcType=NUMERIC},
+            JY_ITEM_COSTS           = #{jyItemCosts,jdbcType=NUMERIC},
+            CLASS_ON_INP_RCPT       = #{classOnInpRcpt,jdbcType=VARCHAR},
+            SPECIAL_CHARGES         = #{specialCharges,jdbcType=NUMERIC},
+            COSTBURDENS_FLAG        = #{costburdensFlag,jdbcType=NUMERIC},
+            SUB_ITEM_NO             = #{subItemNo,jdbcType=NUMERIC},
+            ZF_ITEM_COSTS           = #{zfItemCosts,jdbcType=NUMERIC},
+            FREE_LIMIT              = #{freeLimit,jdbcType=VARCHAR},
+            GJY_FLAG                = #{gjyFlag,jdbcType=NUMERIC},
+            INSURANCE_CODE          = #{insuranceCode,jdbcType=VARCHAR},
+            CHILDREN_JY_ITEM_COSTS  = #{childrenJyItemCosts,jdbcType=NUMERIC},
+            EXAM_LAB_REQNO          = #{examLabReqno,jdbcType=VARCHAR},
+            MXZDH                   = #{mxzdh,jdbcType=VARCHAR},
+            ORDER_NO                = #{orderNo,jdbcType=NUMERIC},
+            ORDER_SUB_NO            = #{orderSubNo,jdbcType=NUMERIC},
+            SPECIAL_INFO            = #{specialInfo,jdbcType=VARCHAR},
+            RECIPETYPE              = #{recipetype,jdbcType=NUMERIC},
+            PACK_NO                 = #{packNo,jdbcType=NUMERIC},
+            TRANS_FLAG              = #{transFlag,jdbcType=VARCHAR},
+            FEEDETL_SN              = #{feedetlSn,jdbcType=VARCHAR},
+            COMB_NO                 = #{combNo,jdbcType=VARCHAR},
+            NATION_CODE             = #{nationCode,jdbcType=VARCHAR},
+            INIT_FEEDETL_SN         = #{initFeedetlSn,jdbcType=VARCHAR},
+            REFUND_ITEM_NO          = #{refundItemNo,jdbcType=NUMERIC},
+            MINPACUNT_DRUG_TRAC_CNT = #{minpacuntDrugTracCnt,jdbcType=NUMERIC},
+            MCS_TRAC_CNT            = #{mcsTracCnt,jdbcType=NUMERIC}
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+          and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+          and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
+    </update>
+</mapper>

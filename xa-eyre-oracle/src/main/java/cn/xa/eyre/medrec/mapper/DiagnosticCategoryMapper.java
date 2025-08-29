@@ -2,6 +2,7 @@ package cn.xa.eyre.medrec.mapper;
 
 import cn.xa.eyre.medrec.domain.DiagnosticCategory;
 import cn.xa.eyre.medrec.domain.DiagnosticCategoryKey;
+import cn.xa.eyre.medrec.domain.DiagnosticDescCode;
 
 public interface DiagnosticCategoryMapper {
     int deleteByPrimaryKey(DiagnosticCategoryKey key);
@@ -15,4 +16,6 @@ public interface DiagnosticCategoryMapper {
     int updateByPrimaryKeySelective(DiagnosticCategory record);
 
     int updateByPrimaryKey(DiagnosticCategory record);
+
+    DiagnosticDescCode getDiagnosticDescCode(String patinetId);
 }

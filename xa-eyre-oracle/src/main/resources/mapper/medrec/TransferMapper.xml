@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.medrec.mapper.TransferMapper">
+    <resultMap id="BaseResultMap" type="cn.xa.eyre.medrec.domain.Transfer">
+        <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId"/>
+        <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId"/>
+        <id column="ADMISSION_DATE_TIME" jdbcType="TIMESTAMP" property="admissionDateTime"/>
+        <result column="DEPT_STAYED" jdbcType="VARCHAR" property="deptStayed"/>
+        <result column="DISCHARGE_DATE_TIME" jdbcType="TIMESTAMP" property="dischargeDateTime"/>
+        <result column="DEPT_TRANSFERED_TO" jdbcType="VARCHAR" property="deptTransferedTo"/>
+        <result column="DOCTOR_IN_CHARGE" jdbcType="VARCHAR" property="doctorInCharge"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PATIENT_ID
+        , VISIT_ID, ADMISSION_DATE_TIME, DEPT_STAYED, DISCHARGE_DATE_TIME, DEPT_TRANSFERED_TO,
+    DOCTOR_IN_CHARGE
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.TransferKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDREC.TRANSFER
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+        and ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP}
+    </select>
+    <select id="getICUInfo" resultType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDREC.TRANSFER
+        where ( dept_stayed='113001' or dept_transfered_to = '113001')
+        and ((DISCHARGE_DATE_TIME <![CDATA[>=]]>  TRUNC(SYSDATE) AND DISCHARGE_DATE_TIME <![CDATA[<]]>
+        TRUNC(SYSDATE)+1)
+        or DISCHARGE_DATE_TIME is null )
+    </select>
+    <select id="getCPAPDeptInfo" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MEDREC.TRANSFER
+        where PATIENT_ID in
+        <foreach item="patientId" collection="patientIds" open="(" separator="," close=")">
+            #{patientId,jdbcType=VARCHAR}
+        </foreach>
+        and (TRUNC(DISCHARGE_DATE_TIME) = TRUNC(SYSDATE) or DISCHARGE_DATE_TIME is null)
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.TransferKey">
+        delete
+        from MEDREC.TRANSFER
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+          and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+          and ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP}
+    </delete>
+    <insert id="insert" parameterType="cn.xa.eyre.medrec.domain.Transfer">
+        insert into MEDREC.TRANSFER (PATIENT_ID, VISIT_ID, ADMISSION_DATE_TIME,
+                                     DEPT_STAYED, DISCHARGE_DATE_TIME, DEPT_TRANSFERED_TO,
+                                     DOCTOR_IN_CHARGE)
+        values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{admissionDateTime,jdbcType=TIMESTAMP},
+                #{deptStayed,jdbcType=VARCHAR}, #{dischargeDateTime,jdbcType=TIMESTAMP},
+                #{deptTransferedTo,jdbcType=VARCHAR},
+                #{doctorInCharge,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.xa.eyre.medrec.domain.Transfer">
+        insert into MEDREC.TRANSFER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">
+                PATIENT_ID,
+            </if>
+            <if test="visitId != null">
+                VISIT_ID,
+            </if>
+            <if test="admissionDateTime != null">
+                ADMISSION_DATE_TIME,
+            </if>
+            <if test="deptStayed != null">
+                DEPT_STAYED,
+            </if>
+            <if test="dischargeDateTime != null">
+                DISCHARGE_DATE_TIME,
+            </if>
+            <if test="deptTransferedTo != null">
+                DEPT_TRANSFERED_TO,
+            </if>
+            <if test="doctorInCharge != null">
+                DOCTOR_IN_CHARGE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="patientId != null">
+                #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="visitId != null">
+                #{visitId,jdbcType=NUMERIC},
+            </if>
+            <if test="admissionDateTime != null">
+                #{admissionDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptStayed != null">
+                #{deptStayed,jdbcType=VARCHAR},
+            </if>
+            <if test="dischargeDateTime != null">
+                #{dischargeDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptTransferedTo != null">
+                #{deptTransferedTo,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorInCharge != null">
+                #{doctorInCharge,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.medrec.domain.Transfer">
+        update MEDREC.TRANSFER
+        <set>
+            <if test="deptStayed != null">
+                DEPT_STAYED = #{deptStayed,jdbcType=VARCHAR},
+            </if>
+            <if test="dischargeDateTime != null">
+                DISCHARGE_DATE_TIME = #{dischargeDateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deptTransferedTo != null">
+                DEPT_TRANSFERED_TO = #{deptTransferedTo,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorInCharge != null">
+                DOCTOR_IN_CHARGE = #{doctorInCharge,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+        and ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.Transfer">
+        update MEDREC.TRANSFER
+        set DEPT_STAYED         = #{deptStayed,jdbcType=VARCHAR},
+            DISCHARGE_DATE_TIME = #{dischargeDateTime,jdbcType=TIMESTAMP},
+            DEPT_TRANSFERED_TO  = #{deptTransferedTo,jdbcType=VARCHAR},
+            DOCTOR_IN_CHARGE    = #{doctorInCharge,jdbcType=VARCHAR}
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+          and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+          and ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP}
+    </update>
+</mapper>

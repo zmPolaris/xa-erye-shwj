@@ -29,6 +29,9 @@ public class MedrecService {
     private PatVisitMapper patVisitMapper;
     @Autowired
     private DrugPrescMasterMapper drugPrescMasterMapper;
+    @Autowired
+    private TransferMapper transferMapper;
+
 
     public PatMasterIndex selectPatMasterIndex(String patientId) {
         return patMasterIndexMapper.selectByPrimaryKey(patientId);
@@ -60,5 +63,21 @@ public class MedrecService {
 
     public DrugPrescMaster selectDrugPrescMasterByPatientId(DrugPrescMaster drugPrescMaster) {
         return drugPrescMasterMapper.selectDrugByPrescNoAndPatientId(drugPrescMaster.getPrescNo(), drugPrescMaster.getPatientId());
+    }
+
+    public List<PatVisit> selectPatVisitDeathInfoList() {
+        return patVisitMapper.selectPatVisitDeathInfoList();
+    }
+
+    public List<Transfer> selectTransfer() {
+        return transferMapper.getICUInfo();
+    }
+
+    public List<Transfer> getCPAPDeptInfo(List<String> cpapInfoList) {
+        return transferMapper.getCPAPDeptInfo(cpapInfoList);
+    }
+
+    public DiagnosticDescCode getDiagnosticDescCode(String patientId) {
+        return diagnosticCategoryMapper.getDiagnosticDescCode(patientId);
     }
 }

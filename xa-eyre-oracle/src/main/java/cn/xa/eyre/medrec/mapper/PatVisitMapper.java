@@ -3,6 +3,8 @@ package cn.xa.eyre.medrec.mapper;
 import cn.xa.eyre.medrec.domain.PatVisit;
 import cn.xa.eyre.medrec.domain.PatVisitKey;
 
+import java.util.List;
+
 public interface PatVisitMapper {
     int deleteByPrimaryKey(PatVisitKey key);
 
@@ -15,4 +17,6 @@ public interface PatVisitMapper {
     int updateByPrimaryKeySelective(PatVisit record);
 
     int updateByPrimaryKey(PatVisit record);
+
+    List<PatVisit> selectPatVisitDeathInfoList();
 }

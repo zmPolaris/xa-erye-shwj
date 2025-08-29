@@ -3,10 +3,14 @@ package cn.xa.eyre.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.xa.eyre.comm.domain.DeptDict;
 import cn.xa.eyre.comm.domain.Users;
+import cn.xa.eyre.common.constant.CacheConstants;
 import cn.xa.eyre.common.constant.Constants;
+import cn.xa.eyre.common.core.domain.R;
 import cn.xa.eyre.common.core.kafka.DBMessage;
+import cn.xa.eyre.common.core.redis.RedisCache;
 import cn.xa.eyre.common.utils.DateUtils;
 import cn.xa.eyre.common.utils.bean.BeanUtils;
+import cn.xa.eyre.hisapi.CommFeignClient;
 import cn.xa.eyre.hub.domain.base.BaseDept;
 import cn.xa.eyre.hub.domain.base.BaseUser;
 import cn.xa.eyre.hub.service.SynchroBaseService;
@@ -31,6 +35,11 @@ public class CommConvertService {
     private DictDisDeptMapper dictDisDeptMapper;// 转码表
     @Autowired
     private SynchroBaseService synchroBaseService;
+    @Autowired
+    CommFeignClient commFeignClient;
+
+    @Autowired
+    private RedisCache redisCache;
 
     public void deptDict(DBMessage dbMessage) {
         logger.debug("科室信息表DEPT_DICT变更接口");
@@ -150,5 +159,20 @@ public class CommConvertService {
         }else {
             logger.info("用户【{}】部门编码为空，无法同步...", users.getUserId() + baseUser.getUserName());
         }
+    }
+
+
+    public Users getUserByName(String name) {
+        Users cache = redisCache.getCacheObject(CacheConstants.SYS_COMM_USER_KEY + name);
+        if (null != cache){
+            return cache;
+        }
+        Users user = new Users();
+        R<Users> userByName = commFeignClient.getUserByName(name);
+        if (R.SUCCESS == userByName.getCode() && userByName.getData() != null){
+            user = userByName.getData();
+        }
+        redisCache.setCacheObject(CacheConstants.SYS_COMM_USER_KEY + name, user);
+        return user;
     }
 }

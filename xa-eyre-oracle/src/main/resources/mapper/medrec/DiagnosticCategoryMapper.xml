@@ -17,6 +17,17 @@
     <result column="ICD10_CODE" jdbcType="VARCHAR" property="icd10Code" />
     <result column="ICD10_CODE_PLUS" jdbcType="VARCHAR" property="icd10CodePlus" />
   </resultMap>
+
+  <resultMap id="BaseResultCodeMap" type="cn.xa.eyre.medrec.domain.DiagnosticDescCode">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="DIAGNOSIS_TYPE" jdbcType="VARCHAR" property="diagnosisType" />
+    <result column="DIAGNOSIS_NO" jdbcType="NUMERIC" property="diagnosisNo" />
+    <result column="DIAGNOSIS_CODE" jdbcType="VARCHAR" property="diagnosisCode" />
+    <result column="DIAGNOSIS_DESC" jdbcType="VARCHAR" property="diagnosisDesc" />
+    <result column="TREAT_RESULT" jdbcType="VARCHAR" property="treatResult" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     PATIENT_ID, VISIT_ID, DIAGNOSIS_TYPE, DIAGNOSIS_NO, DIAGNOSIS_CODE, CODE_NO, INSURANCE_ICD10_CODE, 
     INSURANCE_ICD10_CODE_PLUS, SH_ICD10_CODE, SH_ICD10_CODE_PLUS, CLINIC_ICD10_CODE, 
@@ -31,6 +42,12 @@
       and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
       and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
       and DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
+  </select>
+  <select id="getDiagnosticDescCode" resultMap="BaseResultCodeMap">
+    SELECT T.PATIENT_ID, T.VISIT_ID, T.DIAGNOSIS_NO, T.DIAGNOSIS_DESC, T.TREAT_RESULT, M.DIAGNOSIS_TYPE, M.DIAGNOSIS_CODE
+    FROM MEDREC.FINAL_CHIEF_DIAGNOSIS T
+    LEFT JOIN MEDREC.DIAGNOSTIC_CATEGORY M ON T.PATIENT_ID = M.PATIENT_ID AND T.VISIT_ID = M.VISIT_ID
+    WHERE T.PATIENT_ID = #{patientId,jdbcType=VARCHAR}  AND T.TREAT_RESULT = '死亡' AND M.DIAGNOSIS_TYPE ='3';
   </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.DiagnosticCategoryKey">
     delete from DIAGNOSTIC_CATEGORY

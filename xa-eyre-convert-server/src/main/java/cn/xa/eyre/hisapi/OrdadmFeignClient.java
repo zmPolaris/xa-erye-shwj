@@ -13,6 +13,7 @@ import java.util.List;
 @FeignClient(name = "ordadmService", url = Constants.HIS_URL)
 public interface OrdadmFeignClient {
 
-    @GetMapping("/ordadm/getICUAndAMVInfo")
-    public R<List<Orders>> getICUAndAMVInfo();
+
+    @GetMapping("/ordadm/getDeathInfo")
+    R<List<Orders>> getDeathInfo();
 }

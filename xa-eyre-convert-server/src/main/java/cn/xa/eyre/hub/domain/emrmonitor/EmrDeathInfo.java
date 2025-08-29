@@ -1,6 +1,7 @@
 package cn.xa.eyre.hub.domain.emrmonitor;
 
 import java.util.Date;
+import java.util.Objects;
 
 import cn.xa.eyre.common.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -348,5 +349,100 @@ public class EmrDeathInfo extends BaseEntity
                 .append("dataStatus", getDataStatus())
                 .append("createDate", getCreateDate())
                 .toString();
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof EmrDeathInfo)) return false;
+
+        EmrDeathInfo that = (EmrDeathInfo) o;
+        return Objects.equals(getId(), that.getId())
+                && Objects.equals(getPatientId(), that.getPatientId())
+                && Objects.equals(getActivityTypeCode(), that.getActivityTypeCode())
+                && Objects.equals(getActivityTypeName(), that.getActivityTypeName())
+                && Objects.equals(getSerialNumber(), that.getSerialNumber())
+                && Objects.equals(getPatientName(), that.getPatientName())
+                && Objects.equals(getIdCardTypeCode(), that.getIdCardTypeCode())
+                && Objects.equals(getIdCardTypeName(), that.getIdCardTypeName())
+                && Objects.equals(getIdCard(), that.getIdCard())
+                && Objects.equals(getTreatmentDesc(), that.getTreatmentDesc())
+                && Objects.equals(getDeadDate(), that.getDeadDate())
+                && Objects.equals(getDirectCauseName(), that.getDirectCauseName())
+                && Objects.equals(getDirectCauseCode(), that.getDirectCauseCode())
+                && Objects.equals(getDeathDiagnosisName(), that.getDeathDiagnosisName())
+                && Objects.equals(getDeathDiagnosisCode(), that.getDeathDiagnosisCode())
+                && Objects.equals(getChiefPhysicianId(), that.getChiefPhysicianId())
+                && Objects.equals(getOrgCode(), that.getOrgCode())
+                && Objects.equals(getOrgName(), that.getOrgName())
+                && Objects.equals(getDeptCode(), that.getDeptCode())
+                && Objects.equals(getDeptName(), that.getDeptName())
+                && Objects.equals(getOperatorId(), that.getOperatorId())
+                && Objects.equals(getOperationTime(), that.getOperationTime())
+                && Objects.equals(getInvalidFlag(), that.getInvalidFlag())
+                && Objects.equals(getDataStatus(), that.getDataStatus())
+                && Objects.equals(getCreateDate(), that.getCreateDate());
+    }
+
+    public final boolean equalsNoDate(Object o) {
+        if (!(o instanceof EmrDeathInfo)) return false;
+
+        EmrDeathInfo that = (EmrDeathInfo) o;
+        return Objects.equals(getId(), that.getId())
+                && Objects.equals(getPatientId(), that.getPatientId())
+                && Objects.equals(getActivityTypeCode(), that.getActivityTypeCode())
+                && Objects.equals(getActivityTypeName(), that.getActivityTypeName())
+                && Objects.equals(getSerialNumber(), that.getSerialNumber())
+                && Objects.equals(getPatientName(), that.getPatientName())
+                && Objects.equals(getIdCardTypeCode(), that.getIdCardTypeCode())
+                && Objects.equals(getIdCardTypeName(), that.getIdCardTypeName())
+                && Objects.equals(getIdCard(), that.getIdCard())
+                && Objects.equals(getTreatmentDesc(), that.getTreatmentDesc())
+//                && Objects.equals(getDeadDate(), that.getDeadDate())
+                && Objects.equals(getDirectCauseName(), that.getDirectCauseName())
+                && Objects.equals(getDirectCauseCode(), that.getDirectCauseCode())
+                && Objects.equals(getDeathDiagnosisName(), that.getDeathDiagnosisName())
+                && Objects.equals(getDeathDiagnosisCode(), that.getDeathDiagnosisCode())
+                && Objects.equals(getChiefPhysicianId(), that.getChiefPhysicianId())
+                && Objects.equals(getOrgCode(), that.getOrgCode())
+                && Objects.equals(getOrgName(), that.getOrgName())
+                && Objects.equals(getDeptCode(), that.getDeptCode())
+                && Objects.equals(getDeptName(), that.getDeptName())
+                && Objects.equals(getOperatorId(), that.getOperatorId())
+//                && Objects.equals(getOperationTime(), that.getOperationTime())
+                && Objects.equals(getInvalidFlag(), that.getInvalidFlag())
+                && Objects.equals(getDataStatus(), that.getDataStatus())
+//                && Objects.equals(getCreateDate(), that.getCreateDate());
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(getId());
+        result = 31 * result + Objects.hashCode(getPatientId());
+        result = 31 * result + Objects.hashCode(getActivityTypeCode());
+        result = 31 * result + Objects.hashCode(getActivityTypeName());
+        result = 31 * result + Objects.hashCode(getSerialNumber());
+        result = 31 * result + Objects.hashCode(getPatientName());
+        result = 31 * result + Objects.hashCode(getIdCardTypeCode());
+        result = 31 * result + Objects.hashCode(getIdCardTypeName());
+        result = 31 * result + Objects.hashCode(getIdCard());
+        result = 31 * result + Objects.hashCode(getTreatmentDesc());
+        result = 31 * result + Objects.hashCode(getDeadDate());
+        result = 31 * result + Objects.hashCode(getDirectCauseName());
+        result = 31 * result + Objects.hashCode(getDirectCauseCode());
+        result = 31 * result + Objects.hashCode(getDeathDiagnosisName());
+        result = 31 * result + Objects.hashCode(getDeathDiagnosisCode());
+        result = 31 * result + Objects.hashCode(getChiefPhysicianId());
+        result = 31 * result + Objects.hashCode(getOrgCode());
+        result = 31 * result + Objects.hashCode(getOrgName());
+        result = 31 * result + Objects.hashCode(getDeptCode());
+        result = 31 * result + Objects.hashCode(getDeptName());
+        result = 31 * result + Objects.hashCode(getOperatorId());
+        result = 31 * result + Objects.hashCode(getOperationTime());
+        result = 31 * result + Objects.hashCode(getInvalidFlag());
+        result = 31 * result + Objects.hashCode(getDataStatus());
+        result = 31 * result + Objects.hashCode(getCreateDate());
+        return result;
     }
 }
