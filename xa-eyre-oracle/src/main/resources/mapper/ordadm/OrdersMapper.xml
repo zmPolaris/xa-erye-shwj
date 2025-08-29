@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.ordadm.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.ordadm.domain.Orders">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <id column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <id column="ORDER_NO" jdbcType="NUMERIC" property="orderNo" />
+    <id column="ORDER_SUB_NO" jdbcType="NUMERIC" property="orderSubNo" />
+    <result column="REPEAT_INDICATOR" jdbcType="NUMERIC" property="repeatIndicator" />
+    <result column="ORDER_CLASS" jdbcType="VARCHAR" property="orderClass" />
+    <result column="ORDER_TEXT" jdbcType="VARCHAR" property="orderText" />
+    <result column="ORDER_CODE" jdbcType="VARCHAR" property="orderCode" />
+    <result column="DOSAGE" jdbcType="NUMERIC" property="dosage" />
+    <result column="DOSAGE_UNITS" jdbcType="VARCHAR" property="dosageUnits" />
+    <result column="ADMINISTRATION" jdbcType="VARCHAR" property="administration" />
+    <result column="DURATION" jdbcType="NUMERIC" property="duration" />
+    <result column="DURATION_UNITS" jdbcType="VARCHAR" property="durationUnits" />
+    <result column="START_DATE_TIME" jdbcType="TIMESTAMP" property="startDateTime" />
+    <result column="STOP_DATE_TIME" jdbcType="TIMESTAMP" property="stopDateTime" />
+    <result column="FREQUENCY" jdbcType="VARCHAR" property="frequency" />
+    <result column="FREQ_COUNTER" jdbcType="NUMERIC" property="freqCounter" />
+    <result column="FREQ_INTERVAL" jdbcType="NUMERIC" property="freqInterval" />
+    <result column="FREQ_INTERVAL_UNIT" jdbcType="VARCHAR" property="freqIntervalUnit" />
+    <result column="FREQ_DETAIL" jdbcType="VARCHAR" property="freqDetail" />
+    <result column="PERFORM_SCHEDULE" jdbcType="VARCHAR" property="performSchedule" />
+    <result column="PERFORM_RESULT" jdbcType="VARCHAR" property="performResult" />
+    <result column="ORDERING_DEPT" jdbcType="VARCHAR" property="orderingDept" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+    <result column="STOP_DOCTOR" jdbcType="VARCHAR" property="stopDoctor" />
+    <result column="NURSE" jdbcType="VARCHAR" property="nurse" />
+    <result column="ENTER_DATE_TIME" jdbcType="TIMESTAMP" property="enterDateTime" />
+    <result column="ORDER_STATUS" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="BILLING_ATTR" jdbcType="NUMERIC" property="billingAttr" />
+    <result column="LAST_PERFORM_DATE_TIME" jdbcType="TIMESTAMP" property="lastPerformDateTime" />
+    <result column="LAST_ACCTING_DATE_TIME" jdbcType="TIMESTAMP" property="lastAcctingDateTime" />
+    <result column="CURRENT_PRESC_NO" jdbcType="VARCHAR" property="currentPrescNo" />
+    <result column="CHECK_OPERATOR" jdbcType="VARCHAR" property="checkOperator" />
+    <result column="CHECK_DATETIME" jdbcType="TIMESTAMP" property="checkDatetime" />
+    <result column="DRUG_BILLING_ATTR" jdbcType="NUMERIC" property="drugBillingAttr" />
+    <result column="STOP_NURSE" jdbcType="VARCHAR" property="stopNurse" />
+    <result column="STOP_ORDER_DATE_TIME" jdbcType="TIMESTAMP" property="stopOrderDateTime" />
+    <result column="ISPRINT" jdbcType="VARCHAR" property="isprint" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, ORDER_NO, ORDER_SUB_NO, REPEAT_INDICATOR, ORDER_CLASS, ORDER_TEXT, 
+    ORDER_CODE, DOSAGE, DOSAGE_UNITS, ADMINISTRATION, DURATION, DURATION_UNITS, START_DATE_TIME, 
+    STOP_DATE_TIME, FREQUENCY, FREQ_COUNTER, FREQ_INTERVAL, FREQ_INTERVAL_UNIT, FREQ_DETAIL, 
+    PERFORM_SCHEDULE, PERFORM_RESULT, ORDERING_DEPT, DOCTOR, STOP_DOCTOR, NURSE, ENTER_DATE_TIME, 
+    ORDER_STATUS, BILLING_ATTR, LAST_PERFORM_DATE_TIME, LAST_ACCTING_DATE_TIME, CURRENT_PRESC_NO, 
+    CHECK_OPERATOR, CHECK_DATETIME, DRUG_BILLING_ATTR, STOP_NURSE, STOP_ORDER_DATE_TIME, 
+    ISPRINT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="cn.xa.eyre.ordadm.domain.OrdersKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDADM.ORDERS
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+      and ORDER_SUB_NO = #{orderSubNo,jdbcType=NUMERIC}
+  </select>
+  <select id="getDeathInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ORDADM.ORDERS
+    where ORDER_CLASS ='E' and ORDER_CODE = 'Z0052' and
+      ENTER_DATE_TIME <![CDATA[>=]]> TRUNC(SYSDATE) AND ENTER_DATE_TIME <![CDATA[<]]> TRUNC(SYSDATE)+1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.ordadm.domain.OrdersKey">
+    delete from ORDADM.ORDERS
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+      and ORDER_SUB_NO = #{orderSubNo,jdbcType=NUMERIC}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.ordadm.domain.Orders">
+    insert into ORDADM.ORDERS (PATIENT_ID, VISIT_ID, ORDER_NO, 
+      ORDER_SUB_NO, REPEAT_INDICATOR, ORDER_CLASS, 
+      ORDER_TEXT, ORDER_CODE, DOSAGE, 
+      DOSAGE_UNITS, ADMINISTRATION, DURATION, 
+      DURATION_UNITS, START_DATE_TIME, STOP_DATE_TIME, 
+      FREQUENCY, FREQ_COUNTER, FREQ_INTERVAL, 
+      FREQ_INTERVAL_UNIT, FREQ_DETAIL, PERFORM_SCHEDULE, 
+      PERFORM_RESULT, ORDERING_DEPT, DOCTOR, 
+      STOP_DOCTOR, NURSE, ENTER_DATE_TIME, 
+      ORDER_STATUS, BILLING_ATTR, LAST_PERFORM_DATE_TIME, 
+      LAST_ACCTING_DATE_TIME, CURRENT_PRESC_NO, 
+      CHECK_OPERATOR, CHECK_DATETIME, DRUG_BILLING_ATTR, 
+      STOP_NURSE, STOP_ORDER_DATE_TIME, ISPRINT
+      )
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{orderNo,jdbcType=NUMERIC}, 
+      #{orderSubNo,jdbcType=NUMERIC}, #{repeatIndicator,jdbcType=NUMERIC}, #{orderClass,jdbcType=VARCHAR}, 
+      #{orderText,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{dosage,jdbcType=NUMERIC}, 
+      #{dosageUnits,jdbcType=VARCHAR}, #{administration,jdbcType=VARCHAR}, #{duration,jdbcType=NUMERIC}, 
+      #{durationUnits,jdbcType=VARCHAR}, #{startDateTime,jdbcType=TIMESTAMP}, #{stopDateTime,jdbcType=TIMESTAMP}, 
+      #{frequency,jdbcType=VARCHAR}, #{freqCounter,jdbcType=NUMERIC}, #{freqInterval,jdbcType=NUMERIC}, 
+      #{freqIntervalUnit,jdbcType=VARCHAR}, #{freqDetail,jdbcType=VARCHAR}, #{performSchedule,jdbcType=VARCHAR}, 
+      #{performResult,jdbcType=VARCHAR}, #{orderingDept,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, 
+      #{stopDoctor,jdbcType=VARCHAR}, #{nurse,jdbcType=VARCHAR}, #{enterDateTime,jdbcType=TIMESTAMP}, 
+      #{orderStatus,jdbcType=VARCHAR}, #{billingAttr,jdbcType=NUMERIC}, #{lastPerformDateTime,jdbcType=TIMESTAMP}, 
+      #{lastAcctingDateTime,jdbcType=TIMESTAMP}, #{currentPrescNo,jdbcType=VARCHAR}, 
+      #{checkOperator,jdbcType=VARCHAR}, #{checkDatetime,jdbcType=TIMESTAMP}, #{drugBillingAttr,jdbcType=NUMERIC}, 
+      #{stopNurse,jdbcType=VARCHAR}, #{stopOrderDateTime,jdbcType=TIMESTAMP}, #{isprint,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.ordadm.domain.Orders">
+    insert into ORDADM.ORDERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="orderSubNo != null">
+        ORDER_SUB_NO,
+      </if>
+      <if test="repeatIndicator != null">
+        REPEAT_INDICATOR,
+      </if>
+      <if test="orderClass != null">
+        ORDER_CLASS,
+      </if>
+      <if test="orderText != null">
+        ORDER_TEXT,
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE,
+      </if>
+      <if test="dosage != null">
+        DOSAGE,
+      </if>
+      <if test="dosageUnits != null">
+        DOSAGE_UNITS,
+      </if>
+      <if test="administration != null">
+        ADMINISTRATION,
+      </if>
+      <if test="duration != null">
+        DURATION,
+      </if>
+      <if test="durationUnits != null">
+        DURATION_UNITS,
+      </if>
+      <if test="startDateTime != null">
+        START_DATE_TIME,
+      </if>
+      <if test="stopDateTime != null">
+        STOP_DATE_TIME,
+      </if>
+      <if test="frequency != null">
+        FREQUENCY,
+      </if>
+      <if test="freqCounter != null">
+        FREQ_COUNTER,
+      </if>
+      <if test="freqInterval != null">
+        FREQ_INTERVAL,
+      </if>
+      <if test="freqIntervalUnit != null">
+        FREQ_INTERVAL_UNIT,
+      </if>
+      <if test="freqDetail != null">
+        FREQ_DETAIL,
+      </if>
+      <if test="performSchedule != null">
+        PERFORM_SCHEDULE,
+      </if>
+      <if test="performResult != null">
+        PERFORM_RESULT,
+      </if>
+      <if test="orderingDept != null">
+        ORDERING_DEPT,
+      </if>
+      <if test="doctor != null">
+        DOCTOR,
+      </if>
+      <if test="stopDoctor != null">
+        STOP_DOCTOR,
+      </if>
+      <if test="nurse != null">
+        NURSE,
+      </if>
+      <if test="enterDateTime != null">
+        ENTER_DATE_TIME,
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS,
+      </if>
+      <if test="billingAttr != null">
+        BILLING_ATTR,
+      </if>
+      <if test="lastPerformDateTime != null">
+        LAST_PERFORM_DATE_TIME,
+      </if>
+      <if test="lastAcctingDateTime != null">
+        LAST_ACCTING_DATE_TIME,
+      </if>
+      <if test="currentPrescNo != null">
+        CURRENT_PRESC_NO,
+      </if>
+      <if test="checkOperator != null">
+        CHECK_OPERATOR,
+      </if>
+      <if test="checkDatetime != null">
+        CHECK_DATETIME,
+      </if>
+      <if test="drugBillingAttr != null">
+        DRUG_BILLING_ATTR,
+      </if>
+      <if test="stopNurse != null">
+        STOP_NURSE,
+      </if>
+      <if test="stopOrderDateTime != null">
+        STOP_ORDER_DATE_TIME,
+      </if>
+      <if test="isprint != null">
+        ISPRINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=NUMERIC},
+      </if>
+      <if test="orderSubNo != null">
+        #{orderSubNo,jdbcType=NUMERIC},
+      </if>
+      <if test="repeatIndicator != null">
+        #{repeatIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="orderClass != null">
+        #{orderClass,jdbcType=VARCHAR},
+      </if>
+      <if test="orderText != null">
+        #{orderText,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null">
+        #{dosage,jdbcType=NUMERIC},
+      </if>
+      <if test="dosageUnits != null">
+        #{dosageUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="administration != null">
+        #{administration,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=NUMERIC},
+      </if>
+      <if test="durationUnits != null">
+        #{durationUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="startDateTime != null">
+        #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDateTime != null">
+        #{stopDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="freqCounter != null">
+        #{freqCounter,jdbcType=NUMERIC},
+      </if>
+      <if test="freqInterval != null">
+        #{freqInterval,jdbcType=NUMERIC},
+      </if>
+      <if test="freqIntervalUnit != null">
+        #{freqIntervalUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="freqDetail != null">
+        #{freqDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="performSchedule != null">
+        #{performSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="performResult != null">
+        #{performResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderingDept != null">
+        #{orderingDept,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="stopDoctor != null">
+        #{stopDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null">
+        #{nurse,jdbcType=VARCHAR},
+      </if>
+      <if test="enterDateTime != null">
+        #{enterDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="billingAttr != null">
+        #{billingAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="lastPerformDateTime != null">
+        #{lastPerformDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAcctingDateTime != null">
+        #{lastAcctingDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentPrescNo != null">
+        #{currentPrescNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkOperator != null">
+        #{checkOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDatetime != null">
+        #{checkDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugBillingAttr != null">
+        #{drugBillingAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="stopNurse != null">
+        #{stopNurse,jdbcType=VARCHAR},
+      </if>
+      <if test="stopOrderDateTime != null">
+        #{stopOrderDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isprint != null">
+        #{isprint,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.ordadm.domain.Orders">
+    update ORDADM.ORDERS
+    <set>
+      <if test="repeatIndicator != null">
+        REPEAT_INDICATOR = #{repeatIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="orderClass != null">
+        ORDER_CLASS = #{orderClass,jdbcType=VARCHAR},
+      </if>
+      <if test="orderText != null">
+        ORDER_TEXT = #{orderText,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dosage != null">
+        DOSAGE = #{dosage,jdbcType=NUMERIC},
+      </if>
+      <if test="dosageUnits != null">
+        DOSAGE_UNITS = #{dosageUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="administration != null">
+        ADMINISTRATION = #{administration,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null">
+        DURATION = #{duration,jdbcType=NUMERIC},
+      </if>
+      <if test="durationUnits != null">
+        DURATION_UNITS = #{durationUnits,jdbcType=VARCHAR},
+      </if>
+      <if test="startDateTime != null">
+        START_DATE_TIME = #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDateTime != null">
+        STOP_DATE_TIME = #{stopDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="frequency != null">
+        FREQUENCY = #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="freqCounter != null">
+        FREQ_COUNTER = #{freqCounter,jdbcType=NUMERIC},
+      </if>
+      <if test="freqInterval != null">
+        FREQ_INTERVAL = #{freqInterval,jdbcType=NUMERIC},
+      </if>
+      <if test="freqIntervalUnit != null">
+        FREQ_INTERVAL_UNIT = #{freqIntervalUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="freqDetail != null">
+        FREQ_DETAIL = #{freqDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="performSchedule != null">
+        PERFORM_SCHEDULE = #{performSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="performResult != null">
+        PERFORM_RESULT = #{performResult,jdbcType=VARCHAR},
+      </if>
+      <if test="orderingDept != null">
+        ORDERING_DEPT = #{orderingDept,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null">
+        DOCTOR = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="stopDoctor != null">
+        STOP_DOCTOR = #{stopDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null">
+        NURSE = #{nurse,jdbcType=VARCHAR},
+      </if>
+      <if test="enterDateTime != null">
+        ENTER_DATE_TIME = #{enterDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="billingAttr != null">
+        BILLING_ATTR = #{billingAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="lastPerformDateTime != null">
+        LAST_PERFORM_DATE_TIME = #{lastPerformDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastAcctingDateTime != null">
+        LAST_ACCTING_DATE_TIME = #{lastAcctingDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentPrescNo != null">
+        CURRENT_PRESC_NO = #{currentPrescNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkOperator != null">
+        CHECK_OPERATOR = #{checkOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDatetime != null">
+        CHECK_DATETIME = #{checkDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drugBillingAttr != null">
+        DRUG_BILLING_ATTR = #{drugBillingAttr,jdbcType=NUMERIC},
+      </if>
+      <if test="stopNurse != null">
+        STOP_NURSE = #{stopNurse,jdbcType=VARCHAR},
+      </if>
+      <if test="stopOrderDateTime != null">
+        STOP_ORDER_DATE_TIME = #{stopOrderDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isprint != null">
+        ISPRINT = #{isprint,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+      and ORDER_SUB_NO = #{orderSubNo,jdbcType=NUMERIC}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.ordadm.domain.Orders">
+    update ORDADM.ORDERS
+    set REPEAT_INDICATOR = #{repeatIndicator,jdbcType=NUMERIC},
+      ORDER_CLASS = #{orderClass,jdbcType=VARCHAR},
+      ORDER_TEXT = #{orderText,jdbcType=VARCHAR},
+      ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      DOSAGE = #{dosage,jdbcType=NUMERIC},
+      DOSAGE_UNITS = #{dosageUnits,jdbcType=VARCHAR},
+      ADMINISTRATION = #{administration,jdbcType=VARCHAR},
+      DURATION = #{duration,jdbcType=NUMERIC},
+      DURATION_UNITS = #{durationUnits,jdbcType=VARCHAR},
+      START_DATE_TIME = #{startDateTime,jdbcType=TIMESTAMP},
+      STOP_DATE_TIME = #{stopDateTime,jdbcType=TIMESTAMP},
+      FREQUENCY = #{frequency,jdbcType=VARCHAR},
+      FREQ_COUNTER = #{freqCounter,jdbcType=NUMERIC},
+      FREQ_INTERVAL = #{freqInterval,jdbcType=NUMERIC},
+      FREQ_INTERVAL_UNIT = #{freqIntervalUnit,jdbcType=VARCHAR},
+      FREQ_DETAIL = #{freqDetail,jdbcType=VARCHAR},
+      PERFORM_SCHEDULE = #{performSchedule,jdbcType=VARCHAR},
+      PERFORM_RESULT = #{performResult,jdbcType=VARCHAR},
+      ORDERING_DEPT = #{orderingDept,jdbcType=VARCHAR},
+      DOCTOR = #{doctor,jdbcType=VARCHAR},
+      STOP_DOCTOR = #{stopDoctor,jdbcType=VARCHAR},
+      NURSE = #{nurse,jdbcType=VARCHAR},
+      ENTER_DATE_TIME = #{enterDateTime,jdbcType=TIMESTAMP},
+      ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      BILLING_ATTR = #{billingAttr,jdbcType=NUMERIC},
+      LAST_PERFORM_DATE_TIME = #{lastPerformDateTime,jdbcType=TIMESTAMP},
+      LAST_ACCTING_DATE_TIME = #{lastAcctingDateTime,jdbcType=TIMESTAMP},
+      CURRENT_PRESC_NO = #{currentPrescNo,jdbcType=VARCHAR},
+      CHECK_OPERATOR = #{checkOperator,jdbcType=VARCHAR},
+      CHECK_DATETIME = #{checkDatetime,jdbcType=TIMESTAMP},
+      DRUG_BILLING_ATTR = #{drugBillingAttr,jdbcType=NUMERIC},
+      STOP_NURSE = #{stopNurse,jdbcType=VARCHAR},
+      STOP_ORDER_DATE_TIME = #{stopOrderDateTime,jdbcType=TIMESTAMP},
+      ISPRINT = #{isprint,jdbcType=VARCHAR}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+      and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+      and ORDER_NO = #{orderNo,jdbcType=NUMERIC}
+      and ORDER_SUB_NO = #{orderSubNo,jdbcType=NUMERIC}
+  </update>
+</mapper>
