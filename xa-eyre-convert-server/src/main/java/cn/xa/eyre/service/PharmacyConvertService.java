@@ -93,82 +93,79 @@ public class PharmacyConvertService {
             throw new RuntimeException(e);
         }
         // 反查数据
-//        R<DrugPrescMaster> prescMaster = medrecFeignClient.getDrugPrescMaster(drugPrescMaster);
-        R<DrugPrescMaster> prescMaster = medrecFeignClient.selectDrugPrescMasterByPatientId(drugPrescMaster);
-        if (R.SUCCESS == prescMaster.getCode() && prescMaster.getData() != null) {
-            drugPrescMaster = prescMaster.getData();
-            EmrOrder emrOrder = new EmrOrder();
-            String id = DigestUtil.md5Hex(DateUtils.dateTime(drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo());
-            emrOrder.setId(id);
-            String patientId = drugPrescMaster.getPatientId();
-            R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(patientId);
-            if (R.SUCCESS == medrecResult.getCode()) {
-                // 更新推送患者信息
-                hubToolService.syncPatInfo(medrecResult.getData());
-                PatMasterIndex patMasterIndex = medrecResult.getData();
-                emrOrder.setPatientId(patientId);
-                Short prescSource = drugPrescMaster.getPrescSource();
-                String preNo = "";
-                if (prescSource == 0) {
-                    // 门诊
-                    emrOrder.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getName());
-                    emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getCode());
-                    OutpMr outpMr = new OutpMr();
-                    outpMr.setPatientId(patientId);
-                    outpMr.setVisitDateStr(DateUtils.dateTime(drugPrescMaster.getPrescDate()));
-                    R<List<OutpMr>> mrResult = outpdoctFeignClient.getOutpMrByCondition(outpMr);
-                    if (R.SUCCESS == mrResult.getCode()) {
-                        outpMr = mrResult.getData().get(0);
-                        emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + outpMr.getVisitNo()));
-                    } else {
-                        emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
-                    }
-                    preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
 
+        EmrOrder emrOrder = new EmrOrder();
+        String id = DigestUtil.md5Hex(DateUtils.dateTime(drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo());
+        emrOrder.setId(id);
+        String patientId = drugPrescMaster.getPatientId();
+        R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(patientId);
+        if (R.SUCCESS == medrecResult.getCode()) {
+            // 更新推送患者信息
+            hubToolService.syncPatInfo(medrecResult.getData());
+            PatMasterIndex patMasterIndex = medrecResult.getData();
+            emrOrder.setPatientId(patientId);
+            Short prescSource = drugPrescMaster.getPrescSource();
+            String preNo = "";
+            if (prescSource == 0) {
+                // 门诊
+                emrOrder.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getName());
+                emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getCode());
+                OutpMr outpMr = new OutpMr();
+                outpMr.setPatientId(patientId);
+                outpMr.setVisitDateStr(DateUtils.dateTime(drugPrescMaster.getPrescDate()));
+                R<List<OutpMr>> mrResult = outpdoctFeignClient.getOutpMrByCondition(outpMr);
+                if (R.SUCCESS == mrResult.getCode()) {
+                    outpMr = mrResult.getData().get(0);
+                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + outpMr.getVisitNo()));
                 } else {
-                    // 住院
-                    emrOrder.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getName());
-                    emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getCode());
-                    R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospitalByPatientId(patientId);
-                    if (R.SUCCESS == hospitalResult.getCode()) {
-                        PatsInHospital pats = hospitalResult.getData();
-                        emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + pats.getVisitId()));
-                    }else {
-                        emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
-                    }
-                    preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
+                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
                 }
-                emrOrder.setPatientName(drugPrescMaster.getName());
-                emrOrder.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
-                emrOrder.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
-                emrOrder.setIdCard(patMasterIndex.getIdNo());
-                emrOrder.setPrescriptionNo(preNo);
-                Short prescType = drugPrescMaster.getPrescType();
-                if (prescType == 0) {
-                    emrOrder.setPrescriptionTypeCode("0");
-                } else if (prescType == 1) {
-                    emrOrder.setPrescriptionTypeCode("1");
-                }
-                emrOrder.setPrescriptionIssuanceDate(drugPrescMaster.getPrescDate());
-                R<Users> user = commFeignClient.getUserByName(drugPrescMaster.getPrescribedBy());
-                if (R.SUCCESS == user.getCode() && user.getData() != null) {
-                    emrOrder.setPrescriptionIssuanceId(user.getData().getUserId());
-                }
-                user = commFeignClient.getUserByName(drugPrescMaster.getDispensingProvider());
-                if (R.SUCCESS == user.getCode() && user.getData() != null) {
-                    emrOrder.setPrescriptionDispensingId(user.getData().getUserId());
-                }
-                DictDisDept dictDisDept = hubToolService.getDept(drugPrescMaster.getOrderedBy());
+                preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
 
-                emrOrder.setDeptCode(dictDisDept.getHubCode());
-                emrOrder.setDeptName(dictDisDept.getHubName());
+            } else {
+                // 住院
+                emrOrder.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getName());
+                emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getCode());
+                R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospitalByPatientId(patientId);
+                if (R.SUCCESS == hospitalResult.getCode()) {
+                    PatsInHospital pats = hospitalResult.getData();
+                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + pats.getVisitId()));
+                }else {
+                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
+                }
+                preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
+            }
+            emrOrder.setPatientName(drugPrescMaster.getName());
+            emrOrder.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
+            emrOrder.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
+            emrOrder.setIdCard(patMasterIndex.getIdNo());
+            emrOrder.setPrescriptionNo(preNo);
+            Short prescType = drugPrescMaster.getPrescType();
+            if (prescType == 0) {
+                emrOrder.setPrescriptionTypeCode("0");
+            } else if (prescType == 1) {
+                emrOrder.setPrescriptionTypeCode("1");
+            }
+            emrOrder.setPrescriptionIssuanceDate(drugPrescMaster.getPrescDate());
+            R<Users> user = commFeignClient.getUserByName(drugPrescMaster.getPrescribedBy());
+            if (R.SUCCESS == user.getCode() && user.getData() != null) {
+                emrOrder.setPrescriptionIssuanceId(user.getData().getUserId());
+            }
+            user = commFeignClient.getUserByName(drugPrescMaster.getDispensingProvider());
+            if (R.SUCCESS == user.getCode() && user.getData() != null) {
+                emrOrder.setPrescriptionDispensingId(user.getData().getUserId());
+            }
+            DictDisDept dictDisDept = hubToolService.getDept(drugPrescMaster.getOrderedBy());
 
-                emrOrder.setOrgCode(HubCodeEnum.ORG_CODE.getCode());
-                emrOrder.setOrgName(HubCodeEnum.ORG_CODE.getName());
+            emrOrder.setDeptCode(dictDisDept.getHubCode());
+            emrOrder.setDeptName(dictDisDept.getHubName());
 
-                emrOrder.setOperationTime(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, DateUtils.getNowDate()));
-                emrOrder.setOperatorId(emrOrder.getPrescriptionIssuanceId());
-                synchroEmrMonitorService.syncEmrOrder(emrOrder, httpMethod);
+            emrOrder.setOrgCode(HubCodeEnum.ORG_CODE.getCode());
+            emrOrder.setOrgName(HubCodeEnum.ORG_CODE.getName());
+
+            emrOrder.setOperationTime(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, DateUtils.getNowDate()));
+            emrOrder.setOperatorId(emrOrder.getPrescriptionIssuanceId());
+            synchroEmrMonitorService.syncEmrOrder(emrOrder, httpMethod);
 
 //                logger.debug("构造emrActivityInfo(首次病程)接口数据...");
 //                EmrActivityInfo emrActivityInfo = new EmrActivityInfo();
@@ -194,41 +191,37 @@ public class PharmacyConvertService {
 //                emrActivityInfo.setOperationTime(HubCodeEnum.DIAGNOSIS_ACTIVITIES_FIRST_COURSE.getCode());
 //                synchroEmrRealService.syncEmrActivityInfo(emrActivityInfo, httpMethod);
 
-                logger.debug("构造emrOrderItem接口数据...");
-                DrugPrescDetail drugPrescDetail = new DrugPrescDetail();
-                drugPrescDetail.setPrescNo(drugPrescMaster.getPrescNo());
-                drugPrescDetail.setPrescDate(drugPrescMaster.getPrescDate());
+            logger.debug("构造emrOrderItem接口数据...");
+            DrugPrescDetail drugPrescDetail = new DrugPrescDetail();
+            drugPrescDetail.setPrescNo(drugPrescMaster.getPrescNo());
+            drugPrescDetail.setPrescDate(drugPrescMaster.getPrescDate());
 //                R<List<DrugPrescDetail>> details = pharmacyFeignClient.getDrugPrescDetailByVisitInfo(drugPrescDetail);
-                R<List<DrugPrescDetail>> details = pharmacyFeignClient.getDrugPrescDetailByPrescNo(drugPrescDetail);
-                if (details.getCode() == R.SUCCESS && details.getData() != null) {
-                    for (DrugPrescDetail prescDetail : details.getData()) {
-                        String drugCode = prescDetail.getDrugCode();
-                        EmrOrderItem emrOrderItem = new EmrOrderItem();
-                        id = DigestUtil.md5Hex(DateUtils.dateTime(prescDetail.getPrescDate()) + prescDetail.getPrescNo() + prescDetail.getItemNo());
-                        emrOrderItem.setId(id);
-                        emrOrderItem.setOrderId(emrOrder.getId());
-                        emrOrderItem.setDrugSpecifications(prescDetail.getDrugSpec());
-                        emrOrderItem.setOperatorId(emrOrder.getOperatorId());
-                        emrOrderItem.setOperationTime(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, DateUtils.getNowDate()));
-                        DictDrugType drugType = dictDrugTypeMapper.selectByEmrCode(drugCode);
-                        if (StringUtils.isNotBlank(drugType.getHubCode())) {
-                            emrOrderItem.setDrugCode(drugType.getHubCode());
-                            emrOrderItem.setDrugName(drugType.getHubName());
-                        } else {
-                            emrOrderItem.setDrugCode(drugCode);
-                            emrOrderItem.setDrugName(prescDetail.getDrugName());
-                        }
-                        synchroEmrMonitorService.syncEmrOrderItem(emrOrderItem, Constants.HTTP_METHOD_POST);
+            R<List<DrugPrescDetail>> details = pharmacyFeignClient.getDrugPrescDetailByPrescNo(drugPrescDetail);
+            if (details.getCode() == R.SUCCESS && details.getData() != null) {
+                for (DrugPrescDetail prescDetail : details.getData()) {
+                    String drugCode = prescDetail.getDrugCode();
+                    EmrOrderItem emrOrderItem = new EmrOrderItem();
+                    id = DigestUtil.md5Hex(DateUtils.dateTime(prescDetail.getPrescDate()) + prescDetail.getPrescNo() + prescDetail.getItemNo());
+                    emrOrderItem.setId(id);
+                    emrOrderItem.setOrderId(emrOrder.getId());
+                    emrOrderItem.setDrugSpecifications(prescDetail.getDrugSpec());
+                    emrOrderItem.setOperatorId(emrOrder.getOperatorId());
+                    emrOrderItem.setOperationTime(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, DateUtils.getNowDate()));
+                    DictDrugType drugType = dictDrugTypeMapper.selectByEmrCode(drugCode);
+                    if (StringUtils.isNotBlank(drugType.getHubCode())) {
+                        emrOrderItem.setDrugCode(drugType.getHubCode());
+                        emrOrderItem.setDrugName(drugType.getHubName());
+                    } else {
+                        emrOrderItem.setDrugCode(drugCode);
+                        emrOrderItem.setDrugName(prescDetail.getDrugName());
                     }
-
+                    synchroEmrMonitorService.syncEmrOrderItem(emrOrderItem, Constants.HTTP_METHOD_POST);
                 }
 
-            } else {
-                logger.error("{}对应PatMasterIndex信息信息为空，无法同步", patientId);
             }
+
         } else {
-            logger.error("未找到DRUG_PRESC_MASTER数据");
-            logger.error("查询条件： PrescDate：{}， PrescNo：{}",drugPrescMaster.getPrescDate(), drugPrescMaster.getPrescNo());
+            logger.error("{}对应PatMasterIndex信息信息为空，无法同步", patientId);
         }
     }
 }
