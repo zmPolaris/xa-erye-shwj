@@ -46,7 +46,12 @@
     from PAT_MASTER_INDEX
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectIdNo" parameterType="java.lang.String" resultType="java.lang.String">
+      select n.certno from nation_insur_trade_info n left join outp_rcpt_master r on n.setl_id = r.setl_id
+      left join pat_master_index p on r.patient_id = p.patient_id
+      where p.patient_id = #{patientId,jdbcType=VARCHAR} and ROWNUM = 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from PAT_MASTER_INDEX
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </delete>

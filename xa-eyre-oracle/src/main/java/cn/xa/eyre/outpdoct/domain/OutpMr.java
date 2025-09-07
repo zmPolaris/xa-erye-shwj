@@ -51,6 +51,8 @@ public class OutpMr extends OutpMrKey {
 
     private Short redosage;
 
+    private String visitDateStr;
+
     public String getPatientId() {
         return patientId;
     }
@@ -249,5 +251,13 @@ public class OutpMr extends OutpMrKey {
 
     public void setRedosage(Short redosage) {
         this.redosage = redosage;
+    }
+
+    public String getVisitDateStr() {
+        return visitDateStr;
+    }
+
+    public void setVisitDateStr(String visitDateStr) {
+        this.visitDateStr = visitDateStr;
     }
 }

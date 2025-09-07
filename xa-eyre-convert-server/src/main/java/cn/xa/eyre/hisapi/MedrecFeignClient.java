@@ -48,5 +48,6 @@ public interface MedrecFeignClient {
     @PostMapping("/medrec/getDiagnosticDescCode")
     public R<DiagnosticDescCode> getDiagnosticDescCode(@RequestBody String patientId);
 
-
+    @GetMapping("/medrec/getIdNo/{patientId}")
+    public R<String> getIdNo(@PathVariable("patientId") String patientId);
 }

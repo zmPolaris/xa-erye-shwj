@@ -134,7 +134,7 @@ public class OutpdoctConvertService {
                     if (StringUtils.isBlank(patMasterIndex.getIdNo())){
                         emrOutpatientRecord.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                         emrOutpatientRecord.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                        emrOutpatientRecord.setIdCard("-");
+                        emrOutpatientRecord.setIdCard(medrecResult.getData().getIdNo());
                     }else {
                         emrOutpatientRecord.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                         emrOutpatientRecord.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());

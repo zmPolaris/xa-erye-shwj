@@ -43,6 +43,43 @@
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}
       and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
   </select>
+  <select id="selectOutpMrList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from (select
+    <include refid="Base_Column_List" />
+    from OUTPDOCT.OUTP_MR
+    ORDER BY VISIT_DATE DESC)
+    WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
+  </select>
+  <select id="selectOutpMrByCondition" parameterType="cn.xa.eyre.outpdoct.domain.OutpMr" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from OUTPDOCT.OUTP_MR
+    <where>
+      <if test="visitDateStr != null">
+        and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'YYYY-MM-DD')
+      </if>
+      <if test="visitNo != null">
+        and VISIT_NO = #{visitNo,jdbcType=NUMERIC}
+      </if>
+      <if test="ordinal != null">
+        and ORDINAL = #{ordinal,jdbcType=NUMERIC}
+      </if>
+      <if test="patientId != null">
+        and VISIT_DATE = #{patientId,jdbcType=VARCHAR}
+      </if>
+      <if test="doctor != null">
+        and VISIT_DATE = #{doctor,jdbcType=VARCHAR}
+      </if>
+      <if test="beginVisitDate != null and endVisitDate != null">
+        and VISIT_DATE BETWEEN TO_DATE(#{beginVisitDate,jdbcType=TIMESTAMP}, 'YYYY-MM-DD')
+        AND TO_DATE(#{endVisitDate,jdbcType=TIMESTAMP}, 'YYYY-MM-DD')
+      </if>
+      order by visit_date desc
+    </where>
+
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.outpdoct.domain.OutpMrKey">
     delete from OUTP_MR
     where VISIT_DATE = #{visitDate,jdbcType=TIMESTAMP}

@@ -17,7 +17,6 @@ import cn.xa.eyre.hub.service.SynchroEmrMonitorService;
 import cn.xa.eyre.hub.service.SynchroEmrRealService;
 import cn.xa.eyre.hub.staticvalue.HubCodeEnum;
 import cn.xa.eyre.inpadm.domain.PatsInHospital;
-import cn.xa.eyre.medrec.domain.OutpMrYb;
 import cn.xa.eyre.medrec.domain.PatMasterIndex;
 import cn.xa.eyre.ordadm.domain.Orders;
 import cn.xa.eyre.outpdoct.domain.OutpMr;

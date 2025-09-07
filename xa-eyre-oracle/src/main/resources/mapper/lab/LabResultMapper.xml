@@ -28,6 +28,12 @@
       and ITEM_NO = #{itemNo,jdbcType=NUMERIC}
       and PRINT_ORDER = #{printOrder,jdbcType=NUMERIC}
   </select>
+  <select id="selectByTestNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from LAB_RESULT
+    where TEST_NO = #{testNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.lab.domain.LabResultKey">
     delete from LAB_RESULT
     where TEST_NO = #{testNo,jdbcType=VARCHAR}

@@ -32,14 +32,7 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-//        System.out.println(DigestUtil.md5Hex("2025/8/12" + 2958 +1));
-//        System.out.println(DigestUtil.md5Hex("0097028874" + 2958));
-        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-        System.out.println(IdUtil.getSnowflake(1, 1).nextId());
-        System.out.println(snowflake.nextId());
-        System.out.println(snowflake.nextId());
-        System.out.println(snowflake.nextId());
-        System.out.println(snowflake.nextId());
-        System.out.println(snowflake.nextId());
+        System.out.println(DigestUtil.md5Hex("2025/8/12" + 2958 +1));
+        System.out.println(DigestUtil.md5Hex("0097028874" + 2958));
     }
 }

@@ -29,8 +29,8 @@ public class LabController {
         return AjaxResult.success("接口调用成功", labTestItemsMapper.selectByPrimaryKey(labTestItemsKey));
     }
 
-    @GetMapping("/getResultItemsByTestNo/{testNo}")
-    public AjaxResult getResultItemsByTestNo(@PathVariable("testNo") String testNo){
-        return AjaxResult.success("接口调用成功", labResultMapper.selectResultItemsByTestNo(testNo));
+    @GetMapping("/getResultByTestNo/{testNo}")
+    public AjaxResult getResultByTestNo(@PathVariable("testNo") String testNo){
+        return AjaxResult.success("接口调用成功", labResultMapper.selectByTestNo(testNo));
     }
 }

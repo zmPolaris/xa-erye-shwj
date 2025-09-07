@@ -87,11 +87,7 @@ public class MedrecConvertService {
         // 构造请求参数
         emrPatientInfo.setId(patMasterIndex.getPatientId());
         emrPatientInfo.setPatientName(patMasterIndex.getName());
-        if (StringUtils.isBlank(patMasterIndex.getIdNo())){
-            emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
-            emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-            emrPatientInfo.setIdCard("-");
-        }else {
+        if (StringUtils.isNotBlank(patMasterIndex.getIdNo())){
             if (IdcardUtil.isValidCard(patMasterIndex.getIdNo())){
                 emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                 emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -100,6 +96,19 @@ public class MedrecConvertService {
                 emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                 emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
                 emrPatientInfo.setIdCard(patMasterIndex.getIdNo());
+            }
+        }else {
+            // 获取不到证件号码时从医保信息表查询
+            R<String> idNoResult = medrecFeignClient.getIdNo(patMasterIndex.getPatientId());
+            if (R.SUCCESS == idNoResult.getCode() && idNoResult.getData() != null){
+                emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
+                emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
+                emrPatientInfo.setIdCard(idNoResult.getData());
+            }else {
+                // 还获取不到，取PatientId
+                emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
+                emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
+                emrPatientInfo.setIdCard(patMasterIndex.getPatientId());
             }
         }
         if(StringUtils.isNotBlank(patMasterIndex.getSex())){
@@ -201,7 +210,7 @@ public class MedrecConvertService {
                 if (StringUtils.isBlank(medrecResult.getData().getIdNo())){
                     emrFirstCourse.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                     emrFirstCourse.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                    emrFirstCourse.setIdCard("-");
+                    emrFirstCourse.setIdCard(medrecResult.getData().getPatientId());
                 }else {
                     emrFirstCourse.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                     emrFirstCourse.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -242,7 +251,7 @@ public class MedrecConvertService {
                 }
 
                 if(StringUtils.isNotBlank(diagnosis.getTreatResult())){
-                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosis.getTreatResult());
+                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosis.getTreatResult().trim());
                     if(dictTreatResult == null || dictTreatResult.getHubCode().equals(HubCodeEnum.TREAT_RESULT_OTHER.getCode())){
                         emrFirstCourse.setDiseaseProgressionCode(HubCodeEnum.TREAT_RESULT_OTHER.getCode());
                         emrFirstCourse.setDiseaseProgressionName(diagnosis.getTreatResult());
@@ -304,7 +313,7 @@ public class MedrecConvertService {
                 if (StringUtils.isBlank(medrecResult.getData().getIdNo())){
                     emrDailyCourse.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                     emrDailyCourse.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                    emrDailyCourse.setIdCard("-");
+                    emrDailyCourse.setIdCard(medrecResult.getData().getIdNo());
                 }else {
                     emrDailyCourse.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                     emrDailyCourse.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -325,7 +334,7 @@ public class MedrecConvertService {
                 emrDailyCourse.setOperationTime(DateUtils.getTime());
 
                 if(StringUtils.isNotBlank(diagnosis.getTreatResult())){
-                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosis.getTreatResult());
+                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosis.getTreatResult().trim());
                     if(dictTreatResult == null || dictTreatResult.getHubCode().equals(HubCodeEnum.TREAT_RESULT_OTHER.getCode())){
                         emrDailyCourse.setDiseaseProgressionCode(HubCodeEnum.TREAT_RESULT_OTHER.getCode());
                         emrDailyCourse.setDiseaseProgressionName(diagnosis.getTreatResult());
@@ -474,7 +483,7 @@ public class MedrecConvertService {
             if (StringUtils.isBlank(medrecResult.getData().getIdNo())){
                 emrAdmissionRecord.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                 emrAdmissionRecord.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                emrAdmissionRecord.setIdCard("-");
+                emrAdmissionRecord.setIdCard(medrecResult.getData().getIdNo());
             }else {
                 emrAdmissionRecord.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                 emrAdmissionRecord.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -494,7 +503,7 @@ public class MedrecConvertService {
                 emrDischargeInfo.setDischargeDiagnosisCode(outDictDiseaseIcd10.getHubCode());
                 emrDischargeInfo.setDischargeDiagnosisName(outDictDiseaseIcd10.getHubName());
                 if(StringUtils.isNotBlank(diagnosisOutResult.getData().getTreatResult())){
-                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosisOutResult.getData().getTreatResult());
+                    DictTreatResult dictTreatResult = dictTreatResultMapper.selectByEmrName(diagnosisOutResult.getData().getTreatResult().trim());
                     if(dictTreatResult == null || dictTreatResult.getHubCode().equals(HubCodeEnum.TREAT_RESULT_OTHER.getCode())){
                         emrDischargeInfo.setDiseaseProgressionCode(HubCodeEnum.TREAT_RESULT_OTHER.getCode());
                         emrDischargeInfo.setDiseaseProgressionName(diagnosisOutResult.getData().getTreatResult());
@@ -548,7 +557,7 @@ public class MedrecConvertService {
                 if (StringUtils.isBlank(medrecResult.getData().getIdNo())){
                     emrDischargeInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                     emrDischargeInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                    emrDischargeInfo.setIdCard("-");
+                    emrDischargeInfo.setIdCard(medrecResult.getData().getIdNo());
                 }else {
                     emrDischargeInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                     emrDischargeInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());

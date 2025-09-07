@@ -3,7 +3,7 @@ package cn.xa.eyre.hisapi;
 
 import cn.xa.eyre.common.constant.Constants;
 import cn.xa.eyre.common.core.domain.R;
-import cn.xa.eyre.lab.domain.LabResultVo;
+import cn.xa.eyre.lab.domain.LabResult;
 import cn.xa.eyre.lab.domain.LabTestItems;
 import cn.xa.eyre.lab.domain.LabTestItemsKey;
 import cn.xa.eyre.lab.domain.LabTestMaster;
@@ -27,6 +27,6 @@ public interface LabFeignClient {
     @PostMapping("/lab/getLabTestItems")
     public R<LabTestItems> getLabTestItems(@RequestBody LabTestItemsKey labTestItemsKey);
 
-    @GetMapping("/lab/getResultItemsByTestNo/{testNo}")
-    public R<List<LabResultVo>>  getResultItemsByTestNo(@PathVariable("testNo") String testNo);
+    @GetMapping("/lab/getResultByTestNo/{testNo}")
+    public R<List<LabResult>>  getResultByTestNo(@PathVariable("testNo") String testNo);
 }

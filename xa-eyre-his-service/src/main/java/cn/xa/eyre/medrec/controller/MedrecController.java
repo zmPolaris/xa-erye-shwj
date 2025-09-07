@@ -81,4 +81,9 @@ public class MedrecController {
     public AjaxResult getDiagnosticDescCode(@RequestBody String patientId){
         return AjaxResult.success("接口调用成功", medrecService.getDiagnosticDescCode(patientId));
     }
+
+    @GetMapping("/getIdNo/{patientId}")
+    public AjaxResult getIdNo(@PathVariable("patientId") String patientId){
+        return AjaxResult.success("接口调用成功", medrecService.selectIdNo(patientId));
+    }
 }

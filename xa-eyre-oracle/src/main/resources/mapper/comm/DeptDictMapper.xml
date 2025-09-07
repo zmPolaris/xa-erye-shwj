@@ -22,6 +22,15 @@
     from DEPT_DICT
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
   </select>
+  <select id="selectDeptList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from (select
+    <include refid="Base_Column_List" />
+    from COMM.DEPT_DICT
+    ORDER BY SERIAL_NO DESC)
+    WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from DEPT_DICT
     where DEPT_CODE = #{deptCode,jdbcType=VARCHAR}

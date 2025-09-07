@@ -1,6 +1,9 @@
 package cn.xa.eyre.comm.mapper;
 
 import cn.xa.eyre.comm.domain.DeptDict;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DeptDictMapper {
     int deleteByPrimaryKey(String deptCode);
@@ -14,4 +17,6 @@ public interface DeptDictMapper {
     int updateByPrimaryKeySelective(DeptDict record);
 
     int updateByPrimaryKey(DeptDict record);
+
+    List<DeptDict> selectDeptList(@Param("num") Integer num);
 }

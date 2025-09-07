@@ -75,7 +75,7 @@ public class HubToolService {
                 if (StringUtils.isBlank(patMasterIndex.getIdNo())){
                     emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                     emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                    emrPatientInfo.setIdCard("-");
+                    emrPatientInfo.setIdCard(medrecResult.getData().getIdNo());
                 }else {
                     emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                     emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -223,7 +223,7 @@ public class HubToolService {
                     baseDept.setTargetDeptName(dictDisDept.getHubName());
                     baseDept.setCreateTime(DateUtils.getNowDate());
                     logger.info("同步数据：{}", JSONUtil.toJsonStr(baseDept));
-//                    synchroBaseService.syncBaseDept(baseDept, Constants.HTTP_METHOD_POST);
+                    synchroBaseService.syncBaseDept(baseDept, Constants.HTTP_METHOD_POST);
                 }
                 return true;
             }
@@ -268,7 +268,7 @@ public class HubToolService {
                     } else {
                         emrActivityInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                         emrActivityInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                        emrActivityInfo.setIdCard("-");
+                        emrActivityInfo.setIdCard(medrecResult.getData().getIdNo());
                     }
                     emrActivityInfo.setPatientName(patMasterIndex.getName());
 
@@ -349,11 +349,7 @@ public class HubToolService {
         EmrPatientInfo emrPatientInfo = new EmrPatientInfo();
         emrPatientInfo.setId(patMasterIndex.getPatientId());
         emrPatientInfo.setPatientName(patMasterIndex.getName());
-        if (StringUtils.isBlank(patMasterIndex.getIdNo())){
-            emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
-            emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-            emrPatientInfo.setIdCard("-");
-        }else {
+        if (StringUtils.isNotBlank(patMasterIndex.getIdNo())){
             if (IdcardUtil.isValidCard(patMasterIndex.getIdNo())){
                 emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                 emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
@@ -362,6 +358,19 @@ public class HubToolService {
                 emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                 emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
                 emrPatientInfo.setIdCard(patMasterIndex.getIdNo());
+            }
+        }else {
+            // 获取不到证件号码时从医保信息表查询
+            R<String> idNoResult = medrecFeignClient.getIdNo(patMasterIndex.getPatientId());
+            if (R.SUCCESS == idNoResult.getCode() && idNoResult.getData() != null){
+                emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
+                emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
+                emrPatientInfo.setIdCard(idNoResult.getData());
+            }else {
+                // 还获取不到，取PatientId
+                emrPatientInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
+                emrPatientInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
+                emrPatientInfo.setIdCard(patMasterIndex.getPatientId());
             }
         }
         if(StringUtils.isNotBlank(patMasterIndex.getSex())){

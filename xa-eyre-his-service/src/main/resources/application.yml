@@ -118,7 +118,7 @@ xss:
 
 # licence配置
 license:
-  subject: 中国人民解放军联勤保障部队第九二五医院
+  subject: 中国人民武装警察部队上海市总队医院
   publicAlias: publicCert
   storePass: 7Hk.;9%p2L*m4)Q
   licensePath: /home/convert/licence/license.lic

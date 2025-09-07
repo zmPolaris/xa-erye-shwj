@@ -410,7 +410,7 @@ public class EmrDeathInfo extends BaseEntity
                 && Objects.equals(getOperatorId(), that.getOperatorId())
 //                && Objects.equals(getOperationTime(), that.getOperationTime())
                 && Objects.equals(getInvalidFlag(), that.getInvalidFlag())
-                && Objects.equals(getDataStatus(), that.getDataStatus())
+                && Objects.equals(getDataStatus(), that.getDataStatus());
 //                && Objects.equals(getCreateDate(), that.getCreateDate());
     }
 

@@ -4,9 +4,7 @@ import cn.xa.eyre.common.core.domain.R;
 import cn.xa.eyre.common.core.kafka.DBMessage;
 import cn.xa.eyre.common.utils.DateUtils;
 import cn.xa.eyre.common.utils.FuzzyMatcher;
-import cn.xa.eyre.hisapi.InsuranceFeignClient;
 import cn.xa.eyre.hub.service.SynchroBaseService;
-import cn.xa.eyre.insurance.domain.GysybIcd10;
 import cn.xa.eyre.system.dict.domain.DdDiseaseIcd;
 import cn.xa.eyre.system.dict.domain.DictDisDept;
 import cn.xa.eyre.system.dict.domain.DictDiseaseIcd10;
@@ -42,8 +40,6 @@ public class DataConvertService {
     @Autowired
     private DdDiseaseIcdMapper ddDiseaseIcdMapper;// 前置软件诊断代码表
     @Autowired
-    private InsuranceFeignClient insuranceFeignClient;// HIS
-    @Autowired
     private DictSpecimenCategoryMapper dictSpecimenCategoryMapper;
 
     @Resource
@@ -59,35 +55,49 @@ public class DataConvertService {
         dictDisDept.setStatus(0);
         dictDisDept.setIsDefault(1);
         dictDisDept.setCreateTime(DateUtils.getNowDate());
-//        for (HisDeptDict his:merList) {
-//            boolean exist = false;
-//            hisName = his.getDeptName();
-//            if (hisName.length() > 3){
-//                hisName = hisName.substring(0, hisName.length() - 3);//截取掉最后两个字
-//            }
-//            for (DictTemp temp: hubList) {
-//                if(temp.getName().contains(hisName)){
-//                    exist = true;
-//                    dictDisDept.setRemark("精准匹配");
-//                    dictDisDept.setEmrCode(his.getDeptCode());
-//                    dictDisDept.setEmrName(his.getDeptName());
-//                    dictDisDept.setHubCode(temp.getCode());
-//                    dictDisDept.setHubName(temp.getName());
-//                    break;// 优先匹配第一个
-//                }
-//            }
-//            // 没找到
-//            if(!exist){
-//                dictDisDept.setRemark("在前置软件中没有同名的");
-//                dictDisDept.setEmrCode(his.getDeptCode());
-//                dictDisDept.setEmrName(his.getDeptName());
-//                dictDisDept.setHubCode("D99");
-//                dictDisDept.setHubName("其他科室");
-//            }
-//            dictDisDeptMapper.insertSelective(dictDisDept);
-//        }
+        for (HisDeptDict his:merList) {
+            boolean exist = false;
+            hisName = his.getDeptName();
+            // 精准匹配
+            for (DictTemp temp: hubList) {
+                if(temp.getName().equals(hisName)){
+                    exist = true;
+                    dictDisDept.setRemark("精准匹配");
+                    dictDisDept.setEmrCode(his.getDeptCode());
+                    dictDisDept.setEmrName(his.getDeptName());
+                    dictDisDept.setHubCode(temp.getCode());
+                    dictDisDept.setHubName(temp.getName());
+                    break;
+                }
+            }
+            // 模糊匹配
+            if (!exist){
+                // 模糊匹配
+                for (DictTemp temp: hubList) {
+                    if (FuzzyMatcher.fuzzyMatch(temp.getName(), hisName)) {
+                        exist = true;
+                        dictDisDept.setRemark("模糊匹配");
+                        dictDisDept.setEmrCode(his.getDeptCode());
+                        dictDisDept.setEmrName(his.getDeptName());
+                        dictDisDept.setHubCode(temp.getCode());
+                        dictDisDept.setHubName(temp.getName());
+                        break;
+                    }
+                }
+            }
 
-        // 把HIS中没有的写入
+            // 没找到
+            if(!exist){
+                dictDisDept.setRemark("在前置软件中没有同名的");
+                dictDisDept.setEmrCode(his.getDeptCode());
+                dictDisDept.setEmrName(his.getDeptName());
+                dictDisDept.setHubCode("D99");
+                dictDisDept.setHubName("其他科室");
+            }
+            dictDisDeptMapper.insertSelective(dictDisDept);
+        }
+
+        /*// 把HIS中没有的写入
         List<DictDisDept> list = dictDisDeptMapper.selectAll();
         for (DictTemp temp: hubList) {
             boolean exist = false;
@@ -103,7 +113,7 @@ public class DataConvertService {
                 dictDisDept.setHubName(temp.getName());
                 dictDisDeptMapper.insertSelective(dictDisDept);
             }
-        }
+        }*/
 
         return true;
     }
@@ -119,7 +129,7 @@ public class DataConvertService {
     }
 
     public boolean convertDiseaseIcd() {
-        List<DdDiseaseIcd> hubIcds = ddDiseaseIcdMapper.selectAll();
+        /*List<DdDiseaseIcd> hubIcds = ddDiseaseIcdMapper.selectAll();
         R<List<GysybIcd10>> icd10ListResult = insuranceFeignClient.getGysybIcd10List();
         if (R.SUCCESS == icd10ListResult.getCode() && !icd10ListResult.getData().isEmpty()){
             for (GysybIcd10 emricd : icd10ListResult.getData()) {
@@ -158,7 +168,7 @@ public class DataConvertService {
                 }
                 dictDiseaseIcd10Mapper.insertSelective(dictDiseaseIcd10);
             }
-        }
+        }*/
         return true;
     }
 

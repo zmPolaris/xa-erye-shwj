@@ -4,7 +4,6 @@ package cn.xa.eyre.hisapi;
 import cn.xa.eyre.common.constant.Constants;
 import cn.xa.eyre.common.core.domain.R;
 import cn.xa.eyre.inpadm.domain.PatsInHospital;
-import cn.xa.eyre.outpadm.domain.ClinicMaster;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;

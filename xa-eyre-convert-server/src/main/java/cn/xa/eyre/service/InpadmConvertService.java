@@ -121,7 +121,7 @@ public class InpadmConvertService {
             if (StringUtils.isBlank(patMasterIndex.getIdNo())){
                 emrAdmissionInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE_OTHER.getCode());
                 emrAdmissionInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE_OTHER.getName());
-                emrAdmissionInfo.setIdCard("-");
+                emrAdmissionInfo.setIdCard(medrecResult.getData().getIdNo());
             }else {
                 emrAdmissionInfo.setIdCardTypeCode(HubCodeEnum.ID_CARD_TYPE.getCode());
                 emrAdmissionInfo.setIdCardTypeName(HubCodeEnum.ID_CARD_TYPE.getName());
