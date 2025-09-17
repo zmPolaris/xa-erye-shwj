@@ -3,19 +3,27 @@ package cn.xa.eyre.medrec.controller;
 import cn.xa.eyre.common.core.domain.AjaxResult;
 import cn.xa.eyre.common.core.domain.R;
 import cn.xa.eyre.convertapi.ConvertFeignClient;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import cn.xa.eyre.medrec.domain.*;
 import cn.xa.eyre.medrec.mapper.PatVisitMapper;
 import cn.xa.eyre.medrec.service.MedrecService;
 import cn.xa.eyre.pharmacy.domain.DrugPrescMaster;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
 @RequestMapping("/medrec")
 public class MedrecController {
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private MedrecService medrecService;
@@ -24,12 +32,12 @@ public class MedrecController {
 
     @GetMapping("/getPatMasterIndex/{patientId}")
     public AjaxResult getPatMasterIndex(@PathVariable("patientId") String patientId){
-        return AjaxResult.success("接口调用成功", medrecService.selectPatMasterIndex(patientId));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectPatMasterIndex(patientId)));
     }
 
     @GetMapping("/getPatMasterIndexList")
     public AjaxResult getPatMasterIndexList(@RequestParam("num") Integer num){
-        return AjaxResult.success("接口调用成功", medrecService.selectPatMasterIndexList(num));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(medrecService.selectPatMasterIndexList(num)));
     }
 
     @PostMapping("/getDiagnosticCategory")

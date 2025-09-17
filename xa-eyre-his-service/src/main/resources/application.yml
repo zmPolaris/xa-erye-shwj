@@ -67,6 +67,11 @@ spring:
       auto-offset-reset: earliest
     properties:
       schema-registry-url: http://127.0.0.1:8081
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 kafka:
   topics:

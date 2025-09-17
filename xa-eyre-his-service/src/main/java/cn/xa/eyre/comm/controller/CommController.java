@@ -4,6 +4,7 @@ import cn.xa.eyre.comm.domain.Users;
 import cn.xa.eyre.comm.mapper.DeptDictMapper;
 import cn.xa.eyre.comm.mapper.UsersMapper;
 import cn.xa.eyre.common.core.domain.AjaxResult;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class CommController {
 
     @GetMapping("/getUserList")
     public AjaxResult getUserList(@RequestParam("num") Integer num){
-        return AjaxResult.success("接口调用成功", usersMapper.selectUserList(num));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(usersMapper.selectUserList(num)));
     }
 
     @GetMapping("/getDeptList")

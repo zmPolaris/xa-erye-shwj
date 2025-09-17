@@ -10,7 +10,7 @@ xa-eyre:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 28090
+  port: 8090
   servlet:
     # 应用的访问路径
     context-path: /
