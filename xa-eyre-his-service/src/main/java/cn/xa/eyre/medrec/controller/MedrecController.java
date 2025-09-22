@@ -42,17 +42,17 @@ public class MedrecController {
 
     @PostMapping("/getDiagnosticCategory")
     public AjaxResult getDiagnosticCategory(@RequestBody DiagnosticCategoryKey diagnosticCategoryKey){
-        return AjaxResult.success("接口调用成功", medrecService.selectDiagnosticCategory(diagnosticCategoryKey));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectDiagnosticCategory(diagnosticCategoryKey)));
     }
 
     @PostMapping("/getDiagnosis")
     public AjaxResult getDiagnosis(@RequestBody DiagnosisKey diagnosisKey){
-        return AjaxResult.success("接口调用成功", medrecService.selectDiagnosis(diagnosisKey));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectDiagnosis(diagnosisKey)));
     }
 
     @PostMapping("/getPatVisit")
     public AjaxResult getPatVisit(@RequestBody PatVisitKey patVisitKey){
-        return AjaxResult.success("接口调用成功", medrecService.selectPatVisit(patVisitKey));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectPatVisit(patVisitKey)));
     }
 
     @PostMapping("/getCofig")
@@ -62,32 +62,32 @@ public class MedrecController {
 
     @PostMapping("/getDrugPrescMaster")
     public AjaxResult getDrugPrescMaster(@RequestBody DrugPrescMaster drugPrescMaster){
-        return AjaxResult.success("接口调用成功", medrecService.selectDrugPrescMaster(drugPrescMaster));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectDrugPrescMaster(drugPrescMaster)));
     };
 
     @PostMapping("/selectDrugPrescMasterByPatientId")
     public AjaxResult selectDrugPrescMasterByPatientId(@RequestBody DrugPrescMaster drugPrescMaster){
-        return AjaxResult.success("接口调用成功", medrecService.selectDrugPrescMasterByPatientId(drugPrescMaster));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectDrugPrescMasterByPatientId(drugPrescMaster)));
     };
 
     @PostMapping("/selectPatVisitDeathInfoList")
     public AjaxResult selectPatVisitDeathInfoList(){
-        return AjaxResult.success("接口调用成功", medrecService.selectPatVisitDeathInfoList());
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(medrecService.selectPatVisitDeathInfoList()));
     };
 
     @PostMapping("/getTransfer")
     public AjaxResult getTransfer(){
-        return AjaxResult.success("接口调用成功", medrecService.selectTransfer());
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(medrecService.selectTransfer()));
     }
 
     @PostMapping("/getCPAPDeptInfo")
     public AjaxResult getCPAPDeptInfo(@RequestBody List<String> cpapInfoList){
-        return AjaxResult.success("接口调用成功", medrecService.getCPAPDeptInfo(cpapInfoList));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(medrecService.getCPAPDeptInfo(cpapInfoList)));
     }
 
     @PostMapping("/getDiagnosticDescCode")
     public AjaxResult getDiagnosticDescCode(@RequestBody String patientId){
-        return AjaxResult.success("接口调用成功", medrecService.getDiagnosticDescCode(patientId));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.getDiagnosticDescCode(patientId)));
     }
 
     @GetMapping("/getIdNo/{patientId}")

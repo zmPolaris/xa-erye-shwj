@@ -1,6 +1,7 @@
 package cn.xa.eyre.pharmacy.controller;
 
 import cn.xa.eyre.common.core.domain.AjaxResult;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import cn.xa.eyre.pharmacy.domain.DrugPrescDetail;
 import cn.xa.eyre.pharmacy.mapper.DrugPrescDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class PharmacyController {
 
     @PostMapping("/getDrugPrescDetailByVisitInfo")
     public AjaxResult getDrugPrescDetailByVisitInfo(@RequestBody DrugPrescDetail drugPrescDetail) {
-        return AjaxResult.success("接口调用成功", drugPrescDetailMapper.getDrugPrescDetailByVisitInfo(drugPrescDetail));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(drugPrescDetailMapper.getDrugPrescDetailByVisitInfo(drugPrescDetail)));
     }
 
     @PostMapping("/getDrugPrescDetailByPrescNo")
     public AjaxResult getDrugPrescDetailByPrescNo(@RequestBody DrugPrescDetail drugPrescDetail) {
-        return AjaxResult.success("接口调用成功", drugPrescDetailMapper.getDrugPrescDetailByVisitInfo(drugPrescDetail));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(drugPrescDetailMapper.getDrugPrescDetailByVisitInfo(drugPrescDetail)));
     }
 }

@@ -27,7 +27,7 @@ public class CommController {
     @GetMapping("/getUserByName")
     public AjaxResult getUserByName(@RequestParam("userName") String userName){
         List<Users> users = usersMapper.selectUserByName(userName);
-        return AjaxResult.success("接口调用成功", users.isEmpty() ? null : users.get(0));
+        return AjaxResult.success("接口调用成功", users.isEmpty() ? null : CharsetUtil.convertObject(users.get(0)));
     }
 
     @GetMapping("/getUserList")
@@ -37,11 +37,11 @@ public class CommController {
 
     @GetMapping("/getDeptList")
     public AjaxResult getDeptList(@RequestParam("num") Integer num){
-        return AjaxResult.success("接口调用成功", deptDictMapper.selectDeptList(num));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(deptDictMapper.selectDeptList(num)));
     }
 
     @GetMapping("/getDept{deptCode}")
     public AjaxResult getDept(@PathVariable("deptCode") String deptCode){
-        return AjaxResult.success("接口调用成功", deptDictMapper.selectByPrimaryKey(deptCode));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(deptDictMapper.selectByPrimaryKey(deptCode)));
     }
 }

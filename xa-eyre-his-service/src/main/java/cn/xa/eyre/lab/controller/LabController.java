@@ -1,6 +1,7 @@
 package cn.xa.eyre.lab.controller;
 
 import cn.xa.eyre.common.core.domain.AjaxResult;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import cn.xa.eyre.lab.domain.LabTestItemsKey;
 import cn.xa.eyre.lab.mapper.LabResultMapper;
 import cn.xa.eyre.lab.mapper.LabTestItemsMapper;
@@ -21,16 +22,16 @@ public class LabController {
 
     @GetMapping("/getLabTestMaster/{testNo}")
     public AjaxResult getLabTestMaster(@PathVariable("testNo") String testNo){
-        return AjaxResult.success("接口调用成功", labTestMasterMapper.selectByPrimaryKey(testNo));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(labTestMasterMapper.selectByPrimaryKey(testNo)));
     }
 
     @PostMapping("/getLabTestItems")
     public AjaxResult getLabTestMaster(@RequestBody LabTestItemsKey labTestItemsKey){
-        return AjaxResult.success("接口调用成功", labTestItemsMapper.selectByPrimaryKey(labTestItemsKey));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(labTestItemsMapper.selectByPrimaryKey(labTestItemsKey)));
     }
 
     @GetMapping("/getResultByTestNo/{testNo}")
     public AjaxResult getResultByTestNo(@PathVariable("testNo") String testNo){
-        return AjaxResult.success("接口调用成功", labResultMapper.selectByTestNo(testNo));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(labResultMapper.selectByTestNo(testNo)));
     }
 }

@@ -1,6 +1,7 @@
 package cn.xa.eyre.ordadm.controller;
 
 import cn.xa.eyre.common.core.domain.AjaxResult;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import cn.xa.eyre.ordadm.mapper.OrdersMapper;
 import cn.xa.eyre.outpadm.mapper.ClinicMasterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,6 @@ public class OrdadmController {
 
     @GetMapping("/getDeathInfo")
     public AjaxResult getDeathInfo(){
-        return AjaxResult.success("接口调用成功", ordersMapper.getDeathInfo());
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(ordersMapper.getDeathInfo()));
     }
 }

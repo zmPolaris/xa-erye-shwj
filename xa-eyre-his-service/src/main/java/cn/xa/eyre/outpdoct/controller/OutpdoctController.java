@@ -1,6 +1,7 @@
 package cn.xa.eyre.outpdoct.controller;
 
 import cn.xa.eyre.common.core.domain.AjaxResult;
+import cn.xa.eyre.framework.config.openfegin.CharsetUtil;
 import cn.xa.eyre.outpdoct.domain.OutpMr;
 import cn.xa.eyre.outpdoct.mapper.OutpMrMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ public class OutpdoctController {
 
     @GetMapping("/getOutpMrList")
     public AjaxResult getOutpMrList(@RequestParam("num") Integer num){
-        return AjaxResult.success("接口调用成功", outpMrMapper.selectOutpMrList(num));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(outpMrMapper.selectOutpMrList(num)));
     }
 
     @PostMapping("/getOutpMrByCondition")
     public AjaxResult getOutpMrByCondition(@RequestBody OutpMr outpMr){
-        return AjaxResult.success("接口调用成功", outpMrMapper.selectOutpMrByCondition(outpMr));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObjectList(outpMrMapper.selectOutpMrByCondition(outpMr)));
     }
 }
