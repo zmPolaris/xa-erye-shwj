@@ -34,15 +34,24 @@ public class KafkaConsumerService {
             containerFactory = "kafkaListenerContainerFactory"
     )
     public void consume(ConsumerRecord<GenericRecord, GenericRecord> record, Acknowledgment ack) {
+        // 脏数据被置空
+        if (record == null) {
+            logger.warn("跳过一条脏数据");
+            // 必须提交，否则会死循环
+            ack.acknowledge();
+            return;
+        }
+
         try {
             DBMessage msg = processDebeziumRecord(record);
-            if (msg == null) return;
-            if ("INSERT".equalsIgnoreCase(msg.getOperation()) ||
+            if (null != msg && ("INSERT".equalsIgnoreCase(msg.getOperation()) ||
                     "UPDATE".equalsIgnoreCase(msg.getOperation()) ||
-                    "DELETE".equalsIgnoreCase(msg.getOperation())) {
+                    "DELETE".equalsIgnoreCase(msg.getOperation()))) {
                 logger.info("处理消息: {}", JSON.toJSONString(msg));
                 String sent = HttpClientUtils.sendHttpClientPost(Constants.CONVERT_URL + "/convert/receiveKafkaData", JSON.toJSONString(msg));
                 logger.info("发送结果: {}", sent);
+            } else {
+                logger.warn("跳过一条脏数据");
             }
             // 手动提交偏移量
             ack.acknowledge();
@@ -57,10 +66,14 @@ public class KafkaConsumerService {
         // 获取消息值（包含实际数据变更）
         GenericRecord valueRecord = record.value();
         DBMessage msg = new DBMessage();
+        if (valueRecord == null) {
+            logger.error("这是一条脏数据");
+            logger.error("数据: {}", JSON.toJSONString(record));
+//            return null;
+        }
 
         // 解析操作类型
-        String op = valueRecord.get("op") != null ?
-                valueRecord.get("op").toString() : "unknown";
+        String op = null != valueRecord.get("op") ? valueRecord.get("op").toString() : "unknown";
 
         // 解析源信息（数据库、表等）
         GenericRecord sourceRecord = (GenericRecord) valueRecord.get("source");

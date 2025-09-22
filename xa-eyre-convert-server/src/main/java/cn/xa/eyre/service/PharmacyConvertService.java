@@ -18,6 +18,7 @@ import cn.xa.eyre.hub.service.SynchroEmrRealService;
 import cn.xa.eyre.hub.staticvalue.HubCodeEnum;
 import cn.xa.eyre.inpadm.domain.PatsInHospital;
 import cn.xa.eyre.medrec.domain.PatMasterIndex;
+import cn.xa.eyre.medrec.domain.PatVisit;
 import cn.xa.eyre.ordadm.domain.Orders;
 import cn.xa.eyre.outpdoct.domain.OutpMr;
 import cn.xa.eyre.pharmacy.domain.DrugPrescDetail;
@@ -117,6 +118,7 @@ public class PharmacyConvertService {
                     outpMr = mrResult.getData().get(0);
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + outpMr.getVisitNo()));
                 } else {
+                        logger.error("未找到门诊记录, PatientId:{}, VisitDate{}", patientId, DateUtils.dateTime(drugPrescMaster.getPrescDate()));
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
                 }
                 preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
@@ -125,11 +127,15 @@ public class PharmacyConvertService {
                 // 住院
                 emrOrder.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getName());
                 emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getCode());
-                R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospitalByPatientId(patientId);
-                if (R.SUCCESS == hospitalResult.getCode()) {
-                    PatsInHospital pats = hospitalResult.getData();
+//                    R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospitalByPatientId(patientId);
+                PatVisit patVisit = new PatVisit();
+                patVisit.setPatientId(patientId);
+                R<PatVisit> patVisitR = medrecFeignClient.selectByPatientIdOrderByVisitIdLimit1(patVisit);
+                if (R.SUCCESS == patVisitR.getCode()) {
+                    PatVisit pats = patVisitR.getData();
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + pats.getVisitId()));
                 }else {
+                    logger.error("未查询到住院信息, PatientId:{}", patientId);
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
                 }
                 preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();

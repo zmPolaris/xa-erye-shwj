@@ -55,6 +55,11 @@ public class MedrecController {
         return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(medrecService.selectPatVisit(patVisitKey)));
     }
 
+    @PostMapping("/selectByPatientIdOrderByVisitIdLimit1")
+    public AjaxResult selectByPatientIdOrderByVisitIdLimit1(@RequestBody PatVisitKey patVisitKey){
+        return AjaxResult.success("接口调用成功", medrecService.selectByPatientIdOrderByVisitIdLimit1(patVisitKey.getPatientId()));
+    }
+
     @PostMapping("/getCofig")
     public AjaxResult getCofig(){
         return convertFeignClient.getCofig();

@@ -134,6 +134,15 @@
     from PAT_VISIT
     where DISCHARGE_DISPOSITION =  '3'
   </select>
+  <select id="selectByPatientIdOrderByVisitIdLimit1" resultMap="BaseResultMap">
+    select *
+    from (
+        select VISIT_ID
+        from PAT_VISIT
+        where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+        order by VISIT_ID desc
+    ) WHERE ROWNUM = 1
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="cn.xa.eyre.medrec.domain.PatVisitKey">
     delete from PAT_VISIT
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}

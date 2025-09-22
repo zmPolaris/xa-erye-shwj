@@ -54,6 +54,10 @@ public class MedrecService {
         return patVisitMapper.selectByPrimaryKey(patVisitKey);
     }
 
+    public PatVisit selectByPatientIdOrderByVisitIdLimit1(String patientId) {
+        return patVisitMapper.selectByPatientIdOrderByVisitIdLimit1(patientId);
+    }
+
     public DrugPrescMaster selectDrugPrescMaster(DrugPrescMaster drugPrescMaster) {
         Date prescDate = drugPrescMaster.getPrescDate();
         String prescDateStr = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, prescDate);

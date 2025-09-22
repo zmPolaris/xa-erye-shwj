@@ -19,4 +19,6 @@ public interface PatVisitMapper {
     int updateByPrimaryKey(PatVisit record);
 
     List<PatVisit> selectPatVisitDeathInfoList();
+	
+	PatVisit selectByPatientIdOrderByVisitIdLimit1(String patientId);
 }
