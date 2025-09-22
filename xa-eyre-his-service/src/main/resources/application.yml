@@ -85,7 +85,6 @@ kafka:
     - oracle_service.EXAM.EXAM_MASTER
     - oracle_service.LAB.LAB_TEST_MASTER
     - oracle_service.PHARMACY.DRUG_PRESC_MASTER
-    - oracle_service.LQT2024.LQT_CRB_ZD
 
 # token配置
 token:

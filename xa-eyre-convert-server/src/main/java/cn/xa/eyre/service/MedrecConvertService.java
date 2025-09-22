@@ -83,6 +83,8 @@ public class MedrecConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        // 反查数据
+        patMasterIndex = medrecFeignClient.getPatMasterIndex(patMasterIndex.getPatientId()).getData();
         logger.debug("构造emrPatientInfo接口数据...");
         // 构造请求参数
         emrPatientInfo.setId(patMasterIndex.getPatientId());
@@ -176,6 +178,10 @@ public class MedrecConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        // 反查数据
+        DiagnosisKey diagnosisKey = new DiagnosisKey();
+        BeanUtil.copyProperties(diagnosis, diagnosisKey);
+        diagnosis = medrecFeignClient.getDiagnosis(diagnosisKey).getData();
 
         R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(diagnosis.getPatientId());
         DiagnosticCategoryKey diagnosticCategoryKey = new DiagnosticCategoryKey();
@@ -403,6 +409,10 @@ public class MedrecConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        // 反查数据
+        PatVisitKey patVisitKey = new PatVisitKey();
+        BeanUtil.copyProperties(patVisit, patVisitKey);
+        patVisit = medrecFeignClient.getPatVisit(patVisitKey).getData();
 
         // 军队医改不推送
         /*if (patVisit.getChargeType().equals(Constants.CHARGE_TYPE_JDYG)){

@@ -51,6 +51,8 @@ public class OutpdoctConvertService {
     private CommFeignClient commFeignClient;
     @Autowired
     private HubToolService hubToolService;
+    @Autowired
+    private OutpdoctFeignClient outpdoctFeignClient;
 
     public void outpMr(DBMessage dbMessage) {
         logger.debug("OUTP_MR表变更接口");
@@ -72,6 +74,11 @@ public class OutpdoctConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        // 反查数据
+        OutpMr outpMrParam = new OutpMr();
+        outpMrParam.setVisitDateStr(DateUtils.dateTime(outpMr.getVisitDate()));
+        outpMrParam.setVisitNo(outpMr.getVisitNo());
+        outpMr = outpdoctFeignClient.getOutpMrByCondition(outpMrParam).getData().get(0);
 
         if (StringUtils.isNotBlank(outpMr.getPatientId())){
             logger.debug("构造emrOutpatientRecord接口数据...");

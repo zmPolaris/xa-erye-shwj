@@ -29,4 +29,7 @@ public interface CommFeignClient {
 
     @GetMapping("/comm/getDept{deptCode}")
     public R<DeptDict> getDept(@PathVariable("deptCode") String deptCode);
+
+    @GetMapping("/comm/getUserByPrimaryKey")
+    public R<Users> getUserByPrimaryKey(@RequestParam("dbUser") String dbUser);
 }

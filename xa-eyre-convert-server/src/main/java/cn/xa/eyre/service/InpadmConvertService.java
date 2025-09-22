@@ -12,6 +12,7 @@ import cn.xa.eyre.common.utils.DateUtils;
 import cn.xa.eyre.common.utils.StringUtils;
 import cn.xa.eyre.common.utils.bean.BeanUtils;
 import cn.xa.eyre.hisapi.CommFeignClient;
+import cn.xa.eyre.hisapi.InpadmFeignClient;
 import cn.xa.eyre.hisapi.MedrecFeignClient;
 import cn.xa.eyre.hisapi.OutpdoctFeignClient;
 import cn.xa.eyre.hub.domain.emrmonitor.EmrAdmissionInfo;
@@ -60,6 +61,8 @@ public class InpadmConvertService {
     SynchroEmrRealService synchroEmrRealService;
     @Autowired
     private HubToolService hubToolService;
+    @Autowired
+    private InpadmFeignClient inpadmFeignClient;
 
     public void patsInHospital(DBMessage dbMessage) {
         logger.debug("PATS_IN_HOSPITAL表变更接口");
@@ -80,7 +83,8 @@ public class InpadmConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-
+        // 反查数据
+        patsInHospital = inpadmFeignClient.getPatsInHospitalByPatientId(patsInHospital.getPatientId()).getData();
 
         logger.debug("构造emrAdmissionInfo接口数据...");
         R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(patsInHospital.getPatientId());

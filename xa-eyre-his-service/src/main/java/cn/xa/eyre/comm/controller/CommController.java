@@ -19,6 +19,11 @@ public class CommController {
     @Autowired
     private DeptDictMapper deptDictMapper;
 
+    @GetMapping("/getUserByPrimaryKey")
+    public AjaxResult getUserByPrimaryKey(@RequestParam("dbUser") String dbUser){
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(usersMapper.selectByPrimaryKey(dbUser)));
+    }
+
     /**
      * 根据名称查询在职状态的员工信息，时间倒序，取第一个
      * @param userName

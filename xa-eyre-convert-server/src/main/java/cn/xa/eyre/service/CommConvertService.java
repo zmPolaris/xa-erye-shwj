@@ -75,6 +75,8 @@ public class CommConvertService {
             // 插入 修改
             httpMethod = Constants.HTTP_METHOD_POST;
             DeptDict deptDict = BeanUtil.toBean(dbMessage.getAfterData(), DeptDict.class);
+            // 反查数据
+            deptDict = commFeignClient.getDept(deptDict.getDeptCode()).getData();
             DictDisDept deptParam = new DictDisDept();
             deptParam.setStatus(Constants.STATUS_NORMAL);
             deptParam.setEmrCode(deptDict.getDeptCode());
@@ -135,6 +137,8 @@ public class CommConvertService {
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        // 反查数据
+        users = commFeignClient.getUserByPrimaryKey(users.getDbUser()).getData();
         String deptCode = users.getUserDept();
         if(deptCode != null && !deptCode.equals("")){
             DictDisDept deptParam = new DictDisDept();
