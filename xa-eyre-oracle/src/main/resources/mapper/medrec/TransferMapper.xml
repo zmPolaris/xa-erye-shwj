@@ -23,7 +23,7 @@
         and VISIT_ID = #{visitId,jdbcType=NUMERIC}
         and ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP}
     </select>
-    <select id="getICUInfo" resultType="java.lang.String">
+    <select id="getICUInfo" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from MEDREC.TRANSFER

@@ -2,6 +2,7 @@ package cn.xa.eyre.medrec.mapper;
 
 import cn.xa.eyre.medrec.domain.Transfer;
 import cn.xa.eyre.medrec.domain.TransferKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface TransferMapper {
 
     List<Transfer> getICUInfo();
 
-    List<Transfer> getCPAPDeptInfo(List<String> patientIds);
+    List<Transfer> getCPAPDeptInfo(@Param("patientIds") List<String> patientIds);
 }
