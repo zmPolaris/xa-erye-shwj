@@ -334,7 +334,7 @@
     <include refid="Base_Column_List" />
     from DRUG_PRESC_MASTER
     where PRESC_NO = #{prescNo}
-    AND PRESC_DATE = TO_DATE(#{prescDateStr,jdbcType=VARCHAR}, 'YYYY/MM/DD')
+    AND PRESC_DATE = TO_DATE(#{prescDateStr,jdbcType=VARCHAR}, 'yyyy/MM/dd HH24:mi:ss')
   </select>
   <select id="selectDrugByPrescNoAndPatientId" resultMap="BaseResultMap">
     select

@@ -76,7 +76,7 @@ public class OutpdoctConvertService {
         }
         // 反查数据
         OutpMr outpMrParam = new OutpMr();
-        outpMrParam.setVisitDateStr(DateUtils.dateTime(outpMr.getVisitDate()));
+        outpMrParam.setVisitDateStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,outpMr.getVisitDate()));
         outpMrParam.setVisitNo(outpMr.getVisitNo());
         outpMr = outpdoctFeignClient.getOutpMrByCondition(outpMrParam).getData().get(0);
 
@@ -95,7 +95,7 @@ public class OutpdoctConvertService {
                 hubToolService.syncPatInfo(medrecResult.getData());
                 EmrOutpatientRecord emrOutpatientRecord = new EmrOutpatientRecord();
                 // ID使用OUTP_MR表联合主键拼接计算MD5
-                String id = DigestUtil.md5Hex(DateUtils.dateTime(outpMr.getVisitDate()) + outpMr.getVisitNo());
+                String id = DigestUtil.md5Hex(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,outpMr.getVisitDate()) + outpMr.getVisitNo());
                 emrOutpatientRecord.setId(id);
                 emrOutpatientRecord.setPatientId(outpMr.getPatientId());
                 emrOutpatientRecord.setSerialNumber(DigestUtil.md5Hex(outpMr.getPatientId() + outpMr.getVisitNo()));
@@ -208,7 +208,7 @@ public class OutpdoctConvertService {
                     emrActivityInfo.setOperationTime(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, DateUtils.getNowDate()));
                     synchroEmrRealService.syncEmrActivityInfo(emrActivityInfo, httpMethod);
                 } else {
-                    logger.error("{}，{}对应诊断编码为空，无法同步", outpMr.getPatientId(), DateUtils.dateTime(outpMr.getVisitDate()));
+                    logger.error("{}，{}对应诊断编码为空，无法同步", outpMr.getPatientId(), DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,outpMr.getVisitDate()));
                 }
 
             }else {

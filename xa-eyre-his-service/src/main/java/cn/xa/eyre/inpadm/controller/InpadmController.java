@@ -29,7 +29,7 @@ public class InpadmController {
 
     @GetMapping("/selectPatsInHospitalByPatientId")
     public AjaxResult getPatsInHospital(@RequestParam("patientId") String patientId){
-        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(patsInHospitalMapper.selectPatsInHospitalByPatientId(patientId)));
+        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(patsInHospitalMapper.selectByPrimaryKey(patientId)));
     }
 
 }

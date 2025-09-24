@@ -58,7 +58,7 @@
       from OUTPDOCT.OUTP_MR
       <where>
         <if test="visitDateStr != null">
-          and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'YYYY/MM/DD')
+          and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'yyyy/MM/dd HH24:mi:ss')
         </if>
         <if test="visitNo != null">
           and VISIT_NO = #{visitNo,jdbcType=NUMERIC}

@@ -95,7 +95,7 @@ public class PharmacyConvertService {
         // 反查数据
 
         EmrOrder emrOrder = new EmrOrder();
-        String id = DigestUtil.md5Hex(DateUtils.dateTime(drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo());
+        String id = DigestUtil.md5Hex(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo());
         emrOrder.setId(id);
         String patientId = drugPrescMaster.getPatientId();
         R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(patientId);
@@ -112,13 +112,13 @@ public class PharmacyConvertService {
                 emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getCode());
                 OutpMr outpMr = new OutpMr();
                 outpMr.setPatientId(patientId);
-                outpMr.setVisitDateStr(DateUtils.dateTime(drugPrescMaster.getPrescDate()));
+                outpMr.setVisitDateStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,drugPrescMaster.getPrescDate()));
                 R<List<OutpMr>> mrResult = outpdoctFeignClient.getOutpMrByCondition(outpMr);
                 if (R.SUCCESS == mrResult.getCode()) {
                     outpMr = mrResult.getData().get(0);
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + outpMr.getVisitNo()));
                 } else {
-                        logger.error("未找到门诊记录, PatientId:{}, VisitDate{}", patientId, DateUtils.dateTime(drugPrescMaster.getPrescDate()));
+                        logger.error("未找到门诊记录, PatientId:{}, VisitDate{}", patientId, DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()));
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
                 }
                 preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
@@ -206,7 +206,7 @@ public class PharmacyConvertService {
                 for (DrugPrescDetail prescDetail : details.getData()) {
                     String drugCode = prescDetail.getDrugCode();
                     EmrOrderItem emrOrderItem = new EmrOrderItem();
-                    id = DigestUtil.md5Hex(DateUtils.dateTime(prescDetail.getPrescDate()) + prescDetail.getPrescNo() + prescDetail.getItemNo());
+                    id = DigestUtil.md5Hex(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, prescDetail.getPrescDate()) + prescDetail.getPrescNo() + prescDetail.getItemNo());
                     emrOrderItem.setId(id);
                     emrOrderItem.setOrderId(emrOrder.getId());
                     emrOrderItem.setDrugSpecifications(prescDetail.getDrugSpec());

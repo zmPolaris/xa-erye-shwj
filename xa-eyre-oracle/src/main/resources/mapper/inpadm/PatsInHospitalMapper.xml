@@ -38,6 +38,14 @@
     from PATS_IN_HOSPITAL
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
   </select>
+  <select id="selectPatsInHospital" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from INPADM.PATS_IN_HOSPITAL
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+
+    and VISIT_ID = #{visitId,jdbcType=NUMERIC}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from PATS_IN_HOSPITAL
     where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
