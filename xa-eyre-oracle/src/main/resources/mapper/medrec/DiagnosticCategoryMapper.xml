@@ -41,7 +41,7 @@
       and VISIT_ID = #{visitId,jdbcType=NUMERIC}
       and DIAGNOSIS_TYPE = #{diagnosisType,jdbcType=VARCHAR}
       and DIAGNOSIS_NO = #{diagnosisNo,jdbcType=NUMERIC}
-      and DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
+--       and DIAGNOSIS_CODE = #{diagnosisCode,jdbcType=VARCHAR}
   </select>
   <select id="getDiagnosticDescCode" resultMap="BaseResultCodeMap">
     SELECT T.PATIENT_ID, T.VISIT_ID, T.DIAGNOSIS_NO, T.DIAGNOSIS_DESC, T.TREAT_RESULT, M.DIAGNOSIS_TYPE, M.DIAGNOSIS_CODE

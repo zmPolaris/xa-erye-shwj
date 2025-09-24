@@ -47,7 +47,8 @@ public class MedrecService {
     }
 
     public Diagnosis selectDiagnosis(DiagnosisKey diagnosisKey) {
-        return diagnosisMapper.selectByPartPrimaryKey(diagnosisKey).get(0);
+        List<Diagnosis> list = diagnosisMapper.selectByPartPrimaryKey(diagnosisKey);
+        return list.isEmpty() ? null : list.get(0);
     }
 
     public PatVisit selectPatVisit(PatVisitKey patVisitKey) {

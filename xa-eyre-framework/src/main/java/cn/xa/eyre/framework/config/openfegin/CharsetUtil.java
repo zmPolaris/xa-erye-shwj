@@ -1,5 +1,6 @@
 package cn.xa.eyre.framework.config.openfegin;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.xa.eyre.common.core.domain.R;
 
 import java.io.UnsupportedEncodingException;
@@ -11,12 +12,18 @@ import java.util.Map;
 public class CharsetUtil {
 
     public static List<Object> convertObjectList(Object object){
+        if (ObjectUtil.isEmpty(object)){
+            return null;
+        }
         List<Object> list = (List<Object>) object;
         list.replaceAll(item -> convertObject(item));
         return list;
     }
 
     public static Object convertObject(Object obj){
+        if (ObjectUtil.isEmpty(obj)){
+            return null;
+        }
         try {
             Map<String, Object> objectMap = BeanUtils.deepConvertToMap(obj);
             objectMap.forEach((key, value) -> {
