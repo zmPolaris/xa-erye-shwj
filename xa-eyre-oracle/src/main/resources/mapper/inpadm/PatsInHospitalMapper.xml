@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xa.eyre.inpadm.mapper.PatsInHospitalMapper">
+  <resultMap id="BaseResultMap" type="cn.xa.eyre.inpadm.domain.PatsInHospital">
+    <id column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="VISIT_ID" jdbcType="NUMERIC" property="visitId" />
+    <result column="WARD_CODE" jdbcType="VARCHAR" property="wardCode" />
+    <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode" />
+    <result column="BED_NO" jdbcType="NUMERIC" property="bedNo" />
+    <result column="ADMISSION_DATE_TIME" jdbcType="TIMESTAMP" property="admissionDateTime" />
+    <result column="ADM_WARD_DATE_TIME" jdbcType="TIMESTAMP" property="admWardDateTime" />
+    <result column="DIAGNOSIS" jdbcType="VARCHAR" property="diagnosis" />
+    <result column="PATIENT_CONDITION" jdbcType="VARCHAR" property="patientCondition" />
+    <result column="NURSING_CLASS" jdbcType="VARCHAR" property="nursingClass" />
+    <result column="DOCTOR_IN_CHARGE" jdbcType="VARCHAR" property="doctorInCharge" />
+    <result column="OPERATING_DATE" jdbcType="TIMESTAMP" property="operatingDate" />
+    <result column="BILLING_DATE_TIME" jdbcType="TIMESTAMP" property="billingDateTime" />
+    <result column="PREPAYMENTS" jdbcType="NUMERIC" property="prepayments" />
+    <result column="TOTAL_COSTS" jdbcType="NUMERIC" property="totalCosts" />
+    <result column="TOTAL_CHARGES" jdbcType="NUMERIC" property="totalCharges" />
+    <result column="GUARANTOR" jdbcType="VARCHAR" property="guarantor" />
+    <result column="GUARANTOR_ORG" jdbcType="VARCHAR" property="guarantorOrg" />
+    <result column="GUARANTOR_PHONE_NUM" jdbcType="VARCHAR" property="guarantorPhoneNum" />
+    <result column="BILL_CHECKED_DATE_TIME" jdbcType="TIMESTAMP" property="billCheckedDateTime" />
+    <result column="SETTLED_INDICATOR" jdbcType="NUMERIC" property="settledIndicator" />
+    <result column="OPERATOR_NO" jdbcType="VARCHAR" property="operatorNo" />
+    <result column="ISOVERUSE" jdbcType="NUMERIC" property="isoveruse" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PATIENT_ID, VISIT_ID, WARD_CODE, DEPT_CODE, BED_NO, ADMISSION_DATE_TIME, ADM_WARD_DATE_TIME, 
+    DIAGNOSIS, PATIENT_CONDITION, NURSING_CLASS, DOCTOR_IN_CHARGE, OPERATING_DATE, BILLING_DATE_TIME, 
+    PREPAYMENTS, TOTAL_COSTS, TOTAL_CHARGES, GUARANTOR, GUARANTOR_ORG, GUARANTOR_PHONE_NUM, 
+    BILL_CHECKED_DATE_TIME, SETTLED_INDICATOR, OPERATOR_NO, ISOVERUSE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PATS_IN_HOSPITAL
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PATS_IN_HOSPITAL
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xa.eyre.inpadm.domain.PatsInHospital">
+    insert into PATS_IN_HOSPITAL (PATIENT_ID, VISIT_ID, WARD_CODE, 
+      DEPT_CODE, BED_NO, ADMISSION_DATE_TIME, 
+      ADM_WARD_DATE_TIME, DIAGNOSIS, PATIENT_CONDITION, 
+      NURSING_CLASS, DOCTOR_IN_CHARGE, OPERATING_DATE, 
+      BILLING_DATE_TIME, PREPAYMENTS, TOTAL_COSTS, 
+      TOTAL_CHARGES, GUARANTOR, GUARANTOR_ORG, 
+      GUARANTOR_PHONE_NUM, BILL_CHECKED_DATE_TIME, 
+      SETTLED_INDICATOR, OPERATOR_NO, ISOVERUSE
+      )
+    values (#{patientId,jdbcType=VARCHAR}, #{visitId,jdbcType=NUMERIC}, #{wardCode,jdbcType=VARCHAR}, 
+      #{deptCode,jdbcType=VARCHAR}, #{bedNo,jdbcType=NUMERIC}, #{admissionDateTime,jdbcType=TIMESTAMP}, 
+      #{admWardDateTime,jdbcType=TIMESTAMP}, #{diagnosis,jdbcType=VARCHAR}, #{patientCondition,jdbcType=VARCHAR}, 
+      #{nursingClass,jdbcType=VARCHAR}, #{doctorInCharge,jdbcType=VARCHAR}, #{operatingDate,jdbcType=TIMESTAMP}, 
+      #{billingDateTime,jdbcType=TIMESTAMP}, #{prepayments,jdbcType=NUMERIC}, #{totalCosts,jdbcType=NUMERIC}, 
+      #{totalCharges,jdbcType=NUMERIC}, #{guarantor,jdbcType=VARCHAR}, #{guarantorOrg,jdbcType=VARCHAR}, 
+      #{guarantorPhoneNum,jdbcType=VARCHAR}, #{billCheckedDateTime,jdbcType=TIMESTAMP}, 
+      #{settledIndicator,jdbcType=NUMERIC}, #{operatorNo,jdbcType=VARCHAR}, #{isoveruse,jdbcType=NUMERIC}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xa.eyre.inpadm.domain.PatsInHospital">
+    insert into PATS_IN_HOSPITAL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        PATIENT_ID,
+      </if>
+      <if test="visitId != null">
+        VISIT_ID,
+      </if>
+      <if test="wardCode != null">
+        WARD_CODE,
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE,
+      </if>
+      <if test="bedNo != null">
+        BED_NO,
+      </if>
+      <if test="admissionDateTime != null">
+        ADMISSION_DATE_TIME,
+      </if>
+      <if test="admWardDateTime != null">
+        ADM_WARD_DATE_TIME,
+      </if>
+      <if test="diagnosis != null">
+        DIAGNOSIS,
+      </if>
+      <if test="patientCondition != null">
+        PATIENT_CONDITION,
+      </if>
+      <if test="nursingClass != null">
+        NURSING_CLASS,
+      </if>
+      <if test="doctorInCharge != null">
+        DOCTOR_IN_CHARGE,
+      </if>
+      <if test="operatingDate != null">
+        OPERATING_DATE,
+      </if>
+      <if test="billingDateTime != null">
+        BILLING_DATE_TIME,
+      </if>
+      <if test="prepayments != null">
+        PREPAYMENTS,
+      </if>
+      <if test="totalCosts != null">
+        TOTAL_COSTS,
+      </if>
+      <if test="totalCharges != null">
+        TOTAL_CHARGES,
+      </if>
+      <if test="guarantor != null">
+        GUARANTOR,
+      </if>
+      <if test="guarantorOrg != null">
+        GUARANTOR_ORG,
+      </if>
+      <if test="guarantorPhoneNum != null">
+        GUARANTOR_PHONE_NUM,
+      </if>
+      <if test="billCheckedDateTime != null">
+        BILL_CHECKED_DATE_TIME,
+      </if>
+      <if test="settledIndicator != null">
+        SETTLED_INDICATOR,
+      </if>
+      <if test="operatorNo != null">
+        OPERATOR_NO,
+      </if>
+      <if test="isoveruse != null">
+        ISOVERUSE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="patientId != null">
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitId != null">
+        #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="wardCode != null">
+        #{wardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNo != null">
+        #{bedNo,jdbcType=NUMERIC},
+      </if>
+      <if test="admissionDateTime != null">
+        #{admissionDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admWardDateTime != null">
+        #{admWardDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diagnosis != null">
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="patientCondition != null">
+        #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="nursingClass != null">
+        #{nursingClass,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInCharge != null">
+        #{doctorInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingDate != null">
+        #{operatingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billingDateTime != null">
+        #{billingDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepayments != null">
+        #{prepayments,jdbcType=NUMERIC},
+      </if>
+      <if test="totalCosts != null">
+        #{totalCosts,jdbcType=NUMERIC},
+      </if>
+      <if test="totalCharges != null">
+        #{totalCharges,jdbcType=NUMERIC},
+      </if>
+      <if test="guarantor != null">
+        #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorOrg != null">
+        #{guarantorOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorPhoneNum != null">
+        #{guarantorPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="billCheckedDateTime != null">
+        #{billCheckedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settledIndicator != null">
+        #{settledIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="operatorNo != null">
+        #{operatorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isoveruse != null">
+        #{isoveruse,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xa.eyre.inpadm.domain.PatsInHospital">
+    update PATS_IN_HOSPITAL
+    <set>
+      <if test="visitId != null">
+        VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      </if>
+      <if test="wardCode != null">
+        WARD_CODE = #{wardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNo != null">
+        BED_NO = #{bedNo,jdbcType=NUMERIC},
+      </if>
+      <if test="admissionDateTime != null">
+        ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admWardDateTime != null">
+        ADM_WARD_DATE_TIME = #{admWardDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diagnosis != null">
+        DIAGNOSIS = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="patientCondition != null">
+        PATIENT_CONDITION = #{patientCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="nursingClass != null">
+        NURSING_CLASS = #{nursingClass,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorInCharge != null">
+        DOCTOR_IN_CHARGE = #{doctorInCharge,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingDate != null">
+        OPERATING_DATE = #{operatingDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billingDateTime != null">
+        BILLING_DATE_TIME = #{billingDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepayments != null">
+        PREPAYMENTS = #{prepayments,jdbcType=NUMERIC},
+      </if>
+      <if test="totalCosts != null">
+        TOTAL_COSTS = #{totalCosts,jdbcType=NUMERIC},
+      </if>
+      <if test="totalCharges != null">
+        TOTAL_CHARGES = #{totalCharges,jdbcType=NUMERIC},
+      </if>
+      <if test="guarantor != null">
+        GUARANTOR = #{guarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorOrg != null">
+        GUARANTOR_ORG = #{guarantorOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantorPhoneNum != null">
+        GUARANTOR_PHONE_NUM = #{guarantorPhoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="billCheckedDateTime != null">
+        BILL_CHECKED_DATE_TIME = #{billCheckedDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settledIndicator != null">
+        SETTLED_INDICATOR = #{settledIndicator,jdbcType=NUMERIC},
+      </if>
+      <if test="operatorNo != null">
+        OPERATOR_NO = #{operatorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isoveruse != null">
+        ISOVERUSE = #{isoveruse,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xa.eyre.inpadm.domain.PatsInHospital">
+    update PATS_IN_HOSPITAL
+    set VISIT_ID = #{visitId,jdbcType=NUMERIC},
+      WARD_CODE = #{wardCode,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      BED_NO = #{bedNo,jdbcType=NUMERIC},
+      ADMISSION_DATE_TIME = #{admissionDateTime,jdbcType=TIMESTAMP},
+      ADM_WARD_DATE_TIME = #{admWardDateTime,jdbcType=TIMESTAMP},
+      DIAGNOSIS = #{diagnosis,jdbcType=VARCHAR},
+      PATIENT_CONDITION = #{patientCondition,jdbcType=VARCHAR},
+      NURSING_CLASS = #{nursingClass,jdbcType=VARCHAR},
+      DOCTOR_IN_CHARGE = #{doctorInCharge,jdbcType=VARCHAR},
+      OPERATING_DATE = #{operatingDate,jdbcType=TIMESTAMP},
+      BILLING_DATE_TIME = #{billingDateTime,jdbcType=TIMESTAMP},
+      PREPAYMENTS = #{prepayments,jdbcType=NUMERIC},
+      TOTAL_COSTS = #{totalCosts,jdbcType=NUMERIC},
+      TOTAL_CHARGES = #{totalCharges,jdbcType=NUMERIC},
+      GUARANTOR = #{guarantor,jdbcType=VARCHAR},
+      GUARANTOR_ORG = #{guarantorOrg,jdbcType=VARCHAR},
+      GUARANTOR_PHONE_NUM = #{guarantorPhoneNum,jdbcType=VARCHAR},
+      BILL_CHECKED_DATE_TIME = #{billCheckedDateTime,jdbcType=TIMESTAMP},
+      SETTLED_INDICATOR = #{settledIndicator,jdbcType=NUMERIC},
+      OPERATOR_NO = #{operatorNo,jdbcType=VARCHAR},
+      ISOVERUSE = #{isoveruse,jdbcType=NUMERIC}
+    where PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+  </update>
+</mapper>
