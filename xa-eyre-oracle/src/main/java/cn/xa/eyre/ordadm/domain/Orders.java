@@ -4,6 +4,16 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Orders extends OrdersKey {
+
+    private String patientId;
+
+    private Short visitId;
+
+    private Short orderNo;
+
+    private Short orderSubNo;
+
+
     private Short repeatIndicator;
 
     private String orderClass;
@@ -342,5 +352,45 @@ public class Orders extends OrdersKey {
 
     public void setIsprint(String isprint) {
         this.isprint = isprint == null ? null : isprint.trim();
+    }
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    @Override
+    public Short getOrderNo() {
+        return orderNo;
+    }
+
+    @Override
+    public void setOrderNo(Short orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    @Override
+    public Short getOrderSubNo() {
+        return orderSubNo;
+    }
+
+    @Override
+    public void setOrderSubNo(Short orderSubNo) {
+        this.orderSubNo = orderSubNo;
     }
 }

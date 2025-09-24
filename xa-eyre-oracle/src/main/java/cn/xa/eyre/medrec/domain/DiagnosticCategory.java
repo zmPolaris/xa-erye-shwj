@@ -1,6 +1,17 @@
 package cn.xa.eyre.medrec.domain;
 
 public class DiagnosticCategory extends DiagnosticCategoryKey {
+
+    private String patientId;
+
+    private Short visitId;
+
+    private String diagnosisType;
+
+    private Short diagnosisNo;
+
+    private String diagnosisCode;
+
     private Short codeNo;
 
     private String insuranceIcd10Code;
@@ -89,5 +100,55 @@ public class DiagnosticCategory extends DiagnosticCategoryKey {
 
     public void setIcd10CodePlus(String icd10CodePlus) {
         this.icd10CodePlus = icd10CodePlus == null ? null : icd10CodePlus.trim();
+    }
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    @Override
+    public String getDiagnosisType() {
+        return diagnosisType;
+    }
+
+    @Override
+    public void setDiagnosisType(String diagnosisType) {
+        this.diagnosisType = diagnosisType;
+    }
+
+    @Override
+    public Short getDiagnosisNo() {
+        return diagnosisNo;
+    }
+
+    @Override
+    public void setDiagnosisNo(Short diagnosisNo) {
+        this.diagnosisNo = diagnosisNo;
+    }
+
+    @Override
+    public String getDiagnosisCode() {
+        return diagnosisCode;
+    }
+
+    @Override
+    public void setDiagnosisCode(String diagnosisCode) {
+        this.diagnosisCode = diagnosisCode;
     }
 }

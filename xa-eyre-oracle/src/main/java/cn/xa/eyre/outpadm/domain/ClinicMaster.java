@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ClinicMaster extends ClinicMasterKey {
+    private Date visitDate;
+
+    private Integer visitNo;
+
+
     private String clinicLabel;
 
     private String visitTimeDesc;
@@ -192,6 +197,26 @@ public class ClinicMaster extends ClinicMasterKey {
 
     public String getChargeType() {
         return chargeType;
+    }
+
+    @Override
+    public Date getVisitDate() {
+        return visitDate;
+    }
+
+    @Override
+    public void setVisitDate(Date visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    @Override
+    public Integer getVisitNo() {
+        return visitNo;
+    }
+
+    @Override
+    public void setVisitNo(Integer visitNo) {
+        this.visitNo = visitNo;
     }
 
     public void setChargeType(String chargeType) {

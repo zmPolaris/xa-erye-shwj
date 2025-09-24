@@ -3,6 +3,15 @@ package cn.xa.eyre.medrec.domain;
 import java.util.Date;
 
 public class Diagnosis extends DiagnosisKey {
+
+    private String patientId;
+
+    private Short visitId;
+
+    private String diagnosisType;
+
+    private Short diagnosisNo;
+
     private String diagnosisDesc;
 
     private Date diagnosisDate;
@@ -43,6 +52,46 @@ public class Diagnosis extends DiagnosisKey {
 
     public void setTreatResult(String treatResult) {
         this.treatResult = treatResult == null ? null : treatResult.trim();
+    }
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    @Override
+    public String getDiagnosisType() {
+        return diagnosisType;
+    }
+
+    @Override
+    public void setDiagnosisType(String diagnosisType) {
+        this.diagnosisType = diagnosisType;
+    }
+
+    @Override
+    public Short getDiagnosisNo() {
+        return diagnosisNo;
+    }
+
+    @Override
+    public void setDiagnosisNo(Short diagnosisNo) {
+        this.diagnosisNo = diagnosisNo;
     }
 
     public Short getOperTreatIndicator() {

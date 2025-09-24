@@ -4,6 +4,43 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class InpBillDetail extends InpBillDetailKey {
+
+    private String patientId;
+
+    private Short visitId;
+
+    private Integer itemNo;
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    @Override
+    public Integer getItemNo() {
+        return itemNo;
+    }
+
+    @Override
+    public void setItemNo(Integer itemNo) {
+        this.itemNo = itemNo;
+    }
+
     private String itemClass;
 
     private String itemName;

@@ -3,6 +3,12 @@ package cn.xa.eyre.lab.domain;
 import java.util.Date;
 
 public class LabResult extends LabResultKey {
+    private String testNo;
+
+    private Short itemNo;
+
+    private Short printOrder;
+
     private String reportItemName;
 
     private String reportItemCode;
@@ -101,5 +107,35 @@ public class LabResult extends LabResultKey {
 
     public void setPrintContext(String printContext) {
         this.printContext = printContext == null ? null : printContext.trim();
+    }
+
+    @Override
+    public String getTestNo() {
+        return testNo;
+    }
+
+    @Override
+    public void setTestNo(String testNo) {
+        this.testNo = testNo;
+    }
+
+    @Override
+    public Short getItemNo() {
+        return itemNo;
+    }
+
+    @Override
+    public void setItemNo(Short itemNo) {
+        this.itemNo = itemNo;
+    }
+
+    @Override
+    public Short getPrintOrder() {
+        return printOrder;
+    }
+
+    @Override
+    public void setPrintOrder(Short printOrder) {
+        this.printOrder = printOrder;
     }
 }

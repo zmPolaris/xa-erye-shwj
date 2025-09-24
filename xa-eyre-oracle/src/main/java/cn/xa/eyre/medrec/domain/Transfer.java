@@ -5,6 +5,20 @@ import java.util.Date;
 public class Transfer extends TransferKey {
 
     /**
+     * 病人标识
+     */
+    private String patientId;
+
+    /**
+     * 病人本次住院标识
+     */
+    private Short visitId;
+
+    /**
+     * 入科日期及时间
+     */
+    private Date admissionDateTime;
+    /**
      * 所在科室
      */
     private String deptStayed;
@@ -54,5 +68,35 @@ public class Transfer extends TransferKey {
 
     public void setDoctorInCharge(String doctorInCharge) {
         this.doctorInCharge = doctorInCharge == null ? null : doctorInCharge.trim();
+    }
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
+    }
+
+    @Override
+    public Date getAdmissionDateTime() {
+        return admissionDateTime;
+    }
+
+    @Override
+    public void setAdmissionDateTime(Date admissionDateTime) {
+        this.admissionDateTime = admissionDateTime;
     }
 }

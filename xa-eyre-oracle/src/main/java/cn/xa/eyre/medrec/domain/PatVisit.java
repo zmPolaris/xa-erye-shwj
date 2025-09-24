@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PatVisit extends PatVisitKey {
+
+    private String patientId;
+
+    private Short visitId;
+
+
     private String deptAdmissionTo;
 
     private Date admissionDateTime;
@@ -216,6 +222,26 @@ public class PatVisit extends PatVisitKey {
 
     public void setDeptDischargeFrom(String deptDischargeFrom) {
         this.deptDischargeFrom = deptDischargeFrom == null ? null : deptDischargeFrom.trim();
+    }
+
+    @Override
+    public String getPatientId() {
+        return patientId;
+    }
+
+    @Override
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    @Override
+    public Short getVisitId() {
+        return visitId;
+    }
+
+    @Override
+    public void setVisitId(Short visitId) {
+        this.visitId = visitId;
     }
 
     public Date getDischargeDateTime() {

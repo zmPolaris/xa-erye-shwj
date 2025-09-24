@@ -1,6 +1,13 @@
 package cn.xa.eyre.outpdoct.domain;
 
+import java.util.Date;
+
 public class OutpMr extends OutpMrKey {
+    private Date visitDate;
+
+    private Short visitNo;
+
+
     private String patientId;
 
     private String illnessDesc;
@@ -119,6 +126,26 @@ public class OutpMr extends OutpMrKey {
 
     public String getBodyExam() {
         return bodyExam;
+    }
+
+    @Override
+    public Date getVisitDate() {
+        return visitDate;
+    }
+
+    @Override
+    public void setVisitDate(Date visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    @Override
+    public Short getVisitNo() {
+        return visitNo;
+    }
+
+    @Override
+    public void setVisitNo(Short visitNo) {
+        this.visitNo = visitNo;
     }
 
     public void setBodyExam(String bodyExam) {
