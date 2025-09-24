@@ -84,7 +84,7 @@ public class InpadmConvertService {
             throw new RuntimeException(e);
         }
         // 反查数据
-        patsInHospital = inpadmFeignClient.getPatsInHospitalByPatientId(patsInHospital.getPatientId()).getData();
+        patsInHospital = inpadmFeignClient.getPatsInHospital(patsInHospital.getPatientId(), patsInHospital.getVisitId()).getData();
 
         logger.debug("构造emrAdmissionInfo接口数据...");
         R<PatMasterIndex> medrecResult = medrecFeignClient.getPatMasterIndex(patsInHospital.getPatientId());

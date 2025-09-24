@@ -72,10 +72,6 @@
         <if test="doctor != null">
           and VISIT_DATE = #{doctor,jdbcType=VARCHAR}
         </if>
-        <if test="beginVisitDate != null and endVisitDate != null">
-          and VISIT_DATE BETWEEN TO_DATE(#{beginVisitDate,jdbcType=TIMESTAMP}, 'YYYY/MM/DD')
-          AND TO_DATE(#{endVisitDate,jdbcType=TIMESTAMP}, 'YYYY/MM/DD')
-        </if>
         order by visit_date desc
       </where>
 
