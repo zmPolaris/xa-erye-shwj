@@ -61,7 +61,7 @@
           and VISIT_DATE = TO_DATE(#{visitDateStr,jdbcType=VARCHAR}, 'yyyy/MM/dd HH24:mi:ss')
         </if>
         <if test="visitDateShortStr != null">
-          and VISIT_DATE = TO_DATE(#{visitDateShortStr,jdbcType=VARCHAR}, 'yyyy/MM/dd')
+          and TRUNC(VISIT_DATE) = TO_DATE(#{visitDateShortStr,jdbcType=VARCHAR}, 'yyyy/MM/dd')
         </if>
         <if test="visitNo != null">
           and VISIT_NO = #{visitNo,jdbcType=NUMERIC}

@@ -196,7 +196,7 @@
         and PRESC_DATE = TO_DATE(#{prescDateStr,jdbcType=VARCHAR}, 'yyyy/MM/dd HH24:mi:ss')
       </if>
       <if test="prescDateShortStr != null">
-        and PRESC_DATE = TO_DATE(#{prescDateShortStr,jdbcType=VARCHAR}, 'yyyy/MM/dd')
+        and TRUNC(PRESC_DATE) = TO_DATE(#{prescDateShortStr,jdbcType=VARCHAR}, 'yyyy/MM/dd')
       </if>
       <if test="prescNo != null">
         and PRESC_NO = #{prescNo,jdbcType=NUMERIC}
