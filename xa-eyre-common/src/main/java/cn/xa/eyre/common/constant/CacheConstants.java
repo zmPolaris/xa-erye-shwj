@@ -32,6 +32,10 @@ public class CacheConstants
      */
     public static final String SYS_COMM_USER_KEY = "sys_comm_user:";
 
+    public static final String SYS_COMM_USER_NAME_KEY = "sys_comm_user_name:";
+
+    public static final String SYS_COMM_DB_USER_KEY = "sys_comm_db_user:";
+
     /**
      * 参数管理 cache key
      */

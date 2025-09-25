@@ -102,8 +102,10 @@ public class ExamConvertService {
                 emrExClinical.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getName());
                 emrExClinical.setSerialNumber(DigestUtil.md5Hex(examMaster.getPatientId() + examMaster.getVisitId()));
                 R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospital(examMaster.getPatientId(), examMaster.getVisitId());
-                emrExClinical.setWardNo(hospitalResult.getData().getWardCode());
-                emrExClinical.setBedNo(String.valueOf(hospitalResult.getData().getBedNo()));
+                if (R.SUCCESS == hospitalResult.getCode() && hospitalResult.getData() != null){
+                    emrExClinical.setWardNo(hospitalResult.getData().getWardCode());
+                    emrExClinical.setBedNo(String.valueOf(hospitalResult.getData().getBedNo()));
+                }
             }else if("1".equals(examMaster.getPatientSource()) || StringUtils.isNotBlank(examMaster.getVisitNo())){
                 emrExClinical.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getCode());
                 emrExClinical.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getName());

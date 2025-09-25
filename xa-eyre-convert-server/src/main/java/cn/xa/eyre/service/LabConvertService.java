@@ -40,6 +40,8 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class LabConvertService {
@@ -121,8 +123,10 @@ public class LabConvertService {
                     emrExLab.setActivityTypeName(HubCodeEnum.DIAGNOSIS_ACTIVITIES_HOSPITALIZATION.getName());
                     emrExLab.setSerialNumber(DigestUtil.md5Hex(labTestMaster.getPatientId() + labTestMaster.getVisitId()));
                     R<PatsInHospital> hospitalResult = inpadmFeignClient.getPatsInHospital(labTestMaster.getPatientId(), labTestMaster.getVisitId().shortValue());
-                    emrExLab.setWardNo(hospitalResult.getData().getWardCode());
-                    emrExLab.setBedNo(String.valueOf(hospitalResult.getData().getBedNo()));
+                    if (R.SUCCESS == hospitalResult.getCode() && hospitalResult.getData() != null){
+                        emrExLab.setWardNo(hospitalResult.getData().getWardCode());
+                        emrExLab.setBedNo(String.valueOf(hospitalResult.getData().getBedNo()));
+                    }
                 }else {
                     logger.error("PATIENT_SOURCE:{}, 非门诊和住院，无法同步", labTestMaster.getPatientSource());
                     return;
@@ -238,13 +242,18 @@ public class LabConvertService {
                             // 定量
                             emrExLabItem.setExaminationQuantification(labResult.getResult());
                             emrExLabItem.setExaminationQuantificationUnit(labResult.getUnits());
-                            if (labResult.getAbnormalIndicator().equals("H")){
-                                emrExLabItem.setExaminationQuantificationRi("2");
-                            }else if (labResult.getAbnormalIndicator().equals("L")){
-                                emrExLabItem.setExaminationQuantificationRi("1");
+                            if (StringUtils.isNotBlank(labResult.getAbnormalIndicator())){
+                                if (labResult.getAbnormalIndicator().equals("H")){
+                                    emrExLabItem.setExaminationQuantificationRi("2");
+                                }else if (labResult.getAbnormalIndicator().equals("L")){
+                                    emrExLabItem.setExaminationQuantificationRi("1");
+                                }else {
+                                    emrExLabItem.setExaminationQuantificationRi("0");
+                                }
                             }else {
-                                emrExLabItem.setExaminationQuantificationRi("0");
+                                emrExLabItem.setExaminationQuantificationRi(String.valueOf(checkNumberInRange(labResult.getPrintContext(), labResult.getResult())));
                             }
+
                             if (labResult.getPrintContext().contains("健康非妊娠绝经前女性")){
                                 emrExLabItem.setExaminationQuantificationLower("0");
                                 emrExLabItem.setExaminationQuantificationUpper("7184");
@@ -274,6 +283,45 @@ public class LabConvertService {
             }
         }else {
             logger.error("{}PatMasterIndex或LabResultVo信息为空或报告未确认，无法同步", labTestMaster.getTestNo());
+        }
+    }
+
+    /**
+     * 判断数字是否在参考范围内
+     * @param rangeStr 范围字符串，格式如"3.5--9.5"或"40--75"
+     * @param number 要判断的数字
+     * @return 0-在区间内 1-低于 2-超出
+     * @throws IllegalArgumentException 当输入格式无效时抛出异常
+     */
+    public static int checkNumberInRange(String rangeStr, String number) {
+        // 使用正则表达式提取两个数字
+        Pattern pattern = Pattern.compile("^(-?\\d+(?:\\.\\d+)?)--(-?\\d+(?:\\.\\d+)?)$");
+        Matcher matcher = pattern.matcher(rangeStr.trim());
+
+        if (!matcher.find()) {
+//            throw new IllegalArgumentException("无效的范围格式，请使用'min--max'格式");
+            return 0;
+        }
+
+        try {
+            double lower = Double.parseDouble(matcher.group(1));
+            double upper = Double.parseDouble(matcher.group(2));
+
+            if (lower > upper) {
+//                throw new IllegalArgumentException("下限值不能大于上限值");
+                return 0;
+            }
+            double num = Double.valueOf(number);
+            if (num < lower) {
+                return 1; // 低于下限
+            } else if (num > upper) {
+                return 2; // 超出上限
+            } else {
+                return 0; // 在区间内
+            }
+        } catch (NumberFormatException e) {
+//            throw new IllegalArgumentException("范围中包含非数字字符");
+            return 0;
         }
     }
 }

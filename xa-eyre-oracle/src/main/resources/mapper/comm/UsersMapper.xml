@@ -36,6 +36,11 @@
     ORDER BY CREATE_DATE DESC)
     WHERE ROWNUM <![CDATA[ <= ]]> #{num,jdbcType=INTEGER}
   </select>
+  <select id="selectUserAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from USERS
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from USERS
     where DB_USER = #{dbUser,jdbcType=VARCHAR}
