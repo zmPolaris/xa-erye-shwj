@@ -34,6 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -112,14 +113,19 @@ public class PharmacyConvertService {
                 emrOrder.setActivityTypeCode(HubCodeEnum.DIAGNOSIS_ACTIVITIES_OUTPATIENT.getCode());
                 OutpMr outpMr = new OutpMr();
                 outpMr.setPatientId(patientId);
-                outpMr.setVisitDateStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS,drugPrescMaster.getPrescDate()));
+                Date prescDate = drugPrescMaster.getPrescDate();
+                if (isZeroTime(prescDate)) {
+                    outpMr.setVisitDateShortStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, prescDate));
+                } else {
+                    outpMr.setVisitDateStr(DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, prescDate));
+                }
                 R<List<OutpMr>> mrResult = outpdoctFeignClient.getOutpMrByCondition(outpMr);
                 if (R.SUCCESS == mrResult.getCode()) {
                     outpMr = mrResult.getData().get(0);
                     emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + outpMr.getVisitNo()));
                 } else {
-                        logger.error("未找到门诊记录, PatientId:{}, VisitDate{}", patientId, DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()));
-                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ drugPrescMaster.getPrescDate()));
+                        logger.error("未找到门诊记录, PatientId:{}, VisitDate{}", patientId, DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, prescDate));
+                    emrOrder.setSerialNumber(DigestUtil.md5Hex(patientId + drugPrescMaster.getPrescNo()+ prescDate));
                 }
                 preNo = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, drugPrescMaster.getPrescDate()) + drugPrescMaster.getPrescNo();
 
@@ -228,5 +234,16 @@ public class PharmacyConvertService {
         } else {
             logger.error("{}对应PatMasterIndex信息信息为空，无法同步", patientId);
         }
+    }
+
+    public boolean isZeroTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // 24小时制
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
+
+        return (hour == 0 && minute == 0 && second == 0);
     }
 }
