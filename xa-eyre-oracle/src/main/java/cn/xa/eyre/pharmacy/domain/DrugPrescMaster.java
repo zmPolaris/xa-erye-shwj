@@ -82,6 +82,10 @@ public class    DrugPrescMaster {
 
     private Date dispenseDateTime;
 
+    public String prescDateStr;
+
+    public String prescDateShortStr;
+
     public Date getPrescDate() {
         return prescDate;
     }
@@ -392,5 +396,21 @@ public class    DrugPrescMaster {
 
     public void setDispenseDateTime(Date dispenseDateTime) {
         this.dispenseDateTime = dispenseDateTime;
+    }
+
+    public String getPrescDateStr() {
+        return prescDateStr;
+    }
+
+    public void setPrescDateStr(String prescDateStr) {
+        this.prescDateStr = prescDateStr;
+    }
+
+    public String getPrescDateShortStr() {
+        return prescDateShortStr;
+    }
+
+    public void setPrescDateShortStr(String prescDateShortStr) {
+        this.prescDateShortStr = prescDateShortStr;
     }
 }

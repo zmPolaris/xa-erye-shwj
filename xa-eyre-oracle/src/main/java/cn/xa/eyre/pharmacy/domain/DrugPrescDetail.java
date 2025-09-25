@@ -48,6 +48,10 @@ public class DrugPrescDetail {
 
     private BigDecimal inventory;
 
+    private String prescDateStr;
+
+    private String prescDateShortStr;
+
     public Date getPrescDate() {
         return prescDate;
     }
@@ -222,5 +226,21 @@ public class DrugPrescDetail {
 
     public void setInventory(BigDecimal inventory) {
         this.inventory = inventory;
+    }
+
+    public String getPrescDateStr() {
+        return prescDateStr;
+    }
+
+    public void setPrescDateStr(String prescDateStr) {
+        this.prescDateStr = prescDateStr;
+    }
+
+    public String getPrescDateShortStr() {
+        return prescDateShortStr;
+    }
+
+    public void setPrescDateShortStr(String prescDateShortStr) {
+        this.prescDateShortStr = prescDateShortStr;
     }
 }

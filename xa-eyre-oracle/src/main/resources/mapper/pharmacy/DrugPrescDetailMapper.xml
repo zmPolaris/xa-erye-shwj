@@ -191,8 +191,17 @@
     select
     <include refid="Base_Column_List" />
     from PHARMACY.DRUG_PRESC_DETAIL
-    where PRESC_DATE = #{prescDate,jdbcType=TIMESTAMP}
-    and PRESC_NO = #{prescNo,jdbcType=NUMERIC}
+    <where>
+      <if test="prescDateStr != null">
+        and PRESC_DATE = TO_DATE(#{prescDateStr,jdbcType=VARCHAR}, 'yyyy/MM/dd HH24:mi:ss')
+      </if>
+      <if test="prescDateShortStr != null">
+        and PRESC_DATE = TO_DATE(#{prescDateShortStr,jdbcType=VARCHAR}, 'yyyy/MM/dd')
+      </if>
+      <if test="prescNo != null">
+        and PRESC_NO = #{prescNo,jdbcType=NUMERIC}
+      </if>
+    </where>
   </select>
   <select id="getDrugPrescDetailByPrescNo" resultMap="BaseResultMap">
     select
