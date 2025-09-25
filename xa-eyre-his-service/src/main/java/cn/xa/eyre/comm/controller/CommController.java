@@ -41,7 +41,14 @@ public class CommController {
 
     @GetMapping("/getUserByPrimaryKey")
     public AjaxResult getUserByPrimaryKey(@RequestParam("dbUser") String dbUser){
-        return AjaxResult.success("接口调用成功", CharsetUtil.convertObject(usersMapper.selectByPrimaryKey(dbUser)));
+        Users user = redisCache.getCacheObject(CacheConstants.SYS_COMM_DB_USER_KEY + dbUser);
+        if (ObjectUtil.isEmpty(user)){
+            user = usersMapper.selectByPrimaryKey(dbUser);
+            user.setUserName(CharsetUtil.convertToChinese(user.getUserName()));
+            redisCache.setCacheObject(CacheConstants.SYS_COMM_USER_NAME_KEY + user.getUserName(), user);
+            redisCache.setCacheObject(CacheConstants.SYS_COMM_DB_USER_KEY + user.getDbUser(), user);
+        }
+        return AjaxResult.success("接口调用成功", user);
     }
 
     /**

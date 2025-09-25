@@ -231,7 +231,7 @@ public class MedrecConvertService {
 
                 // 治疗医生
                 String doctor = null;
-                if (StringUtils.isNotBlank(hospitalResult.getData().getDoctorInCharge())){
+                if (hospitalResult.getCode() == R.SUCCESS && hospitalResult.getData() != null && StringUtils.isNotBlank(hospitalResult.getData().getDoctorInCharge())){
                     doctor = hospitalResult.getData().getDoctorInCharge();
                     R<Users> user = commFeignClient.getUserByName(hospitalResult.getData().getDoctorInCharge());
                     if (R.SUCCESS == user.getCode() && user.getData() != null){
@@ -267,7 +267,7 @@ public class MedrecConvertService {
                     }
                 }
 
-                DictDisDept dictDisDept = hubToolService.getDept(hospitalResult.getData().getDeptCode());
+                DictDisDept dictDisDept = hubToolService.getDept(patVisitResult.getData().getDeptAdmissionTo());
 
                 emrFirstCourse.setDeptCode(dictDisDept.getHubCode());
                 emrFirstCourse.setDeptName(dictDisDept.getHubName());
@@ -400,6 +400,7 @@ public class MedrecConvertService {
         if(dbMessage.getOperation().equalsIgnoreCase("DELETE")){
             httpMethod = Constants.HTTP_METHOD_DELETE;
             data = dbMessage.getBeforeData();
+            return;
         }else {
             httpMethod = Constants.HTTP_METHOD_POST;
             data = dbMessage.getAfterData();

@@ -74,6 +74,7 @@ public class InpadmConvertService {
         if(dbMessage.getOperation().equalsIgnoreCase("DELETE")){
             httpMethod = Constants.HTTP_METHOD_DELETE;
             data = dbMessage.getBeforeData();
+            return;
         }else {
             httpMethod = Constants.HTTP_METHOD_POST;
             data = dbMessage.getAfterData();
